@@ -9,13 +9,22 @@
 </head>
 <body>
   <div class="shell">
-    <header class="topbar"><a class="brand" href="/">promptimize<span>✳</span></a><span class="build">Promptbase workbench</span><span class="version">Prototype · 01</span></header>
+    <header class="topbar"><a class="brand" href="/">Promptimize<span>✳</span></a><a class="top-action" href="#workbench">Open workbench <span aria-hidden="true">↘</span></a></header>
     <main>
       <section class="intro">
-        <div><h1>Make the promptbase<br><em>smaller.</em> Keep the rules.</h1><p>Inspect where instructions came from, split context by workflow, then run the same cases against both versions.</p></div>
-        <div class="motif" aria-hidden="true"><div class="motif-old">ALL CONTEXT <b>→</b> EVERY REQUEST</div><div class="motif-new">RIGHT CONTEXT <b>→</b> RIGHT TASK</div></div>
+        <div class="intro-copy"><h1>Untangle the<br><span>promptbase.</span></h1><p>Find the rules. Cut the context. Prove the behavior.</p><button class="hero-button" id="hero-start">Explore the sample <span aria-hidden="true">↗</span></button></div>
+        <div class="hero-art" role="img" aria-label="A tangled stack of prompt files becomes a small set of workflow modules">
+          <div class="art-ring"></div><div class="art-ring ring-two"></div>
+          <div class="art-label from">ALL FILES, EVERY TIME</div><div class="art-label to">ONLY WHAT THIS TASK NEEDS</div>
+          <div class="file-card old-card old-one"><span class="file-symbol">↳</span><span>shared.md</span><i></i><i></i><i></i></div>
+          <div class="file-card old-card old-two"><span class="file-symbol">↳</span><span>refunds.md</span><i></i><i></i></div>
+          <div class="file-card old-card old-three"><span class="file-symbol">↳</span><span>cancellations.md</span><i></i><i></i></div>
+          <div class="file-card old-card old-four"><span class="file-symbol">↳</span><span>profile.md</span><i></i><i></i></div>
+          <div class="art-mark" aria-hidden="true">✳</div>
+          <div class="file-card new-card"><div class="new-head"><span class="new-symbol">✳</span><span>Refund request</span><b>READY</b></div><div class="new-row"><span class="dot violet"></span>shared.md <span class="new-note">always</span></div><div class="new-row"><span class="dot pink"></span>refund.md <span class="new-note">selected</span></div><div class="new-foot">2 modules loaded <span>→</span></div></div>
+        </div>
       </section>
-      <nav class="steps" aria-label="Workflow"><button class="step active" data-step="input">01 <span>Input</span></button><button class="step" data-step="audit">02 <span>Audit</span></button><button class="step" data-step="candidate">03 <span>Candidate</span></button><button class="step" data-step="tests">04 <span>Tests</span></button></nav>
+      <nav class="steps" id="workbench" aria-label="Workflow"><button class="step active" data-step="input">01 <span>Input</span></button><button class="step" data-step="audit">02 <span>Audit</span></button><button class="step" data-step="candidate">03 <span>Candidate</span></button><button class="step" data-step="tests">04 <span>Tests</span></button></nav>
       <section id="input" class="panel active"><div class="panel-head"><div><h2>Bring a promptbase</h2><p>Start with the synthetic event operations sample. Folder analysis is experimental and expects the same refund, cancellation and profile workflows.</p></div><span class="index">01 / 04</span></div>
         <div class="input-grid"><div class="drop"><input type="file" id="folder" webkitdirectory directory multiple accept=".md,.txt,.json,.py,.js,.ts"><label for="folder"><strong>Choose a folder</strong><span>Text, Markdown, JSON and scripts · up to 12 files / 50 KB total</span></label></div><button class="sample" id="sample"><span class="sample-icon">✳</span><strong>Load the sample</strong><span>Refund, cancellation and profile workflows with a cross-workflow exception.</span></button></div>
         <div id="file-list" class="file-list" aria-live="polite"></div><div class="actions"><span id="input-status" class="hint">No files selected</span><button class="primary" id="analyze" disabled>Analyze bundle <span>↗</span></button></div>
