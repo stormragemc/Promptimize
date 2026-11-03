@@ -22,7 +22,7 @@ After 6 AM: inspect Marcel's feedback; extend the adapter to a **small, selected
 4. Open **Tests** and click **Run comparisons**. This runs six synthetic cases on both versions, with up to two responses for each run that requests a lookup. It makes up to 14 more Meta responses.
 5. Check task pass counts and actual provider-reported total tokens. A candidate failure is a next-iteration note, never an automatic patch.
 
-The first implementation is an honest narrow slice: it accepts 1–12 text files with a 50,000-character cap, asks a human to review model-extracted rules, uses direct intent routing from the synthetic test contract, and measures one stochastic run per case. The UI does **not** claim production correctness, exact dollar cost, generalized arbitrary-repo migration, or statistical significance. Export is a JSON snapshot; a runnable loader and zip export are later stages.
+The first implementation is an honest narrow slice: it accepts 1–12 text files with a 50,000-character cap for experimental analysis of the same three-workflow domain, asks a human to review model-extracted rules, and measures one stochastic run per case **only for the bundled sample**. The UI does **not** claim production correctness, exact dollar cost, generalized arbitrary-repo migration, or statistical significance. Export is a JSON snapshot; a runnable loader and zip export are later stages.
 
 ## Local development
 
