@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f0eff2">
+  <title>Promptimize — Refactor with evidence</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar"><a class="brand" href="/">promptimize<span>✳</span></a><span class="build">Promptbase workbench</span><span class="version">Prototype · 01</span></header>
+    <main>
+      <section class="intro">
+        <div><h1>Make the promptbase<br><em>smaller.</em> Keep the rules.</h1><p>Inspect where instructions came from, split context by workflow, then run the same cases against both versions.</p></div>
+        <div class="motif" aria-hidden="true"><div class="motif-old">ALL CONTEXT <b>→</b> EVERY REQUEST</div><div class="motif-new">RIGHT CONTEXT <b>→</b> RIGHT TASK</div></div>
+      </section>
+      <nav class="steps" aria-label="Workflow"><button class="step active" data-step="input">01 <span>Input</span></button><button class="step" data-step="audit">02 <span>Audit</span></button><button class="step" data-step="candidate">03 <span>Candidate</span></button><button class="step" data-step="tests">04 <span>Tests</span></button></nav>
+      <section id="input" class="panel active"><div class="panel-head"><div><h2>Bring a promptbase</h2><p>Start with the synthetic event operations sample, or select a folder of text files.</p></div><span class="index">01 / 04</span></div>
+        <div class="input-grid"><div class="drop"><input type="file" id="folder" webkitdirectory directory multiple accept=".md,.txt,.json,.py,.js,.ts"><label for="folder"><strong>Choose a folder</strong><span>Text, Markdown, JSON and scripts · up to 12 files / 50 KB total</span></label></div><button class="sample" id="sample"><span class="sample-icon">✳</span><strong>Load the sample</strong><span>Refund, cancellation and profile workflows with a cross-workflow exception.</span></button></div>
+        <div id="file-list" class="file-list" aria-live="polite"></div><div class="actions"><span id="input-status" class="hint">No files selected</span><button class="primary" id="analyze" disabled>Analyze bundle <span>↗</span></button></div>
+      </section>
+      <section id="audit" class="panel"><div class="panel-head"><div><h2>Review the rules</h2><p>Each extracted instruction links to its original file and exact wording. Check the interpretation before evaluating it.</p></div><span class="index">02 / 04</span></div><div id="audit-summary" class="summary"></div><div id="rule-list" class="rule-list"></div><div class="actions"><span class="hint">Model suggestions need your review.</span><button id="approve" class="primary">Approve mapping <span>↗</span></button></div></section>
+      <section id="candidate" class="panel"><div class="panel-head"><div><h2>What would load now</h2><p>The candidate preserves source wording and loads only the shared rules and the selected workflow.</p></div><span class="index">03 / 04</span></div><div class="compare-grid"><div><h3>Before <span>every file</span></h3><div id="before-tree" class="tree"></div></div><div><h3>After <span>routed modules</span></h3><div id="after-tree" class="tree"></div></div></div><div id="candidate-warning" class="warning"></div><div class="actions"><button id="export" class="secondary">Download candidate JSON ↓</button><button id="go-tests" class="primary">Compare behavior <span>↗</span></button></div></section>
+      <section id="tests" class="panel"><div class="panel-head"><div><h2>Same cases. Both versions.</h2><p>Run a bounded set of synthetic cases. A failure creates a next-iteration note; it never edits the frozen candidate.</p></div><span class="index">04 / 04</span></div><div id="case-list" class="case-list"></div><div class="actions"><span class="hint">Up to 14 model responses. You start the run.</span><button id="run-tests" class="primary">Run comparisons <span>↗</span></button></div><div id="results" class="results" aria-live="polite"></div></section>
+    </main>
+    <footer>Built for reviewable promptbase refactors <span>·</span> Synthetic sample · API calls happen only when you choose Analyze or Run</footer>
+  </div>
+  <script src="/app.js" defer></script>
+</body>
+</html>
