@@ -22,7 +22,7 @@ After 9 AM: inspect Marcel's feedback; extend the adapter to a **small, selected
 4. Open **Tests** and click **Run comparisons**. This runs six synthetic cases on both versions, with up to two responses for each run that requests a lookup. It makes up to 14 more Meta responses.
 5. Check task pass counts and actual provider-reported total tokens. A candidate failure is a next-iteration note, never an automatic patch.
 
-The first implementation is an honest narrow slice: it accepts 1–12 text files with a 50,000-character cap for experimental analysis of the same three-workflow domain, asks a human to review model-extracted rules, and measures one stochastic run per case **only for the bundled sample**. The UI does **not** claim production correctness, exact dollar cost, generalized arbitrary-repo migration, or statistical significance. Export is a JSON snapshot; a runnable loader and zip export are later stages.
+The first implementation is an honest narrow slice: it accepts 1–12 text files with a 50,000-character cap for experimental analysis of the same three-workflow domain, asks a human to review model-extracted rules, and measures one stochastic run per case **only for the bundled sample**. The UI does **not** claim production correctness, exact dollar cost, generalized arbitrary-repo migration, or statistical significance. Export includes a Markdown promptbase and JSON snapshot; a runnable loader and zip export are later stages.
 
 ## Local development
 
@@ -36,7 +36,7 @@ Static assets are at the root. `api/` contains Vercel Node functions. The server
 - The run route allows only six synthetic test IDs and a one-step simulated event-status lookup. It has no production side-effect tools.
 - The token comparison includes the baseline/candidate task calls and the simulated lookup follow-up, but **does not yet include the one-time analysis call or real routing/classification**, and it is not a projected bill. Provider pricing and caching are not modeled. Do not quote a cost-saving percentage from this graph.
 - Model outputs can vary. One pass/fail per case is a debugging signal, not a reliability guarantee. The baseline can be wrong too.
-- The browser holds the candidate and traces for the session; reload discards them. Download the JSON for a record.
+- The browser holds the candidate and traces in session storage for the synthetic sample; the bundled sample resumes within the same tab session. Download JSON for a durable record.
 
 ## Morning handoff checkpoints
 
