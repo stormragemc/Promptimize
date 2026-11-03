@@ -1,0 +1,11 @@
+const assert=require('node:assert/strict');
+const {digest,validateAnalysis,messagesFor}=require('./api/_bundle');
+const files=['shared.md','refunds.md','cancellations.md','profile.md','router.txt'].map(name=>({name,content:name==='refunds.md'?'Organizer cancellation overrides the refund window.':'Use only known event IDs.'}));
+const a={rules:[{id:'R1',file:'refunds.md',line:1,quote:files[1].content,workflows:['refund']}],modules:{shared:[],refund:['R1'],cancellation:[],profile:[]}};a.sha256=digest(files,a);validateAnalysis(a,files);
+assert.throws(()=>validateAnalysis({...a,sha256:'changed'},files),/Snapshot changed/);
+assert.throws(()=>validateAnalysis({...a,rules:[{...a.rules[0],quote:'invented'}]},files),/Source mapping/);
+assert.equal(messagesFor(files,a,'refund','Question','candidate')[0].content.includes(a.rules[0].quote),true);
+assert.equal(messagesFor(files,a,'refund','Question','baseline')[0].content.includes('profile.md'),true);
+const metaPath=require.resolve('./api/_meta');const real=require(metaPath);let answers=[{action:'lookup_event_status',event_id:'EV-7'},{action:'eligible'}];require.cache[metaPath].exports={...real,meta:async()=>({value:answers.shift(),usage:{prompt_tokens:8,completion_tokens:2,total_tokens:10},model:'mock'})};
+const res={status(n){this.code=n;return this},setHeader(){return this},json(d){this.data=d;return this}};
+(async()=>{await require('./api/run-case')({method:'POST',body:{files,analysis:a,test:{id:'T04',intent:'refund',expected:'eligible',query:'Event EV-7 status is unknown.'},mode:'candidate'}},res);assert.equal(res.code,200);assert.equal(res.data.pass,true);assert.equal(res.data.toolCalls.length,1);assert.equal(res.data.usage.total_tokens,20);assert.equal(res.data.snapshot,a.sha256);console.log('Passed: provenance, snapshot integrity, context selection, bounded lookup, combined usage. No provider calls.');})();
