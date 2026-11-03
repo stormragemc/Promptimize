@@ -1,0 +1,2 @@
+const {meta,json,error}=require('./_meta');
+module.exports=async(req,res)=>{if(req.method!=='GET'||req.query.probe!=='p6m-2026-11-03-2312')return json(res,404,{error:'Not found'});try{const r=await meta([{role:'developer',content:'Return a JSON object with the key ok and the boolean value true.'},{role:'user',content:'Reply now.'}],120);json(res,200,{ok:r.value.ok===true,model:r.model,total_tokens:r.usage.total_tokens??null})}catch(e){error(res,e)}};
