@@ -1,1 +1,1 @@
-{"functions":{"api/showcase.js":{"maxDuration":300,"includeFiles":"demo/**"}}}
+{"functions":{"api/showcase.js":{"maxDuration":300,"includeFiles":"demo/**"}},"buildCommand":"node demo/package-apps.cjs","outputDirectory":"."}

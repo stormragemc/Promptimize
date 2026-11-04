@@ -93,4 +93,13 @@ Readiness colors and enabled buttons mark the required sequence. Frozen candidat
 
 The follow-up workbench supports separately approved test plans, optional holdout cases, 1–3 repetitions, per-rule evidence links, bounded per-attempt reservations and complete reported call receipts. It includes optimizer overhead, explicit retries, incomplete-call usage, cache/reasoning details, latency and pricing-based cost estimates. Unknown cost evidence or behavioral failures prevent an adoption recommendation.
 
-See [the stages 4–5 review guide](docs/STAGES_4_5_REVIEW.md) for the exact UI sequence, supported simulation boundaries, API fields and remaining live acceptance gate. Stage 6 remains deferred for owner review.
+See [the stages 4–5 review guide](docs/STAGES_4_5_REVIEW.md) for the exact UI sequence, supported simulation boundaries, API fields and remaining live acceptance gate. Stage 6 motion and the Forma showcase are available for owner review; production remains unchanged.
+
+
+## Forma before/after showcase
+
+Open `/demo/?version=before`, `/demo/?version=after`, or `/demo/bench.html`. Both apps use identical UI/backend code; only the original versus frozen exported prompt package/loader differs. The fictional fixture has 26,871 source characters; Promptimize generated 12 modules with meaningful intent/policy registries. No private UIC source is included.
+
+A real Vercel cloud benchmark completed 32 calls: 16/16 checks passed in each version, all paired final states matched, total task tokens fell 58.5% and estimated task cost fell 51.9%. Median model latency was 1.100s before and 1.156s after, so no speedup is claimed. The complete evidence, prior failed attempts and method are in `demo/generated/`; see [the showcase guide](docs/FORMA_SHOWCASE.md).
+
+Normal preview builds run only `node demo/package-apps.cjs` to produce both standalone ZIPs and the exported promptbase ZIP. Live cloud benchmarking requires the separately explicit `node demo/cloud-benchmark.cjs --run-live` command and the existing server-side Meta credential. No browser or laptop is required for it. Do not run it automatically on normal deploys.

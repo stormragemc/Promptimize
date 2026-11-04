@@ -24,7 +24,7 @@ function verifyPackage(pkg){
   markers.forEach((m,i)=>{const value=content.slice(m.index+m[0].length,i+1<markers.length?markers[i+1].index-2:content.length);if(text.has(m[1])&&text.get(m[1])!==value)throw Error('Shared module copies disagree.');text.set(m[1],value);});
   const registry=JSON.parse(pkg.files[file.replace(/[^/]+$/,'intents.json')]);if(!Array.isArray(registry)||!registry.length)throw Error('A module registry is empty.');const expected=require('./_intent-registry').intentRegistry(moduleId,pkg.analysis.rules.filter(r=>manifest.modules[moduleId]&&pkg.analysis.modules[moduleId].includes(r.id)),pkg.analysis);if(hash(registry)!==hash(expected))throw Error('An intent registry changed after review.');for(const entry of registry)if(entry.intent)intentIds.add(entry.intent);
  }
- const canonical=compileRuntime(pkg.analysis);
+ const canonical=compileRuntime(pkg.analysis);for(const rule of canonical.rules){if(text.get(rule.id)!==rule.text)throw Error('An exported instruction differs from the frozen reviewed text.');}if(!require('node:util').isDeepStrictEqual(manifest.modules,pkg.analysis.paths))throw Error('Exported module paths differ from the reviewed paths.');
  if(JSON.stringify(runtime.rules.map(({text,...r})=>r))!==JSON.stringify(canonical.rules.map(({text,...r})=>r)))throw Error('Exported routing metadata differs from the reviewed analysis.');
  const plan={...canonical,rules:canonical.rules.map(rule=>({...rule,text:text.get(rule.id)??(()=>{throw Error('Exported rule text is missing.');})()}))};
  return {analysis:pkg.analysis,plan,manifest,packageHash:hash(pkg.files),intentIds:[...intentIds]};

@@ -5,7 +5,8 @@ const {proposeSemantic}=require('./_semantic-analysis');
 const {revise}=require('./_review'),{bundleFiles}=require('./_export');
 const {charge}=require('../evaluation-metrics');
 module.exports=async(req,res)=>{
- if(req.method==='GET')return json(res,200,{name:'Forma',fictional:true,files:S.source.files,context:S.source.context,cases:S.cases,installed:!!S.readInstalled(),installedSnapshot:S.readInstalled()?.analysis.sha256,evidence:(()=>{try{return require('../demo/generated/benchmark.json')}catch{return null}})()});
+ if(req.method==='GET'&&(req.url||'').includes('view=workspace')){const installed=S.readInstalled();return json(res,200,{name:'Forma',fictional:true,installed:!!installed,installedSnapshot:installed?.analysis.sha256});}
+ if(req.method==='GET')return json(res,200,{installedAnalysis:S.readInstalled()?.analysis,name:'Forma',fictional:true,files:S.source.files,context:S.source.context,cases:S.cases,installed:!!S.readInstalled(),installedSnapshot:S.readInstalled()?.analysis.sha256,evidence:(()=>{try{return require('../demo/generated/benchmark.json')}catch{return null}})()});
  if(req.method!=='POST')return json(res,405,{error:'POST required'});
  try{
   const b=req.body||{};
