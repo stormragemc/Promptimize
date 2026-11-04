@@ -14,7 +14,7 @@ def messages(context, utterance, baseline=False):
         user = json.dumps({"request_context": context, "utterance": utterance}, ensure_ascii=False, separators=(",", ":"))
     else:
         developer = 'You are an event operations assistant. Follow only these promptbase instructions:\n' + text + '\n\nReturn JSON only: {"action":"eligible|ineligible|lookup_event_status|ask_event_id|ask_confirmation|show_profile|cancel_booking|save_profile|escalate","event_id":"string or empty"}. A lookup action asks for a simulated tool result; do not infer its result. Never claim a side effect happened when no tool ran.'
-        user = utterance
+        user = json.dumps({"request_context": context, "utterance": utterance}, ensure_ascii=False, separators=(",", ":")) if context else utterance
     return [{"role":"developer", "content":developer}, {"role":"user", "content":user}]
 
 def post(path, body, key):

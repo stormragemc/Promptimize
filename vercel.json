@@ -11,7 +11,10 @@
     },
     "api/architecture-image.js": {
       "maxDuration": 100
+    },
+    "api/preflight.js": {
+      "maxDuration": 90
     }
   },
-  "buildCommand": "node --check advisor.js"
+  "buildCommand": "node tests/check-build.cjs"
 }

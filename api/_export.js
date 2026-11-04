@@ -33,7 +33,7 @@ if __name__ == "__main__":
     import sys
     print(load_context(json.loads(sys.argv[1]) if len(sys.argv) > 1 else {}))
 `;
-function bundleFiles(a,results=[],sources=[]){
+function bundleFiles(a,results=[],sources=[],options={}){
  const files={},paths={};
  const runtime=a.semantic?require('./_semantic-runtime'):null;
  const plan=runtime?.compileRuntime(a);
@@ -63,7 +63,7 @@ function bundleFiles(a,results=[],sources=[]){
  files['review.json']=JSON.stringify(a.semantic?{...review,semantic:a.semantic}:review,null,2);
  files['evaluation.json']=JSON.stringify({snapshot:a.sha256,runs:results},null,2);
  files['README.md']='# Promptimize export\n\nOriginal source quotes remain in the review record. Candidate text may include explicit human corrections. Scope assignments require review. Classification tests are not a guarantee of production behavior.\n\n'+(a.adapter==='jd-viewer-v1'?'Run: python loader.py \'{"jd_evaluation_results_modal_open": true}\'\n\nUnknown UI state conservatively loads every module. The original Gateway classifier/composer was not included in the upload; integrate this loader explicitly.\n':'This sample exports prompt modules and a manifest.\n');
- if(!plan)files['loader.py']=loader;files['run.py']=runner;files['cases.json']=JSON.stringify(a.testCases||[],null,2);
+ if(!plan)files['loader.py']=loader;files['run.py']=runner;files['cases.json']=JSON.stringify(a.testCases||((!a.adapter||a.adapter==='sample')?require('../sample-contract').cases(options.testSetups):[]),null,2);
  if(sources.length)files['baseline.md']=a.adapter==='jd-viewer-v1'?sources.map(f=>f.content).join('\n\n'):sources.map(f=>`[${f.name}]\n${f.content}`).join('\n\n');
  if(plan)files['README.md']+='\nThe semantic runtime reads routing metadata from runtime.json and instruction text from the actual module Markdown files. It verifies the manifest snapshot, module hashes, rule markers and duplicate copies before running. If a file was edited, return to Review in Promptimize, save the correction, freeze a new candidate and export it again. Do not edit runtime hashes to bypass review: existing test results apply only to the frozen export. Missing required state or evidence stops generation. Review metadata and the source map retain original evidence and approved consolidation aliases.\n';
  files['README.md']+='\n## Run a real request\n\nPython 3.10+, standard library only. Configure MODEL_API_KEY in your shell; no key is embedded.\n\n'+(a.testCases?.length?'Dry run: python run.py --case '+a.testCases[0].id+' --dry-run\n\nLive candidate: python run.py --case '+a.testCases[0].id+'\n\nLive baseline: python run.py --case '+a.testCases[0].id+' --mode baseline\n':'Dry run: python run.py --utterance "Can I get a refund?" --dry-run\n')+'\nThe runner sizes input before generation, enforces a per-call token allowance, and does not retry. Tool-state simulation runs in the web workbench.\n';return files;

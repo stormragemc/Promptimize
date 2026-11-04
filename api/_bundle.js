@@ -27,10 +27,10 @@ function validateAnalysis(a,files){
  if(a.reviewVersion||a.semantic){const {validatePaths}=require('./_review');validatePaths(a.paths,a.modules,{semantic:!!a.semantic});for(const r of a.rules)if(r.candidateText!==undefined&&(typeof r.candidateText!=='string'||!r.candidateText.trim()))throw Error('Invalid corrected instruction')}
  if(a.sha256!==digest(files,a))throw Object.assign(Error('Snapshot changed'),{status:409,publicMessage:'The candidate changed. Analyze and approve a new iteration.'});
 }
-function messagesFor(files,a,intent,query,mode){
+function messagesFor(files,a,intent,query,mode,executionContext={}){
  const ids=new Set([...(a.modules.shared||[]),...(a.modules[intent]||[])]);
  const context=mode==='baseline'?files.map(f=>`[${f.name}]\n${f.content}`).join('\n\n'):a.rules.filter(r=>ids.has(r.id)).map(r=>r.candidateText??r.quote).join('\n\n');
  if(!context)throw Error('Empty context');
- return [{role:'developer',content:`You are an event operations assistant. Follow only these promptbase instructions:\n${context}\n\nReturn JSON only: {"action":"eligible|ineligible|lookup_event_status|ask_event_id|ask_confirmation|show_profile|cancel_booking|save_profile|escalate","event_id":"string or empty"}. A lookup action asks for a simulated tool result; do not infer its result. Never claim a side effect happened when no tool ran.`},{role:'user',content:query}];
+ return [{role:'developer',content:`You are an event operations assistant. Follow only these promptbase instructions:\n${context}\n\nReturn JSON only: {"action":"eligible|ineligible|lookup_event_status|ask_event_id|ask_confirmation|show_profile|cancel_booking|save_profile|escalate","event_id":"string or empty"}. A lookup action asks for a simulated tool result; do not infer its result. Never claim a side effect happened when no tool ran.`},{role:'user',content:Object.keys(executionContext).length?JSON.stringify({request_context:executionContext,utterance:query}):query}];
 }
 module.exports={digest,validateAnalysis,messagesFor};

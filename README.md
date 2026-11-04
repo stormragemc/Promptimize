@@ -94,3 +94,8 @@ Readiness colors and enabled buttons mark the required sequence. Frozen candidat
 On `feature/context-architecture-advisor`, upload context documents separately from promptbase files, review Meta’s source-linked interpretation, and request a project-specific implementation plan. Download Meta-generated starter scripts, an exact flow diagram, and transparent scenario estimates. Optional Muse Wonder design review and Muse Image illustration are explicit paid actions. No generated code is executed and no frozen candidate is patched.
 
 See [the workflow, forecast assumptions and review guide](docs/CONTEXT_ARCHITECTURE_ADVISOR.md). Demo recordings remain deferred.
+
+
+## Blocked comparison recovery
+
+The review branch now checks the exact six sample cases and lookup follow-ups, supplies visible state to both versions, and reports the actual missing field or source conflict. Partial input counts are not treated as savings. See [comparison setup and recovery](docs/PREFLIGHT_RECOVERY.md).
