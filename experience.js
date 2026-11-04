@@ -114,6 +114,7 @@
    const x=Math.max(8,r.left-7),y=Math.max(8,r.top-7),width=Math.max(0,Math.min(vw-8,r.right+7)-x),height=Math.max(0,Math.min(vh-8,r.bottom+7)-y);
    Object.assign(spot.style,{left:x+'px',top:y+'px',width:width+'px',height:height+'px'});spot.hidden=false;
    if(r.right+card.width+28<vw){left=r.right+20;top=Math.max(padding,r.top);}
+   else if(r.left-card.width-20>padding){left=r.left-card.width-20;top=Math.max(padding,r.top);}
    else if(r.bottom+card.height+28<vh){left=Math.min(vw-card.width-padding,Math.max(padding,r.left));top=r.bottom+20;}
    else if(r.top-card.height-20>padding){left=Math.min(vw-card.width-padding,Math.max(padding,r.left));top=r.top-card.height-20;}
    else top=vh-card.height-padding;
