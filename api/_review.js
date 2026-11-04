@@ -1,6 +1,6 @@
 const {digest,validateAnalysis}=require('./_bundle');
 function validatePaths(paths,modules){
- const outputs=new Set(['manifest.json','source-map.json','review.json','evaluation.json','README.md','loader.py']);
+ const outputs=new Set(['manifest.json','source-map.json','review.json','evaluation.json','README.md','loader.py','run.py','cases.json','baseline.md']);
  for(const name of Object.keys(modules)){
   const p=paths?.[name];if(typeof p!=='string'||p.length>230||!p.endsWith('.md')||p.split('/').some(s=>!s||s==='.'||s==='..'||!/^[a-zA-Z0-9_][a-zA-Z0-9_. -]{0,63}$/.test(s)))throw Error('Use relative Markdown paths with valid folder names.');
   for(const file of [p,p.replace(/[^/]+$/,'intents.json')]){if(outputs.has(file))throw Error('Two outputs would use the same path: '+file);outputs.add(file)}
