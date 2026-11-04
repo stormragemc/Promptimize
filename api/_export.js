@@ -57,7 +57,7 @@ function bundleFiles(a,results=[],sources=[],testPlan=null){
  for(const [name,ids]of Object.entries(a.modules)){
   const path=a.paths?.[name]||(a.adapter==='jd-viewer-v1'?modulePath(name):`workflows/${name}/prompt.md`);paths[name]=path;
   const rules=plan?plan.modules[name].map(id=>byRule.get(id)):a.rules.filter(r=>ids.includes(r.id));files[path]=rules.map(r=>`<!-- promptimize-rule:${r.id} -->\n${r.candidateText??r.quote}`).join('\n\n');
-  const intents=rules.flatMap(r=>(r.intents||[]).map(intent=>({intent,rule:r.id,source:{file:r.file,line:r.line}})));
+  const intents=require('./_intent-registry').intentRegistry(name,rules,a);
   files[path.replace(/[^/]+$/, 'intents.json')]=JSON.stringify(intents,null,2);
  }
  const moduleHashes=Object.fromEntries(Object.entries(paths).map(([name,path])=>[name,require('node:crypto').createHash('sha256').update(files[path]).digest('hex')]));
