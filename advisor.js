@@ -1,4 +1,4 @@
-let architectureImage=null;
+let architectureImage=null,projectionSnapshot=null;
 let contextDocuments=[],contextFacts=[],contextReceipt=null,architectureReport=null,advisorBusy=false,contextReadSequence=0,advisorSequence=0,analyzedContext=null;
 const ad=id=>document.getElementById(id);
 const adEscape=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -26,11 +26,12 @@ function advisorBeforeAnalyze(){
  if(ad('context-approved').checked&&!payload.projectContext)throw Error('Describe the project or read context files first.');
  return payload;
 }
-function advisorAnalyzed(){analyzedContext=JSON.stringify(contextPayload());architectureReport=null;advisorSequence++;}
-function invalidateAdvisor(){architectureImage=null;ad('advisor-image-result').innerHTML='';architectureReport=null;advisorSequence++;renderAdvisor();}
+function advisorAnalyzed(payload=contextPayload()){analyzedContext=JSON.stringify(payload);projectionSnapshot=null;ad('advisor-projection').innerHTML='';architectureReport=null;advisorSequence++;}
+function invalidateAdvisor(){projectionSnapshot=null;ad('advisor-projection').innerHTML='';architectureImage=null;ad('advisor-image-result').innerHTML='';architectureReport=null;advisorSequence++;renderAdvisor();}
 function resetAdvisor(){
  contextReadSequence++;advisorSequence++;contextDocuments=[];contextFacts=[];contextReceipt=null;architectureReport=null;analyzedContext=null;advisorBusy=false;
  if(!ad('project-purpose'))return;
+ projectionSnapshot=null;ad('advisor-projection').innerHTML='';
  ad('project-purpose').value='';ad('context-approved').checked=false;ad('context-facts').innerHTML='';ad('context-file-list').innerHTML='';ad('context-status').textContent='Optional. Context files explain the project; they are kept separate from the promptbase.';
  ad('context-files').value='';ad('context-folder').value='';ad('read-context').disabled=true;
  renderAdvisor();
@@ -90,11 +91,13 @@ function advisorAssumptions(){return {fallbackRate:Number(ad('fallback-rate').va
 function advisorBody(action){return {action,files,analysis,...contextPayload(),modelChoice:ad('advisor-model').value,budget:Number(ad('advisor-budget').value),assumptions:advisorAssumptions()};}
 function percent(value){return `${value>0?'+':''}${value.toFixed(1)}%`;}
 function renderProjection(p){
+ projectionSnapshot=analysis?.sha256;
  const change=-p.inputSavingsPercent;
  ad('advisor-projection').innerHTML=`<div class="projection-main"><span>Projected instruction input</span><strong class="${change<0?'token-good':change>0?'token-bad':''}">${percent(change)}</strong><span>~${p.baselineInputTokens.toLocaleString()} → ~${p.expectedInputTokens.toLocaleString()} tokens/request</span></div><p>Scenario estimate, not a measured result. Assumes ${(p.fallbackRate*100).toFixed(0)}% broader retries and equal traffic across workflows.</p><details><summary>See the calculation and limits</summary><p>Expected instruction characters = compact context + fallback rate × broader context + routing overhead. Approximate tokens = characters ÷ 4.</p><p>Token range: original ${p.tokenRange.baseline.join('–')}; proposed ${p.tokenRange.candidate.join('–')}. Break-even fallback rate: ${p.breakEvenFallbackRate===null?'unknown':(p.breakEvenFallbackRate*100).toFixed(1)+'%'}.</p><ul>${p.assumptions.map(x=>`<li>${adEscape(x)}</li>`).join('')}</ul><table><thead><tr><th>Broader retries</th><th>Approx. input</th><th>Change</th></tr></thead><tbody>${p.sensitivity.map(r=>`<tr><td>${Math.round(r.fallbackRate*100)}%</td><td>${r.expectedInputTokens.toLocaleString()}</td><td class="${r.inputSavingsPercent>0?'token-good':'token-bad'}">${percent(-r.inputSavingsPercent)}</td></tr>`).join('')}</tbody></table></details>`;
 }
 function renderAdvisor(){
  if(!ad('advisor-generate'))return;
+ if(projectionSnapshot!==analysis?.sha256){ad('advisor-projection').innerHTML='';projectionSnapshot=null;}
  if(architectureReport&&architectureReport.snapshot!==analysis?.sha256){architectureReport=null;advisorSequence++;}
  const context=contextPayload(),fresh=analyzedContext===JSON.stringify(context);
  const ready=!!analysis&&!!context.projectContext&&ad('context-approved').checked&&fresh&&!advisorBusy;

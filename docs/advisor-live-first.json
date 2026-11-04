@@ -1,0 +1,409 @@
+{
+  "format": "promptimize.advisor-smoke.v1",
+  "fictionalData": true,
+  "startedAt": "2026-11-04T11:42:30.715Z",
+  "completed": true,
+  "receipts": [
+    {
+      "stage": "context",
+      "model": "muse-spark-1.3",
+      "usage": {
+        "completion_tokens": 1624,
+        "prompt_tokens": 243,
+        "total_tokens": 1867,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1374
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "inputSizing": 400,
+      "outputCap": 4000,
+      "reservedTokens": 4400,
+      "elapsedMs": 13815,
+      "recordedAt": "2026-11-04T11:42:45.460Z"
+    },
+    {
+      "stage": "extract",
+      "status": "provider-error",
+      "estimatedInputTokens": 2476,
+      "reservedTokens": 6276,
+      "usage": {},
+      "elapsedMs": 26005
+    },
+    {
+      "stage": "architecture",
+      "model": "muse-spark-1.3",
+      "usage": {
+        "completion_tokens": 2698,
+        "prompt_tokens": 1569,
+        "total_tokens": 4267,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1392
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "inputSizing": 1726,
+      "outputCap": 6500,
+      "reservedTokens": 8226,
+      "elapsedMs": 22951,
+      "recordedAt": "2026-11-04T11:43:35.067Z"
+    }
+  ],
+  "context": {
+    "format": "promptimize.context-draft.v1",
+    "status": "draft",
+    "facts": [
+      {
+        "id": "C1",
+        "kind": "purpose",
+        "text": "Fictional observatory assistant routes telescope operators, duty technicians and public visitors.",
+        "source": {
+          "file": "context/project.md",
+          "quote": "This fictional observatory assistant routes telescope operators, duty technicians and public visitors.",
+          "line": 1,
+          "sha256": "f72a03ea81c75644843a466917f169ee001783074d9ad910dcbae29e227c626c"
+        },
+        "authority": "source-observed"
+      },
+      {
+        "id": "C2",
+        "kind": "invariant",
+        "text": "Telescope operations must respect the documented wind threshold.",
+        "source": {
+          "file": "context/project.md",
+          "quote": "Telescope operations must respect the documented wind threshold.",
+          "line": 1,
+          "sha256": "0fe75754cabad4db12be320452cc14e41dca426eeb39a89370a3f140ad70aa26"
+        },
+        "authority": "source-observed"
+      },
+      {
+        "id": "C3",
+        "kind": "invariant",
+        "text": "Names entered during roster collection refer to technicians, not observation targets.",
+        "source": {
+          "file": "context/project.md",
+          "quote": "Names entered during roster collection refer to technicians, not observation targets.",
+          "line": 1,
+          "sha256": "97955e28c62e365fc15841a3b0c260dd80d61310446d008b3255a5dfe6cca16c"
+        },
+        "authority": "source-observed"
+      },
+      {
+        "id": "C4",
+        "kind": "stateField",
+        "text": "Request context includes deskPhase and domeState.",
+        "source": {
+          "file": "context/project.md",
+          "quote": "The request context includes deskPhase and domeState.",
+          "line": 1,
+          "sha256": "1d528f34564f6e7067aa9437c55458a0446b2cb5ccc67fd291576fb190b03ff4"
+        },
+        "authority": "source-observed"
+      },
+      {
+        "id": "C5",
+        "kind": "invariant",
+        "text": "The existing prompts are the source for exact action names and safety policies.",
+        "source": {
+          "file": "context/project.md",
+          "quote": "The existing prompts contain the exact action names and safety policies.",
+          "line": 1,
+          "sha256": "9b7fa881b8c212daab3ef369bc97ca026b88fd1a120d27142f86ad9ace3bdf70"
+        },
+        "authority": "source-observed"
+      }
+    ],
+    "sourceHash": "494e928ce7b9441acb21db92a1d4b7443d372e10b8d1bb6075dae6281c1c7eef",
+    "sources": [
+      {
+        "name": "context/project.md",
+        "sha256": "3aa8692bed2fd1164d876c3a84cc5d7dd157f99a6b6a1382815b41ba0be808c5"
+      }
+    ],
+    "context": {
+      "projectContext": {
+        "schemaVersion": 1,
+        "projectId": "uploaded-project",
+        "version": "1",
+        "status": "draft",
+        "authority": "inferred",
+        "purpose": "Fictional observatory assistant routes telescope operators, duty technicians and public visitors.",
+        "actors": [],
+        "workflowHints": [],
+        "tools": [],
+        "outputs": [],
+        "stateFields": [
+          "Request context includes deskPhase and domeState."
+        ],
+        "invariants": [
+          {
+            "id": "C2",
+            "text": "Telescope operations must respect the documented wind threshold.",
+            "authority": "inferred"
+          },
+          {
+            "id": "C3",
+            "text": "Names entered during roster collection refer to technicians, not observation targets.",
+            "authority": "inferred"
+          },
+          {
+            "id": "C5",
+            "text": "The existing prompts are the source for exact action names and safety policies.",
+            "authority": "inferred"
+          }
+        ],
+        "exceptions": [],
+        "references": [
+          {
+            "id": "C1",
+            "title": "context/project.md:1",
+            "text": "Fictional observatory assistant routes telescope operators, duty technicians and public visitors.\nSource: This fictional observatory assistant routes telescope operators, duty technicians and public visitors.",
+            "authority": "inferred"
+          },
+          {
+            "id": "C2",
+            "title": "context/project.md:1",
+            "text": "Telescope operations must respect the documented wind threshold.\nSource: Telescope operations must respect the documented wind threshold.",
+            "authority": "inferred"
+          },
+          {
+            "id": "C3",
+            "title": "context/project.md:1",
+            "text": "Names entered during roster collection refer to technicians, not observation targets.\nSource: Names entered during roster collection refer to technicians, not observation targets.",
+            "authority": "inferred"
+          },
+          {
+            "id": "C4",
+            "title": "context/project.md:1",
+            "text": "Request context includes deskPhase and domeState.\nSource: The request context includes deskPhase and domeState.",
+            "authority": "inferred"
+          },
+          {
+            "id": "C5",
+            "title": "context/project.md:1",
+            "text": "The existing prompts are the source for exact action names and safety policies.\nSource: The existing prompts contain the exact action names and safety policies.",
+            "authority": "inferred"
+          }
+        ]
+      },
+      "promptContext": []
+    },
+    "receipt": {
+      "model": "muse-spark-1.3",
+      "usage": {
+        "completion_tokens": 1624,
+        "prompt_tokens": 243,
+        "total_tokens": 1867,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1374
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "inputSizing": 400,
+      "outputCap": 4000,
+      "reservedTokens": 4400,
+      "elapsedMs": 13815,
+      "recordedAt": "2026-11-04T11:42:45.460Z"
+    }
+  },
+  "analysis": {
+    "snapshot": "0b213c1af156d77e08c4b008f9f57cfdc02c732dd0ebd3caa0e8962d238e2103",
+    "rules": 4,
+    "modules": [
+      "shared"
+    ],
+    "semantic": true,
+    "calls": [
+      {
+        "stage": "extract",
+        "status": "provider-error",
+        "estimatedInputTokens": 2476,
+        "reservedTokens": 6276,
+        "usage": {},
+        "elapsedMs": 26005
+      }
+    ]
+  },
+  "design": {
+    "flow": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 800 650\" role=\"img\" aria-labelledby=\"flow-title flow-desc\"><title id=\"flow-title\">Compact context with a conditional fallback</title><desc id=\"flow-desc\">A request selects compact context. Ready context proceeds to the model. Otherwise expand once. If still unresolved, stop and ask for clarification.</desc><defs><linearGradient id=\"bg\"><stop stop-color=\"#f0f0f0\"/><stop offset=\".6\" stop-color=\"#e8dcff\"/><stop offset=\"1\" stop-color=\"#ffd9f4\"/></linearGradient></defs><rect width=\"800\" height=\"650\" rx=\"24\" fill=\"url(#bg)\"/><g font-family=\"sans-serif\" fill=\"#23172f\"><text x=\"30\" y=\"45\" font-size=\"24\">Load less. Expand only when needed.</text><text x=\"30\" y=\"73\" font-size=\"14\">Suggested flow \u00b7 0b213c1af156 \u00b7 validate before adoption</text></g><g fill=\"none\" stroke=\"#6342bd\" stroke-width=\"2\"><path d=\"M375 160v40m-5-6 5 6 5-6M375 260v40m-5-6 5 6 5-6M375 360v160m-5-6 5 6 5-6M500 330h145v70m-5-6 5 6 5-6M645 460v90H500m6-5-6 5 6 5M520 430H280m6-5-6 5 6 5\"/></g><g font-family=\"sans-serif\" font-size=\"13\" fill=\"#51415f\"><text x=\"388\" y=\"490\">ready</text><text x=\"525\" y=\"318\">needs context</text><text x=\"552\" y=\"535\">ready</text><text x=\"304\" y=\"419\">still unresolved</text></g><rect x=\"250\" y=\"100\" width=\"250\" height=\"60\" rx=\"12\" fill=\"white\"/><g font-family=\"sans-serif\" fill=\"#23172f\"><text x=\"264\" y=\"125\" font-size=\"17\">User request</text><text x=\"264\" y=\"146\" font-size=\"12\">Message + application state</text></g><rect x=\"250\" y=\"200\" width=\"250\" height=\"60\" rx=\"12\" fill=\"#563bdf\"/><g font-family=\"sans-serif\" fill=\"white\"><text x=\"264\" y=\"225\" font-size=\"17\">Compact context</text><text x=\"264\" y=\"246\" font-size=\"12\">Shared + relevant workflow rules</text></g><rect x=\"250\" y=\"300\" width=\"250\" height=\"60\" rx=\"12\" fill=\"white\"/><g font-family=\"sans-serif\" fill=\"#23172f\"><text x=\"264\" y=\"325\" font-size=\"17\">Readiness check</text><text x=\"264\" y=\"346\" font-size=\"12\">Required context available?</text></g><rect x=\"520\" y=\"400\" width=\"250\" height=\"60\" rx=\"12\" fill=\"white\"/><g font-family=\"sans-serif\" fill=\"#23172f\"><text x=\"534\" y=\"425\" font-size=\"17\">Expand once</text><text x=\"534\" y=\"446\" font-size=\"12\">Broader context + references</text></g><rect x=\"30\" y=\"400\" width=\"250\" height=\"60\" rx=\"12\" fill=\"white\"/><g font-family=\"sans-serif\" fill=\"#23172f\"><text x=\"44\" y=\"425\" font-size=\"17\">Stop / clarify</text><text x=\"44\" y=\"446\" font-size=\"12\">Required state still missing</text></g><rect x=\"250\" y=\"520\" width=\"250\" height=\"60\" rx=\"12\" fill=\"white\"/><g font-family=\"sans-serif\" fill=\"#23172f\"><text x=\"264\" y=\"545\" font-size=\"17\">Meta response</text><text x=\"264\" y=\"566\" font-size=\"12\">Check behavior, tokens and timing</text></g><text x=\"30\" y=\"622\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#51415f\">Promptimize \u00b7 exact flow diagram \u00b7 no measured improvement is implied</text></svg>",
+    "format": "promptimize.architecture.v1",
+    "snapshot": "0b213c1af156d77e08c4b008f9f57cfdc02c732dd0ebd3caa0e8962d238e2103",
+    "contextFingerprint": "5b64764333dc6c5efc27555aae098e2c495313374b90f2be31294e5cbee4e9eb",
+    "generatedAt": "2026-11-04T11:43:35.068Z",
+    "summary": "Route observatory requests by deskPhase and domeState through the existing semantic runtime. Keep compact loading and single broader retry as-is, add explicit phase routing on top, and defer caching or model changes until tested. Loaded prompts remain the source for action names and safety text.",
+    "techniques": [
+      {
+        "id": "selective-loading",
+        "status": "already-present",
+        "title": "Compact context load",
+        "why": "The shared bundle already loads only needed rules for wind, confirmation, and target versus technician selection.",
+        "implementation": "Continue using runtime.json plus loader.runtime_request for assembly. No new loader. Keep manifest.json as source of truth for shared set.",
+        "risk": "Compact slice can miss a needed rule if routing is wrong, requiring the approved broader retry.",
+        "validation": "Test roster-collection vs target-selection, wind interlock present, and confirmation expiry cases.",
+        "evidence": [
+          "R1",
+          "R2"
+        ]
+      },
+      {
+        "id": "dependency-aware-loading",
+        "status": "already-present",
+        "title": "Dependency closure plus one broader retry",
+        "why": "Runtime already resolves shared dependencies and allows ONE broader pre-generation expansion when compact context is insufficient.",
+        "implementation": "Use existing runtime closure in loader.py and run.py. Do not add custom expansion. Pass intent and require_rule_ids through when supplied.",
+        "risk": "Repeated retries would add input cost; limit to the one approved expansion.",
+        "validation": "Test missing-rule fallback, hash check failure stops, and unresolved state stops without bypass.",
+        "evidence": [
+          "R4",
+          "R1",
+          "R2",
+          "R3"
+        ]
+      },
+      {
+        "id": "deterministic-routing",
+        "status": "recommend",
+        "title": "Phase-based routing on deskPhase",
+        "why": "R2 requires different actions for the same name by phase: select_target versus select_technician, plus confirmation before slew.",
+        "implementation": "In templates/project_adapter.py add resolve_intent(context) mapping deskPhase target-selection to target workflow and roster-collection to roster workflow, then call loader.runtime_request once with that intent. If deskPhase is missing ask for clarification.",
+        "risk": "Wrong or missing deskPhase routes to wrong action; default must be clarification not guess.",
+        "validation": "Test each deskPhase value, missing deskPhase, domeState closed notice, and confirmation scoping.",
+        "evidence": [
+          "R2",
+          "R3"
+        ]
+      },
+      {
+        "id": "prompt-caching",
+        "status": "defer",
+        "title": "Defer caching until measured",
+        "why": "Caching needs live traffic validation and must not change safety text from R1 and R3.",
+        "implementation": "No code change now. Later measure with run.py input/output and cache use before any adoption.",
+        "risk": "Stale cache could serve expired confirmation or old safety text.",
+        "validation": "Requires paired live tests for correctness, input/output use, and response time.",
+        "evidence": [
+          "R1"
+        ]
+      }
+    ],
+    "files": [
+      {
+        "path": "templates/project_adapter.py",
+        "content": "\"\"\"Project adapter starter for observatory assistant.\nREQUIRES REVIEW: starter template only, not approved policy.\nUses existing semantic runtime only. Does not modify rules.\n\"\"\"\nfrom typing import Any, Dict, Optional, Tuple\nimport loader\n\nAPPROVED_INTENTS = (\"target\", \"roster\", \"visitor\", \"safety-check\")\n\ndef resolve_intent(context: Dict[str, Any]) -> Tuple[Optional[str], Optional[str]]:\n    \"\"\"Map deskPhase to an approved workflow intent.\"\"\"\n    phase = (context or {}).get(\"deskPhase\")\n    if phase == \"target-selection\":\n        return (\"target\", None)\n    if phase == \"roster-collection\":\n        return (\"roster\", None)\n    if phase in (\"visitor-checkin\", \"visit\"):\n        return (\"visitor\", None)\n    if phase in (\"inspection\", \"safety-check\"):\n        return (\"safety-check\", None)\n    return (None, \"Missing deskPhase: ask which desk phase applies (target-selection, roster-collection, visitor-checkin, inspection).\")\n\ndef observatory_request(context: Dict[str, Any], utterance: str, baseline: bool = False) -> Dict[str, Any]:\n    \"\"\"Single semantic-runtime call. Stops if no messages are returned.\"\"\"\n    if not isinstance(context, dict) or \"deskPhase\" not in context or \"domeState\" not in context:\n        return {\n            \"action\": \"clarify\",\n            \"message\": \"Need deskPhase and domeState to route. Please supply both.\",\n            \"messages\": [],\n        }\n    intent, clarification = resolve_intent(context)\n    if intent is None:\n        return {\"action\": \"clarify\", \"message\": clarification, \"messages\": []}\n    if intent not in APPROVED_INTENTS:\n        return {\"action\": \"clarify\", \"message\": \"Unknown phase. Please clarify.\", \"messages\": []}\n    # First two args positionally per contract: (context, utterance).\n    result = loader.runtime_request(context, utterance, baseline=baseline, intent=intent)\n    # Do not bypass unresolved state or hash checks.\n    if isinstance(result, dict):\n        msgs = result.get(\"messages\", result.get(\"prompt_messages\", []))\n        status = result.get(\"status\", \"ok\")\n        if status != \"ok\" or not msgs:\n            return {\n                \"action\": \"clarify\",\n                \"message\": \"Runtime returned no usable context. Resolve state or hash issue before continuing.\",\n                \"messages\": [],\n                \"detail\": result,\n            }\n        return {\"action\": \"runtime\", \"messages\": msgs, \"detail\": result}\n    if not result:\n        return {\"action\": \"clarify\", \"message\": \"No runtime messages. Stopping without bypass.\", \"messages\": []}\n    return {\"action\": \"runtime\", \"messages\": result}",
+        "reviewRequired": true,
+        "executed": false
+      }
+    ],
+    "projection": {
+      "kind": "character-based-scenario-estimate",
+      "measured": false,
+      "baselineChars": 1363,
+      "compactChars": 1363,
+      "broadChars": 2508,
+      "fallbackRate": 0.1,
+      "routingChars": 400,
+      "expectedChars": 2014,
+      "baselineInputTokens": 341,
+      "expectedInputTokens": 504,
+      "tokenRange": {
+        "baseline": [
+          273,
+          455
+        ],
+        "candidate": [
+          403,
+          672
+        ]
+      },
+      "inputSavingsPercent": -47.7,
+      "breakEvenFallbackRate": 0,
+      "sensitivity": [
+        {
+          "fallbackRate": 0,
+          "expectedInputTokens": 441,
+          "inputSavingsPercent": -29.3
+        },
+        {
+          "fallbackRate": 0.1,
+          "expectedInputTokens": 504,
+          "inputSavingsPercent": -47.7
+        },
+        {
+          "fallbackRate": 0.25,
+          "expectedInputTokens": 598,
+          "inputSavingsPercent": -75.3
+        },
+        {
+          "fallbackRate": 0.5,
+          "expectedInputTokens": 755,
+          "inputSavingsPercent": -121.3
+        },
+        {
+          "fallbackRate": 1,
+          "expectedInputTokens": 1068,
+          "inputSavingsPercent": -213.4
+        }
+      ],
+      "modules": [],
+      "assumptions": [
+        "Equal request share across listed workflow modules; replace with your traffic mix.",
+        "Token counts approximate instruction characters / 4, with a 3\u20135 characters/token range. They are not Meta token counts.",
+        "Fallback scenario adds a broader retry after a compact attempt; actual pre-generation expansion can cost less.",
+        "Shared rules, approved dependency closure, routing overhead and approved reference lengths are included.",
+        "User messages, tools, full message envelope, generated/reasoning output, cache discounts and optimization setup cost are excluded.",
+        "This is an input-cost scenario at the same model/rate; accuracy, total cost and speed improvements require paired live tests."
+      ],
+      "nextTests": [
+        "Boundary cases and cross-workflow exceptions",
+        "Ambiguous requests and missing state",
+        "Routing mistakes and broader fallback",
+        "Identical expected action, entities and final state",
+        "Actual input/output/reasoning/cache usage and response time"
+      ]
+    },
+    "receipt": {
+      "model": "muse-spark-1.3",
+      "usage": {
+        "completion_tokens": 2698,
+        "prompt_tokens": 1569,
+        "total_tokens": 4267,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1392
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "inputSizing": 1726,
+      "outputCap": 6500,
+      "reservedTokens": 8226,
+      "elapsedMs": 22951,
+      "recordedAt": "2026-11-04T11:43:35.067Z"
+    },
+    "modelSelection": {
+      "model": "muse-spark-1.3",
+      "reason": "Muse Spark keeps this design pass economical."
+    },
+    "scope": "Advisory templates only. No candidate edits, generated-code execution or measured performance claim."
+  },
+  "kitFiles": [
+    "templates/project_adapter.py",
+    "architecture.json",
+    "flow.svg",
+    "muse-image-prompt.txt",
+    "IMPLEMENTATION.md"
+  ],
+  "finishedAt": "2026-11-04T11:43:35.072Z",
+  "reviewFindings": [
+    "Context extraction and design calls completed, but semantic extraction timed out with unknown usage. Shared-only retention did not establish useful organization.",
+    "The generated Python parsed, but invented workflow labels. This first-pass template is rejected and is not the final deliverable."
+  ],
+  "validatedForAdoption": false
+}

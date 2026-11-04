@@ -13,7 +13,9 @@ async function main(){
   const analysis=await proposeSemantic(fixture.files,{...ctx},{limits:{maxCalls:4,maxReservedTokens:40000}});
   report.analysis={snapshot:analysis.sha256,rules:analysis.rules.length,modules:Object.keys(analysis.modules),semantic:true,calls:analysis.semantic.calls};
   report.receipts.push(...analysis.semantic.calls.map(x=>({stage:'semantic-analysis',...x})));
-  report.design=await architecture({files:fixture.files,analysis,...ctx,modelChoice:'spark',budget:24000,assumptions:{fallbackRate:0.1,routingChars:400}});
+  if(analysis.semantic.calls.some(c=>c.status!=='completed'&&c.status!=='cached'))throw Error('Semantic analysis did not complete; conservative source retention is not a successful optimization.');
+
+  report.design=await architecture({files:fixture.files,analysis,...ctx,modelChoice:'wonder',budget:24000,assumptions:{fallbackRate:0.1,routingChars:400}});
   report.receipts.push({stage:'architecture',...report.design.receipt});
   const output=kit(report.design,analysis,fixture.files,{...ctx,assumptions:{fallbackRate:0.1,routingChars:400}});
   report.kitFiles=Object.keys(output);report.completed=true;

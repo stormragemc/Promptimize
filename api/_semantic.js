@@ -395,7 +395,7 @@ function providerState(context, options, limits) {
     calls.push(call);
     const start = Date.now();
     try {
-      const response = await provider(messages, settings.max, { reasoningEffort: settings.effort });
+      const response = await provider(messages, settings.max, { reasoningEffort: settings.effort, timeoutMs: 52000 });
       call.usage = response?.usage ?? {};
       call.model = response?.model ?? MODEL;
       addUsage(usage, call.usage);

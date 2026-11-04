@@ -57,3 +57,9 @@ The existing semantic context normalizer, analysis, dependency checks and export
 ## Review boundary
 
 Test and review this branch before merging. Main and production must stay unchanged until Marcel approves. Demo recordings remain deferred; the workflow and media behavior are documented here instead.
+
+## Live check and hardening
+
+The first cloud check completed real context and design calls, but semantic extraction timed out and the generated adapter invented workflow labels. That partial result is retained in `advisor-live-first.json` and is not accepted as a successful refactor. Extraction timeouts now have a longer bounded window. State-field facts must be exact source-backed identifiers, and generated Python must use the reviewed runtime bridge rather than bypass the exported loader. The bridge rejects unknown workflow hints and stops unresolved requests. Its code is included in the kit alongside the model-generated project adapter.
+
+No recordings were created. Browser inspection was unavailable in this session; UI state checks use DOM doubles, and the owner should inspect the real preview before merging.
