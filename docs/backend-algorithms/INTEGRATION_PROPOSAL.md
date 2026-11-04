@@ -1,6 +1,6 @@
 # Backend algorithm integration
 
-This proposal describes the backend semantic pipeline and the later wiring into the existing Promptimize workbench. The current workbench requests the legacy path by sending only `{files}`. A caller opts into the semantic engine with `algorithm: "semantic-v1"` and can supply versioned project and prompt context alongside the files.
+This proposal describes the backend semantic pipeline and the later wiring into the existing Promptimize workbench. The current workbench sends only `{files}`. That keeps the legacy path by default. For owner review, a Preview deployment can opt into the semantic backend through the server-only `PROMPTIMIZE_PREVIEW_ALGORITHM=semantic-v1` setting; it is ignored outside `VERCEL_ENV=preview` and is scoped to the backend branch in Vercel. An explicit `algorithm: "legacy"` keeps the historical path even in that preview. An API caller can select `algorithm: "semantic-v1"` and supply versioned project and prompt context alongside the files.
 
 ## From source to test
 
@@ -113,7 +113,7 @@ When there is no narrow match or the selection exposes missing state, dependenci
 
 A reported source conflict suppresses the compiled project brief and approved references. An affected context conflict or a contradiction between selected rules produces an unresolved selection. Review the conflicting evidence before generating a case answer.
 
-The compiled plan preserves stable rule order, deduplicates by rule ID, and applies approved consolidation aliases. The manifest keeps `format: "promptimize.v2"` and adds `semantic: {algorithm, schemaVersion, runtime}`. Its `runtime` points to `runtime.json`, which contains the snapshot and `runtimeVersion: 1`. The Python loader and runner use that plan to reproduce the Node selection and request. The source map retains the original rule records and their evidence. The exported runner returns model decisions. The built-in server cases add deterministic simulation to their results.
+The compiled plan preserves stable rule order, deduplicates by rule ID, and applies approved consolidation aliases. The manifest keeps `format: "promptimize.v2"` and adds `semantic: {algorithm, schemaVersion, runtime}`. Its `runtime` points to `runtime.json`, which contains the snapshot and `runtimeVersion: 1`. The Python loader uses the plan for routing metadata, then reads exact instruction text from the actual module Markdown files. Exported runtime metadata contains module SHA-256 hashes instead of a second embedded text copy. It rejects edited, missing or inconsistent module files before generation. Corrections must go through Promptimize Review and a new frozen export. The Python runner reproduces the Node selection and request. The source map retains the original rule records and their evidence. The exported runner returns model decisions. The built-in server cases add deterministic simulation to their results.
 
 ## Endpoints and frozen proposals
 
@@ -223,3 +223,32 @@ prepareObservatory().then(console.log).catch(error => {
 ## Persistence boundary
 
 The first integration can supply versioned JSON records from backend fixtures or a future context form. If durable storage is added later, project context and variable metadata can use PostgreSQL JSONB, with relational identifiers for sources, rules, assignments, dependencies, snapshots, and test results. Keep original private uploads and exports in private storage. Scope persistent cache keys to a verified project and permission boundary.
+
+## Review hardening
+
+Missing rule state is now checked after selection and dependency closure, regardless of whether a rule entered through shared context, a workflow match, lexical ranking, an explicit required ID or a dependency. Broader expansion cannot silently satisfy an unknown required state field. Both Node and Python return unresolved and omit generation messages. This is a clarification requirement, not a prediction that an unsafe tool action already occurred.
+
+Blocking review items have stable `id` values computed from their original finding. Existing evidence and findings remain immutable. A reviewer can submit `draft.conflictResolutions` to `POST /api/review` without changing the frontend. These records express human decisions, not successful test results.
+
+```json
+{
+  "draft": {
+    "conflictResolutions": [
+      {
+        "conflictId": "<id from analysis.semantic.reviewItems>",
+        "action": "dismiss-false-positive",
+        "rationale": "The cited instructions cover different actors; both remain in the candidate.",
+        "evidence": ["<source span for each affected rule>"]
+      }
+    ]
+  }
+}
+```
+
+`action` accepts `dismiss-false-positive` or `corrected-candidate`. Both require a nonempty rationale and verified source spans covering every affected rule. The correction action additionally requires an explicit affected text change in the same review. Unknown IDs, duplicates and unsupported evidence are rejected. A project/source-context conflict requires a context version update and reanalysis; it cannot be dismissed through this endpoint.
+
+Each resolution records fingerprints of affected candidate text and module memberships. Later affected text or assignment edits invalidate the resolution, while folder path renames do not. Resolution history is retained; an old approval is not automatically revived when a later resolution becomes stale. The current finding remains visible in the audit. Test failures never create these resolutions or edit a candidate automatically.
+
+The existing frontend cannot submit these new review fields yet. For a blocking finding, inspect the analysis JSON and use the review API, or analyze a new proposal with corrected versioned context. Source-only browser testing is available on the scoped branch Preview. Context input forms and dedicated resolution controls remain later frontend work.
+
+See [REVIEW_GUIDE.md](REVIEW_GUIDE.md) for the browser and command-line checks, exact scope and remaining live acceptance gate.

@@ -88,7 +88,11 @@ test('exported Python and Node select the same rules and construct identical req
   });
   const output = bundleFiles(analysis, [], fixture.files);
   const runtime = compileRuntime(analysis);
-  assert.deepEqual(JSON.parse(output['runtime.json']), JSON.parse(JSON.stringify(runtime)));
+  const exportedRuntime = JSON.parse(output['runtime.json']);
+  assert.equal(exportedRuntime.textSource, 'module-files-v1');
+  assert(exportedRuntime.rules.every(rule => !Object.hasOwn(rule, 'text')));
+  const { textSource, moduleHashes, ...metadata } = exportedRuntime;
+  assert.deepEqual(metadata, JSON.parse(JSON.stringify({ ...runtime, rules: runtime.rules.map(({ text, ...rule }) => rule) })));
   assert.equal(JSON.parse(output['manifest.json']).modules[renamed], 'workflows/renamed/interlock/prompt.md');
   assert(output['workflows/renamed/interlock/prompt.md'].includes('Keep the observatory log available.'));
   assert.equal(runtime.ruleAliases[pending.removeRuleId], pending.keepRuleId);

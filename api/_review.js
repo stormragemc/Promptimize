@@ -19,6 +19,9 @@ function revise(files,a,draft){
  const edits=[];let total=0;
  next.rules=next.rules.map(r=>{const text=draft.text&&Object.hasOwn(draft.text,r.id)?draft.text[r.id]:(r.candidateText??r.quote);if(typeof text!=='string'||!text.trim()||text.length>50000)throw Error('Instructions must contain text.');total+=text.length;const workflows=[...new Set(assignments[r.id])];if(text!==r.quote||JSON.stringify(workflows)!==JSON.stringify(a.rules.find(x=>x.id===r.id).workflows))edits.push({rule:r.id,textChanged:text!==r.quote,workflows});return {...r,workflows,...(text!==r.quote?{candidateText:text}: {candidateText:undefined})}});
  if(total>100000)throw Error('Reviewed instructions exceed 100,000 characters.');
- next.modules=Object.fromEntries(names.map(m=>[m,next.rules.filter(r=>r.workflows.includes(m)).map(r=>r.id)]));next.reviewVersion=1;next.review={parentSnapshot:a.sha256,savedAt:new Date().toISOString(),notes:String(draft.notes===undefined?(a.review?.notes||''):draft.notes).slice(0,4000),edits};next.sha256=digest(files,next);if(next.semantic)validateAnalysis(next,files);return next;
+ next.modules=Object.fromEntries(names.map(m=>[m,next.rules.filter(r=>r.workflows.includes(m)).map(r=>r.id)]));
+ if(next.semantic)require('./_semantic-conflicts').resolveConflicts(a,next,draft);
+ else if(draft.conflictResolutions!==undefined)throw Error('This analysis has no semantic conflicts to resolve.');
+ next.reviewVersion=1;next.review={parentSnapshot:a.sha256,savedAt:new Date().toISOString(),notes:String(draft.notes===undefined?(a.review?.notes||''):draft.notes).slice(0,4000),edits};next.sha256=digest(files,next);if(next.semantic)validateAnalysis(next,files);return next;
 }
 module.exports={validatePaths,revise};

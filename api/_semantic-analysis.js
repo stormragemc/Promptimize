@@ -2,6 +2,7 @@ const {createHash}=require('node:crypto');
 const {analyzeSemantic}=require('./_semantic');
 const {normalizeContext,makeEvidence}=require('./_semantic-context');
 const jd=require('./_organize');
+const {identifyConflicts,validateResolutions}=require('./_semantic-conflicts');
 
 const ALGORITHM='semantic-v1';
 const EVENT_SAMPLE_FILES=['shared.md','refunds.md','cancellations.md','profile.md','router.txt'];
@@ -47,7 +48,7 @@ async function proposeSemantic(files,body,options){
    contextConflicts:contexts.conflicts,promptVersion:result.promptVersion,comparisons:result.comparisons,
    diagnostics:result.diagnostics,sourceWindows:result.sourceWindows,inferredContext:result.inferredContext,
    assignments,relations:result.relations,
-   removalProposals:result.removalProposals,reviewItems:result.reviewItems,calls:result.calls
+   removalProposals:result.removalProposals,reviewItems:identifyConflicts(result.reviewItems),calls:result.calls
   }
  };
  if(jd.detect(files)){
@@ -182,6 +183,7 @@ function validateSemantic(a,files,ids){
   decisions.add(removal.id);
  }
  approvedAliases(s);
+ validateResolutions(a);
 }
 
 module.exports={ALGORITHM,proposeSemantic,validateSemantic,approveSemantic,inputError};

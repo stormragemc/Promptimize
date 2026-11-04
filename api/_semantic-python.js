@@ -1,11 +1,53 @@
 module.exports = String.raw`"""Promptimize semantic runtime v1. Standard library only."""
 import json
 import re
+import hashlib
 from collections import Counter, defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 PLAN = json.loads((ROOT / 'runtime.json').read_text(encoding='utf-8'))
+
+
+def hydrate_module_text():
+    if PLAN.get('textSource') is None:
+        return  # Compatibility with earlier self-contained semantic exports.
+    if PLAN['textSource'] != 'module-files-v1':
+        raise RuntimeError('Unsupported instruction text source. Export a new reviewed candidate.')
+    manifest = json.loads((ROOT / 'manifest.json').read_text(encoding='utf-8'))
+    if manifest.get('snapshot') != PLAN.get('snapshot') or set(manifest.get('modules', {})) != set(PLAN['modules']):
+        raise RuntimeError('Manifest and runtime snapshot differ. Export a new reviewed candidate.')
+    texts = {}
+    marker = re.compile(r'^<!-- promptimize-rule:(R[0-9]+) -->\n', re.M)
+    for module, expected_ids in PLAN['modules'].items():
+        path = (ROOT / manifest['modules'][module]).resolve()
+        if not path.is_relative_to(ROOT.resolve()):
+            raise RuntimeError('A prompt module path leaves the export directory.')
+        try:
+            raw_bytes = path.read_bytes()
+        except OSError as exc:
+            raise RuntimeError('A prompt module is missing. Export a new reviewed candidate.') from exc
+        if hashlib.sha256(raw_bytes).hexdigest() != PLAN.get('moduleHashes', {}).get(module):
+            raise RuntimeError('A prompt module changed after review. Save the correction in Promptimize Review, freeze a new candidate and export again.')
+        raw = raw_bytes.decode('utf-8')
+        matches = list(marker.finditer(raw))
+        if [match[1] for match in matches] != expected_ids:
+            raise RuntimeError('Prompt rule markers differ from the frozen runtime.')
+        for index, match in enumerate(matches):
+            end = matches[index + 1].start() - 2 if index + 1 < len(matches) else len(raw)
+            text = raw[match.end():end]
+            rule_id = match[1]
+            if rule_id in texts and texts[rule_id] != text:
+                raise RuntimeError('Copies of a shared prompt rule disagree. Export a new reviewed candidate.')
+            texts[rule_id] = text
+    for rule in PLAN['rules']:
+        if rule['id'] == rule['activeId']:
+            if rule['id'] not in texts:
+                raise RuntimeError('An active prompt rule is missing from the module files.')
+            rule['text'] = texts[rule['id']]
+
+
+hydrate_module_text()
 MAX_CONTEXT_CHARS = 50000
 JD_ADAPTER = 'jd-viewer-v1'
 OPTIONAL_JD_STATE = {'jd_evaluation_results_modal_open': False, 'candidate_information_modal_open': False,
@@ -181,6 +223,21 @@ def check_conflicts(selected, fallback_reasons, unresolved):
             add_reason(unresolved, kind, detail)
 
 
+def check_selected_state(selected, state, fallback_reasons, unresolved):
+    for rule in PLAN['rules']:
+        if rule['activeId'] not in selected:
+            continue
+        _, missing = condition_result(rule['conditions'], state)
+        fields = list(missing)
+        assignments = [item for item in rule['assignments'] if item.get('status') != 'unresolved']
+        placements = [condition_result(item['conditions'], state) for item in assignments]
+        if 'shared' not in rule['workflows'] and placements and not any(status is True for status, _ in placements):
+            fields.extend(field for _, missing_fields in placements for field in missing_fields)
+        for field in unique(fields):
+            add_reason(fallback_reasons, 'missing-rule-state', field)
+            add_reason(unresolved, 'missing-rule-state', field)
+
+
 def select_context(context, utterance='', intent=None, require_rule_ids=None, max_context_chars=MAX_CONTEXT_CHARS):
     if PLAN.get('runtimeVersion') != 1:
         raise RuntimeError('Unsupported semantic runtime version.')
@@ -271,9 +328,11 @@ def select_context(context, utterance='', intent=None, require_rule_ids=None, ma
     if not anchored:
         add_reason(fallback_reasons, 'no-narrow-match', 'request workflow or source rule')
     selected = relation_closure(seed, state, fallback_reasons, unresolved, known)
+    check_selected_state(selected, state, fallback_reasons, unresolved)
     check_conflicts(selected, fallback_reasons, unresolved)
     if fallback_reasons:
         selected = relation_closure((rule['id'] for rule in active_rules), state, fallback_reasons, unresolved, known, not anchored)
+        check_selected_state(selected, state, fallback_reasons, unresolved)
         check_conflicts(selected, fallback_reasons, unresolved)
     rules = [rule for rule in active_rules if rule['id'] in selected]
     cycles = cycle_members(selected, state)

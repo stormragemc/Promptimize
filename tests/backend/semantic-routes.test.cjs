@@ -5,6 +5,7 @@ const packageCheck = require('../../api/package-check');
 const exportZip = require('../../api/export');
 const preflight = require('../../api/preflight');
 const runCase = require('../../api/run-case');
+const analyze = require('../../api/analyze');
 const jd = require('../../api/_organize');
 const { proposeSemantic } = require('../../api/_semantic-analysis');
 const { revise } = require('../../api/_review');
@@ -67,6 +68,33 @@ function mockMeta(t, { tokenCount = 37, answers = [] } = {}) {
   });
   return calls;
 }
+
+test('preview-only engine selection leaves production and explicit legacy requests unchanged', async t => {
+ const keys = ['VERCEL_ENV', 'PROMPTIMIZE_PREVIEW_ALGORITHM', 'promptimizer_musespark'];
+ const before = Object.fromEntries(keys.map(key => [key, process.env[key]]));
+ t.after(() => { for (const key of keys) { if (before[key] === undefined) delete process.env[key]; else process.env[key] = before[key]; } });
+ process.env.PROMPTIMIZE_PREVIEW_ALGORITHM = 'semantic-v1';
+ process.env.promptimizer_musespark = 'preview-test-double';
+ process.env.VERCEL_ENV = 'production';
+ let result = await post(analyze, { files: jdFiles });
+ assert.equal(result.code, 200);
+ assert.equal(result.data.semantic, undefined);
+ process.env.VERCEL_ENV = 'preview';
+ result = await post(analyze, { files: jdFiles, algorithm: 'legacy' });
+ assert.equal(result.data.semantic, undefined);
+ const { provider } = createProvider();
+ let calls = 0;
+ t.mock.method(globalThis, 'fetch', async (_url, options) => {
+  calls++;
+  const body = JSON.parse(options.body);
+  const answer = await provider(body.messages, body.max_completion_tokens, { reasoningEffort: body.reasoning_effort });
+  return { ok: true, json: async () => ({ choices: [{ message: { content: JSON.stringify(answer.value) } }], usage: answer.usage }) };
+ });
+ result = await post(analyze, fixture);
+ assert.equal(result.code, 200, result.data.error);
+ assert.equal(result.data.semantic.algorithm, 'semantic-v1');
+ assert(calls > 0);
+});
 
 test('semantic package check and export keep the route and ZIP contracts', async () => {
   const { provider } = createProvider();

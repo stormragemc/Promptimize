@@ -2,6 +2,7 @@ const RUNTIME_VERSION = 1;
 const MAX_CONTEXT_CHARS = 50000;
 const EXECUTION_TOKEN_BUDGET = 20000;
 const OUTPUT_RESERVE = 750;
+const {currentResolution}=require('./_semantic-conflicts');
 const JD_ADAPTER = 'jd-viewer-v1';
 const OPTIONAL_JD_STATE = new Map([
  ['jd_evaluation_results_modal_open',false],['candidate_information_modal_open',false],['interview_workflow_phase',null]
@@ -90,7 +91,7 @@ function compileRuntime(a) {
   type:edge.type,from:aliases[edge.from] || edge.from,to:aliases[edge.to] || edge.to,
   conditions:edge.conditions || []
  })).filter((edge, i) => edge.from !== edge.to || a.semantic.relations[i].from === a.semantic.relations[i].to);
- const conflicts = (a.semantic.reviewItems || []).filter(item => ['context-conflict','contradiction','relation-unresolved'].includes(item.type))
+ const conflicts = (a.semantic.reviewItems || []).filter(item => ['context-conflict','contradiction','relation-unresolved'].includes(item.type) && !currentResolution(a,item))
   .map(item => ({type:item.type,ruleIds:unique((item.ruleIds || (item.ruleId ? [item.ruleId] : [])).map(id => aliases[id] || id))}));
  const hasSourceConflict = conflicts.some(conflict => conflict.type === 'context-conflict');
  return {
@@ -204,6 +205,25 @@ function checkConflicts(plan, selected, fallbackReasons, unresolved) {
  }
 }
 
+// Every route into the selection must obey state requirements, including lexical
+// ranking, explicit rule IDs, shared rules and dependency closure.
+function checkSelectedState(plan, selected, state, fallbackReasons, unresolved) {
+ for (const rule of plan.rules) {
+  if (!selected.has(rule.activeId)) continue;
+  const result = conditionResult(rule.conditions,state,plan.adapter);
+  const fields = [...result.missing];
+  const assignments = rule.assignments.filter(item => item.status !== 'unresolved');
+  const placements = assignments.map(item => conditionResult(item.conditions,state,plan.adapter));
+  if (!rule.workflows.includes('shared') && placements.length && !placements.some(item => item.matches === true)) {
+   fields.push(...placements.flatMap(item => item.missing));
+  }
+  for (const field of unique(fields)) {
+   addReason(fallbackReasons,'missing-rule-state',field);
+   addReason(unresolved,'missing-rule-state',field);
+  }
+ }
+}
+
 function selectContext(plan, {executionContext={},utterance='',intent,requireRuleIds=[],maxContextChars=MAX_CONTEXT_CHARS}={}) {
  if (plan.runtimeVersion !== RUNTIME_VERSION) throw Error('Unsupported semantic runtime version.');
  if (!executionContext || typeof executionContext !== 'object' || Array.isArray(executionContext)) throw Error('Execution context must be an object.');
@@ -295,9 +315,11 @@ function selectContext(plan, {executionContext={},utterance='',intent,requireRul
  }
  if (!anchored) addReason(fallbackReasons,'no-narrow-match','request workflow or source rule');
  let selected = relationClosure(plan,seed,state,fallbackReasons,unresolved,known);
+ checkSelectedState(plan,selected,state,fallbackReasons,unresolved);
  checkConflicts(plan,selected,fallbackReasons,unresolved);
  if (fallbackReasons.length) {
   selected = relationClosure(plan,activeRules.map(rule => rule.id),state,fallbackReasons,unresolved,known,!anchored);
+  checkSelectedState(plan,selected,state,fallbackReasons,unresolved);
   checkConflicts(plan,selected,fallbackReasons,unresolved);
  }
  const rules = activeRules.filter(rule => selected.has(rule.id));

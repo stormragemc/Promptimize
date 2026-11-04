@@ -15,7 +15,7 @@ node tests/backend/semantic-cli.cjs
 node tests/backend/semantic-cli.cjs --with-context
 ```
 
-**Results:** All four legacy suites and all 25 new backend tests passed on Node 24.22.1 and Python 3.12.14. Both synthetic CLI examples completed with the provider double.
+**Results:** All four legacy suites and all 35 backend tests passed on Node 24.22.1 and Python 3.12.14. Both synthetic CLI examples completed with the provider double.
 
 The existing suites cover provenance, snapshot integrity, path and assignment corrections, export layout, bounded lookup, and six isolated simulation cases. The semantic tests add UTF-16 source coverage, authority and version handling, grounded extraction, scoped comparison, pending and approved consolidation, graph closure, phase ambiguity, budget gating, and Node/Python request parity. Endpoint tests exercise the existing JSON traces and ZIP output with a provider double.
 
@@ -67,3 +67,13 @@ The expected hashes match the starting commit.
 | `styles.css` | `fb37c6fe1ff2cd39b0eea5a7e1199901799febc9fbe139b7552725b9537965d8` |
 
 The implementation contract and later workbench integration are in [INTEGRATION_PROPOSAL.md](INTEGRATION_PROPOSAL.md).
+
+## Independent hardening review
+
+The follow-up review added ten regression tests: nine covering missing state, explicit conflict review and frozen export integrity, plus a Preview-only engine selector test. The existing 25 tests remain. Raw output from the final local rerun is in `test-results.tap`; aggregate evidence and frontend hashes are in `REVIEW_RESULTS.json`. No test in that rerun made a live provider call.
+
+The missing-state reproduction used a refund rule that requires `phase=approval`, with no phase supplied. Previously a lexical match returned ready/compact. It now returns unresolved before sizing or generation; the same checks cover shared, explicit and dependency selection and Python parity.
+
+The private three-file UIC slice was structurally evaluated again with calls disabled. All 43,394 UTF-16 source code units were retained. This intentionally produces three retained source records in one shared module and does not demonstrate semantic extraction, accuracy or savings. The original heuristic still produces 52 rules in ten modules. No private source or per-case model output was committed.
+
+Live Meta behavior, latency, token savings and optimizer break-even remain pending: the local environment has no Meta credential, and protected Vercel POST access has not been verified from this agent. The branch Preview uses the existing server credential when the owner starts analysis and comparisons. Mock token counts and millisecond timings must not be presented as live Meta performance.
