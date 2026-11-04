@@ -11,6 +11,6 @@ http.createServer(async(req,res)=>{
  }
  if(url.pathname==='/'&&!url.searchParams.has('version')){res.writeHead(302,{Location:'/?version='+defaultVersion}).end();return;}
  const route=url.pathname==='/'||url.pathname==='/demo/'?'/demo/index.html':url.pathname;
- const file=path.resolve(root,'.'+decodeURIComponent(route));if(!file.startsWith(root+path.sep)){res.writeHead(403).end();return;}
+ if(!(route.startsWith('/demo/')||['/styles.css','/evaluation-metrics.js'].includes(route))||route.split('/').some(p=>p.startsWith('.'))){res.writeHead(404).end();return;}let decoded;try{decoded=decodeURIComponent(route);}catch{res.writeHead(400).end();return;}const file=path.resolve(root,'.'+decoded);if(!file.startsWith(root+path.sep)){res.writeHead(403).end();return;}
  try{const body=fs.readFileSync(file),ext=path.extname(file);res.setHeader('Content-Type',({'.html':'text/html; charset=utf-8','.css':'text/css','.js':'text/javascript','.json':'application/json','.zip':'application/zip'})[ext]||'text/plain');res.end(body);}catch{res.writeHead(404).end('Not found');}
 }).listen(port,'0.0.0.0',()=>console.log('Forma ready on port '+port+' (default '+defaultVersion+'). No model calls until a request is submitted.'));

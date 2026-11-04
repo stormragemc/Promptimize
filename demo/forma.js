@@ -20,10 +20,11 @@ async function request(query){
  if(version==='after'&&!pkg&&!fixture.installed){chat('Prepare the exported candidate in the Promptimize lab first.','error');return;}
  busy=true;$('#send-message').disabled=true;document.querySelectorAll('.dialog-query button').forEach(b=>b.disabled=true);chat(query,'user');
  const waiting=document.createElement('div');waiting.className='chat-loading';waiting.innerHTML='<i></i><i></i><i></i><span>Reading the prompt context…</span>';$('#chat-history').append(waiting);const start=performance.now();
+ const contextAtStart=JSON.stringify(state);
  const timer=setInterval(()=>{const elapsed=((performance.now()-start)/1000).toFixed(1)+'s';waiting.querySelector('span').textContent='Working · '+elapsed;document.querySelectorAll('.dialog-wait').forEach(n=>n.textContent='Forma is working · '+elapsed);},100);
  try{
   const r=await fetch('/api/showcase',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'request',version,query,context:{...state},package:version==='after'&&!fixture.installed?pkg:undefined,remainingTokens:Math.max(0,120000-spent)})}),d=await r.json();if(!r.ok)throw Error(d.error||'Request failed');spent+=d.reservedTokens||0;if(d.status!=='completed')throw Error(d.reason||'No complete response. No automatic retry.');
-  const wall=performance.now()-start;renderReceipt(d,wall);
+  const wall=performance.now()-start;renderReceipt(d,wall);if(JSON.stringify(state)!==contextAtStart)throw Error('The workspace changed while waiting. The receipt is retained; no stale action was applied. Submit a new request when ready.');
   if(!d.simulation?.passed)throw Error('The model chose an unsupported action for this UI state. No action was applied.');
   const intent=d.answer.intent,entities=d.answer.entities;
   if(intent==='navigate_published_jd_applicant_evaluation_tab'){evalTab(entities.evaluation_results_tab);chat('Opened '+(entities.evaluation_results_tab==='facial'?'presentation notes':entities.evaluation_results_tab)+'. The job workspace stays open.','assistant-message');}
