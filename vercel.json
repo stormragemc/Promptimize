@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/context.js": {"maxDuration": 90},
+    "api/architecture.js": {"maxDuration": 90},
+    "api/architecture-image.js": {"maxDuration": 100}
+  }
+}

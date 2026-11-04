@@ -87,3 +87,10 @@ The JD-viewer suite now contains six authored cases, adding the interview-attend
 View trace and Open visual comparison show a fullscreen native dialog with old/new skeletal workspaces, context modules, reported tokens/latency, step playback, tool timelines, source references, expected outputs, assertions and a final-state diff. The same overlay can show completed sides while other requests are pending. Replay is local and sends no additional model requests. The UI never fabricates a pending answer or exposes private reasoning.
 
 Readiness colors and enabled buttons mark the required sequence. Frozen candidates remain unchanged by evaluation. Run `node test-simulation.cjs` with the prior test commands. Offline tests pass for valid transitions, invalid-tool rejection, state isolation, modal-only close, exports, review revisions and loader parity. Full live six-case Meta evaluation and authenticated browser screenshot QA still require verification.
+
+
+## Context documents and architecture proposals
+
+On `feature/context-architecture-advisor`, upload context documents separately from promptbase files, review Meta’s source-linked interpretation, and request a project-specific implementation plan. Download Meta-generated starter scripts, an exact flow diagram, and transparent scenario estimates. Optional Muse Wonder design review and Muse Image illustration are explicit paid actions. No generated code is executed and no frozen candidate is patched.
+
+See [the workflow, forecast assumptions and review guide](docs/CONTEXT_ARCHITECTURE_ADVISOR.md). Demo recordings remain deferred.
