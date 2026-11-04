@@ -88,3 +88,9 @@ test('semantic extraction rejects an invented state wrapper around a real flat f
  assert(result.rules.every(r=>(r.conditions||[]).every(c=>c.field!=='state.deskPhase')));
  assert(result.semantic.reviewItems.some(x=>x.type==='condition-unresolved'));
 });
+test('a changed context is rejected server-side before any design call',async()=>{
+ const fixture=require('./fixtures/observatory.json'),{createProvider}=require('./observatory-provider.cjs'),{proposeSemantic}=require('../../api/_semantic-analysis');
+ const {provider}=createProvider();const a=await proposeSemantic(fixture.files,fixture,{provider});let attempts=0;
+ await assert.rejects(architecture({files:fixture.files,analysis:a,...fixture,projectContext:{...fixture.projectContext,purpose:'Changed purpose'}},{counter:async()=>{attempts++;return 1;}}),/changed since analysis/);
+ assert.equal(attempts,0);
+});
