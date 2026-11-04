@@ -1,6 +1,7 @@
 const {modulePath}=require('./_organize');
+const runner=require('./_runtime');
 const loader=`"""Promptimize supported JD-viewer loader. It does not execute uploaded scripts."""
-import json
+import json, re
 from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 MANIFEST = json.loads((ROOT / "manifest.json").read_text(encoding="utf-8"))
@@ -16,16 +17,26 @@ def load_context(context):
         selected += ["applicants", "interview"]
     else:
         selected = list(MANIFEST["modules"])
+    if MANIFEST["adapter"] != "jd-viewer-v1":
+        selected = ["shared", context["intent"]] if context.get("intent") else list(MANIFEST["modules"])
     paths = [MANIFEST["modules"][name] for name in dict.fromkeys(selected) if name in MANIFEST["modules"]]
-    return "\\n\\n".join((ROOT / p).read_text(encoding="utf-8") for p in paths)
+    seen, blocks = set(), []
+    for path in paths:
+        raw = (ROOT / path).read_text(encoding="utf-8")
+        parts = re.split(r"^<!-- promptimize-rule:(R[0-9]+) -->\\n", raw, flags=re.M)
+        for i in range(1, len(parts), 2):
+            if parts[i] not in seen:
+                seen.add(parts[i])
+                blocks.append(parts[i+1].rstrip("\\n"))
+    return "\\n\\n".join(blocks)
 if __name__ == "__main__":
     import sys
     print(load_context(json.loads(sys.argv[1]) if len(sys.argv) > 1 else {}))
 `;
-function bundleFiles(a,results=[]){
+function bundleFiles(a,results=[],sources=[]){
  const files={},paths={};for(const [name,ids]of Object.entries(a.modules)){
   const path=a.paths?.[name]||(a.adapter==='jd-viewer-v1'?modulePath(name):`workflows/${name}/prompt.md`);paths[name]=path;
-  const rules=a.rules.filter(r=>ids.includes(r.id));files[path]=rules.map(r=>r.candidateText??r.quote).join('\n\n');
+  const rules=a.rules.filter(r=>ids.includes(r.id));files[path]=rules.map(r=>`<!-- promptimize-rule:${r.id} -->\n${r.candidateText??r.quote}`).join('\n\n');
   const intents=rules.flatMap(r=>(r.intents||[]).map(intent=>({intent,rule:r.id,source:{file:r.file,line:r.line}})));
   files[path.replace(/[^/]+$/, 'intents.json')]=JSON.stringify(intents,null,2);
  }
@@ -34,7 +45,9 @@ function bundleFiles(a,results=[]){
  files['review.json']=JSON.stringify(a.review||{note:'Source-preserving initial proposal'},null,2);
  files['evaluation.json']=JSON.stringify({snapshot:a.sha256,runs:results},null,2);
  files['README.md']='# Promptimize export\n\nOriginal source quotes remain in the review record. Candidate text may include explicit human corrections. Scope assignments require review. Classification tests are not a guarantee of production behavior.\n\n'+(a.adapter==='jd-viewer-v1'?'Run: python loader.py \'{"jd_evaluation_results_modal_open": true}\'\n\nUnknown UI state conservatively loads every module. The original Gateway classifier/composer was not included in the upload; integrate this loader explicitly.\n':'This sample exports prompt modules and a manifest.\n');
- if(a.adapter==='jd-viewer-v1')files['loader.py']=loader;return files;
+ files['loader.py']=loader;files['run.py']=runner;files['cases.json']=JSON.stringify(a.testCases||[],null,2);
+ if(sources.length)files['baseline.md']=a.adapter==='jd-viewer-v1'?sources.map(f=>f.content).join('\n\n'):sources.map(f=>`[${f.name}]\n${f.content}`).join('\n\n');
+ files['README.md']+='\n## Run a real request\n\nPython 3.10+, standard library only. Configure MODEL_API_KEY in your shell; no key is embedded.\n\n'+(a.testCases?.length?'Dry run: python run.py --case '+a.testCases[0].id+' --dry-run\n\nLive candidate: python run.py --case '+a.testCases[0].id+'\n\nLive baseline: python run.py --case '+a.testCases[0].id+' --mode baseline\n':'Dry run: python run.py --utterance "Can I get a refund?" --dry-run\n')+'\nThe runner sizes input before generation, enforces a per-call token allowance, and does not retry. Tool-state simulation runs in the web workbench.\n';return files;
 }
 function crc32(buf){let c=0xffffffff;for(const b of buf){c^=b;for(let i=0;i<8;i++)c=(c>>>1)^((c&1)?0xedb88320:0)}return (c^0xffffffff)>>>0}
 function zip(files){let offset=0;const locals=[],central=[];for(const [name,text]of Object.entries(files)){const n=Buffer.from(name),data=Buffer.from(text),crc=crc32(data),h=Buffer.alloc(30);h.writeUInt32LE(0x04034b50);h.writeUInt16LE(20,4);h.writeUInt16LE(0x800,6);h.writeUInt32LE(crc,14);h.writeUInt32LE(data.length,18);h.writeUInt32LE(data.length,22);h.writeUInt16LE(n.length,26);locals.push(h,n,data);const c=Buffer.alloc(46);c.writeUInt32LE(0x02014b50);c.writeUInt16LE(20,4);c.writeUInt16LE(20,6);c.writeUInt16LE(0x800,8);c.writeUInt32LE(crc,16);c.writeUInt32LE(data.length,20);c.writeUInt32LE(data.length,24);c.writeUInt16LE(n.length,28);c.writeUInt32LE(offset,42);central.push(c,n);offset+=h.length+n.length+data.length}const cd=Buffer.concat(central),end=Buffer.alloc(22);end.writeUInt32LE(0x06054b50);end.writeUInt16LE(Object.keys(files).length,8);end.writeUInt16LE(Object.keys(files).length,10);end.writeUInt32LE(cd.length,12);end.writeUInt32LE(offset,16);return Buffer.concat([...locals,cd,end])}
