@@ -65,3 +65,13 @@ The UIC adapter does not call an LLM to rewrite rules. Muse Spark runs the befor
 Token delta colors: negative = green (fewer task-run tokens), positive = red, zero = neutral. Quality failures independently block the recommendation.
 
 Run `node test-jd-adapter.cjs` and `node test-contract.cjs`. Real-source tests and private generated outputs were kept outside the public repository.
+
+## Proposal and correction review
+
+The flow is now Input → Audit → Proposal → Review → Candidate → Tests. Proposal presents two folder diagrams: the source layout and the planned export. Folder labels in the proposed tree are editable. Saving a parent folder renames every affected output path, and the manifest and exported loader follow those paths. Collisions, unsafe paths, and a file being reused as a folder are rejected.
+
+Review keeps each original source quote and permits an explicit candidate-text correction and module reassignment. Every source rule must remain assigned somewhere. Saved corrections create a new fingerprint including paths and review metadata. Candidate execution and exports use the corrected text; baseline execution continues to use the original files. Review notes and original quotes are included in the ZIP.
+
+After Save corrections, Approve & freeze unlocks Candidate. A frozen candidate's Proposal and Review are read-only. Create next proposal explicitly preserves the old snapshot and results in iteration history, then opens an editable proposal. The JSON download includes that history. Changes are held in the current browser state; the synthetic sample session can restore, and real uploads should be downloaded to preserve a record.
+
+`node test-review.cjs` verifies renamed folders in manifests/exports, original-source retention, corrected candidate assembly, assignment changes, invalid paths, collision rejection, and isolation of the prior snapshot. A private real-file test renamed recruitment → talent-workflows and evaluation → results-review and successfully ran the exported Python loader from the renamed ZIP.
