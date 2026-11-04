@@ -1,9 +1,9 @@
 const {createHash}=require('node:crypto');
 const digest=(files,a)=>createHash('sha256').update(JSON.stringify({files,rules:a.rules,modules:a.modules})).digest('hex');
 function validateAnalysis(a,files){
- if(!a||!Array.isArray(a.rules)||!a.rules.length||a.rules.length>18||!a.modules)throw Error('Invalid candidate');
+ if(!a||!Array.isArray(a.rules)||!a.rules.length||a.rules.length>(a.adapter==='jd-viewer-v1'?500:18)||!a.modules)throw Error('Invalid candidate');
  const ids=new Set();for(const r of a.rules){const f=files.find(f=>f.name===r.file);if(typeof r.id!=='string'||ids.has(r.id)||typeof r.quote!=='string'||!r.quote||!f?.content.includes(r.quote))throw Error('Source mapping invalid');ids.add(r.id)}
- const assigned=new Set();for(const [name,refs] of Object.entries(a.modules)){if(!['shared','refund','cancellation','profile'].includes(name)||!Array.isArray(refs)||refs.some(id=>!ids.has(id)))throw Error('Manifest invalid');refs.forEach(id=>assigned.add(id))}
+ const assigned=new Set();for(const [name,refs] of Object.entries(a.modules)){if(!(a.adapter==='jd-viewer-v1'?['shared','workspace','applicants','evaluation','candidate-information','interview','competency','publishing','archive','editing','navigation']:['shared','refund','cancellation','profile']).includes(name)||!Array.isArray(refs)||refs.some(id=>!ids.has(id)))throw Error('Manifest invalid');refs.forEach(id=>assigned.add(id))}
  if([...ids].some(id=>!assigned.has(id)))throw Error('Unassigned rule');
  if(a.sha256!==digest(files,a))throw Object.assign(Error('Snapshot changed'),{status:409,publicMessage:'The candidate changed. Analyze and approve a new iteration.'});
 }
