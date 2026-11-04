@@ -24,15 +24,16 @@ if __name__ == "__main__":
 `;
 function bundleFiles(a,results=[]){
  const files={},paths={};for(const [name,ids]of Object.entries(a.modules)){
-  const path=a.adapter==='jd-viewer-v1'?modulePath(name):`workflows/${name}/prompt.md`;paths[name]=path;
-  const rules=a.rules.filter(r=>ids.includes(r.id));files[path]=rules.map(r=>r.quote).join('\n\n');
+  const path=a.paths?.[name]||(a.adapter==='jd-viewer-v1'?modulePath(name):`workflows/${name}/prompt.md`);paths[name]=path;
+  const rules=a.rules.filter(r=>ids.includes(r.id));files[path]=rules.map(r=>r.candidateText??r.quote).join('\n\n');
   const intents=rules.flatMap(r=>(r.intents||[]).map(intent=>({intent,rule:r.id,source:{file:r.file,line:r.line}})));
   files[path.replace(/[^/]+$/, 'intents.json')]=JSON.stringify(intents,null,2);
  }
  files['manifest.json']=JSON.stringify({format:'promptimize.v2',adapter:a.adapter||'sample',snapshot:a.sha256,modules:paths},null,2);
- files['source-map.json']=JSON.stringify(a.rules.map(({id,file,line,sources,workflows})=>({id,file,line,sources,workflows})),null,2);
+ files['source-map.json']=JSON.stringify(a.rules.map(({id,file,line,sources,workflows,quote,candidateText})=>({id,file,line,sources,workflows,quote,candidateText})),null,2);
+ files['review.json']=JSON.stringify(a.review||{note:'Source-preserving initial proposal'},null,2);
  files['evaluation.json']=JSON.stringify({snapshot:a.sha256,runs:results},null,2);
- files['README.md']='# Promptimize export\n\nSource wording is preserved. Scope assignments require review. Classification tests are not a guarantee of production behavior.\n\n'+(a.adapter==='jd-viewer-v1'?'Run: python loader.py \'{"jd_evaluation_results_modal_open": true}\'\n\nUnknown UI state conservatively loads every module. The original Gateway classifier/composer was not included in the upload; integrate this loader explicitly.\n':'This sample exports prompt modules and a manifest.\n');
+ files['README.md']='# Promptimize export\n\nOriginal source quotes remain in the review record. Candidate text may include explicit human corrections. Scope assignments require review. Classification tests are not a guarantee of production behavior.\n\n'+(a.adapter==='jd-viewer-v1'?'Run: python loader.py \'{"jd_evaluation_results_modal_open": true}\'\n\nUnknown UI state conservatively loads every module. The original Gateway classifier/composer was not included in the upload; integrate this loader explicitly.\n':'This sample exports prompt modules and a manifest.\n');
  if(a.adapter==='jd-viewer-v1')files['loader.py']=loader;return files;
 }
 function crc32(buf){let c=0xffffffff;for(const b of buf){c^=b;for(let i=0;i<8;i++)c=(c>>>1)^((c&1)?0xedb88320:0)}return (c^0xffffffff)>>>0}
