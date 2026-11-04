@@ -23,5 +23,5 @@ def prepare_request(context, utterance, workflow=None):
     if workflow is None:
         return {"status": "unresolved", "reason": "A reviewed workflow route is required."}
     from run import messages
-    return {"status": "ready", "messages": messages({**context, "intent": workflow}, utterance)}
+    return {"status": "ready", "messages": messages(context, utterance, route_intent=workflow)}
 `;

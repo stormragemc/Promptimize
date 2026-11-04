@@ -14,6 +14,12 @@
     },
     "api/preflight.js": {
       "maxDuration": 90
+    },
+    "api/evaluation-preflight.js": {
+      "maxDuration": 90
+    },
+    "api/evaluation-case.js": {
+      "maxDuration": 90
     }
   },
   "buildCommand": "node tests/check-build.cjs"

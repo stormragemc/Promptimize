@@ -1,9 +1,9 @@
 const {selectionReceipt,EXECUTION_TOKEN_BUDGET,OUTPUT_RESERVE}=require('./_semantic-runtime');
 function report(a,executions,budgetLimit,bindings={}){
  const incomplete=executions.some(r=>r.tokens===null);
- const sum=mode=>executions.filter(r=>r.mode===mode).reduce((n,r)=>n+(r.tokens??0),0);
+ const sum=mode=>executions.filter(r=>r.mode===mode).reduce((n,r)=>n+(r.tokens??0)*(r.weight??1),0);
  const complete=mode=>executions.filter(r=>r.mode===mode).every(r=>r.tokens!==null);
- const baseline=sum('baseline'),candidate=sum('candidate'),generationCallsMax=executions.length;
+ const baseline=sum('baseline'),candidate=sum('candidate'),generationCallsMax=executions.reduce((n,r)=>n+(r.weight??1),0);
  const knownReserved=baseline+candidate+generationCallsMax*OUTPUT_RESERVE;
  const blockers=[];const planRules=a.rules||[];
  function add(run,reason){

@@ -1,0 +1,4910 @@
+{
+  "runtimeVersion": 1,
+  "adapter": "jd-viewer-v1",
+  "snapshot": "9507b75ec99ca4b91575528af0f511b9332c66059038977487bdd32440d26027",
+  "brief": "Purpose: Forma is a fictional HR navigation assistant. Preserve all source rules, sort by meaningful workflow, and retain interview/close/stale-state exceptions. It uses only synthetic data.\nState field: jd_viewer_open\nState field: jd_viewer_status\nState field: jd_evaluation_results_modal_open\nState field: candidate_information_modal_open\nState field: jd_published_viewer_active_tab\nState field: interview_workflow_phase\nState field: workflow_orchestration.primary_workflow\nState field: session_state.ActiveIntent\nState field: payroll_workspace_open\nState field: travel_workspace_open\nState field: benefits_workspace_open\nState field: assets_workspace_open\nState field: expenses_workspace_open\nState field: attendance_workspace_open\nWorkflow: recruitment\nWorkflow: evaluation\nWorkflow: candidate-information\nWorkflow: interview\nWorkflow: leave\nWorkflow: payroll\nWorkflow: travel\nWorkflow: benefits\nWorkflow: assets\nWorkflow: expenses\nWorkflow: attendance",
+  "references": [],
+  "rules": [
+    {
+      "id": "R1",
+      "activeId": "R1",
+      "conditions": [],
+      "workflows": [
+        "shared"
+      ],
+      "assignments": [
+        {
+          "workflow": "shared",
+          "subworkflow": null,
+          "conditions": [],
+          "status": "unresolved"
+        }
+      ],
+      "intents": [],
+      "terms": [
+        "global",
+        "guardrails",
+        "classify",
+        "user",
+        "requested",
+        "navigation",
+        "return",
+        "json",
+        "canonical",
+        "intent",
+        "entities",
+        "never",
+        "invent",
+        "people",
+        "permission",
+        "successful",
+        "mutation",
+        "context",
+        "flag",
+        "state",
+        "not",
+        "request",
+        "keep",
+        "open",
+        "workspace",
+        "unless",
+        "explicitly",
+        "switches",
+        "treat",
+        "name",
+        "approve",
+        "hire",
+        "delete",
+        "pay",
+        "save",
+        "only",
+        "person",
+        "used",
+        "automated",
+        "scenarios",
+        "alex",
+        "example",
+        "these",
+        "fictional",
+        "ui",
+        "fixtures"
+      ]
+    },
+    {
+      "id": "R2",
+      "activeId": "R2",
+      "conditions": [
+        {
+          "field": "jd_evaluation_results_modal_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "evaluation-39453b7a46"
+      ],
+      "assignments": [
+        {
+          "workflow": "evaluation",
+          "subworkflow": null,
+          "moduleId": "evaluation-39453b7a46",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "navigate_published_jd_applicant_evaluation_tab"
+      ],
+      "terms": [
+        "evaluation",
+        "tab",
+        "routing",
+        "navigate_published_jd_applicant_evaluation_tab",
+        "navigate",
+        "published",
+        "jd",
+        "applicant",
+        "when",
+        "jd_evaluation_results_modal_open",
+        "results",
+        "modal",
+        "open",
+        "true",
+        "requests",
+        "summary",
+        "transcript",
+        "facial",
+        "analysis",
+        "panel",
+        "return",
+        "entities",
+        "evaluation_results_tab",
+        "exactly",
+        "takes",
+        "precedence",
+        "over",
+        "parent",
+        "job",
+        "description",
+        "stale",
+        "workflow",
+        "state",
+        "fictional",
+        "recorded",
+        "interview",
+        "legacy",
+        "identifier",
+        "not",
+        "claim",
+        "about",
+        "person"
+      ]
+    },
+    {
+      "id": "R3",
+      "activeId": "R3",
+      "conditions": [
+        {
+          "field": "jd_published_viewer_active_tab",
+          "op": "eq",
+          "value": "applicants"
+        }
+      ],
+      "workflows": [
+        "recruitment-cef5cdd19f"
+      ],
+      "assignments": [
+        {
+          "workflow": "recruitment",
+          "subworkflow": null,
+          "moduleId": "recruitment-cef5cdd19f",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "view_published_jd_applicant"
+      ],
+      "terms": [
+        "applicant",
+        "search",
+        "stale",
+        "leave",
+        "view_published_jd_applicant",
+        "view",
+        "published",
+        "jd",
+        "when",
+        "jd_published_viewer_active_tab",
+        "viewer",
+        "active",
+        "tab",
+        "applicants",
+        "user",
+        "explicitly",
+        "asks",
+        "show",
+        "alex",
+        "example",
+        "return",
+        "entities",
+        "applicant_name_query",
+        "name",
+        "query",
+        "equal",
+        "ignore",
+        "workflow_orchestration",
+        "workflow",
+        "orchestration",
+        "primary_workflow",
+        "primary",
+        "session_state",
+        "session",
+        "state",
+        "activeintent",
+        "apply_leave",
+        "apply",
+        "merely",
+        "mentioning",
+        "not",
+        "new",
+        "request",
+        "never",
+        "confuse",
+        "candidate",
+        "names",
+        "intent",
+        "identifiers"
+      ]
+    },
+    {
+      "id": "R4",
+      "activeId": "R4",
+      "conditions": [
+        {
+          "field": "benefits_workspace_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "benefits-0ae897400e"
+      ],
+      "assignments": [
+        {
+          "workflow": "benefits",
+          "subworkflow": null,
+          "moduleId": "benefits-0ae897400e",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "view_benefit_plan"
+      ],
+      "terms": [
+        "benefit",
+        "enrollment",
+        "view_benefit_plan",
+        "view",
+        "plan",
+        "use",
+        "only",
+        "request",
+        "inspect",
+        "benefits",
+        "benefits_workspace_open",
+        "workspace",
+        "open",
+        "true",
+        "viewing",
+        "does",
+        "not",
+        "enroll",
+        "cancel",
+        "alter",
+        "coverage",
+        "do",
+        "infer",
+        "marital",
+        "disability",
+        "health",
+        "status",
+        "messages",
+        "show",
+        "missing",
+        "names",
+        "information",
+        "changes",
+        "require",
+        "independent",
+        "confirmation",
+        "cannot",
+        "triggered",
+        "candidate",
+        "navigation",
+        "must",
+        "domain",
+        "version",
+        "keeps",
+        "guard",
+        "beside",
+        "consumer",
+        "even",
+        "when",
+        "other",
+        "files",
+        "already",
+        "repeat"
+      ]
+    },
+    {
+      "id": "R5",
+      "activeId": "R5",
+      "conditions": [
+        {
+          "field": "attendance_workspace_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "attendance-2f11330aad"
+      ],
+      "assignments": [
+        {
+          "workflow": "attendance",
+          "subworkflow": null,
+          "moduleId": "attendance-2f11330aad",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "view_attendance_adjustment"
+      ],
+      "terms": [
+        "attendance",
+        "correction",
+        "view_attendance_adjustment",
+        "view",
+        "adjustment",
+        "use",
+        "explicit",
+        "timecard",
+        "queries",
+        "attendance_workspace_open",
+        "workspace",
+        "open",
+        "true",
+        "show",
+        "original",
+        "proposed",
+        "timestamps",
+        "separately",
+        "timezone",
+        "preview",
+        "never",
+        "changes",
+        "creates",
+        "overtime",
+        "missing",
+        "timezones",
+        "require",
+        "clarification",
+        "transcript",
+        "timestamp",
+        "not",
+        "request",
+        "corrections",
+        "infer",
+        "candidate",
+        "availability",
+        "must",
+        "domain",
+        "version",
+        "keeps",
+        "guard",
+        "beside",
+        "consumer",
+        "even",
+        "when",
+        "other",
+        "files",
+        "already",
+        "repeat"
+      ]
+    },
+    {
+      "id": "R6",
+      "activeId": "R6",
+      "conditions": [],
+      "workflows": [
+        "shared"
+      ],
+      "assignments": [
+        {
+          "workflow": "shared",
+          "subworkflow": null,
+          "conditions": [],
+          "status": "unresolved"
+        }
+      ],
+      "intents": [],
+      "terms": [
+        "global",
+        "guardrails",
+        "classify",
+        "user",
+        "requested",
+        "navigation",
+        "return",
+        "json",
+        "canonical",
+        "intent",
+        "entities",
+        "never",
+        "invent",
+        "people",
+        "permission",
+        "successful",
+        "mutation",
+        "context",
+        "flag",
+        "state",
+        "not",
+        "request",
+        "keep",
+        "open",
+        "workspace",
+        "unless",
+        "explicitly",
+        "switches",
+        "treat",
+        "name",
+        "approve",
+        "hire",
+        "delete",
+        "pay",
+        "save",
+        "only",
+        "person",
+        "used",
+        "automated",
+        "scenarios",
+        "alex",
+        "example",
+        "these",
+        "fictional",
+        "ui",
+        "fixtures"
+      ]
+    },
+    {
+      "id": "R7",
+      "activeId": "R7",
+      "conditions": [
+        {
+          "field": "interview_workflow_phase",
+          "op": "eq",
+          "value": "awaiting_attendee_names"
+        }
+      ],
+      "workflows": [
+        "interview-474b260a93"
+      ],
+      "assignments": [
+        {
+          "workflow": "interview",
+          "subworkflow": null,
+          "moduleId": "interview-474b260a93",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "interview_scheduling"
+      ],
+      "terms": [
+        "interview",
+        "attendee",
+        "exception",
+        "interview_scheduling",
+        "scheduling",
+        "when",
+        "interview_workflow_phase",
+        "workflow",
+        "phase",
+        "awaiting_attendee_names",
+        "awaiting",
+        "names",
+        "name-only",
+        "name",
+        "only",
+        "utterance",
+        "alex",
+        "example",
+        "means",
+        "next",
+        "return",
+        "entities",
+        "attendee_name_query",
+        "query",
+        "equal",
+        "overrides",
+        "general",
+        "applicant-search",
+        "applicant",
+        "search",
+        "interpretation",
+        "even",
+        "while",
+        "jd_published_viewer_active_tab",
+        "jd",
+        "published",
+        "viewer",
+        "active",
+        "tab",
+        "applicants",
+        "does",
+        "not",
+        "choose",
+        "candidate",
+        "hiring",
+        "create",
+        "real",
+        "calendar",
+        "event"
+      ]
+    },
+    {
+      "id": "R8",
+      "activeId": "R8",
+      "conditions": [
+        {
+          "field": "jd_evaluation_results_modal_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "evaluation-39453b7a46"
+      ],
+      "assignments": [
+        {
+          "workflow": "evaluation",
+          "subworkflow": null,
+          "moduleId": "evaluation-39453b7a46",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "close_published_jd_applicant_evaluation_results"
+      ],
+      "terms": [
+        "evaluation",
+        "close",
+        "exception",
+        "close_published_jd_applicant_evaluation_results",
+        "published",
+        "jd",
+        "applicant",
+        "results",
+        "when",
+        "jd_evaluation_results_modal_open",
+        "modal",
+        "open",
+        "true",
+        "user",
+        "says",
+        "dismiss",
+        "panel",
+        "return",
+        "empty",
+        "entities",
+        "only",
+        "never",
+        "job",
+        "description",
+        "workspace",
+        "browser",
+        "request",
+        "change",
+        "tabs",
+        "does",
+        "not"
+      ]
+    },
+    {
+      "id": "R9",
+      "activeId": "R9",
+      "conditions": [
+        {
+          "field": "benefits_workspace_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "benefits-0ae897400e"
+      ],
+      "assignments": [
+        {
+          "workflow": "benefits",
+          "subworkflow": null,
+          "moduleId": "benefits-0ae897400e",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "view_benefit_plan"
+      ],
+      "terms": [
+        "benefit",
+        "enrollment",
+        "view_benefit_plan",
+        "view",
+        "plan",
+        "use",
+        "only",
+        "request",
+        "inspect",
+        "benefits",
+        "benefits_workspace_open",
+        "workspace",
+        "open",
+        "true",
+        "viewing",
+        "does",
+        "not",
+        "enroll",
+        "cancel",
+        "alter",
+        "coverage",
+        "do",
+        "infer",
+        "marital",
+        "disability",
+        "health",
+        "status",
+        "messages",
+        "show",
+        "missing",
+        "names",
+        "information",
+        "changes",
+        "require",
+        "independent",
+        "confirmation",
+        "cannot",
+        "triggered",
+        "candidate",
+        "navigation",
+        "must",
+        "domain",
+        "version",
+        "keeps",
+        "guard",
+        "beside",
+        "consumer",
+        "even",
+        "when",
+        "other",
+        "files",
+        "already",
+        "repeat"
+      ]
+    },
+    {
+      "id": "R10",
+      "activeId": "R10",
+      "conditions": [
+        {
+          "field": "attendance_workspace_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "attendance-2f11330aad"
+      ],
+      "assignments": [
+        {
+          "workflow": "attendance",
+          "subworkflow": null,
+          "moduleId": "attendance-2f11330aad",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "view_attendance_adjustment"
+      ],
+      "terms": [
+        "attendance",
+        "correction",
+        "view_attendance_adjustment",
+        "view",
+        "adjustment",
+        "use",
+        "explicit",
+        "timecard",
+        "queries",
+        "attendance_workspace_open",
+        "workspace",
+        "open",
+        "true",
+        "show",
+        "original",
+        "proposed",
+        "timestamps",
+        "separately",
+        "timezone",
+        "preview",
+        "never",
+        "changes",
+        "creates",
+        "overtime",
+        "missing",
+        "timezones",
+        "require",
+        "clarification",
+        "transcript",
+        "timestamp",
+        "not",
+        "request",
+        "corrections",
+        "infer",
+        "candidate",
+        "availability",
+        "must",
+        "domain",
+        "version",
+        "keeps",
+        "guard",
+        "beside",
+        "consumer",
+        "even",
+        "when",
+        "other",
+        "files",
+        "already",
+        "repeat"
+      ]
+    },
+    {
+      "id": "R11",
+      "activeId": "R11",
+      "conditions": [],
+      "workflows": [
+        "leave-c7b9221e8e"
+      ],
+      "assignments": [
+        {
+          "workflow": "leave",
+          "subworkflow": null,
+          "moduleId": "leave-c7b9221e8e",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "apply_leave"
+      ],
+      "terms": [
+        "explicit",
+        "workspace",
+        "switch",
+        "apply_leave",
+        "apply",
+        "leave",
+        "user",
+        "request",
+        "returns",
+        "empty",
+        "entities",
+        "even",
+        "while",
+        "jd_published_viewer_active_tab",
+        "jd",
+        "published",
+        "viewer",
+        "active",
+        "tab",
+        "applicants",
+        "open",
+        "local",
+        "form",
+        "only",
+        "do",
+        "not",
+        "submit",
+        "invent",
+        "dates",
+        "reuse",
+        "stale",
+        "if",
+        "names",
+        "applicant",
+        "requests",
+        "modal",
+        "never"
+      ]
+    },
+    {
+      "id": "R12",
+      "activeId": "R12",
+      "conditions": [
+        {
+          "field": "candidate_information_modal_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "candidate-information-c8b56ec30e"
+      ],
+      "assignments": [
+        {
+          "workflow": "candidate-information",
+          "subworkflow": null,
+          "moduleId": "candidate-information-c8b56ec30e",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "navigate_candidate_information_tab"
+      ],
+      "terms": [
+        "candidate",
+        "information",
+        "navigation",
+        "navigate_candidate_information_tab",
+        "navigate",
+        "tab",
+        "when",
+        "candidate_information_modal_open",
+        "modal",
+        "open",
+        "true",
+        "request",
+        "go",
+        "personal",
+        "education",
+        "payslips",
+        "references",
+        "returns",
+        "entities",
+        "candidate_information_tab",
+        "set",
+        "exact",
+        "identifier",
+        "must",
+        "not",
+        "job",
+        "description",
+        "infer",
+        "qualification",
+        "read-only",
+        "read",
+        "only",
+        "panel"
+      ]
+    },
+    {
+      "id": "R13",
+      "activeId": "R13",
+      "conditions": [
+        {
+          "field": "benefits_workspace_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "benefits-0ae897400e"
+      ],
+      "assignments": [
+        {
+          "workflow": "benefits",
+          "subworkflow": null,
+          "moduleId": "benefits-0ae897400e",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "view_benefit_plan"
+      ],
+      "terms": [
+        "benefit",
+        "enrollment",
+        "view_benefit_plan",
+        "view",
+        "plan",
+        "use",
+        "only",
+        "request",
+        "inspect",
+        "benefits",
+        "benefits_workspace_open",
+        "workspace",
+        "open",
+        "true",
+        "viewing",
+        "does",
+        "not",
+        "enroll",
+        "cancel",
+        "alter",
+        "coverage",
+        "do",
+        "infer",
+        "marital",
+        "disability",
+        "health",
+        "status",
+        "messages",
+        "show",
+        "missing",
+        "names",
+        "information",
+        "changes",
+        "require",
+        "independent",
+        "confirmation",
+        "cannot",
+        "triggered",
+        "candidate",
+        "navigation",
+        "must",
+        "domain",
+        "version",
+        "keeps",
+        "guard",
+        "beside",
+        "consumer",
+        "even",
+        "when",
+        "other",
+        "files",
+        "already",
+        "repeat"
+      ]
+    },
+    {
+      "id": "R14",
+      "activeId": "R14",
+      "conditions": [
+        {
+          "field": "attendance_workspace_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "attendance-2f11330aad"
+      ],
+      "assignments": [
+        {
+          "workflow": "attendance",
+          "subworkflow": null,
+          "moduleId": "attendance-2f11330aad",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "view_attendance_adjustment"
+      ],
+      "terms": [
+        "attendance",
+        "correction",
+        "view_attendance_adjustment",
+        "view",
+        "adjustment",
+        "use",
+        "explicit",
+        "timecard",
+        "queries",
+        "attendance_workspace_open",
+        "workspace",
+        "open",
+        "true",
+        "show",
+        "original",
+        "proposed",
+        "timestamps",
+        "separately",
+        "timezone",
+        "preview",
+        "never",
+        "changes",
+        "creates",
+        "overtime",
+        "missing",
+        "timezones",
+        "require",
+        "clarification",
+        "transcript",
+        "timestamp",
+        "not",
+        "request",
+        "corrections",
+        "infer",
+        "candidate",
+        "availability",
+        "must",
+        "domain",
+        "version",
+        "keeps",
+        "guard",
+        "beside",
+        "consumer",
+        "even",
+        "when",
+        "other",
+        "files",
+        "already",
+        "repeat"
+      ]
+    },
+    {
+      "id": "R15",
+      "activeId": "R15",
+      "conditions": [
+        {
+          "field": "jd_evaluation_results_modal_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "evaluation-39453b7a46"
+      ],
+      "assignments": [
+        {
+          "workflow": "evaluation",
+          "subworkflow": null,
+          "moduleId": "evaluation-39453b7a46",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "navigate_published_jd_applicant_evaluation_tab"
+      ],
+      "terms": [
+        "evaluation",
+        "tab",
+        "routing",
+        "navigate_published_jd_applicant_evaluation_tab",
+        "navigate",
+        "published",
+        "jd",
+        "applicant",
+        "when",
+        "jd_evaluation_results_modal_open",
+        "results",
+        "modal",
+        "open",
+        "true",
+        "requests",
+        "summary",
+        "transcript",
+        "facial",
+        "analysis",
+        "panel",
+        "return",
+        "entities",
+        "evaluation_results_tab",
+        "exactly",
+        "takes",
+        "precedence",
+        "over",
+        "parent",
+        "job",
+        "description",
+        "stale",
+        "workflow",
+        "state",
+        "fictional",
+        "recorded",
+        "interview",
+        "legacy",
+        "identifier",
+        "not",
+        "claim",
+        "about",
+        "person"
+      ]
+    },
+    {
+      "id": "R16",
+      "activeId": "R16",
+      "conditions": [
+        {
+          "field": "jd_published_viewer_active_tab",
+          "op": "eq",
+          "value": "applicants"
+        }
+      ],
+      "workflows": [
+        "recruitment-cef5cdd19f"
+      ],
+      "assignments": [
+        {
+          "workflow": "recruitment",
+          "subworkflow": null,
+          "moduleId": "recruitment-cef5cdd19f",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "view_published_jd_applicant"
+      ],
+      "terms": [
+        "applicant",
+        "search",
+        "stale",
+        "leave",
+        "view_published_jd_applicant",
+        "view",
+        "published",
+        "jd",
+        "when",
+        "jd_published_viewer_active_tab",
+        "viewer",
+        "active",
+        "tab",
+        "applicants",
+        "user",
+        "explicitly",
+        "asks",
+        "show",
+        "alex",
+        "example",
+        "return",
+        "entities",
+        "applicant_name_query",
+        "name",
+        "query",
+        "equal",
+        "ignore",
+        "workflow_orchestration",
+        "workflow",
+        "orchestration",
+        "primary_workflow",
+        "primary",
+        "session_state",
+        "session",
+        "state",
+        "activeintent",
+        "apply_leave",
+        "apply",
+        "merely",
+        "mentioning",
+        "not",
+        "new",
+        "request",
+        "never",
+        "confuse",
+        "candidate",
+        "names",
+        "intent",
+        "identifiers"
+      ]
+    },
+    {
+      "id": "R17",
+      "activeId": "R17",
+      "conditions": [
+        {
+          "field": "attendance_workspace_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "attendance-2f11330aad"
+      ],
+      "assignments": [
+        {
+          "workflow": "attendance",
+          "subworkflow": null,
+          "moduleId": "attendance-2f11330aad",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "view_attendance_adjustment"
+      ],
+      "terms": [
+        "attendance",
+        "correction",
+        "view_attendance_adjustment",
+        "view",
+        "adjustment",
+        "use",
+        "explicit",
+        "timecard",
+        "queries",
+        "attendance_workspace_open",
+        "workspace",
+        "open",
+        "true",
+        "show",
+        "original",
+        "proposed",
+        "timestamps",
+        "separately",
+        "timezone",
+        "preview",
+        "never",
+        "changes",
+        "creates",
+        "overtime",
+        "missing",
+        "timezones",
+        "require",
+        "clarification",
+        "transcript",
+        "timestamp",
+        "not",
+        "request",
+        "corrections",
+        "infer",
+        "candidate",
+        "availability",
+        "must",
+        "domain",
+        "version",
+        "keeps",
+        "guard",
+        "beside",
+        "consumer",
+        "even",
+        "when",
+        "other",
+        "files",
+        "already",
+        "repeat"
+      ]
+    },
+    {
+      "id": "R18",
+      "activeId": "R18",
+      "conditions": [
+        {
+          "field": "benefits_workspace_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "benefits-0ae897400e"
+      ],
+      "assignments": [
+        {
+          "workflow": "benefits",
+          "subworkflow": null,
+          "moduleId": "benefits-0ae897400e",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "view_benefit_plan"
+      ],
+      "terms": [
+        "benefit",
+        "enrollment",
+        "view_benefit_plan",
+        "view",
+        "plan",
+        "use",
+        "only",
+        "request",
+        "inspect",
+        "benefits",
+        "benefits_workspace_open",
+        "workspace",
+        "open",
+        "true",
+        "viewing",
+        "does",
+        "not",
+        "enroll",
+        "cancel",
+        "alter",
+        "coverage",
+        "do",
+        "infer",
+        "marital",
+        "disability",
+        "health",
+        "status",
+        "messages",
+        "show",
+        "missing",
+        "names",
+        "information",
+        "changes",
+        "require",
+        "independent",
+        "confirmation",
+        "cannot",
+        "triggered",
+        "candidate",
+        "navigation",
+        "must",
+        "domain",
+        "version",
+        "keeps",
+        "guard",
+        "beside",
+        "consumer",
+        "even",
+        "when",
+        "other",
+        "files",
+        "already",
+        "repeat"
+      ]
+    },
+    {
+      "id": "R19",
+      "activeId": "R19",
+      "conditions": [],
+      "workflows": [
+        "shared"
+      ],
+      "assignments": [
+        {
+          "workflow": "shared",
+          "subworkflow": null,
+          "conditions": [],
+          "status": "unresolved"
+        }
+      ],
+      "intents": [],
+      "terms": [
+        "global",
+        "guardrails",
+        "classify",
+        "user",
+        "requested",
+        "navigation",
+        "return",
+        "json",
+        "canonical",
+        "intent",
+        "entities",
+        "never",
+        "invent",
+        "people",
+        "permission",
+        "successful",
+        "mutation",
+        "context",
+        "flag",
+        "state",
+        "not",
+        "request",
+        "keep",
+        "open",
+        "workspace",
+        "unless",
+        "explicitly",
+        "switches",
+        "treat",
+        "name",
+        "approve",
+        "hire",
+        "delete",
+        "pay",
+        "save",
+        "only",
+        "person",
+        "used",
+        "automated",
+        "scenarios",
+        "alex",
+        "example",
+        "these",
+        "fictional",
+        "ui",
+        "fixtures"
+      ]
+    },
+    {
+      "id": "R20",
+      "activeId": "R20",
+      "conditions": [],
+      "workflows": [
+        "shared"
+      ],
+      "assignments": [
+        {
+          "workflow": "shared",
+          "subworkflow": null,
+          "conditions": [],
+          "status": "unresolved"
+        }
+      ],
+      "intents": [],
+      "terms": [
+        "global",
+        "guardrails",
+        "classify",
+        "user",
+        "requested",
+        "navigation",
+        "return",
+        "json",
+        "canonical",
+        "intent",
+        "entities",
+        "never",
+        "invent",
+        "people",
+        "permission",
+        "successful",
+        "mutation",
+        "context",
+        "flag",
+        "state",
+        "not",
+        "request",
+        "keep",
+        "open",
+        "workspace",
+        "unless",
+        "explicitly",
+        "switches",
+        "treat",
+        "name",
+        "approve",
+        "hire",
+        "delete",
+        "pay",
+        "save",
+        "only",
+        "person",
+        "used",
+        "automated",
+        "scenarios",
+        "alex",
+        "example",
+        "these",
+        "fictional",
+        "ui",
+        "fixtures"
+      ]
+    },
+    {
+      "id": "R21",
+      "activeId": "R21",
+      "conditions": [],
+      "workflows": [
+        "shared"
+      ],
+      "assignments": [
+        {
+          "workflow": "shared",
+          "subworkflow": null,
+          "conditions": [],
+          "status": "unresolved"
+        }
+      ],
+      "intents": [],
+      "terms": [
+        "global",
+        "guardrails",
+        "classify",
+        "user",
+        "requested",
+        "navigation",
+        "return",
+        "json",
+        "canonical",
+        "intent",
+        "entities",
+        "never",
+        "invent",
+        "people",
+        "permission",
+        "successful",
+        "mutation",
+        "context",
+        "flag",
+        "state",
+        "not",
+        "request",
+        "keep",
+        "open",
+        "workspace",
+        "unless",
+        "explicitly",
+        "switches",
+        "treat",
+        "name",
+        "approve",
+        "hire",
+        "delete",
+        "pay",
+        "save",
+        "only",
+        "person",
+        "used",
+        "automated",
+        "scenarios",
+        "alex",
+        "example",
+        "these",
+        "fictional",
+        "ui",
+        "fixtures"
+      ]
+    },
+    {
+      "id": "R22",
+      "activeId": "R22",
+      "conditions": [],
+      "workflows": [
+        "shared"
+      ],
+      "assignments": [
+        {
+          "workflow": "shared",
+          "subworkflow": null,
+          "conditions": [],
+          "status": "unresolved"
+        }
+      ],
+      "intents": [],
+      "terms": [
+        "global",
+        "guardrails",
+        "classify",
+        "user",
+        "requested",
+        "navigation",
+        "return",
+        "json",
+        "canonical",
+        "intent",
+        "entities",
+        "never",
+        "invent",
+        "people",
+        "permission",
+        "successful",
+        "mutation",
+        "context",
+        "flag",
+        "state",
+        "not",
+        "request",
+        "keep",
+        "open",
+        "workspace",
+        "unless",
+        "explicitly",
+        "switches",
+        "treat",
+        "name",
+        "approve",
+        "hire",
+        "delete",
+        "pay",
+        "save",
+        "only",
+        "person",
+        "used",
+        "automated",
+        "scenarios",
+        "alex",
+        "example",
+        "these",
+        "fictional",
+        "ui",
+        "fixtures"
+      ]
+    },
+    {
+      "id": "R23",
+      "activeId": "R23",
+      "conditions": [],
+      "workflows": [
+        "shared"
+      ],
+      "assignments": [
+        {
+          "workflow": "shared",
+          "subworkflow": null,
+          "conditions": [],
+          "status": "unresolved"
+        }
+      ],
+      "intents": [],
+      "terms": [
+        "global",
+        "guardrails",
+        "classify",
+        "user",
+        "requested",
+        "navigation",
+        "return",
+        "json",
+        "canonical",
+        "intent",
+        "entities",
+        "never",
+        "invent",
+        "people",
+        "permission",
+        "successful",
+        "mutation",
+        "context",
+        "flag",
+        "state",
+        "not",
+        "request",
+        "keep",
+        "open",
+        "workspace",
+        "unless",
+        "explicitly",
+        "switches",
+        "treat",
+        "name",
+        "approve",
+        "hire",
+        "delete",
+        "pay",
+        "save",
+        "only",
+        "person",
+        "used",
+        "automated",
+        "scenarios",
+        "alex",
+        "example",
+        "these",
+        "fictional",
+        "ui",
+        "fixtures"
+      ]
+    },
+    {
+      "id": "R24",
+      "activeId": "R24",
+      "conditions": [],
+      "workflows": [
+        "shared"
+      ],
+      "assignments": [
+        {
+          "workflow": "shared",
+          "subworkflow": null,
+          "conditions": [],
+          "status": "unresolved"
+        }
+      ],
+      "intents": [],
+      "terms": [
+        "global",
+        "guardrails",
+        "classify",
+        "user",
+        "requested",
+        "navigation",
+        "return",
+        "json",
+        "canonical",
+        "intent",
+        "entities",
+        "never",
+        "invent",
+        "people",
+        "permission",
+        "successful",
+        "mutation",
+        "context",
+        "flag",
+        "state",
+        "not",
+        "request",
+        "keep",
+        "open",
+        "workspace",
+        "unless",
+        "explicitly",
+        "switches",
+        "treat",
+        "name",
+        "approve",
+        "hire",
+        "delete",
+        "pay",
+        "save",
+        "only",
+        "person",
+        "used",
+        "automated",
+        "scenarios",
+        "alex",
+        "example",
+        "these",
+        "fictional",
+        "ui",
+        "fixtures"
+      ]
+    },
+    {
+      "id": "R25",
+      "activeId": "R25",
+      "conditions": [
+        {
+          "field": "jd_evaluation_results_modal_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "evaluation-39453b7a46"
+      ],
+      "assignments": [
+        {
+          "workflow": "evaluation",
+          "subworkflow": null,
+          "moduleId": "evaluation-39453b7a46",
+          "conditions": [
+            {
+              "field": "jd_evaluation_results_modal_open",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "close_published_jd_applicant_evaluation_results"
+      ],
+      "terms": [
+        "evaluation",
+        "close",
+        "exception",
+        "close_published_jd_applicant_evaluation_results",
+        "published",
+        "jd",
+        "applicant",
+        "results",
+        "when",
+        "jd_evaluation_results_modal_open",
+        "modal",
+        "open",
+        "true",
+        "user",
+        "says",
+        "dismiss",
+        "panel",
+        "return",
+        "empty",
+        "entities",
+        "only",
+        "never",
+        "job",
+        "description",
+        "workspace",
+        "browser",
+        "request",
+        "change",
+        "tabs",
+        "does",
+        "not"
+      ]
+    },
+    {
+      "id": "R26",
+      "activeId": "R26",
+      "conditions": [
+        {
+          "field": "interview_workflow_phase",
+          "op": "eq",
+          "value": "awaiting_attendee_names"
+        }
+      ],
+      "workflows": [
+        "interview-474b260a93"
+      ],
+      "assignments": [
+        {
+          "workflow": "interview",
+          "subworkflow": null,
+          "moduleId": "interview-474b260a93",
+          "conditions": [
+            {
+              "field": "interview_workflow_phase",
+              "op": "eq",
+              "value": "awaiting_attendee_names"
+            }
+          ],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "interview_scheduling"
+      ],
+      "terms": [
+        "interview",
+        "attendee",
+        "exception",
+        "interview_scheduling",
+        "scheduling",
+        "when",
+        "interview_workflow_phase",
+        "workflow",
+        "phase",
+        "awaiting_attendee_names",
+        "awaiting",
+        "names",
+        "name-only",
+        "name",
+        "only",
+        "utterance",
+        "alex",
+        "example",
+        "means",
+        "next",
+        "return",
+        "entities",
+        "attendee_name_query",
+        "query",
+        "equal",
+        "overrides",
+        "general",
+        "applicant-search",
+        "applicant",
+        "search",
+        "interpretation",
+        "even",
+        "while",
+        "jd_published_viewer_active_tab",
+        "jd",
+        "published",
+        "viewer",
+        "active",
+        "tab",
+        "applicants",
+        "does",
+        "not",
+        "choose",
+        "candidate",
+        "hiring",
+        "create",
+        "real",
+        "calendar",
+        "event"
+      ]
+    },
+    {
+      "id": "R27",
+      "activeId": "R27",
+      "conditions": [
+        {
+          "field": "payroll_workspace_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "payroll-3fe40e21d2"
+      ],
+      "assignments": [
+        {
+          "workflow": "payroll",
+          "subworkflow": null,
+          "moduleId": "payroll-3fe40e21d2",
+          "conditions": [
+            {
+              "field": "payroll_workspace_open",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "export_payroll_preview"
+      ],
+      "terms": [
+        "payroll",
+        "export",
+        "export_payroll_preview",
+        "preview",
+        "use",
+        "only",
+        "explicit",
+        "request",
+        "payroll_workspace_open",
+        "workspace",
+        "open",
+        "true",
+        "never",
+        "pays",
+        "anyone",
+        "periods",
+        "iso",
+        "year-month",
+        "year",
+        "month",
+        "require",
+        "read",
+        "permission",
+        "missing",
+        "period",
+        "must",
+        "requested",
+        "inferred",
+        "recruitment",
+        "state",
+        "salary",
+        "columns",
+        "fixture",
+        "data",
+        "preserve",
+        "currency",
+        "units",
+        "add",
+        "salaries",
+        "across",
+        "currencies",
+        "no",
+        "role",
+        "candidate",
+        "tabs",
+        "attendee",
+        "selection",
+        "domain",
+        "version",
+        "keeps",
+        "guard",
+        "beside",
+        "consumer",
+        "even",
+        "when",
+        "other",
+        "files",
+        "already",
+        "repeat"
+      ]
+    },
+    {
+      "id": "R28",
+      "activeId": "R28",
+      "conditions": [
+        {
+          "field": "assets_workspace_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "assets-9b1cf6e78d"
+      ],
+      "assignments": [
+        {
+          "workflow": "assets",
+          "subworkflow": null,
+          "moduleId": "assets-9b1cf6e78d",
+          "conditions": [
+            {
+              "field": "assets_workspace_open",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "view_asset_record"
+      ],
+      "terms": [
+        "asset",
+        "inventory",
+        "view_asset_record",
+        "view",
+        "record",
+        "use",
+        "only",
+        "explicit",
+        "queries",
+        "assets_workspace_open",
+        "assets",
+        "workspace",
+        "open",
+        "state",
+        "serial",
+        "numbers",
+        "strings",
+        "not",
+        "counts",
+        "loaned",
+        "laptop",
+        "applicant",
+        "viewing",
+        "equipment",
+        "never",
+        "transfers",
+        "ownership",
+        "ask",
+        "number",
+        "if",
+        "missing",
+        "employee",
+        "name",
+        "must",
+        "trigger",
+        "interview",
+        "scheduling",
+        "unless",
+        "active",
+        "workflow",
+        "awaiting",
+        "attendee",
+        "names",
+        "true",
+        "domain",
+        "version",
+        "keeps",
+        "guard",
+        "beside",
+        "consumer",
+        "even",
+        "when",
+        "other",
+        "files",
+        "already",
+        "repeat"
+      ]
+    },
+    {
+      "id": "R29",
+      "activeId": "R29",
+      "conditions": [
+        {
+          "field": "candidate_information_modal_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "candidate-information-c8b56ec30e"
+      ],
+      "assignments": [
+        {
+          "workflow": "candidate-information",
+          "subworkflow": null,
+          "moduleId": "candidate-information-c8b56ec30e",
+          "conditions": [
+            {
+              "field": "candidate_information_modal_open",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "navigate_candidate_information_tab"
+      ],
+      "terms": [
+        "candidate",
+        "information",
+        "navigation",
+        "navigate_candidate_information_tab",
+        "navigate",
+        "tab",
+        "when",
+        "candidate_information_modal_open",
+        "modal",
+        "open",
+        "true",
+        "request",
+        "go",
+        "personal",
+        "education",
+        "payslips",
+        "references",
+        "returns",
+        "entities",
+        "candidate_information_tab",
+        "set",
+        "exact",
+        "identifier",
+        "must",
+        "not",
+        "job",
+        "description",
+        "infer",
+        "qualification",
+        "read-only",
+        "read",
+        "only",
+        "panel"
+      ]
+    },
+    {
+      "id": "R30",
+      "activeId": "R30",
+      "conditions": [],
+      "workflows": [
+        "leave-c7b9221e8e"
+      ],
+      "assignments": [
+        {
+          "workflow": "leave",
+          "subworkflow": null,
+          "moduleId": "leave-c7b9221e8e",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "apply_leave"
+      ],
+      "terms": [
+        "explicit",
+        "workspace",
+        "switch",
+        "apply_leave",
+        "apply",
+        "leave",
+        "user",
+        "request",
+        "returns",
+        "empty",
+        "entities",
+        "even",
+        "while",
+        "jd_published_viewer_active_tab",
+        "jd",
+        "published",
+        "viewer",
+        "active",
+        "tab",
+        "applicants",
+        "open",
+        "local",
+        "form",
+        "only",
+        "do",
+        "not",
+        "submit",
+        "invent",
+        "dates",
+        "reuse",
+        "stale",
+        "if",
+        "names",
+        "applicant",
+        "requests",
+        "modal",
+        "never"
+      ]
+    },
+    {
+      "id": "R31",
+      "activeId": "R31",
+      "conditions": [
+        {
+          "field": "assets_workspace_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "assets-9b1cf6e78d"
+      ],
+      "assignments": [
+        {
+          "workflow": "assets",
+          "subworkflow": null,
+          "moduleId": "assets-9b1cf6e78d",
+          "conditions": [
+            {
+              "field": "assets_workspace_open",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "view_asset_record"
+      ],
+      "terms": [
+        "asset",
+        "inventory",
+        "view_asset_record",
+        "view",
+        "record",
+        "use",
+        "only",
+        "explicit",
+        "queries",
+        "assets_workspace_open",
+        "assets",
+        "workspace",
+        "open",
+        "state",
+        "serial",
+        "numbers",
+        "strings",
+        "not",
+        "counts",
+        "loaned",
+        "laptop",
+        "applicant",
+        "viewing",
+        "equipment",
+        "never",
+        "transfers",
+        "ownership",
+        "ask",
+        "number",
+        "if",
+        "missing",
+        "employee",
+        "name",
+        "must",
+        "trigger",
+        "interview",
+        "scheduling",
+        "unless",
+        "active",
+        "workflow",
+        "awaiting",
+        "attendee",
+        "names",
+        "true",
+        "domain",
+        "version",
+        "keeps",
+        "guard",
+        "beside",
+        "consumer",
+        "even",
+        "when",
+        "other",
+        "files",
+        "already",
+        "repeat"
+      ]
+    },
+    {
+      "id": "R32",
+      "activeId": "R32",
+      "conditions": [
+        {
+          "field": "payroll_workspace_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "payroll-3fe40e21d2"
+      ],
+      "assignments": [
+        {
+          "workflow": "payroll",
+          "subworkflow": null,
+          "moduleId": "payroll-3fe40e21d2",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "export_payroll_preview"
+      ],
+      "terms": [
+        "payroll",
+        "export",
+        "export_payroll_preview",
+        "preview",
+        "use",
+        "only",
+        "explicit",
+        "request",
+        "payroll_workspace_open",
+        "workspace",
+        "open",
+        "true",
+        "never",
+        "pays",
+        "anyone",
+        "periods",
+        "iso",
+        "year-month",
+        "year",
+        "month",
+        "require",
+        "read",
+        "permission",
+        "missing",
+        "period",
+        "must",
+        "requested",
+        "inferred",
+        "recruitment",
+        "state",
+        "salary",
+        "columns",
+        "fixture",
+        "data",
+        "preserve",
+        "currency",
+        "units",
+        "add",
+        "salaries",
+        "across",
+        "currencies",
+        "no",
+        "role",
+        "candidate",
+        "tabs",
+        "attendee",
+        "selection",
+        "domain",
+        "version",
+        "keeps",
+        "guard",
+        "beside",
+        "consumer",
+        "even",
+        "when",
+        "other",
+        "files",
+        "already",
+        "repeat"
+      ]
+    },
+    {
+      "id": "R33",
+      "activeId": "R33",
+      "conditions": [],
+      "workflows": [
+        "shared"
+      ],
+      "assignments": [
+        {
+          "workflow": "shared",
+          "subworkflow": null,
+          "conditions": [],
+          "status": "unresolved"
+        }
+      ],
+      "intents": [],
+      "terms": [
+        "global",
+        "guardrails",
+        "classify",
+        "user",
+        "requested",
+        "navigation",
+        "return",
+        "json",
+        "canonical",
+        "intent",
+        "entities",
+        "never",
+        "invent",
+        "people",
+        "permission",
+        "successful",
+        "mutation",
+        "context",
+        "flag",
+        "state",
+        "not",
+        "request",
+        "keep",
+        "open",
+        "workspace",
+        "unless",
+        "explicitly",
+        "switches",
+        "treat",
+        "name",
+        "approve",
+        "hire",
+        "delete",
+        "pay",
+        "save",
+        "only",
+        "person",
+        "used",
+        "automated",
+        "scenarios",
+        "alex",
+        "example",
+        "these",
+        "fictional",
+        "ui",
+        "fixtures"
+      ]
+    },
+    {
+      "id": "R34",
+      "activeId": "R34",
+      "conditions": [
+        {
+          "field": "jd_evaluation_results_modal_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "evaluation-39453b7a46"
+      ],
+      "assignments": [
+        {
+          "workflow": "evaluation",
+          "subworkflow": null,
+          "moduleId": "evaluation-39453b7a46",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "navigate_published_jd_applicant_evaluation_tab"
+      ],
+      "terms": [
+        "evaluation",
+        "tab",
+        "routing",
+        "navigate_published_jd_applicant_evaluation_tab",
+        "navigate",
+        "published",
+        "jd",
+        "applicant",
+        "when",
+        "jd_evaluation_results_modal_open",
+        "results",
+        "modal",
+        "open",
+        "true",
+        "requests",
+        "summary",
+        "transcript",
+        "facial",
+        "analysis",
+        "panel",
+        "return",
+        "entities",
+        "evaluation_results_tab",
+        "exactly",
+        "takes",
+        "precedence",
+        "over",
+        "parent",
+        "job",
+        "description",
+        "stale",
+        "workflow",
+        "state",
+        "fictional",
+        "recorded",
+        "interview",
+        "legacy",
+        "identifier",
+        "not",
+        "claim",
+        "about",
+        "person"
+      ]
+    },
+    {
+      "id": "R35",
+      "activeId": "R35",
+      "conditions": [
+        {
+          "field": "jd_published_viewer_active_tab",
+          "op": "eq",
+          "value": "applicants"
+        }
+      ],
+      "workflows": [
+        "recruitment-cef5cdd19f"
+      ],
+      "assignments": [
+        {
+          "workflow": "recruitment",
+          "subworkflow": null,
+          "moduleId": "recruitment-cef5cdd19f",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "view_published_jd_applicant"
+      ],
+      "terms": [
+        "applicant",
+        "search",
+        "stale",
+        "leave",
+        "view_published_jd_applicant",
+        "view",
+        "published",
+        "jd",
+        "when",
+        "jd_published_viewer_active_tab",
+        "viewer",
+        "active",
+        "tab",
+        "applicants",
+        "user",
+        "explicitly",
+        "asks",
+        "show",
+        "alex",
+        "example",
+        "return",
+        "entities",
+        "applicant_name_query",
+        "name",
+        "query",
+        "equal",
+        "ignore",
+        "workflow_orchestration",
+        "workflow",
+        "orchestration",
+        "primary_workflow",
+        "primary",
+        "session_state",
+        "session",
+        "state",
+        "activeintent",
+        "apply_leave",
+        "apply",
+        "merely",
+        "mentioning",
+        "not",
+        "new",
+        "request",
+        "never",
+        "confuse",
+        "candidate",
+        "names",
+        "intent",
+        "identifiers"
+      ]
+    },
+    {
+      "id": "R36",
+      "activeId": "R36",
+      "conditions": [
+        {
+          "field": "assets_workspace_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "assets-9b1cf6e78d"
+      ],
+      "assignments": [
+        {
+          "workflow": "assets",
+          "subworkflow": null,
+          "moduleId": "assets-9b1cf6e78d",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "view_asset_record"
+      ],
+      "terms": [
+        "asset",
+        "inventory",
+        "view_asset_record",
+        "view",
+        "record",
+        "use",
+        "only",
+        "explicit",
+        "queries",
+        "assets_workspace_open",
+        "assets",
+        "workspace",
+        "open",
+        "state",
+        "serial",
+        "numbers",
+        "strings",
+        "not",
+        "counts",
+        "loaned",
+        "laptop",
+        "applicant",
+        "viewing",
+        "equipment",
+        "never",
+        "transfers",
+        "ownership",
+        "ask",
+        "number",
+        "if",
+        "missing",
+        "employee",
+        "name",
+        "must",
+        "trigger",
+        "interview",
+        "scheduling",
+        "unless",
+        "active",
+        "workflow",
+        "awaiting",
+        "attendee",
+        "names",
+        "true",
+        "domain",
+        "version",
+        "keeps",
+        "guard",
+        "beside",
+        "consumer",
+        "even",
+        "when",
+        "other",
+        "files",
+        "already",
+        "repeat"
+      ]
+    },
+    {
+      "id": "R37",
+      "activeId": "R37",
+      "conditions": [
+        {
+          "field": "payroll_workspace_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "payroll-3fe40e21d2"
+      ],
+      "assignments": [
+        {
+          "workflow": "payroll",
+          "subworkflow": null,
+          "moduleId": "payroll-3fe40e21d2",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "export_payroll_preview"
+      ],
+      "terms": [
+        "payroll",
+        "export",
+        "export_payroll_preview",
+        "preview",
+        "use",
+        "only",
+        "explicit",
+        "request",
+        "payroll_workspace_open",
+        "workspace",
+        "open",
+        "true",
+        "never",
+        "pays",
+        "anyone",
+        "periods",
+        "iso",
+        "year-month",
+        "year",
+        "month",
+        "require",
+        "read",
+        "permission",
+        "missing",
+        "period",
+        "must",
+        "requested",
+        "inferred",
+        "recruitment",
+        "state",
+        "salary",
+        "columns",
+        "fixture",
+        "data",
+        "preserve",
+        "currency",
+        "units",
+        "add",
+        "salaries",
+        "across",
+        "currencies",
+        "no",
+        "role",
+        "candidate",
+        "tabs",
+        "attendee",
+        "selection",
+        "domain",
+        "version",
+        "keeps",
+        "guard",
+        "beside",
+        "consumer",
+        "even",
+        "when",
+        "other",
+        "files",
+        "already",
+        "repeat"
+      ]
+    },
+    {
+      "id": "R38",
+      "activeId": "R38",
+      "conditions": [
+        {
+          "field": "jd_evaluation_results_modal_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "evaluation-39453b7a46"
+      ],
+      "assignments": [
+        {
+          "workflow": "evaluation",
+          "subworkflow": null,
+          "moduleId": "evaluation-39453b7a46",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "close_published_jd_applicant_evaluation_results"
+      ],
+      "terms": [
+        "evaluation",
+        "close",
+        "exception",
+        "close_published_jd_applicant_evaluation_results",
+        "published",
+        "jd",
+        "applicant",
+        "results",
+        "when",
+        "jd_evaluation_results_modal_open",
+        "modal",
+        "open",
+        "true",
+        "user",
+        "says",
+        "dismiss",
+        "panel",
+        "return",
+        "empty",
+        "entities",
+        "only",
+        "never",
+        "job",
+        "description",
+        "workspace",
+        "browser",
+        "request",
+        "change",
+        "tabs",
+        "does",
+        "not"
+      ]
+    },
+    {
+      "id": "R39",
+      "activeId": "R39",
+      "conditions": [
+        {
+          "field": "interview_workflow_phase",
+          "op": "eq",
+          "value": "awaiting_attendee_names"
+        }
+      ],
+      "workflows": [
+        "interview-474b260a93"
+      ],
+      "assignments": [
+        {
+          "workflow": "interview",
+          "subworkflow": null,
+          "moduleId": "interview-474b260a93",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "interview_scheduling"
+      ],
+      "terms": [
+        "interview",
+        "attendee",
+        "exception",
+        "interview_scheduling",
+        "scheduling",
+        "when",
+        "interview_workflow_phase",
+        "workflow",
+        "phase",
+        "awaiting_attendee_names",
+        "awaiting",
+        "names",
+        "name-only",
+        "name",
+        "only",
+        "utterance",
+        "alex",
+        "example",
+        "means",
+        "next",
+        "return",
+        "entities",
+        "attendee_name_query",
+        "query",
+        "equal",
+        "overrides",
+        "general",
+        "applicant-search",
+        "applicant",
+        "search",
+        "interpretation",
+        "even",
+        "while",
+        "jd_published_viewer_active_tab",
+        "jd",
+        "published",
+        "viewer",
+        "active",
+        "tab",
+        "applicants",
+        "does",
+        "not",
+        "choose",
+        "candidate",
+        "hiring",
+        "create",
+        "real",
+        "calendar",
+        "event"
+      ]
+    },
+    {
+      "id": "R40",
+      "activeId": "R40",
+      "conditions": [
+        {
+          "field": "assets_workspace_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "assets-9b1cf6e78d"
+      ],
+      "assignments": [
+        {
+          "workflow": "assets",
+          "subworkflow": null,
+          "moduleId": "assets-9b1cf6e78d",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "view_asset_record"
+      ],
+      "terms": [
+        "asset",
+        "inventory",
+        "view_asset_record",
+        "view",
+        "record",
+        "use",
+        "only",
+        "explicit",
+        "queries",
+        "assets_workspace_open",
+        "assets",
+        "workspace",
+        "open",
+        "state",
+        "serial",
+        "numbers",
+        "strings",
+        "not",
+        "counts",
+        "loaned",
+        "laptop",
+        "applicant",
+        "viewing",
+        "equipment",
+        "never",
+        "transfers",
+        "ownership",
+        "ask",
+        "number",
+        "if",
+        "missing",
+        "employee",
+        "name",
+        "must",
+        "trigger",
+        "interview",
+        "scheduling",
+        "unless",
+        "active",
+        "workflow",
+        "awaiting",
+        "attendee",
+        "names",
+        "true",
+        "domain",
+        "version",
+        "keeps",
+        "guard",
+        "beside",
+        "consumer",
+        "even",
+        "when",
+        "other",
+        "files",
+        "already",
+        "repeat"
+      ]
+    },
+    {
+      "id": "R41",
+      "activeId": "R41",
+      "conditions": [
+        {
+          "field": "payroll_workspace_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "payroll-3fe40e21d2"
+      ],
+      "assignments": [
+        {
+          "workflow": "payroll",
+          "subworkflow": null,
+          "moduleId": "payroll-3fe40e21d2",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "export_payroll_preview"
+      ],
+      "terms": [
+        "payroll",
+        "export",
+        "export_payroll_preview",
+        "preview",
+        "use",
+        "only",
+        "explicit",
+        "request",
+        "payroll_workspace_open",
+        "workspace",
+        "open",
+        "true",
+        "never",
+        "pays",
+        "anyone",
+        "periods",
+        "iso",
+        "year-month",
+        "year",
+        "month",
+        "require",
+        "read",
+        "permission",
+        "missing",
+        "period",
+        "must",
+        "requested",
+        "inferred",
+        "recruitment",
+        "state",
+        "salary",
+        "columns",
+        "fixture",
+        "data",
+        "preserve",
+        "currency",
+        "units",
+        "add",
+        "salaries",
+        "across",
+        "currencies",
+        "no",
+        "role",
+        "candidate",
+        "tabs",
+        "attendee",
+        "selection",
+        "domain",
+        "version",
+        "keeps",
+        "guard",
+        "beside",
+        "consumer",
+        "even",
+        "when",
+        "other",
+        "files",
+        "already",
+        "repeat"
+      ]
+    },
+    {
+      "id": "R42",
+      "activeId": "R42",
+      "conditions": [
+        {
+          "field": "candidate_information_modal_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "candidate-information-c8b56ec30e"
+      ],
+      "assignments": [
+        {
+          "workflow": "candidate-information",
+          "subworkflow": null,
+          "moduleId": "candidate-information-c8b56ec30e",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "navigate_candidate_information_tab"
+      ],
+      "terms": [
+        "candidate",
+        "information",
+        "navigation",
+        "navigate_candidate_information_tab",
+        "navigate",
+        "tab",
+        "when",
+        "candidate_information_modal_open",
+        "modal",
+        "open",
+        "true",
+        "request",
+        "go",
+        "personal",
+        "education",
+        "payslips",
+        "references",
+        "returns",
+        "entities",
+        "candidate_information_tab",
+        "set",
+        "exact",
+        "identifier",
+        "must",
+        "not",
+        "job",
+        "description",
+        "infer",
+        "qualification",
+        "read-only",
+        "read",
+        "only",
+        "panel"
+      ]
+    },
+    {
+      "id": "R43",
+      "activeId": "R43",
+      "conditions": [],
+      "workflows": [
+        "leave-c7b9221e8e"
+      ],
+      "assignments": [
+        {
+          "workflow": "leave",
+          "subworkflow": null,
+          "moduleId": "leave-c7b9221e8e",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "apply_leave"
+      ],
+      "terms": [
+        "explicit",
+        "workspace",
+        "switch",
+        "apply_leave",
+        "apply",
+        "leave",
+        "user",
+        "request",
+        "returns",
+        "empty",
+        "entities",
+        "even",
+        "while",
+        "jd_published_viewer_active_tab",
+        "jd",
+        "published",
+        "viewer",
+        "active",
+        "tab",
+        "applicants",
+        "open",
+        "local",
+        "form",
+        "only",
+        "do",
+        "not",
+        "submit",
+        "invent",
+        "dates",
+        "reuse",
+        "stale",
+        "if",
+        "names",
+        "applicant",
+        "requests",
+        "modal",
+        "never"
+      ]
+    },
+    {
+      "id": "R44",
+      "activeId": "R44",
+      "conditions": [
+        {
+          "field": "travel_workspace_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "travel-65d90d46f1"
+      ],
+      "assignments": [
+        {
+          "workflow": "travel",
+          "subworkflow": null,
+          "moduleId": "travel-65d90d46f1",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "draft_travel_request"
+      ],
+      "terms": [
+        "travel",
+        "draft",
+        "draft_travel_request",
+        "request",
+        "use",
+        "only",
+        "explicit",
+        "requests",
+        "travel_workspace_open",
+        "workspace",
+        "open",
+        "state",
+        "ask",
+        "destination",
+        "dates",
+        "before",
+        "creating",
+        "never",
+        "book",
+        "flight",
+        "charge",
+        "card",
+        "approve",
+        "treat",
+        "applicant",
+        "location",
+        "saved",
+        "remains",
+        "distinct",
+        "approval",
+        "quoted",
+        "policy",
+        "example",
+        "not",
+        "user",
+        "instruction",
+        "all",
+        "fixture",
+        "illustrative",
+        "must",
+        "true",
+        "domain",
+        "version",
+        "keeps",
+        "guard",
+        "beside",
+        "consumer",
+        "even",
+        "when",
+        "other",
+        "files",
+        "already",
+        "repeat"
+      ]
+    },
+    {
+      "id": "R45",
+      "activeId": "R45",
+      "conditions": [
+        {
+          "field": "expenses_workspace_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "expenses-5430246a20"
+      ],
+      "assignments": [
+        {
+          "workflow": "expenses",
+          "subworkflow": null,
+          "moduleId": "expenses-5430246a20",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "preview_expense_claim"
+      ],
+      "terms": [
+        "expense",
+        "policy",
+        "preview_expense_claim",
+        "preview",
+        "claim",
+        "use",
+        "only",
+        "explicit",
+        "claims",
+        "expenses_workspace_open",
+        "expenses",
+        "workspace",
+        "open",
+        "true",
+        "require",
+        "receipt",
+        "reference",
+        "amount",
+        "currency",
+        "cannot",
+        "approve",
+        "reimburse",
+        "pay",
+        "do",
+        "not",
+        "treat",
+        "word",
+        "candidate",
+        "transcript",
+        "action",
+        "original",
+        "receipts",
+        "user-entered",
+        "user",
+        "entered",
+        "amounts",
+        "remain",
+        "authoritative",
+        "missing",
+        "blocks",
+        "totals",
+        "instead",
+        "guessing",
+        "sgd",
+        "must",
+        "domain",
+        "version",
+        "keeps",
+        "guard",
+        "beside",
+        "consumer",
+        "even",
+        "when",
+        "other",
+        "files",
+        "already",
+        "repeat"
+      ]
+    },
+    {
+      "id": "R46",
+      "activeId": "R46",
+      "conditions": [
+        {
+          "field": "jd_published_viewer_active_tab",
+          "op": "eq",
+          "value": "applicants"
+        }
+      ],
+      "workflows": [
+        "recruitment-cef5cdd19f"
+      ],
+      "assignments": [
+        {
+          "workflow": "recruitment",
+          "subworkflow": null,
+          "moduleId": "recruitment-cef5cdd19f",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "view_published_jd_applicant"
+      ],
+      "terms": [
+        "applicant",
+        "search",
+        "stale",
+        "leave",
+        "view_published_jd_applicant",
+        "view",
+        "published",
+        "jd",
+        "when",
+        "jd_published_viewer_active_tab",
+        "viewer",
+        "active",
+        "tab",
+        "applicants",
+        "user",
+        "explicitly",
+        "asks",
+        "show",
+        "alex",
+        "example",
+        "return",
+        "entities",
+        "applicant_name_query",
+        "name",
+        "query",
+        "equal",
+        "ignore",
+        "workflow_orchestration",
+        "workflow",
+        "orchestration",
+        "primary_workflow",
+        "primary",
+        "session_state",
+        "session",
+        "state",
+        "activeintent",
+        "apply_leave",
+        "apply",
+        "merely",
+        "mentioning",
+        "not",
+        "new",
+        "request",
+        "never",
+        "confuse",
+        "candidate",
+        "names",
+        "intent",
+        "identifiers"
+      ]
+    },
+    {
+      "id": "R47",
+      "activeId": "R47",
+      "conditions": [
+        {
+          "field": "jd_evaluation_results_modal_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "evaluation-39453b7a46"
+      ],
+      "assignments": [
+        {
+          "workflow": "evaluation",
+          "subworkflow": null,
+          "moduleId": "evaluation-39453b7a46",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "navigate_published_jd_applicant_evaluation_tab"
+      ],
+      "terms": [
+        "evaluation",
+        "tab",
+        "routing",
+        "navigate_published_jd_applicant_evaluation_tab",
+        "navigate",
+        "published",
+        "jd",
+        "applicant",
+        "when",
+        "jd_evaluation_results_modal_open",
+        "results",
+        "modal",
+        "open",
+        "true",
+        "requests",
+        "summary",
+        "transcript",
+        "facial",
+        "analysis",
+        "panel",
+        "return",
+        "entities",
+        "evaluation_results_tab",
+        "exactly",
+        "takes",
+        "precedence",
+        "over",
+        "parent",
+        "job",
+        "description",
+        "stale",
+        "workflow",
+        "state",
+        "fictional",
+        "recorded",
+        "interview",
+        "legacy",
+        "identifier",
+        "not",
+        "claim",
+        "about",
+        "person"
+      ]
+    },
+    {
+      "id": "R48",
+      "activeId": "R48",
+      "conditions": [
+        {
+          "field": "travel_workspace_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "travel-65d90d46f1"
+      ],
+      "assignments": [
+        {
+          "workflow": "travel",
+          "subworkflow": null,
+          "moduleId": "travel-65d90d46f1",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "draft_travel_request"
+      ],
+      "terms": [
+        "travel",
+        "draft",
+        "draft_travel_request",
+        "request",
+        "use",
+        "only",
+        "explicit",
+        "requests",
+        "travel_workspace_open",
+        "workspace",
+        "open",
+        "state",
+        "ask",
+        "destination",
+        "dates",
+        "before",
+        "creating",
+        "never",
+        "book",
+        "flight",
+        "charge",
+        "card",
+        "approve",
+        "treat",
+        "applicant",
+        "location",
+        "saved",
+        "remains",
+        "distinct",
+        "approval",
+        "quoted",
+        "policy",
+        "example",
+        "not",
+        "user",
+        "instruction",
+        "all",
+        "fixture",
+        "illustrative",
+        "must",
+        "true",
+        "domain",
+        "version",
+        "keeps",
+        "guard",
+        "beside",
+        "consumer",
+        "even",
+        "when",
+        "other",
+        "files",
+        "already",
+        "repeat"
+      ]
+    },
+    {
+      "id": "R49",
+      "activeId": "R49",
+      "conditions": [
+        {
+          "field": "expenses_workspace_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "expenses-5430246a20"
+      ],
+      "assignments": [
+        {
+          "workflow": "expenses",
+          "subworkflow": null,
+          "moduleId": "expenses-5430246a20",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "preview_expense_claim"
+      ],
+      "terms": [
+        "expense",
+        "policy",
+        "preview_expense_claim",
+        "preview",
+        "claim",
+        "use",
+        "only",
+        "explicit",
+        "claims",
+        "expenses_workspace_open",
+        "expenses",
+        "workspace",
+        "open",
+        "true",
+        "require",
+        "receipt",
+        "reference",
+        "amount",
+        "currency",
+        "cannot",
+        "approve",
+        "reimburse",
+        "pay",
+        "do",
+        "not",
+        "treat",
+        "word",
+        "candidate",
+        "transcript",
+        "action",
+        "original",
+        "receipts",
+        "user-entered",
+        "user",
+        "entered",
+        "amounts",
+        "remain",
+        "authoritative",
+        "missing",
+        "blocks",
+        "totals",
+        "instead",
+        "guessing",
+        "sgd",
+        "must",
+        "domain",
+        "version",
+        "keeps",
+        "guard",
+        "beside",
+        "consumer",
+        "even",
+        "when",
+        "other",
+        "files",
+        "already",
+        "repeat"
+      ]
+    },
+    {
+      "id": "R50",
+      "activeId": "R50",
+      "conditions": [
+        {
+          "field": "interview_workflow_phase",
+          "op": "eq",
+          "value": "awaiting_attendee_names"
+        }
+      ],
+      "workflows": [
+        "interview-474b260a93"
+      ],
+      "assignments": [
+        {
+          "workflow": "interview",
+          "subworkflow": null,
+          "moduleId": "interview-474b260a93",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "interview_scheduling"
+      ],
+      "terms": [
+        "interview",
+        "attendee",
+        "exception",
+        "interview_scheduling",
+        "scheduling",
+        "when",
+        "interview_workflow_phase",
+        "workflow",
+        "phase",
+        "awaiting_attendee_names",
+        "awaiting",
+        "names",
+        "name-only",
+        "name",
+        "only",
+        "utterance",
+        "alex",
+        "example",
+        "means",
+        "next",
+        "return",
+        "entities",
+        "attendee_name_query",
+        "query",
+        "equal",
+        "overrides",
+        "general",
+        "applicant-search",
+        "applicant",
+        "search",
+        "interpretation",
+        "even",
+        "while",
+        "jd_published_viewer_active_tab",
+        "jd",
+        "published",
+        "viewer",
+        "active",
+        "tab",
+        "applicants",
+        "does",
+        "not",
+        "choose",
+        "candidate",
+        "hiring",
+        "create",
+        "real",
+        "calendar",
+        "event"
+      ]
+    },
+    {
+      "id": "R51",
+      "activeId": "R51",
+      "conditions": [
+        {
+          "field": "jd_evaluation_results_modal_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "evaluation-39453b7a46"
+      ],
+      "assignments": [
+        {
+          "workflow": "evaluation",
+          "subworkflow": null,
+          "moduleId": "evaluation-39453b7a46",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "close_published_jd_applicant_evaluation_results"
+      ],
+      "terms": [
+        "evaluation",
+        "close",
+        "exception",
+        "close_published_jd_applicant_evaluation_results",
+        "published",
+        "jd",
+        "applicant",
+        "results",
+        "when",
+        "jd_evaluation_results_modal_open",
+        "modal",
+        "open",
+        "true",
+        "user",
+        "says",
+        "dismiss",
+        "panel",
+        "return",
+        "empty",
+        "entities",
+        "only",
+        "never",
+        "job",
+        "description",
+        "workspace",
+        "browser",
+        "request",
+        "change",
+        "tabs",
+        "does",
+        "not"
+      ]
+    },
+    {
+      "id": "R52",
+      "activeId": "R52",
+      "conditions": [
+        {
+          "field": "expenses_workspace_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "expenses-5430246a20"
+      ],
+      "assignments": [
+        {
+          "workflow": "expenses",
+          "subworkflow": null,
+          "moduleId": "expenses-5430246a20",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "preview_expense_claim"
+      ],
+      "terms": [
+        "expense",
+        "policy",
+        "preview_expense_claim",
+        "preview",
+        "claim",
+        "use",
+        "only",
+        "explicit",
+        "claims",
+        "expenses_workspace_open",
+        "expenses",
+        "workspace",
+        "open",
+        "true",
+        "require",
+        "receipt",
+        "reference",
+        "amount",
+        "currency",
+        "cannot",
+        "approve",
+        "reimburse",
+        "pay",
+        "do",
+        "not",
+        "treat",
+        "word",
+        "candidate",
+        "transcript",
+        "action",
+        "original",
+        "receipts",
+        "user-entered",
+        "user",
+        "entered",
+        "amounts",
+        "remain",
+        "authoritative",
+        "missing",
+        "blocks",
+        "totals",
+        "instead",
+        "guessing",
+        "sgd",
+        "must",
+        "domain",
+        "version",
+        "keeps",
+        "guard",
+        "beside",
+        "consumer",
+        "even",
+        "when",
+        "other",
+        "files",
+        "already",
+        "repeat"
+      ]
+    },
+    {
+      "id": "R53",
+      "activeId": "R53",
+      "conditions": [
+        {
+          "field": "travel_workspace_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "travel-65d90d46f1"
+      ],
+      "assignments": [
+        {
+          "workflow": "travel",
+          "subworkflow": null,
+          "moduleId": "travel-65d90d46f1",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "draft_travel_request"
+      ],
+      "terms": [
+        "travel",
+        "draft",
+        "draft_travel_request",
+        "request",
+        "use",
+        "only",
+        "explicit",
+        "requests",
+        "travel_workspace_open",
+        "workspace",
+        "open",
+        "state",
+        "ask",
+        "destination",
+        "dates",
+        "before",
+        "creating",
+        "never",
+        "book",
+        "flight",
+        "charge",
+        "card",
+        "approve",
+        "treat",
+        "applicant",
+        "location",
+        "saved",
+        "remains",
+        "distinct",
+        "approval",
+        "quoted",
+        "policy",
+        "example",
+        "not",
+        "user",
+        "instruction",
+        "all",
+        "fixture",
+        "illustrative",
+        "must",
+        "true",
+        "domain",
+        "version",
+        "keeps",
+        "guard",
+        "beside",
+        "consumer",
+        "even",
+        "when",
+        "other",
+        "files",
+        "already",
+        "repeat"
+      ]
+    },
+    {
+      "id": "R54",
+      "activeId": "R54",
+      "conditions": [],
+      "workflows": [
+        "shared"
+      ],
+      "assignments": [
+        {
+          "workflow": "shared",
+          "subworkflow": null,
+          "conditions": [],
+          "status": "unresolved"
+        }
+      ],
+      "intents": [],
+      "terms": [
+        "global",
+        "guardrails",
+        "classify",
+        "user",
+        "requested",
+        "navigation",
+        "return",
+        "json",
+        "canonical",
+        "intent",
+        "entities",
+        "never",
+        "invent",
+        "people",
+        "permission",
+        "successful",
+        "mutation",
+        "context",
+        "flag",
+        "state",
+        "not",
+        "request",
+        "keep",
+        "open",
+        "workspace",
+        "unless",
+        "explicitly",
+        "switches",
+        "treat",
+        "name",
+        "approve",
+        "hire",
+        "delete",
+        "pay",
+        "save",
+        "only",
+        "person",
+        "used",
+        "automated",
+        "scenarios",
+        "alex",
+        "example",
+        "these",
+        "fictional",
+        "ui",
+        "fixtures"
+      ]
+    },
+    {
+      "id": "R55",
+      "activeId": "R55",
+      "conditions": [
+        {
+          "field": "candidate_information_modal_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "candidate-information-c8b56ec30e"
+      ],
+      "assignments": [
+        {
+          "workflow": "candidate-information",
+          "subworkflow": null,
+          "moduleId": "candidate-information-c8b56ec30e",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "navigate_candidate_information_tab"
+      ],
+      "terms": [
+        "candidate",
+        "information",
+        "navigation",
+        "navigate_candidate_information_tab",
+        "navigate",
+        "tab",
+        "when",
+        "candidate_information_modal_open",
+        "modal",
+        "open",
+        "true",
+        "request",
+        "go",
+        "personal",
+        "education",
+        "payslips",
+        "references",
+        "returns",
+        "entities",
+        "candidate_information_tab",
+        "set",
+        "exact",
+        "identifier",
+        "must",
+        "not",
+        "job",
+        "description",
+        "infer",
+        "qualification",
+        "read-only",
+        "read",
+        "only",
+        "panel"
+      ]
+    },
+    {
+      "id": "R56",
+      "activeId": "R56",
+      "conditions": [],
+      "workflows": [
+        "leave-c7b9221e8e"
+      ],
+      "assignments": [
+        {
+          "workflow": "leave",
+          "subworkflow": null,
+          "moduleId": "leave-c7b9221e8e",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "apply_leave"
+      ],
+      "terms": [
+        "explicit",
+        "workspace",
+        "switch",
+        "apply_leave",
+        "apply",
+        "leave",
+        "user",
+        "request",
+        "returns",
+        "empty",
+        "entities",
+        "even",
+        "while",
+        "jd_published_viewer_active_tab",
+        "jd",
+        "published",
+        "viewer",
+        "active",
+        "tab",
+        "applicants",
+        "open",
+        "local",
+        "form",
+        "only",
+        "do",
+        "not",
+        "submit",
+        "invent",
+        "dates",
+        "reuse",
+        "stale",
+        "if",
+        "names",
+        "applicant",
+        "requests",
+        "modal",
+        "never"
+      ]
+    },
+    {
+      "id": "R57",
+      "activeId": "R57",
+      "conditions": [
+        {
+          "field": "expenses_workspace_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "expenses-5430246a20"
+      ],
+      "assignments": [
+        {
+          "workflow": "expenses",
+          "subworkflow": null,
+          "moduleId": "expenses-5430246a20",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "preview_expense_claim"
+      ],
+      "terms": [
+        "expense",
+        "policy",
+        "preview_expense_claim",
+        "preview",
+        "claim",
+        "use",
+        "only",
+        "explicit",
+        "claims",
+        "expenses_workspace_open",
+        "expenses",
+        "workspace",
+        "open",
+        "true",
+        "require",
+        "receipt",
+        "reference",
+        "amount",
+        "currency",
+        "cannot",
+        "approve",
+        "reimburse",
+        "pay",
+        "do",
+        "not",
+        "treat",
+        "word",
+        "candidate",
+        "transcript",
+        "action",
+        "original",
+        "receipts",
+        "user-entered",
+        "user",
+        "entered",
+        "amounts",
+        "remain",
+        "authoritative",
+        "missing",
+        "blocks",
+        "totals",
+        "instead",
+        "guessing",
+        "sgd",
+        "must",
+        "domain",
+        "version",
+        "keeps",
+        "guard",
+        "beside",
+        "consumer",
+        "even",
+        "when",
+        "other",
+        "files",
+        "already",
+        "repeat"
+      ]
+    },
+    {
+      "id": "R58",
+      "activeId": "R58",
+      "conditions": [
+        {
+          "field": "travel_workspace_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "travel-65d90d46f1"
+      ],
+      "assignments": [
+        {
+          "workflow": "travel",
+          "subworkflow": null,
+          "moduleId": "travel-65d90d46f1",
+          "conditions": [
+            {
+              "field": "travel_workspace_open",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "draft_travel_request"
+      ],
+      "terms": [
+        "travel",
+        "draft",
+        "draft_travel_request",
+        "request",
+        "use",
+        "only",
+        "explicit",
+        "requests",
+        "travel_workspace_open",
+        "workspace",
+        "open",
+        "state",
+        "ask",
+        "destination",
+        "dates",
+        "before",
+        "creating",
+        "never",
+        "book",
+        "flight",
+        "charge",
+        "card",
+        "approve",
+        "treat",
+        "applicant",
+        "location",
+        "saved",
+        "remains",
+        "distinct",
+        "approval",
+        "quoted",
+        "policy",
+        "example",
+        "not",
+        "user",
+        "instruction",
+        "all",
+        "fixture",
+        "illustrative",
+        "must",
+        "true",
+        "domain",
+        "version",
+        "keeps",
+        "guard",
+        "beside",
+        "consumer",
+        "even",
+        "when",
+        "other",
+        "files",
+        "already",
+        "repeat"
+      ]
+    },
+    {
+      "id": "R59",
+      "activeId": "R59",
+      "conditions": [
+        {
+          "field": "travel_workspace_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "travel-65d90d46f1"
+      ],
+      "assignments": [
+        {
+          "workflow": "travel",
+          "subworkflow": null,
+          "moduleId": "travel-65d90d46f1",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "draft_travel_request"
+      ],
+      "terms": [
+        "travel",
+        "draft",
+        "draft_travel_request",
+        "request",
+        "use",
+        "only",
+        "explicit",
+        "requests",
+        "travel_workspace_open",
+        "workspace",
+        "open",
+        "state",
+        "ask",
+        "destination",
+        "dates",
+        "before",
+        "creating",
+        "never",
+        "book",
+        "flight",
+        "charge",
+        "card",
+        "approve",
+        "treat",
+        "applicant",
+        "location",
+        "saved",
+        "remains",
+        "distinct",
+        "approval",
+        "quoted",
+        "policy",
+        "example",
+        "not",
+        "user",
+        "instruction",
+        "all",
+        "fixture",
+        "illustrative",
+        "must",
+        "true",
+        "domain",
+        "version",
+        "keeps",
+        "guard",
+        "beside",
+        "consumer",
+        "even",
+        "when",
+        "other",
+        "files",
+        "already",
+        "repeat"
+      ]
+    },
+    {
+      "id": "R60",
+      "activeId": "R60",
+      "conditions": [],
+      "workflows": [
+        "travel-65d90d46f1"
+      ],
+      "assignments": [
+        {
+          "workflow": "travel",
+          "subworkflow": null,
+          "moduleId": "travel-65d90d46f1",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "draft_travel_request"
+      ],
+      "terms": [
+        "travel",
+        "draft",
+        "draft_travel_request",
+        "request",
+        "use",
+        "only",
+        "explicit",
+        "requests",
+        "travel_workspace_open",
+        "workspace",
+        "open",
+        "state",
+        "ask",
+        "destination",
+        "dates",
+        "before",
+        "creating",
+        "never",
+        "book",
+        "flight",
+        "charge",
+        "card",
+        "approve",
+        "treat",
+        "applicant",
+        "location",
+        "saved",
+        "remains",
+        "distinct",
+        "approval",
+        "quoted",
+        "policy",
+        "example",
+        "not",
+        "user",
+        "instruction",
+        "all",
+        "fixture",
+        "illustrative",
+        "must",
+        "true",
+        "domain",
+        "version",
+        "keeps",
+        "guard",
+        "beside",
+        "consumer",
+        "even",
+        "when",
+        "other",
+        "files",
+        "already",
+        "repeat"
+      ]
+    },
+    {
+      "id": "R61",
+      "activeId": "R61",
+      "conditions": [],
+      "workflows": [
+        "travel-65d90d46f1"
+      ],
+      "assignments": [
+        {
+          "workflow": "travel",
+          "subworkflow": null,
+          "moduleId": "travel-65d90d46f1",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "draft_travel_request"
+      ],
+      "terms": [
+        "travel",
+        "draft",
+        "draft_travel_request",
+        "request",
+        "use",
+        "only",
+        "explicit",
+        "requests",
+        "travel_workspace_open",
+        "workspace",
+        "open",
+        "state",
+        "ask",
+        "destination",
+        "dates",
+        "before",
+        "creating",
+        "never",
+        "book",
+        "flight",
+        "charge",
+        "card",
+        "approve",
+        "treat",
+        "applicant",
+        "location",
+        "saved",
+        "remains",
+        "distinct",
+        "approval",
+        "quoted",
+        "policy",
+        "example",
+        "not",
+        "user",
+        "instruction",
+        "all",
+        "fixture",
+        "illustrative",
+        "must",
+        "true",
+        "domain",
+        "version",
+        "keeps",
+        "guard",
+        "beside",
+        "consumer",
+        "even",
+        "when",
+        "other",
+        "files",
+        "already",
+        "repeat"
+      ]
+    },
+    {
+      "id": "R62",
+      "activeId": "R62",
+      "conditions": [],
+      "workflows": [
+        "travel-65d90d46f1"
+      ],
+      "assignments": [
+        {
+          "workflow": "travel",
+          "subworkflow": null,
+          "moduleId": "travel-65d90d46f1",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "draft_travel_request"
+      ],
+      "terms": [
+        "travel",
+        "draft",
+        "draft_travel_request",
+        "request",
+        "use",
+        "only",
+        "explicit",
+        "requests",
+        "travel_workspace_open",
+        "workspace",
+        "open",
+        "state",
+        "ask",
+        "destination",
+        "dates",
+        "before",
+        "creating",
+        "never",
+        "book",
+        "flight",
+        "charge",
+        "card",
+        "approve",
+        "treat",
+        "applicant",
+        "location",
+        "saved",
+        "remains",
+        "distinct",
+        "approval",
+        "quoted",
+        "policy",
+        "example",
+        "not",
+        "user",
+        "instruction",
+        "all",
+        "fixture",
+        "illustrative",
+        "must",
+        "true",
+        "domain",
+        "version",
+        "keeps",
+        "guard",
+        "beside",
+        "consumer",
+        "even",
+        "when",
+        "other",
+        "files",
+        "already",
+        "repeat"
+      ]
+    },
+    {
+      "id": "R63",
+      "activeId": "R63",
+      "conditions": [],
+      "workflows": [
+        "travel-65d90d46f1"
+      ],
+      "assignments": [
+        {
+          "workflow": "travel",
+          "subworkflow": null,
+          "moduleId": "travel-65d90d46f1",
+          "conditions": [],
+          "status": "proposed"
+        }
+      ],
+      "intents": [],
+      "terms": [
+        "travel",
+        "draft",
+        "draft_travel_request",
+        "request",
+        "use",
+        "only",
+        "explicit",
+        "requests",
+        "travel_workspace_open",
+        "workspace",
+        "open",
+        "state",
+        "ask",
+        "destination",
+        "dates",
+        "before",
+        "creating",
+        "never",
+        "book",
+        "flight",
+        "charge",
+        "card",
+        "approve",
+        "treat",
+        "applicant",
+        "location",
+        "saved",
+        "remains",
+        "distinct",
+        "approval",
+        "quoted",
+        "policy",
+        "example",
+        "not",
+        "user",
+        "instruction",
+        "all",
+        "fixture",
+        "illustrative",
+        "must",
+        "true",
+        "domain",
+        "version",
+        "keeps",
+        "guard",
+        "beside",
+        "consumer",
+        "even",
+        "when",
+        "other",
+        "files",
+        "already",
+        "repeat"
+      ]
+    },
+    {
+      "id": "R64",
+      "activeId": "R64",
+      "conditions": [
+        {
+          "field": "travel_workspace_open",
+          "op": "eq",
+          "value": true
+        }
+      ],
+      "workflows": [
+        "travel-65d90d46f1"
+      ],
+      "assignments": [
+        {
+          "workflow": "travel",
+          "subworkflow": null,
+          "moduleId": "travel-65d90d46f1",
+          "conditions": [
+            {
+              "field": "travel_workspace_open",
+              "op": "eq",
+              "value": true
+            }
+          ],
+          "status": "proposed"
+        }
+      ],
+      "intents": [
+        "draft_travel_request"
+      ],
+      "terms": [
+        "travel",
+        "draft",
+        "draft_travel_request",
+        "request",
+        "use",
+        "only",
+        "explicit",
+        "requests",
+        "travel_workspace_open",
+        "workspace",
+        "open",
+        "state",
+        "ask",
+        "destination",
+        "dates",
+        "before",
+        "creating",
+        "never",
+        "book",
+        "flight",
+        "charge",
+        "card",
+        "approve",
+        "treat",
+        "applicant",
+        "location",
+        "saved",
+        "remains",
+        "distinct",
+        "approval",
+        "quoted",
+        "policy",
+        "example",
+        "not",
+        "user",
+        "instruction",
+        "all",
+        "fixture",
+        "illustrative",
+        "must",
+        "true",
+        "domain",
+        "version",
+        "keeps",
+        "guard",
+        "beside",
+        "consumer",
+        "even",
+        "when",
+        "other",
+        "files",
+        "already",
+        "repeat"
+      ]
+    }
+  ],
+  "modules": {
+    "assets-9b1cf6e78d": [
+      "R28",
+      "R31",
+      "R36",
+      "R40"
+    ],
+    "attendance-2f11330aad": [
+      "R5",
+      "R10",
+      "R14",
+      "R17"
+    ],
+    "benefits-0ae897400e": [
+      "R4",
+      "R9",
+      "R13",
+      "R18"
+    ],
+    "candidate-information-c8b56ec30e": [
+      "R12",
+      "R29",
+      "R42",
+      "R55"
+    ],
+    "evaluation-39453b7a46": [
+      "R2",
+      "R8",
+      "R15",
+      "R25",
+      "R34",
+      "R38",
+      "R47",
+      "R51"
+    ],
+    "expenses-5430246a20": [
+      "R45",
+      "R49",
+      "R52",
+      "R57"
+    ],
+    "interview-474b260a93": [
+      "R7",
+      "R26",
+      "R39",
+      "R50"
+    ],
+    "leave-c7b9221e8e": [
+      "R11",
+      "R30",
+      "R43",
+      "R56"
+    ],
+    "payroll-3fe40e21d2": [
+      "R27",
+      "R32",
+      "R37",
+      "R41"
+    ],
+    "recruitment-cef5cdd19f": [
+      "R3",
+      "R16",
+      "R35",
+      "R46"
+    ],
+    "shared": [
+      "R1",
+      "R6",
+      "R19",
+      "R20",
+      "R21",
+      "R22",
+      "R23",
+      "R24",
+      "R33",
+      "R54"
+    ],
+    "travel-65d90d46f1": [
+      "R44",
+      "R48",
+      "R53",
+      "R58",
+      "R59",
+      "R60",
+      "R61",
+      "R62",
+      "R63",
+      "R64"
+    ]
+  },
+  "relations": [
+    {
+      "type": "applies_when",
+      "from": "R28",
+      "to": "R26",
+      "conditions": [
+        {
+          "field": "interview_workflow_phase",
+          "op": "eq",
+          "value": "awaiting_attendee_names"
+        }
+      ]
+    },
+    {
+      "type": "applies_when",
+      "from": "R31",
+      "to": "R26",
+      "conditions": [
+        {
+          "field": "interview_workflow_phase",
+          "op": "eq",
+          "value": "awaiting_attendee_names"
+        }
+      ]
+    },
+    {
+      "type": "overrides",
+      "from": "R50",
+      "to": "R46",
+      "conditions": []
+    },
+    {
+      "type": "requires",
+      "from": "R58",
+      "to": "R64",
+      "conditions": []
+    },
+    {
+      "type": "requires",
+      "from": "R59",
+      "to": "R64",
+      "conditions": []
+    }
+  ],
+  "ruleAliases": {},
+  "conflicts": [],
+  "textSource": "module-files-v1",
+  "moduleHashes": {
+    "assets-9b1cf6e78d": "769c7900f2456196f55c1bc60b6cf0247ca8e68e016a09ec48a8c6feca548e6a",
+    "attendance-2f11330aad": "fe911b840e76f8d152a3e39ec65f9736d1aa9eb2a592088d37d2236c99996bd1",
+    "benefits-0ae897400e": "54a0b7fcdfd246073459debdcd28a734924e77162a42836b04ca323c65db79a8",
+    "candidate-information-c8b56ec30e": "b46942cba8e616f8ad0c2b22eee36afaa758262b1bd471d38fa163c8591386f2",
+    "evaluation-39453b7a46": "ef622d490a3789d96454cafbc3a6fd21cebd857825cb5797dc75510070013d0e",
+    "expenses-5430246a20": "f8d87152cb65a040bf41b0b3e4ca5b4d049b44b0078d759901e8622723ba032b",
+    "interview-474b260a93": "afc954466464ecaefb57a724d83b92511f98fc5b4816f189b612d2651ebed6ed",
+    "leave-c7b9221e8e": "6b763a178488e540704984ec4822a1bb2b4f4e4f8b61f87e86c01fb5f40c91d3",
+    "payroll-3fe40e21d2": "c24eb87f6ae2b9c2df2d57879c436974d283bdc75fcd4f8b093fe86cffd01fa0",
+    "recruitment-cef5cdd19f": "f86d2a066d9cf5d3660ede98e9e96a665ff219b107fd576d2ac44a7923642b38",
+    "shared": "69c00b0eff827ec3453d60117d03d54bedbc64413908b572aa2354a077331139",
+    "travel-65d90d46f1": "709320dcef4750be88be5c6d2fb0001226692315b21bc801f7d4e009a92b1002"
+  }
+}

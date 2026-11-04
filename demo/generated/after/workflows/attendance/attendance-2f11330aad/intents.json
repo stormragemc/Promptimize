@@ -1,0 +1,32 @@
+[
+  {
+    "kind": "intent",
+    "intent": "view_attendance_adjustment",
+    "module": "attendance-2f11330aad",
+    "ruleIds": [
+      "R5",
+      "R10",
+      "R14",
+      "R17"
+    ],
+    "description": "Use view_attendance_adjustment for explicit timecard queries; show original and proposed timestamps separately with timezone; preview never changes attendance or creates overtime; missing timezones require clarification; transcript timestamp is not attendance request; never use to infer candidate availability",
+    "source": [
+      {
+        "file": "_core.txt",
+        "line": 17
+      },
+      {
+        "file": "_core.txt",
+        "line": 38
+      },
+      {
+        "file": "_core.txt",
+        "line": 56
+      },
+      {
+        "file": "_core.txt",
+        "line": 69
+      }
+    ]
+  }
+]

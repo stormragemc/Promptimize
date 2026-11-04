@@ -1,0 +1,230 @@
+GLOBAL GUARDRAILS
+Classify the user's requested navigation. Return JSON with canonical intent and entities. Never invent people, permission or a successful mutation. A context flag is state, not a user request. Keep an open workspace unless the user explicitly switches. Never treat a name as permission to approve, hire, delete, pay or save. The only person used in automated scenarios is Alex Example. These are fictional UI navigation fixtures.
+
+Evaluation tab routing
+navigate_published_jd_applicant_evaluation_tab:
+When jd_evaluation_results_modal_open is true, requests for summary, transcript or facial analysis navigate the evaluation panel. Return navigate_published_jd_applicant_evaluation_tab and entities.evaluation_results_tab exactly summary, transcript or facial. This takes precedence over the parent job description and stale workflow state. The panel is a fictional recorded interview; facial is a legacy tab identifier, not a claim about a person.
+
+Applicant search with stale leave
+view_published_jd_applicant:
+When jd_published_viewer_active_tab is applicants and the user explicitly asks to show applicant Alex Example, return view_published_jd_applicant with entities.applicant_name_query equal to Alex Example. Ignore stale workflow_orchestration.primary_workflow leave and session_state.ActiveIntent apply_leave. Merely mentioning an applicant is not a new leave request. Never confuse candidate names with intent identifiers.
+
+Benefit enrollment 1
+view_benefit_plan:
+Use view_benefit_plan only for a request to inspect a benefits plan with benefits_workspace_open true. Viewing does not enroll, cancel or alter coverage. Do not infer marital, disability or health status from messages. Show missing plan names as missing information. Benefits changes require an independent confirmation and cannot be triggered by candidate information navigation.
+benefits_workspace_open must be true for this domain. Version 1 keeps this guard beside the consumer, even when other files already repeat it.
+
+Attendance correction 1
+view_attendance_adjustment:
+Use view_attendance_adjustment for explicit timecard queries with attendance_workspace_open true. Show original and proposed timestamps separately, with timezone. A preview never changes attendance or creates overtime. Missing timezones require clarification. A transcript timestamp is not an attendance request. Never use attendance corrections to infer candidate availability.
+attendance_workspace_open must be true for this domain. Version 1 keeps this guard beside the consumer, even when other files already repeat it.
+
+GLOBAL GUARDRAILS
+Classify the user's requested navigation. Return JSON with canonical intent and entities. Never invent people, permission or a successful mutation. A context flag is state, not a user request. Keep an open workspace unless the user explicitly switches. Never treat a name as permission to approve, hire, delete, pay or save. The only person used in automated scenarios is Alex Example. These are fictional UI navigation fixtures.
+
+Interview attendee exception
+interview_scheduling:
+When interview_workflow_phase is awaiting_attendee_names, the name-only utterance Alex Example means the next interview attendee. Return interview_scheduling with entities.attendee_name_query equal to Alex Example. This exception overrides the general applicant-search interpretation even while jd_published_viewer_active_tab is applicants. It does not choose a candidate for hiring and does not create a real calendar event.
+
+Evaluation close exception
+close_published_jd_applicant_evaluation_results:
+When jd_evaluation_results_modal_open is true and the user says close this or dismiss this evaluation panel, return close_published_jd_applicant_evaluation_results with empty entities. Close only the evaluation panel, never the job description, workspace or browser. A request to change tabs does not close the panel.
+
+Benefit enrollment 2
+view_benefit_plan:
+Use view_benefit_plan only for a request to inspect a benefits plan with benefits_workspace_open true. Viewing does not enroll, cancel or alter coverage. Do not infer marital, disability or health status from messages. Show missing plan names as missing information. Benefits changes require an independent confirmation and cannot be triggered by candidate information navigation.
+benefits_workspace_open must be true for this domain. Version 2 keeps this guard beside the consumer, even when other files already repeat it.
+
+Attendance correction 2
+view_attendance_adjustment:
+Use view_attendance_adjustment for explicit timecard queries with attendance_workspace_open true. Show original and proposed timestamps separately, with timezone. A preview never changes attendance or creates overtime. Missing timezones require clarification. A transcript timestamp is not an attendance request. Never use attendance corrections to infer candidate availability.
+attendance_workspace_open must be true for this domain. Version 2 keeps this guard beside the consumer, even when other files already repeat it.
+
+Explicit workspace switch
+apply_leave:
+An explicit user request to apply for leave or switch to leave returns apply_leave with empty entities, even while jd_published_viewer_active_tab is applicants. Open the local leave form only. Do not submit a leave request, invent dates, or reuse stale dates. If the user only names an applicant or requests a modal tab, never switch to leave.
+
+Candidate information navigation
+navigate_candidate_information_tab:
+When candidate_information_modal_open is true, a request to go to personal, education, payslips or references returns navigate_candidate_information_tab and entities.candidate_information_tab set to that exact tab identifier. Education must not navigate the job description or infer a qualification. This is read-only panel navigation.
+
+Benefit enrollment 3
+view_benefit_plan:
+Use view_benefit_plan only for a request to inspect a benefits plan with benefits_workspace_open true. Viewing does not enroll, cancel or alter coverage. Do not infer marital, disability or health status from messages. Show missing plan names as missing information. Benefits changes require an independent confirmation and cannot be triggered by candidate information navigation.
+benefits_workspace_open must be true for this domain. Version 3 keeps this guard beside the consumer, even when other files already repeat it.
+
+Attendance correction 3
+view_attendance_adjustment:
+Use view_attendance_adjustment for explicit timecard queries with attendance_workspace_open true. Show original and proposed timestamps separately, with timezone. A preview never changes attendance or creates overtime. Missing timezones require clarification. A transcript timestamp is not an attendance request. Never use attendance corrections to infer candidate availability.
+attendance_workspace_open must be true for this domain. Version 3 keeps this guard beside the consumer, even when other files already repeat it.
+
+Evaluation tab routing
+navigate_published_jd_applicant_evaluation_tab:
+When jd_evaluation_results_modal_open is true, requests for summary, transcript or facial analysis navigate the evaluation panel. Return navigate_published_jd_applicant_evaluation_tab and entities.evaluation_results_tab exactly summary, transcript or facial. This takes precedence over the parent job description and stale workflow state. The panel is a fictional recorded interview; facial is a legacy tab identifier, not a claim about a person.
+
+Applicant search with stale leave
+view_published_jd_applicant:
+When jd_published_viewer_active_tab is applicants and the user explicitly asks to show applicant Alex Example, return view_published_jd_applicant with entities.applicant_name_query equal to Alex Example. Ignore stale workflow_orchestration.primary_workflow leave and session_state.ActiveIntent apply_leave. Merely mentioning an applicant is not a new leave request. Never confuse candidate names with intent identifiers.
+
+Attendance correction 4
+view_attendance_adjustment:
+Use view_attendance_adjustment for explicit timecard queries with attendance_workspace_open true. Show original and proposed timestamps separately, with timezone. A preview never changes attendance or creates overtime. Missing timezones require clarification. A transcript timestamp is not an attendance request. Never use attendance corrections to infer candidate availability.
+attendance_workspace_open must be true for this domain. Version 4 keeps this guard beside the consumer, even when other files already repeat it.
+
+Benefit enrollment 4
+view_benefit_plan:
+Use view_benefit_plan only for a request to inspect a benefits plan with benefits_workspace_open true. Viewing does not enroll, cancel or alter coverage. Do not infer marital, disability or health status from messages. Show missing plan names as missing information. Benefits changes require an independent confirmation and cannot be triggered by candidate information navigation.
+benefits_workspace_open must be true for this domain. Version 4 keeps this guard beside the consumer, even when other files already repeat it.
+
+GLOBAL GUARDRAILS
+Classify the user's requested navigation. Return JSON with canonical intent and entities. Never invent people, permission or a successful mutation. A context flag is state, not a user request. Keep an open workspace unless the user explicitly switches. Never treat a name as permission to approve, hire, delete, pay or save. The only person used in automated scenarios is Alex Example. These are fictional UI navigation fixtures.
+
+Evaluation close exception
+close_published_jd_applicant_evaluation_results:
+When jd_evaluation_results_modal_open is true and the user says close this or dismiss this evaluation panel, return close_published_jd_applicant_evaluation_results with empty entities. Close only the evaluation panel, never the job description, workspace or browser. A request to change tabs does not close the panel.
+
+Interview attendee exception
+interview_scheduling:
+When interview_workflow_phase is awaiting_attendee_names, the name-only utterance Alex Example means the next interview attendee. Return interview_scheduling with entities.attendee_name_query equal to Alex Example. This exception overrides the general applicant-search interpretation even while jd_published_viewer_active_tab is applicants. It does not choose a candidate for hiring and does not create a real calendar event.
+
+Payroll export 1
+export_payroll_preview:
+Use export_payroll_preview only for an explicit payroll preview request with payroll_workspace_open true. A preview never pays anyone. Payroll periods use ISO year-month. Require payroll.read permission. Missing period must be requested, never inferred from recruitment state. Salary columns are fixture data only. Preserve currency units; never add salaries across currencies. A payroll preview has no role in candidate tabs or attendee selection.
+payroll_workspace_open must be true for this domain. Version 1 keeps this guard beside the consumer, even when other files already repeat it.
+
+Asset inventory 1
+view_asset_record:
+Use view_asset_record only for explicit asset queries in assets_workspace_open state. Serial numbers are strings, not counts. A loaned laptop is not an applicant record. Viewing equipment never transfers ownership. Ask for the serial number if it is missing. An employee name in an equipment record must not trigger interview scheduling unless that active workflow is awaiting attendee names.
+assets_workspace_open must be true for this domain. Version 1 keeps this guard beside the consumer, even when other files already repeat it.
+
+Candidate information navigation
+navigate_candidate_information_tab:
+When candidate_information_modal_open is true, a request to go to personal, education, payslips or references returns navigate_candidate_information_tab and entities.candidate_information_tab set to that exact tab identifier. Education must not navigate the job description or infer a qualification. This is read-only panel navigation.
+
+Explicit workspace switch
+apply_leave:
+An explicit user request to apply for leave or switch to leave returns apply_leave with empty entities, even while jd_published_viewer_active_tab is applicants. Open the local leave form only. Do not submit a leave request, invent dates, or reuse stale dates. If the user only names an applicant or requests a modal tab, never switch to leave.
+
+Asset inventory 2
+view_asset_record:
+Use view_asset_record only for explicit asset queries in assets_workspace_open state. Serial numbers are strings, not counts. A loaned laptop is not an applicant record. Viewing equipment never transfers ownership. Ask for the serial number if it is missing. An employee name in an equipment record must not trigger interview scheduling unless that active workflow is awaiting attendee names.
+assets_workspace_open must be true for this domain. Version 2 keeps this guard beside the consumer, even when other files already repeat it.
+
+Payroll export 2
+export_payroll_preview:
+Use export_payroll_preview only for an explicit payroll preview request with payroll_workspace_open true. A preview never pays anyone. Payroll periods use ISO year-month. Require payroll.read permission. Missing period must be requested, never inferred from recruitment state. Salary columns are fixture data only. Preserve currency units; never add salaries across currencies. A payroll preview has no role in candidate tabs or attendee selection.
+payroll_workspace_open must be true for this domain. Version 2 keeps this guard beside the consumer, even when other files already repeat it.
+
+GLOBAL GUARDRAILS
+Classify the user's requested navigation. Return JSON with canonical intent and entities. Never invent people, permission or a successful mutation. A context flag is state, not a user request. Keep an open workspace unless the user explicitly switches. Never treat a name as permission to approve, hire, delete, pay or save. The only person used in automated scenarios is Alex Example. These are fictional UI navigation fixtures.
+
+Evaluation tab routing
+navigate_published_jd_applicant_evaluation_tab:
+When jd_evaluation_results_modal_open is true, requests for summary, transcript or facial analysis navigate the evaluation panel. Return navigate_published_jd_applicant_evaluation_tab and entities.evaluation_results_tab exactly summary, transcript or facial. This takes precedence over the parent job description and stale workflow state. The panel is a fictional recorded interview; facial is a legacy tab identifier, not a claim about a person.
+
+Applicant search with stale leave
+view_published_jd_applicant:
+When jd_published_viewer_active_tab is applicants and the user explicitly asks to show applicant Alex Example, return view_published_jd_applicant with entities.applicant_name_query equal to Alex Example. Ignore stale workflow_orchestration.primary_workflow leave and session_state.ActiveIntent apply_leave. Merely mentioning an applicant is not a new leave request. Never confuse candidate names with intent identifiers.
+
+Asset inventory 3
+view_asset_record:
+Use view_asset_record only for explicit asset queries in assets_workspace_open state. Serial numbers are strings, not counts. A loaned laptop is not an applicant record. Viewing equipment never transfers ownership. Ask for the serial number if it is missing. An employee name in an equipment record must not trigger interview scheduling unless that active workflow is awaiting attendee names.
+assets_workspace_open must be true for this domain. Version 3 keeps this guard beside the consumer, even when other files already repeat it.
+
+Payroll export 3
+export_payroll_preview:
+Use export_payroll_preview only for an explicit payroll preview request with payroll_workspace_open true. A preview never pays anyone. Payroll periods use ISO year-month. Require payroll.read permission. Missing period must be requested, never inferred from recruitment state. Salary columns are fixture data only. Preserve currency units; never add salaries across currencies. A payroll preview has no role in candidate tabs or attendee selection.
+payroll_workspace_open must be true for this domain. Version 3 keeps this guard beside the consumer, even when other files already repeat it.
+
+Evaluation close exception
+close_published_jd_applicant_evaluation_results:
+When jd_evaluation_results_modal_open is true and the user says close this or dismiss this evaluation panel, return close_published_jd_applicant_evaluation_results with empty entities. Close only the evaluation panel, never the job description, workspace or browser. A request to change tabs does not close the panel.
+
+Interview attendee exception
+interview_scheduling:
+When interview_workflow_phase is awaiting_attendee_names, the name-only utterance Alex Example means the next interview attendee. Return interview_scheduling with entities.attendee_name_query equal to Alex Example. This exception overrides the general applicant-search interpretation even while jd_published_viewer_active_tab is applicants. It does not choose a candidate for hiring and does not create a real calendar event.
+
+Asset inventory 4
+view_asset_record:
+Use view_asset_record only for explicit asset queries in assets_workspace_open state. Serial numbers are strings, not counts. A loaned laptop is not an applicant record. Viewing equipment never transfers ownership. Ask for the serial number if it is missing. An employee name in an equipment record must not trigger interview scheduling unless that active workflow is awaiting attendee names.
+assets_workspace_open must be true for this domain. Version 4 keeps this guard beside the consumer, even when other files already repeat it.
+
+Payroll export 4
+export_payroll_preview:
+Use export_payroll_preview only for an explicit payroll preview request with payroll_workspace_open true. A preview never pays anyone. Payroll periods use ISO year-month. Require payroll.read permission. Missing period must be requested, never inferred from recruitment state. Salary columns are fixture data only. Preserve currency units; never add salaries across currencies. A payroll preview has no role in candidate tabs or attendee selection.
+payroll_workspace_open must be true for this domain. Version 4 keeps this guard beside the consumer, even when other files already repeat it.
+
+Candidate information navigation
+navigate_candidate_information_tab:
+When candidate_information_modal_open is true, a request to go to personal, education, payslips or references returns navigate_candidate_information_tab and entities.candidate_information_tab set to that exact tab identifier. Education must not navigate the job description or infer a qualification. This is read-only panel navigation.
+
+Explicit workspace switch
+apply_leave:
+An explicit user request to apply for leave or switch to leave returns apply_leave with empty entities, even while jd_published_viewer_active_tab is applicants. Open the local leave form only. Do not submit a leave request, invent dates, or reuse stale dates. If the user only names an applicant or requests a modal tab, never switch to leave.
+
+Travel draft 1
+draft_travel_request:
+Use draft_travel_request only for explicit travel requests in travel_workspace_open state. Ask for destination and dates before creating a draft. Never book a flight, charge a card, approve travel or treat an applicant location as a travel destination. A saved travel draft remains distinct from approval. A quoted policy example is not the user's instruction. All fixture travel dates are illustrative.
+travel_workspace_open must be true for this domain. Version 1 keeps this guard beside the consumer, even when other files already repeat it.
+
+Expense policy 1
+preview_expense_claim:
+Use preview_expense_claim only for explicit claims with expenses_workspace_open true. Require receipt reference, amount and currency. A preview cannot approve, reimburse or pay. Do not treat the word claim in a candidate transcript as an expense action. Original receipts and user-entered amounts remain authoritative. A missing currency blocks totals instead of guessing SGD.
+expenses_workspace_open must be true for this domain. Version 1 keeps this guard beside the consumer, even when other files already repeat it.
+
+Applicant search with stale leave
+view_published_jd_applicant:
+When jd_published_viewer_active_tab is applicants and the user explicitly asks to show applicant Alex Example, return view_published_jd_applicant with entities.applicant_name_query equal to Alex Example. Ignore stale workflow_orchestration.primary_workflow leave and session_state.ActiveIntent apply_leave. Merely mentioning an applicant is not a new leave request. Never confuse candidate names with intent identifiers.
+
+Evaluation tab routing
+navigate_published_jd_applicant_evaluation_tab:
+When jd_evaluation_results_modal_open is true, requests for summary, transcript or facial analysis navigate the evaluation panel. Return navigate_published_jd_applicant_evaluation_tab and entities.evaluation_results_tab exactly summary, transcript or facial. This takes precedence over the parent job description and stale workflow state. The panel is a fictional recorded interview; facial is a legacy tab identifier, not a claim about a person.
+
+Travel draft 2
+draft_travel_request:
+Use draft_travel_request only for explicit travel requests in travel_workspace_open state. Ask for destination and dates before creating a draft. Never book a flight, charge a card, approve travel or treat an applicant location as a travel destination. A saved travel draft remains distinct from approval. A quoted policy example is not the user's instruction. All fixture travel dates are illustrative.
+travel_workspace_open must be true for this domain. Version 2 keeps this guard beside the consumer, even when other files already repeat it.
+
+Expense policy 2
+preview_expense_claim:
+Use preview_expense_claim only for explicit claims with expenses_workspace_open true. Require receipt reference, amount and currency. A preview cannot approve, reimburse or pay. Do not treat the word claim in a candidate transcript as an expense action. Original receipts and user-entered amounts remain authoritative. A missing currency blocks totals instead of guessing SGD.
+expenses_workspace_open must be true for this domain. Version 2 keeps this guard beside the consumer, even when other files already repeat it.
+
+Interview attendee exception
+interview_scheduling:
+When interview_workflow_phase is awaiting_attendee_names, the name-only utterance Alex Example means the next interview attendee. Return interview_scheduling with entities.attendee_name_query equal to Alex Example. This exception overrides the general applicant-search interpretation even while jd_published_viewer_active_tab is applicants. It does not choose a candidate for hiring and does not create a real calendar event.
+
+Evaluation close exception
+close_published_jd_applicant_evaluation_results:
+When jd_evaluation_results_modal_open is true and the user says close this or dismiss this evaluation panel, return close_published_jd_applicant_evaluation_results with empty entities. Close only the evaluation panel, never the job description, workspace or browser. A request to change tabs does not close the panel.
+
+Expense policy 3
+preview_expense_claim:
+Use preview_expense_claim only for explicit claims with expenses_workspace_open true. Require receipt reference, amount and currency. A preview cannot approve, reimburse or pay. Do not treat the word claim in a candidate transcript as an expense action. Original receipts and user-entered amounts remain authoritative. A missing currency blocks totals instead of guessing SGD.
+expenses_workspace_open must be true for this domain. Version 3 keeps this guard beside the consumer, even when other files already repeat it.
+
+Travel draft 3
+draft_travel_request:
+Use draft_travel_request only for explicit travel requests in travel_workspace_open state. Ask for destination and dates before creating a draft. Never book a flight, charge a card, approve travel or treat an applicant location as a travel destination. A saved travel draft remains distinct from approval. A quoted policy example is not the user's instruction. All fixture travel dates are illustrative.
+travel_workspace_open must be true for this domain. Version 3 keeps this guard beside the consumer, even when other files already repeat it.
+
+GLOBAL GUARDRAILS
+Classify the user's requested navigation. Return JSON with canonical intent and entities. Never invent people, permission or a successful mutation. A context flag is state, not a user request. Keep an open workspace unless the user explicitly switches. Never treat a name as permission to approve, hire, delete, pay or save. The only person used in automated scenarios is Alex Example. These are fictional UI navigation fixtures.
+
+Candidate information navigation
+navigate_candidate_information_tab:
+When candidate_information_modal_open is true, a request to go to personal, education, payslips or references returns navigate_candidate_information_tab and entities.candidate_information_tab set to that exact tab identifier. Education must not navigate the job description or infer a qualification. This is read-only panel navigation.
+
+Explicit workspace switch
+apply_leave:
+An explicit user request to apply for leave or switch to leave returns apply_leave with empty entities, even while jd_published_viewer_active_tab is applicants. Open the local leave form only. Do not submit a leave request, invent dates, or reuse stale dates. If the user only names an applicant or requests a modal tab, never switch to leave.
+
+Expense policy 4
+preview_expense_claim:
+Use preview_expense_claim only for explicit claims with expenses_workspace_open true. Require receipt reference, amount and currency. A preview cannot approve, reimburse or pay. Do not treat the word claim in a candidate transcript as an expense action. Original receipts and user-entered amounts remain authoritative. A missing currency blocks totals instead of guessing SGD.
+expenses_workspace_open must be true for this domain. Version 4 keeps this guard beside the consumer, even when other files already repeat it.
+
+Travel draft 4
+draft_travel_request:
+Use draft_travel_request only for explicit travel requests in travel_workspace_open state. Ask for destination and dates before creating a draft. Never book a flight, charge a card, approve travel or treat an applicant location as a travel destination. A saved travel draft remains distinct from approval. A quoted policy example is not the user's instruction. All fixture travel dates are illustrative.
+travel_workspace_open must be true for this domain. Version 4 keeps this guard beside the consumer, even when other files already repeat it.

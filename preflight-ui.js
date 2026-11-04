@@ -10,6 +10,7 @@
  return {esc,budgetMarkup};
 });
 if(typeof window!=='undefined'){
+ const reviewedFlow=typeof evaluationPlan!=='undefined';
  let setupErrors=new Set(),preflightBusy=false;
  const byId=id=>document.getElementById(id);
  const esc=PromptimizePreflight.esc;
@@ -19,6 +20,7 @@ if(typeof window!=='undefined'){
   if(results.length&&!preserveResults){iterationHistory.push({kind:'test-setup-revision',analysis:structuredClone(analysis),results:structuredClone(results),frozen:approved});results=[];byId('results').innerHTML='';document.querySelectorAll('[data-open-case]').forEach(b=>b.disabled=true);byId('live-view').disabled=true;refreshSimulation();}
  }
  window.renderTestSetups=function(){
+  if(reviewedFlow)return;
   setupErrors.clear();
   if(!comparisonBudgetEdited)comparisonBudget=analysis?.adapter==='jd-viewer-v1'?100000:30000;
   byId('comparison-budget').value=comparisonBudget;
@@ -47,6 +49,7 @@ if(typeof window!=='undefined'){
  byId('budget').addEventListener('click',event=>{
   const button=event.target.closest('button');if(!button)return;
   if(button.dataset.testSetup){
+   if(reviewedFlow){if(evaluationPlan?.approved)byId('edit-test-plan').onclick();const index=evaluationPlan?.cases.findIndex(c=>c.id===button.dataset.testSetup);const input=document.querySelector('[data-edit-case="'+index+'"]');if(input){input.closest('.evaluation-case').open=true;input.closest('details').open=true;input.focus();input.scrollIntoView({block:'center'});}return;}
    const row=byId(button.dataset.testSetup),details=row?.querySelector('.test-setup');if(!details)return;
    details.open=true;const input=details.querySelector(button.dataset.testStage==='followup'?'[data-stage="followup"]':'[data-stage="initial"]');
    input?.focus();details.scrollIntoView({block:'center',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
@@ -56,7 +59,7 @@ if(typeof window!=='undefined'){
    if(approved)byId('new-proposal').click();show('review');
   }
  });
- byId('preflight').onclick=async()=>{
+ if(!reviewedFlow)byId('preflight').onclick=async()=>{
   if(!analysis||setupErrors.size||comparisonsRunning)return;
   const snapshot=analysis;preflightBusy=true;lockTestSetups(true);byId('preflight').disabled=true;byId('run-tests').disabled=true;byId('budget').textContent='Checking all case states and counting their requests with Meta. No test responses are being generated…';
   try{

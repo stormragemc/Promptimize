@@ -1,0 +1,278 @@
+[
+  {
+    "kind": "intent",
+    "intent": "navigate_published_jd_applicant_evaluation_tab",
+    "description": "navigate_published_jd_applicant_evaluation_tab:\nWhen jd_evaluation_results_modal_open is true, requests for summary, transcript or facial analysis navigate the evaluation panel. Return navigate_published_jd_applicant_evaluation_tab and entities.evaluation_results_tab exactly summary, transcript or facial. This takes precedence over the parent job description and stale workflow state. The panel is a fictional recorded interview; facial is a legacy tab identifier, not a claim about a person.",
+    "source": [
+      {
+        "file": "_core.txt",
+        "line": 5
+      },
+      {
+        "file": "_core.txt",
+        "line": 62
+      },
+      {
+        "file": "_core_jd_request_context.txt",
+        "line": 41
+      },
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 24
+      }
+    ]
+  },
+  {
+    "kind": "intent",
+    "intent": "view_published_jd_applicant",
+    "description": "view_published_jd_applicant:\nWhen jd_published_viewer_active_tab is applicants and the user explicitly asks to show applicant Alex Example, return view_published_jd_applicant with entities.applicant_name_query equal to Alex Example. Ignore stale workflow_orchestration.primary_workflow leave and session_state.ActiveIntent apply_leave. Merely mentioning an applicant is not a new leave request. Never confuse candidate names with intent identifiers.",
+    "source": [
+      {
+        "file": "_core.txt",
+        "line": 9
+      },
+      {
+        "file": "_core.txt",
+        "line": 66
+      },
+      {
+        "file": "_core_jd_request_context.txt",
+        "line": 45
+      },
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 20
+      }
+    ]
+  },
+  {
+    "kind": "intent",
+    "intent": "view_benefit_plan",
+    "description": "view_benefit_plan:\nUse view_benefit_plan only for a request to inspect a benefits plan with benefits_workspace_open true. Viewing does not enroll, cancel or alter coverage. Do not infer marital, disability or health status from messages. Show missing plan names as missing information. Benefits changes require an independent confirmation and cannot be triggered by candidate information navigation.\nbenefits_workspace_open must be true for this domain. Version 1 keeps this guard beside the consumer",
+    "source": [
+      {
+        "file": "_core.txt",
+        "line": 13
+      },
+      {
+        "file": "_core.txt",
+        "line": 34
+      },
+      {
+        "file": "_core.txt",
+        "line": 52
+      },
+      {
+        "file": "_core.txt",
+        "line": 75
+      }
+    ]
+  },
+  {
+    "kind": "intent",
+    "intent": "view_attendance_adjustment",
+    "description": "view_attendance_adjustment:\nUse view_attendance_adjustment for explicit timecard queries with attendance_workspace_open true. Show original and proposed timestamps separately, with timezone. A preview never changes attendance or creates overtime. Missing timezones require clarification. A transcript timestamp is not an attendance request. Never use attendance corrections to infer candidate availability.\nattendance_workspace_open must be true for this domain. Version 1 keeps this guard beside the",
+    "source": [
+      {
+        "file": "_core.txt",
+        "line": 18
+      },
+      {
+        "file": "_core.txt",
+        "line": 39
+      },
+      {
+        "file": "_core.txt",
+        "line": 57
+      },
+      {
+        "file": "_core.txt",
+        "line": 70
+      }
+    ]
+  },
+  {
+    "kind": "intent",
+    "intent": "interview_scheduling",
+    "description": "interview_scheduling:\nWhen interview_workflow_phase is awaiting_attendee_names, the name-only utterance Alex Example means the next interview attendee. Return interview_scheduling with entities.attendee_name_query equal to Alex Example. This exception overrides the general applicant-search interpretation even while jd_published_viewer_active_tab is applicants. It does not choose a candidate for hiring and does not create a real calendar event.",
+    "source": [
+      {
+        "file": "_core.txt",
+        "line": 26
+      },
+      {
+        "file": "_core_jd_request_context.txt",
+        "line": 6
+      },
+      {
+        "file": "_core_jd_request_context.txt",
+        "line": 63
+      },
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 38
+      }
+    ]
+  },
+  {
+    "kind": "intent",
+    "intent": "close_published_jd_applicant_evaluation_results",
+    "description": "close_published_jd_applicant_evaluation_results:\nWhen jd_evaluation_results_modal_open is true and the user says close this or dismiss this evaluation panel, return close_published_jd_applicant_evaluation_results with empty entities. Close only the evaluation panel, never the job description, workspace or browser. A request to change tabs does not close the panel.",
+    "source": [
+      {
+        "file": "_core.txt",
+        "line": 30
+      },
+      {
+        "file": "_core_jd_request_context.txt",
+        "line": 2
+      },
+      {
+        "file": "_core_jd_request_context.txt",
+        "line": 59
+      },
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 42
+      }
+    ]
+  },
+  {
+    "kind": "intent",
+    "intent": "apply_leave",
+    "description": "apply_leave:\nAn explicit user request to apply for leave or switch to leave returns apply_leave with empty entities, even while jd_published_viewer_active_tab is applicants. Open the local leave form only. Do not submit a leave request, invent dates, or reuse stale dates. If the user only names an applicant or requests a modal tab, never switch to leave.",
+    "source": [
+      {
+        "file": "_core.txt",
+        "line": 44
+      },
+      {
+        "file": "_core_jd_request_context.txt",
+        "line": 24
+      },
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 6
+      },
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 63
+      }
+    ]
+  },
+  {
+    "kind": "intent",
+    "intent": "navigate_candidate_information_tab",
+    "description": "navigate_candidate_information_tab:\nWhen candidate_information_modal_open is true, a request to go to personal, education, payslips or references returns navigate_candidate_information_tab and entities.candidate_information_tab set to that exact tab identifier. Education must not navigate the job description or infer a qualification. This is read-only panel navigation.",
+    "source": [
+      {
+        "file": "_core.txt",
+        "line": 48
+      },
+      {
+        "file": "_core_jd_request_context.txt",
+        "line": 20
+      },
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 2
+      },
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 59
+      }
+    ]
+  },
+  {
+    "kind": "intent",
+    "intent": "export_payroll_preview",
+    "description": "export_payroll_preview:\nUse export_payroll_preview only for an explicit payroll preview request with payroll_workspace_open true. A preview never pays anyone. Payroll periods use ISO year-month. Require payroll.read permission. Missing period must be requested, never inferred from recruitment state. Salary columns are fixture data only. Preserve currency units; never add salaries across currencies. A payroll preview has no role in candidate tabs or attendee selection.\npayroll_workspace_open must",
+    "source": [
+      {
+        "file": "_core_jd_request_context.txt",
+        "line": 10
+      },
+      {
+        "file": "_core_jd_request_context.txt",
+        "line": 33
+      },
+      {
+        "file": "_core_jd_request_context.txt",
+        "line": 54
+      },
+      {
+        "file": "_core_jd_request_context.txt",
+        "line": 72
+      }
+    ]
+  },
+  {
+    "kind": "intent",
+    "intent": "view_asset_record",
+    "description": "view_asset_record:\nUse view_asset_record only for explicit asset queries in assets_workspace_open state. Serial numbers are strings, not counts. A loaned laptop is not an applicant record. Viewing equipment never transfers ownership. Ask for the serial number if it is missing. An employee name in an equipment record must not trigger interview scheduling unless that active workflow is awaiting attendee names.\nassets_workspace_open must be true for this domain. Version 1 keeps this guard beside th",
+    "source": [
+      {
+        "file": "_core_jd_request_context.txt",
+        "line": 15
+      },
+      {
+        "file": "_core_jd_request_context.txt",
+        "line": 28
+      },
+      {
+        "file": "_core_jd_request_context.txt",
+        "line": 49
+      },
+      {
+        "file": "_core_jd_request_context.txt",
+        "line": 67
+      }
+    ]
+  },
+  {
+    "kind": "intent",
+    "intent": "draft_travel_request",
+    "description": "draft_travel_request:\nUse draft_travel_request only for explicit travel requests in travel_workspace_open state. Ask for destination and dates before creating a draft. Never book a flight, charge a card, approve travel or treat an applicant location as a travel destination. A saved travel draft remains distinct from approval. A quoted policy example is not the user's instruction. All fixture travel dates are illustrative.\ntravel_workspace_open must be true for this domain. Version 1 keeps this g",
+    "source": [
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 10
+      },
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 28
+      },
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 51
+      },
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 72
+      }
+    ]
+  },
+  {
+    "kind": "intent",
+    "intent": "preview_expense_claim",
+    "description": "preview_expense_claim:\nUse preview_expense_claim only for explicit claims with expenses_workspace_open true. Require receipt reference, amount and currency. A preview cannot approve, reimburse or pay. Do not treat the word claim in a candidate transcript as an expense action. Original receipts and user-entered amounts remain authoritative. A missing currency blocks totals instead of guessing SGD.\nexpenses_workspace_open must be true for this domain. Version 1 keeps this guard beside the consumer",
+    "source": [
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 15
+      },
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 33
+      },
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 46
+      },
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 67
+      }
+    ]
+  }
+]

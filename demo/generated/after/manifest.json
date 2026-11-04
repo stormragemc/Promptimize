@@ -1,0 +1,38 @@
+{
+  "moduleHashes": {
+    "assets-9b1cf6e78d": "769c7900f2456196f55c1bc60b6cf0247ca8e68e016a09ec48a8c6feca548e6a",
+    "attendance-2f11330aad": "fe911b840e76f8d152a3e39ec65f9736d1aa9eb2a592088d37d2236c99996bd1",
+    "benefits-0ae897400e": "54a0b7fcdfd246073459debdcd28a734924e77162a42836b04ca323c65db79a8",
+    "candidate-information-c8b56ec30e": "b46942cba8e616f8ad0c2b22eee36afaa758262b1bd471d38fa163c8591386f2",
+    "evaluation-39453b7a46": "ef622d490a3789d96454cafbc3a6fd21cebd857825cb5797dc75510070013d0e",
+    "expenses-5430246a20": "f8d87152cb65a040bf41b0b3e4ca5b4d049b44b0078d759901e8622723ba032b",
+    "interview-474b260a93": "afc954466464ecaefb57a724d83b92511f98fc5b4816f189b612d2651ebed6ed",
+    "leave-c7b9221e8e": "6b763a178488e540704984ec4822a1bb2b4f4e4f8b61f87e86c01fb5f40c91d3",
+    "payroll-3fe40e21d2": "c24eb87f6ae2b9c2df2d57879c436974d283bdc75fcd4f8b093fe86cffd01fa0",
+    "recruitment-cef5cdd19f": "f86d2a066d9cf5d3660ede98e9e96a665ff219b107fd576d2ac44a7923642b38",
+    "shared": "69c00b0eff827ec3453d60117d03d54bedbc64413908b572aa2354a077331139",
+    "travel-65d90d46f1": "709320dcef4750be88be5c6d2fb0001226692315b21bc801f7d4e009a92b1002"
+  },
+  "format": "promptimize.v2",
+  "adapter": "jd-viewer-v1",
+  "snapshot": "9507b75ec99ca4b91575528af0f511b9332c66059038977487bdd32440d26027",
+  "modules": {
+    "assets-9b1cf6e78d": "workflows/assets/assets-9b1cf6e78d/prompt.md",
+    "attendance-2f11330aad": "workflows/attendance/attendance-2f11330aad/prompt.md",
+    "benefits-0ae897400e": "workflows/benefits/benefits-0ae897400e/prompt.md",
+    "candidate-information-c8b56ec30e": "workflows/candidate-information/candidate-information-c8b56ec30e/prompt.md",
+    "evaluation-39453b7a46": "workflows/evaluation/evaluation-39453b7a46/prompt.md",
+    "expenses-5430246a20": "workflows/expenses/expenses-5430246a20/prompt.md",
+    "interview-474b260a93": "workflows/interview/interview-474b260a93/prompt.md",
+    "leave-c7b9221e8e": "workflows/leave/leave-c7b9221e8e/prompt.md",
+    "payroll-3fe40e21d2": "workflows/payroll/payroll-3fe40e21d2/prompt.md",
+    "recruitment-cef5cdd19f": "workflows/recruitment/recruitment-cef5cdd19f/prompt.md",
+    "shared": "workflows/shared/prompt.md",
+    "travel-65d90d46f1": "workflows/travel/travel-65d90d46f1/prompt.md"
+  },
+  "semantic": {
+    "algorithm": "semantic-v1",
+    "schemaVersion": 1,
+    "runtime": "runtime.json"
+  }
+}

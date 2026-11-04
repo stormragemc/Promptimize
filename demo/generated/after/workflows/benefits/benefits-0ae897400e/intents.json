@@ -1,0 +1,32 @@
+[
+  {
+    "kind": "intent",
+    "intent": "view_benefit_plan",
+    "module": "benefits-0ae897400e",
+    "ruleIds": [
+      "R4",
+      "R9",
+      "R13",
+      "R18"
+    ],
+    "description": "Use view_benefit_plan only for request to inspect a benefits plan; viewing does not enroll, cancel or alter coverage; do not infer marital, disability or health status; show missing plan names as missing information",
+    "source": [
+      {
+        "file": "_core.txt",
+        "line": 12
+      },
+      {
+        "file": "_core.txt",
+        "line": 33
+      },
+      {
+        "file": "_core.txt",
+        "line": 51
+      },
+      {
+        "file": "_core.txt",
+        "line": 74
+      }
+    ]
+  }
+]

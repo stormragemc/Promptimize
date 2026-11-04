@@ -1,0 +1,32 @@
+[
+  {
+    "kind": "intent",
+    "intent": "view_published_jd_applicant",
+    "module": "recruitment-cef5cdd19f",
+    "ruleIds": [
+      "R3",
+      "R16",
+      "R35",
+      "R46"
+    ],
+    "description": "When published JD viewer active tab is applicants and user explicitly asks to show applicant Alex Example, return view_published_jd_applicant with entities.applicant_name_query equal to Alex Example; merely mentioning applicant is not a new leave request and candidate names are not intent identifiers",
+    "source": [
+      {
+        "file": "_core.txt",
+        "line": 8
+      },
+      {
+        "file": "_core.txt",
+        "line": 65
+      },
+      {
+        "file": "_core_jd_request_context.txt",
+        "line": 44
+      },
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 19
+      }
+    ]
+  }
+]

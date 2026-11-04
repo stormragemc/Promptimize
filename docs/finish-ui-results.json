@@ -1,0 +1,26 @@
+{
+  "baseCommit": "f69f3add3300130baa5d9576329f7018a0fe3949",
+  "branch": "feature/regression-measurements",
+  "testsPassed": 52,
+  "legacySuitesPassed": [
+    "test-contract.cjs",
+    "test-jd-adapter.cjs",
+    "test-review.cjs",
+    "test-simulation.cjs"
+  ],
+  "mode": "Provider/functional DOM doubles, no live model or screenshot claims",
+  "checks": [
+    "Finish navigation only after complete bound pairs",
+    "Failed checks retain honest review messaging",
+    "Download actions reuse existing exports",
+    "Upload another clears project/session and returns to top",
+    "Insufficient budget opens blocking warning before generation",
+    "Near-limit reserve distinguishes fitting headroom from a shortfall",
+    "Budget dismissal cannot unlock an insufficient run",
+    "Celebration requires both passing current results and matching final state",
+    "Earlier trace frames and dismissed banners do not celebrate",
+    "Trace replay and UI overlays make no model calls"
+  ],
+  "html": "No duplicate static IDs",
+  "stage6": "Not started; awaiting owner UI instructions"
+}

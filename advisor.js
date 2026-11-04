@@ -38,6 +38,7 @@ function resetAdvisor(){
 }
 function contextEdited(){ad('context-approved').checked=false;contextReadSequence++;invalidateAdvisor();ad('context-status').textContent=analysis?'Context changed. Review it, approve it, then analyze the promptbase again.':'Review the context and approve it before analyzing.';}
 async function advisorPost(body,path='/api/architecture'){
+ if(typeof post==='function')return post(path,body);
  const response=await fetch(path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
  const result=await response.json().catch(()=>({error:'The server returned an invalid response.'}));
  if(!response.ok){const e=Error(result.error||'Request failed.');e.data=result;throw e;}return result;

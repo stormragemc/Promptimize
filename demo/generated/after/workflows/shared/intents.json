@@ -1,0 +1,62 @@
+[
+  {
+    "kind": "shared-policy",
+    "module": "shared",
+    "appliesTo": "all-workflows",
+    "ruleIds": [
+      "R1",
+      "R6",
+      "R19",
+      "R20",
+      "R21",
+      "R22",
+      "R23",
+      "R24",
+      "R33",
+      "R54"
+    ],
+    "description": "Instructions loaded by the reviewed routing manifest; this module declares no standalone executable intent.",
+    "source": [
+      {
+        "file": "_core.txt",
+        "line": 1
+      },
+      {
+        "file": "_core.txt",
+        "line": 22
+      },
+      {
+        "file": "_core.txt",
+        "line": 79
+      },
+      {
+        "file": "_core.txt",
+        "line": 79
+      },
+      {
+        "file": "_core.txt",
+        "line": 79
+      },
+      {
+        "file": "_core.txt",
+        "line": 79
+      },
+      {
+        "file": "_core.txt",
+        "line": 79
+      },
+      {
+        "file": "_core.txt",
+        "line": 79
+      },
+      {
+        "file": "_core_jd_request_context.txt",
+        "line": 37
+      },
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 55
+      }
+    ]
+  }
+]

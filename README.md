@@ -2,7 +2,15 @@
 
 An evidence-first prototype for refactoring overloaded promptbases. It shows source-linked rules, constructs a workflow-scoped candidate using the exact quoted wording, and compares bounded synthetic cases against the original context. Muse Spark 1.3 extracts the rule candidates and runs the cases.
 
-## Build stages (Singapore time, 4 November 2026)
+## Current integrated release
+
+Includes the reviewed evaluation flow, animations, guided tutorial and finish page from PR #2, plus context uploads, architecture proposals and comparison recovery from PR #3. The sections below retain the implementation history; earlier limits may describe an older stage.
+
+Current review path: **Input → Audit → Proposal → Review → Candidate → Tests → Downloads**. In Tests, build and approve the case plan, check the token allowance, then run comparisons. Missing context links back to the case editor; budget checks never generate test responses. Context documents and architecture suggestions remain optional, separately reviewed actions.
+
+Run `node --test tests/backend/*.test.cjs`, the four root `test-*.cjs` scripts, and `node tests/check-build.cjs`. These checks use mocked providers or local files and spend no Meta credits. See [integration verification](docs/INTEGRATED_RELEASE.md).
+
+## Original build stages (Singapore time, 4 November 2026)
 
 | Stage | Target | Review checkpoint |
 | --- | --- | --- |
@@ -91,7 +99,7 @@ Readiness colors and enabled buttons mark the required sequence. Frozen candidat
 
 ## Context documents and architecture proposals
 
-On `feature/context-architecture-advisor`, upload context documents separately from promptbase files, review Meta’s source-linked interpretation, and request a project-specific implementation plan. Download Meta-generated starter scripts, an exact flow diagram, and transparent scenario estimates. Optional Muse Wonder design review and Muse Image illustration are explicit paid actions. No generated code is executed and no frozen candidate is patched.
+Upload context documents separately from promptbase files, review Meta’s source-linked interpretation, and request a project-specific implementation plan. Download Meta-generated starter scripts, an exact flow diagram, and transparent scenario estimates. Optional Muse Wonder design review and Muse Image illustration are explicit paid actions. No generated code is executed and no frozen candidate is patched.
 
 See [the workflow, forecast assumptions and review guide](docs/CONTEXT_ARCHITECTURE_ADVISOR.md). Demo recordings remain deferred.
 
@@ -99,3 +107,17 @@ See [the workflow, forecast assumptions and review guide](docs/CONTEXT_ARCHITECT
 ## Blocked comparison recovery
 
 The review branch now checks the exact six sample cases and lookup follow-ups, supplies visible state to both versions, and reports the actual missing field or source conflict. Partial input counts are not treated as savings. See [comparison setup and recovery](docs/PREFLIGHT_RECOVERY.md).
+## Stages 4 and 5: reviewed regression and complete measurements
+
+The follow-up workbench supports separately approved test plans, optional holdout cases, 1–3 repetitions, per-rule evidence links, bounded per-attempt reservations and complete reported call receipts. It includes optimizer overhead, explicit retries, incomplete-call usage, cache/reasoning details, latency and pricing-based cost estimates. Unknown cost evidence or behavioral failures prevent an adoption recommendation.
+
+See [the stages 4–5 review guide](docs/STAGES_4_5_REVIEW.md) for the exact UI sequence, supported simulation boundaries, API fields and remaining live acceptance gate. Stage 6 motion and the Forma showcase are available for owner review; production remains unchanged.
+
+
+## Forma before/after showcase
+
+Open `/demo/?version=before`, `/demo/?version=after`, or `/demo/bench.html`. Both apps use identical UI/backend code; only the original versus frozen exported prompt package/loader differs. The fictional fixture has 26,871 source characters; Promptimize generated 12 modules with meaningful intent/policy registries. No private UIC source is included.
+
+A real Vercel cloud benchmark completed 32 calls: 16/16 checks passed in each version, all paired final states matched, total task tokens fell 58.5% and estimated task cost fell 51.9%. Median model latency was 1.100s before and 1.156s after, so no speedup is claimed. The complete evidence, prior failed attempts and method are in `demo/generated/`; see [the showcase guide](docs/FORMA_SHOWCASE.md).
+
+Normal preview builds run only `node demo/package-apps.cjs` to produce both standalone ZIPs and the exported promptbase ZIP. Live cloud benchmarking requires the separately explicit `node demo/cloud-benchmark.cjs --run-live` command and the existing server-side Meta credential. No browser or laptop is required for it. Do not run it automatically on normal deploys.

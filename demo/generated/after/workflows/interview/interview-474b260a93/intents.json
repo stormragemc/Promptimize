@@ -1,0 +1,32 @@
+[
+  {
+    "kind": "intent",
+    "intent": "interview_scheduling",
+    "module": "interview-474b260a93",
+    "ruleIds": [
+      "R7",
+      "R26",
+      "R39",
+      "R50"
+    ],
+    "description": "when interview_workflow_phase is awaiting_attendee_names, the name-only utterance Alex Example means the next interview attendee and returns interview_scheduling with entities.attendee_name_query equal to Alex Example",
+    "source": [
+      {
+        "file": "_core.txt",
+        "line": 25
+      },
+      {
+        "file": "_core_jd_request_context.txt",
+        "line": 5
+      },
+      {
+        "file": "_core_jd_request_context.txt",
+        "line": 62
+      },
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 37
+      }
+    ]
+  }
+]

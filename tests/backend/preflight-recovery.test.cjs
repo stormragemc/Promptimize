@@ -51,6 +51,30 @@ test('default sample facts resolve all six cases and the lookup follow-ups witho
  assert.equal(JSON.stringify(a),frozen);
  assert.equal(r.data.reservedTokens,r.data.baselineInitialInput+r.data.candidateInitialInput+14*750);
 });
+test('reviewed plans retain missing-state recovery, repetition reserves and exact follow-up requests',async t=>{
+ const {createPlan,approvePlan}=require('../../api/_evaluation');
+ const reviewedPreflight=require('../../api/evaluation-preflight'),reviewedRun=require('../../api/evaluation-case');
+ const a=await analysis(),original=JSON.stringify(a),requests=provider(t,[sample.LOOKUP,{action:'eligible'}]);
+ const draft=createPlan(files,a);draft.repetitions=2;draft.budgetLimit=100000;
+ const broken=structuredClone(draft);broken.cases.find(c=>c.id==='T04').followupContext={};
+ const blocked=await post(reviewedPreflight,{files,analysis:a,plan:approvePlan(broken,files,a)});
+ assert.equal(blocked.data.canRun,false);assert.equal(blocked.data.reservedTokens,null);
+ assert(blocked.data.blockers.some(b=>b.caseId==='T04'&&b.stage==='followup'&&b.field==='event_status'));
+ assert(requests.every(x=>x.url.endsWith('/input_tokens')));
+ requests.length=0;
+ const plan=approvePlan(draft,files,a),sized=await post(reviewedPreflight,{files,analysis:a,plan});
+ assert.equal(sized.data.canRun,true,JSON.stringify(sized.data.blockers));
+ assert.equal(sized.data.generationCallsMax,28);assert.equal(requests.length,14);
+ assert.equal(sized.data.reservedTokens,sized.data.requests.reduce((n,r)=>n+r.reservedTokens*2,0));
+ const counted=requests.map(x=>JSON.stringify(x.body.input));
+ const result=await post(reviewedRun,{files,analysis:a,plan,caseId:'T04',mode:'candidate',repetition:1,remainingTokens:plan.budgetLimit});
+ assert.equal(result.data.pass,true);assert.equal(result.data.measurement.calls.length,2);
+ const generations=requests.filter(x=>x.url.endsWith('/chat/completions'));
+ assert.equal(generations.length,2);assert(generations.every(x=>counted.includes(JSON.stringify(x.body.messages))));
+ assert(!generations[0].body.messages[0].content.includes('the refund is eligible regardless'));
+ assert(generations[1].body.messages[0].content.includes('the refund is eligible regardless'));
+ assert.equal(JSON.stringify(a),original);
+});
 test('the full suite allowance can be explicitly increased while the per-call guard stays enforced',async t=>{
  const a=await analysis();provider(t);
  const blocked=await post(preflight,{files,analysis:a,comparisonBudget:1000});assert.equal(blocked.data.canRun,false);assert(blocked.data.blockers.some(b=>b.code==='suite-budget-exceeded'));

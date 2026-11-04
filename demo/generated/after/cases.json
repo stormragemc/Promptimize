@@ -1,0 +1,243 @@
+[
+  {
+    "id": "U01",
+    "intent": "jd-viewer",
+    "name": "Evaluation tab takes precedence",
+    "query": "Show me the facial analysis",
+    "context": {
+      "jd_viewer_open": true,
+      "jd_viewer_status": "PUBLISHED",
+      "jd_evaluation_results_modal_open": true
+    },
+    "expected": "navigate_published_jd_applicant_evaluation_tab",
+    "field": "evaluation_results_tab",
+    "value": "facial",
+    "evidence": [
+      {
+        "rule": "R2",
+        "file": "_core.txt",
+        "line": 4
+      },
+      {
+        "rule": "R15",
+        "file": "_core.txt",
+        "line": 61
+      },
+      {
+        "rule": "R34",
+        "file": "_core_jd_request_context.txt",
+        "line": 40
+      },
+      {
+        "rule": "R47",
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 23
+      }
+    ]
+  },
+  {
+    "id": "U02",
+    "intent": "jd-viewer",
+    "name": "Close the evaluation modal only",
+    "query": "Close this",
+    "context": {
+      "jd_viewer_open": true,
+      "jd_viewer_status": "PUBLISHED",
+      "jd_evaluation_results_modal_open": true
+    },
+    "expected": "close_published_jd_applicant_evaluation_results",
+    "evidence": [
+      {
+        "rule": "R8",
+        "file": "_core.txt",
+        "line": 29
+      },
+      {
+        "rule": "R25",
+        "file": "_core_jd_request_context.txt",
+        "line": 1
+      },
+      {
+        "rule": "R38",
+        "file": "_core_jd_request_context.txt",
+        "line": 58
+      },
+      {
+        "rule": "R51",
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 41
+      }
+    ]
+  },
+  {
+    "id": "U03",
+    "intent": "jd-viewer",
+    "name": "Candidate information tab",
+    "query": "Go to education",
+    "context": {
+      "jd_viewer_open": true,
+      "jd_viewer_status": "PUBLISHED",
+      "candidate_information_modal_open": true
+    },
+    "expected": "navigate_candidate_information_tab",
+    "field": "candidate_information_tab",
+    "value": "education",
+    "evidence": [
+      {
+        "rule": "R12",
+        "file": "_core.txt",
+        "line": 47
+      },
+      {
+        "rule": "R29",
+        "file": "_core_jd_request_context.txt",
+        "line": 19
+      },
+      {
+        "rule": "R42",
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 1
+      },
+      {
+        "rule": "R55",
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 58
+      }
+    ]
+  },
+  {
+    "id": "U04",
+    "intent": "jd-viewer",
+    "name": "Applicant selection overrides stale leave",
+    "query": "Show me applicant Alex Example",
+    "context": {
+      "jd_viewer_open": true,
+      "jd_viewer_status": "PUBLISHED",
+      "jd_published_viewer_active_tab": "applicants",
+      "entity_domain_hint": "candidate",
+      "workflow_orchestration": {
+        "primary_workflow": "leave",
+        "phase": "collecting"
+      },
+      "session_state": {
+        "ActiveIntent": "apply_leave"
+      }
+    },
+    "expected": "view_published_jd_applicant",
+    "field": "applicant_name_query",
+    "value": "Alex Example",
+    "evidence": [
+      {
+        "rule": "R3",
+        "file": "_core.txt",
+        "line": 8
+      },
+      {
+        "rule": "R16",
+        "file": "_core.txt",
+        "line": 65
+      },
+      {
+        "rule": "R35",
+        "file": "_core_jd_request_context.txt",
+        "line": 44
+      },
+      {
+        "rule": "R46",
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 19
+      }
+    ]
+  },
+  {
+    "id": "U05",
+    "intent": "jd-viewer",
+    "name": "Interview attendee exception",
+    "query": "Alex Example",
+    "context": {
+      "jd_viewer_open": true,
+      "jd_viewer_status": "PUBLISHED",
+      "jd_published_viewer_active_tab": "applicants",
+      "interview_workflow_phase": "awaiting_attendee_names"
+    },
+    "expected": "interview_scheduling",
+    "field": "attendee_name_query",
+    "value": "Alex Example",
+    "evidence": [
+      {
+        "rule": "R7",
+        "file": "_core.txt",
+        "line": 25
+      },
+      {
+        "rule": "R26",
+        "file": "_core_jd_request_context.txt",
+        "line": 5
+      },
+      {
+        "rule": "R39",
+        "file": "_core_jd_request_context.txt",
+        "line": 62
+      },
+      {
+        "rule": "R50",
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 37
+      }
+    ]
+  },
+  {
+    "id": "U06",
+    "intent": "jd-viewer",
+    "name": "Explicit leave switch",
+    "query": "I want to apply for leave",
+    "context": {
+      "jd_viewer_open": true,
+      "jd_viewer_status": "PUBLISHED",
+      "jd_published_viewer_active_tab": "applicants"
+    },
+    "expected": "apply_leave",
+    "evidence": [
+      {
+        "rule": "R3",
+        "file": "_core.txt",
+        "line": 8
+      },
+      {
+        "rule": "R11",
+        "file": "_core.txt",
+        "line": 43
+      },
+      {
+        "rule": "R16",
+        "file": "_core.txt",
+        "line": 65
+      },
+      {
+        "rule": "R30",
+        "file": "_core_jd_request_context.txt",
+        "line": 23
+      },
+      {
+        "rule": "R35",
+        "file": "_core_jd_request_context.txt",
+        "line": 44
+      },
+      {
+        "rule": "R43",
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 5
+      },
+      {
+        "rule": "R46",
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 19
+      },
+      {
+        "rule": "R56",
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 62
+      }
+    ]
+  }
+]
