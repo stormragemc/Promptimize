@@ -1,0 +1,75 @@
+{
+  "files": [
+    {
+      "name": "station/safety.md",
+      "content": "# Safety 🌒\n\n## Wind interlock\n\n- Keep the dome closed at sustained wind of 35 km/h or more.\n  - Exception: the duty technician may run a latch test during maintenance, but the dome must stay closed.\n\n## Confirmation\n\n- Confirm the selected telescope before slewing.\n  - A confirmation expires after 30 seconds and does not carry to a different telescope.\n\n## Safety status\n\n- Record the station status after the inspection.\n"
+    },
+    {
+      "name": "station/target-console.md",
+      "content": "# Night desk\n\n## Target selection\n\n- Select the matching observation target when an operator supplies a name and `deskPhase` is `target-selection`. Return `select_target`.\n\n## Shift roster\n\n- Select the matching duty technician when an operator supplies a name while `deskPhase` is `roster-collection`. Return `select_technician`.\n  - Do not select an observation target in this phase.\n\n## Safety gate\n\n- Confirm the selected telescope before slewing.\n"
+    },
+    {
+      "name": "station/accessibility.txt",
+      "content": "# Public visit desk\n\n## Telescope operator\n\n- Before moving a telescope, obtain confirmation for that particular telescope.\n\n## Visitor badge\n\n- Before issuing a badge, obtain confirmation of the visitor's name.\n\n## Safety notice\n\n- Tell visitors when the dome is closed.\n\n## Visit status\n\n- Record the station status after the inspection.\n"
+    },
+    {
+      "name": "station/assembly.py",
+      "content": "def assemble_observatory(mode):\n    if mode == 'roster':\n        return ['target-console.md']\n    return ['safety.md', 'target-console.md']\n"
+    }
+  ],
+  "projectContext": {
+    "schemaVersion": 1,
+    "projectId": "fictional-kestrel-observatory",
+    "version": "night-shift-1",
+    "status": "approved",
+    "purpose": "Route requests for a fictional observatory night shift.",
+    "actors": [
+      "operator",
+      "duty technician",
+      "visitor"
+    ],
+    "glossary": [
+      {
+        "term": "slew",
+        "meaning": "move the telescope",
+        "authority": "user-approved"
+      }
+    ],
+    "stateFields": [
+      "deskPhase",
+      "domeState"
+    ],
+    "invariants": [
+      {
+        "id": "wind-gate",
+        "text": "The dome must stay closed above the documented wind threshold.",
+        "authority": "user-approved"
+      }
+    ],
+    "workflowHints": [
+      "observing",
+      "shift-staffing",
+      "public-visits"
+    ],
+    "references": [
+      {
+        "id": "ref-night-log",
+        "title": "Night log",
+        "text": "The synthetic observatory runs night and public-visit shifts.",
+        "authority": "user-approved"
+      }
+    ]
+  },
+  "promptContext": [
+    {
+      "sourceFile": "station/target-console.md",
+      "purpose": "Interpret name-only inputs using the current desk phase.",
+      "caller": "assemble_observatory",
+      "supportedIntents": [
+        "select_target",
+        "select_technician"
+      ],
+      "authority": "user-approved"
+    }
+  ]
+}

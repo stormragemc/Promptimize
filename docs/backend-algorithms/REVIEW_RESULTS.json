@@ -1,0 +1,107 @@
+{
+  "reviewDate": "2026-11-04",
+  "reviewedBase": "f1766b87c259c9db5960a535db2dfa1425bb7769",
+  "runtime": {
+    "node": "v24.22.1",
+    "python": "Python 3.12.14"
+  },
+  "backendTests": {
+    "passed": 35,
+    "failed": 0,
+    "provider": "test doubles only",
+    "rawOutput": "test-results.tap"
+  },
+  "legacySuites": [
+    {
+      "file": "test-contract.cjs",
+      "passed": true
+    },
+    {
+      "file": "test-jd-adapter.cjs",
+      "passed": true
+    },
+    {
+      "file": "test-review.cjs",
+      "passed": true
+    },
+    {
+      "file": "test-simulation.cjs",
+      "passed": true
+    }
+  ],
+  "frontend": {
+    "app.js": {
+      "unchanged": true,
+      "sha256": "e9adc598f60896f119f32a40d26a09d92786bf64d752ebf2a11c8b8ae6055a46"
+    },
+    "index.html": {
+      "unchanged": true,
+      "sha256": "bb59959251abb221a80d6787f6d3c4d283a0bb2459aa5f40a54f7f0b597614af"
+    },
+    "styles.css": {
+      "unchanged": true,
+      "sha256": "fb37c6fe1ff2cd39b0eea5a7e1199901799febc9fbe139b7552725b9537965d8"
+    }
+  },
+  "syntheticExamples": [
+    {
+      "evaluation": "mock",
+      "contextIncluded": false,
+      "snapshot": "358817a4e356bf5293873847aeb79337f8ebb3c030e17a732c8a89223acbe5f3",
+      "model": "muse-spark-1.3",
+      "elapsedMs": 38,
+      "rules": 16,
+      "modules": 7,
+      "relations": 2,
+      "pendingRemovals": 1,
+      "reviewItems": 0,
+      "usage": {
+        "prompt_tokens": 136,
+        "completion_tokens": 52,
+        "total_tokens": 188,
+        "completion_tokens_details": {
+          "reasoning_tokens": 20
+        }
+      }
+    },
+    {
+      "evaluation": "mock",
+      "contextIncluded": true,
+      "snapshot": "28efd0444b82259544039dac0b4c28b5ed40c461f081d5af588aaf92885d4ba8",
+      "model": "muse-spark-1.3",
+      "elapsedMs": 49,
+      "rules": 16,
+      "modules": 7,
+      "relations": 2,
+      "pendingRemovals": 1,
+      "reviewItems": 0,
+      "usage": {
+        "prompt_tokens": 136,
+        "completion_tokens": 52,
+        "total_tokens": 188,
+        "completion_tokens_details": {
+          "reasoning_tokens": 20
+        }
+      }
+    }
+  ],
+  "uicStructural": {
+    "sourceFiles": 3,
+    "sourceCodeUnits": 43394,
+    "providerCalls": 0,
+    "semanticRules": 3,
+    "semanticModules": 1,
+    "retention": "All source retained because extraction calls were disabled",
+    "accuracyMeasured": false,
+    "tokenSavingsMeasured": false
+  },
+  "liveMeta": {
+    "verified": false,
+    "reason": "No local Meta credential; authenticated protected Preview POST unavailable to this agent",
+    "accuracy": null,
+    "latency": null,
+    "tokenSavings": null,
+    "optimizerBreakEven": null
+  },
+  "mergeStatus": "Draft for owner review. No merge or production promotion."
+}
