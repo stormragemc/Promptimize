@@ -7,7 +7,7 @@ const DEFAULT_LIMITS = Object.freeze({
   batchChars: 8000, maxCalls: 10, maxReservedTokens: 80000, topK: 3, maxPairs: 24
 });
 const EXTRACTION = { max: 6000, effort: 'minimal' };
-const COMPARISON = { max: 3000, effort: 'medium' };
+const COMPARISON = { max: 6000, effort: 'low' };
 const MAX_RULES_PER_BATCH = 32;
 const RELATIONS = new Set(['requires', 'overrides', 'applies_when']);
 const COMPARISONS = new Set(['equivalent', 'overlap', 'contradiction', 'exception', 'override', 'unrelated']);

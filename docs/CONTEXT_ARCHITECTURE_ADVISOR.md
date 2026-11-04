@@ -39,7 +39,7 @@ The forecast excludes user/tool/message envelopes, generated and reasoning outpu
 
 ## Models and spending
 
-- Context extraction: `muse-spark-1.3`, low reasoning, 4,000 output-token cap.
+- Context extraction: `muse-spark-1.3`, minimal reasoning, 6,000 output-token cap.
 - Design proposal: Spark by default; optional `muse-wonder-1.0`, low reasoning, 6,500 output-token cap. Auto selects Wonder at 80 or more source rules, otherwise Spark. This is an explicit, inspectable complexity heuristic, not evidence that Wonder improves a particular project.
 - Per-pass allowance: default 24,000 tokens; valid range 1,000–40,000. Meta's input-token endpoint sizes the complete design/extraction request before generation; a pass is refused if input plus capped output exceeds the allowance.
 - No automatic retry or automatic model escalation on failure. The model choice applies only to the advisor, not every task in the user's assistant.
@@ -65,3 +65,5 @@ The first cloud check completed real context and design calls, but semantic extr
 No recordings were created. Browser inspection was unavailable in this session; UI state checks use DOM doubles, and the owner should inspect the real preview before merging.
 
 The second live check showed the old extraction cap was being consumed mostly by reasoning (3,042 of 3,800 output tokens), leaving an incomplete structured response. That failed attempt and its usage are retained in `advisor-live-second.json`. Extraction now uses minimal reasoning with a 6,000-token output cap; full literal state paths are checked rather than accepting only their final field name. The overall analysis call/reservation limits remain in force. This is a new proposal implementation, not an automatic repair of a frozen candidate.
+
+The third check completed source extraction (25 retained rule records across eight modules), but optional comparisons hit their old reasoning caps. Those receipts are retained in `advisor-live-third.json`. Comparisons now use low reasoning with a 6,000-token cap. Context-document extraction uses minimal reasoning with the same cap. Model outputs remain proposals requiring source validation and human approval; reducing reasoning is not a claim of better accuracy.

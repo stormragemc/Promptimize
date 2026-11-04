@@ -20,7 +20,7 @@ function contextPayload(){
 }
 function advisorBeforeAnalyze(){
  if(advisorBusy)throw Error('Wait for the current context or architecture pass to finish.');
- if(contextDocuments.length&&!contextFacts.length)throw Error('Read the uploaded context with Meta, or remove those files before analyzing.');
+ if(contextDocuments.length&&!contextFacts.length&&!contextReceipt)throw Error('Read the uploaded context with Meta, or remove those files before analyzing.');
  const payload=contextPayload();
  if(payload.projectContext&&!ad('context-approved').checked)throw Error('Review and approve project context before analyzing the promptbase.');
  if(ad('context-approved').checked&&!payload.projectContext)throw Error('Describe the project or read context files first.');
@@ -99,6 +99,7 @@ function renderAdvisor(){
  if(!ad('advisor-generate'))return;
  if(projectionSnapshot!==analysis?.sha256){ad('advisor-projection').innerHTML='';projectionSnapshot=null;}
  if(architectureReport&&architectureReport.snapshot!==analysis?.sha256){architectureReport=null;advisorSequence++;}
+ const incomplete=analysis?.semantic?.calls?.filter(c=>!['completed','cached'].includes(c.status)).length||0;
  const context=contextPayload(),fresh=analyzedContext===JSON.stringify(context);
  const ready=!!analysis&&!!context.projectContext&&ad('context-approved').checked&&fresh&&!advisorBusy;
  ad('advisor-generate').disabled=!ready;ad('advisor-generate').classList.toggle('ready-action',ready);
@@ -109,7 +110,7 @@ function renderAdvisor(){
  if(!analysis)ad('advisor-status').textContent='Analyze a promptbase to inspect architecture options.';
  else if(!context.projectContext||!ad('context-approved').checked)ad('advisor-status').textContent='Add and approve project context in Input, then analyze again to request a tailored plan.';
  else if(!fresh)ad('advisor-status').textContent='Context changed. Analyze the promptbase again before requesting a plan.';
- else if(!architectureReport&&!advisorBusy)ad('advisor-status').textContent='Ready for one bounded Meta design pass. This creates suggestions without editing your candidate.';
+ else if(!architectureReport&&!advisorBusy)ad('advisor-status').textContent=incomplete?`${incomplete} source-analysis passes were incomplete. Original text was retained; architecture suggestions remain provisional.`:'Ready for one bounded Meta design pass. This creates suggestions without editing your candidate.';
 }
 ad('advisor-generate').addEventListener('click',async()=>{
  const seq=++advisorSequence,body=advisorBody('generate');setAdvisorBusy(true);ad('advisor-generate').textContent='Designing the implementation…';ad('advisor-status').textContent='Meta is checking which techniques fit, what already exists, and how to integrate the proposed changes.';

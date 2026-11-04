@@ -10,7 +10,7 @@ async function main(){
   const draft=await extractContext({contextFiles:[{name:'context/project.md',content:'This fictional observatory assistant routes telescope operators, duty technicians and public visitors. Telescope operations must respect the documented wind threshold. Names entered during roster collection refer to technicians, not observation targets. The request context includes deskPhase and domeState. The existing prompts contain the exact action names and safety policies.'}],promptFiles:fixture.files.map(f=>f.name),budget:16000});
   report.context=draft;report.receipts.push({stage:'context',...draft.receipt});
   const ctx=factsToContext(draft.facts,'Route a fictional observatory assistant without losing safety constraints.',true);
-  const analysis=await proposeSemantic(fixture.files,{...ctx},{limits:{maxCalls:4,maxReservedTokens:40000}});
+  const analysis=await proposeSemantic(fixture.files,{...ctx},{limits:{maxCalls:6,maxReservedTokens:60000}});
   report.analysis={snapshot:analysis.sha256,rules:analysis.rules.length,modules:Object.keys(analysis.modules),semantic:true,calls:analysis.semantic.calls};
   report.receipts.push(...analysis.semantic.calls.map(x=>({stage:'semantic-analysis',...x})));
   if(analysis.semantic.calls.some(c=>c.status!=='completed'&&c.status!=='cached'))throw Error('Semantic analysis did not complete; conservative source retention is not a successful optimization.');
