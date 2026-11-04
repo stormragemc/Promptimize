@@ -20,10 +20,10 @@ function contextPayload(){
 }
 function advisorBeforeAnalyze(){
  if(advisorBusy)throw Error('Wait for the current context or architecture pass to finish.');
- if(contextDocuments.length&&!contextFacts.length&&!contextReceipt)throw Error('Read the uploaded context with Meta, or remove those files before analyzing.');
+ if(!ad('context-approved').checked)return {};
+ if(contextDocuments.length&&!contextFacts.length&&!contextReceipt)throw Error('Read the uploaded context with Meta before including it, or uncheck the approval to analyze without context.');
  const payload=contextPayload();
- if(payload.projectContext&&!ad('context-approved').checked)throw Error('Review and approve project context before analyzing the promptbase.');
- if(ad('context-approved').checked&&!payload.projectContext)throw Error('Describe the project or read context files first.');
+ if(!payload.projectContext)throw Error('Describe the project or read context files before including context.');
  return payload;
 }
 function advisorAnalyzed(payload=contextPayload()){analyzedContext=JSON.stringify(payload);projectionSnapshot=null;ad('advisor-projection').innerHTML='';architectureReport=null;advisorSequence++;}
@@ -32,11 +32,11 @@ function resetAdvisor(){
  contextReadSequence++;advisorSequence++;contextDocuments=[];contextFacts=[];contextReceipt=null;architectureReport=null;analyzedContext=null;advisorBusy=false;
  if(!ad('project-purpose'))return;
  projectionSnapshot=null;ad('advisor-projection').innerHTML='';
- ad('project-purpose').value='';ad('context-approved').checked=false;ad('context-facts').innerHTML='';ad('context-file-list').innerHTML='';ad('context-status').textContent='Optional. Context files explain the project; they are kept separate from the promptbase.';
+ ad('project-purpose').value='';ad('context-approved').checked=false;ad('context-facts').innerHTML='';ad('context-file-list').innerHTML='';ad('context-status').textContent='You can analyze with the promptbase alone. Approve context to include it.';
  ad('context-files').value='';ad('context-folder').value='';ad('read-context').disabled=true;
  renderAdvisor();
 }
-function contextEdited(){ad('context-approved').checked=false;contextReadSequence++;invalidateAdvisor();ad('context-status').textContent=analysis?'Context changed. Review it, approve it, then analyze the promptbase again.':'Review the context and approve it before analyzing.';}
+function contextEdited(){ad('context-approved').checked=false;contextReadSequence++;invalidateAdvisor();ad('context-status').textContent='Context is a draft. Approve it to include it in the next analysis.';}
 async function advisorPost(body,path='/api/architecture'){
  if(typeof post==='function')return post(path,body);
  const response=await fetch(path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
@@ -56,7 +56,7 @@ async function receiveContext(event){
   if(seq!==contextReadSequence)return;
   contextDocuments=next;contextFacts=[];contextReceipt=null;ad('context-approved').checked=false;ad('context-facts').innerHTML='';
   ad('context-file-list').innerHTML=next.map(f=>`<span class="chip">${adEscape(f.name)}</span>`).join('');
-  ad('context-status').textContent=`${next.length} context files ready.${all.length>eligible.length?` ${all.length-eligible.length} unsupported or hidden files skipped.`:''} Read them with Meta, then review its interpretation.`;
+  ad('context-status').textContent=`${next.length} context files ready.${all.length>eligible.length?` ${all.length-eligible.length} unsupported or hidden files skipped.`:''} To include them, read them with Meta and approve its interpretation.`;
   ad('read-context').disabled=false;invalidateAdvisor();
  }catch{ad('context-status').textContent='A context file could not be read. Choose the files again.';}
 }
@@ -74,7 +74,7 @@ function setAdvisorBusy(busy){
 }
 ad('context-files').addEventListener('change',receiveContext);ad('context-folder').addEventListener('change',receiveContext);
 ad('project-purpose').addEventListener('input',contextEdited);
-ad('context-approved').addEventListener('change',()=>{invalidateAdvisor();ad('context-status').textContent=ad('context-approved').checked?'Context approved. Analyze the promptbase to apply it.':'Context is a draft until you approve it.';});
+ad('context-approved').addEventListener('change',()=>{invalidateAdvisor();ad('context-status').textContent=ad('context-approved').checked?'Context approved. Analyze the promptbase to apply it.':'The next analysis will use the promptbase alone.';});
 ad('clear-context').addEventListener('click',()=>{resetAdvisor();ad('context-status').textContent='Context cleared. Analyze again if the previous candidate used this context.';});
 ad('read-context').addEventListener('click',async()=>{
  const seq=++contextReadSequence;setAdvisorBusy(true);ad('read-context').textContent='Reading context…';ad('context-status').textContent='Meta is identifying the project, workflows and exceptions. Original source quotes will remain visible.';
