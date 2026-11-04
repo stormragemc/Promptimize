@@ -164,7 +164,7 @@ test('semantic event route preserves its bounded lookup trace', async t => {
   assert.equal(response.data.usage.total_tokens, 24);
   const generations = calls.filter(call => call.url.endsWith('/chat/completions'));
   assert.equal(generations.length, 2);
-  const planned = semanticCase(eventFiles, analysis, { mode: 'candidate', utterance: scenario.query, intent: scenario.intent });
+  const planned = semanticCase(eventFiles, analysis, { mode: 'candidate', utterance: scenario.query, intent: scenario.intent, executionContext:require('../../sample-contract').CASES.find(c=>c.id===scenario.id).context });
   assert.deepEqual(generations[0].body.messages, planned.messages);
 });
 

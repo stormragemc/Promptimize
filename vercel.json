@@ -1,0 +1,26 @@
+{
+  "functions": {
+    "api/analyze.js": {
+      "maxDuration": 120
+    },
+    "api/context.js": {
+      "maxDuration": 90
+    },
+    "api/architecture.js": {
+      "maxDuration": 90
+    },
+    "api/architecture-image.js": {
+      "maxDuration": 100
+    },
+    "api/preflight.js": {
+      "maxDuration": 90
+    },
+    "api/evaluation-preflight.js": {
+      "maxDuration": 90
+    },
+    "api/evaluation-case.js": {
+      "maxDuration": 90
+    }
+  },
+  "buildCommand": "node tests/check-build.cjs"
+}

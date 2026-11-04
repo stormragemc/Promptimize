@@ -1,0 +1,273 @@
+{
+  "packageHash": "2e5e157a218dc37f8e3c667d15bb951aaea5af6a805765634cd064e44567c2a3",
+  "checks": [
+    {
+      "caseId": "U01",
+      "beforeCharacters": 27078,
+      "afterCharacters": 11857,
+      "modules": [
+        "evaluation-39453b7a46",
+        "interview-474b260a93",
+        "recruitment-cef5cdd19f",
+        "shared"
+      ],
+      "ruleIds": [
+        "R1",
+        "R2",
+        "R3",
+        "R6",
+        "R8",
+        "R15",
+        "R16",
+        "R19",
+        "R20",
+        "R21",
+        "R22",
+        "R23",
+        "R24",
+        "R25",
+        "R33",
+        "R34",
+        "R35",
+        "R38",
+        "R46",
+        "R47",
+        "R50",
+        "R51",
+        "R54"
+      ],
+      "fallbacks": []
+    },
+    {
+      "caseId": "U02",
+      "beforeCharacters": 27078,
+      "afterCharacters": 11857,
+      "modules": [
+        "evaluation-39453b7a46",
+        "interview-474b260a93",
+        "recruitment-cef5cdd19f",
+        "shared"
+      ],
+      "ruleIds": [
+        "R1",
+        "R2",
+        "R3",
+        "R6",
+        "R8",
+        "R15",
+        "R16",
+        "R19",
+        "R20",
+        "R21",
+        "R22",
+        "R23",
+        "R24",
+        "R25",
+        "R33",
+        "R34",
+        "R35",
+        "R38",
+        "R46",
+        "R47",
+        "R50",
+        "R51",
+        "R54"
+      ],
+      "fallbacks": []
+    },
+    {
+      "caseId": "U03",
+      "beforeCharacters": 27078,
+      "afterCharacters": 9817,
+      "modules": [
+        "candidate-information-c8b56ec30e",
+        "interview-474b260a93",
+        "recruitment-cef5cdd19f",
+        "shared"
+      ],
+      "ruleIds": [
+        "R1",
+        "R3",
+        "R6",
+        "R12",
+        "R16",
+        "R19",
+        "R20",
+        "R21",
+        "R22",
+        "R23",
+        "R24",
+        "R29",
+        "R33",
+        "R35",
+        "R42",
+        "R46",
+        "R50",
+        "R54",
+        "R55"
+      ],
+      "fallbacks": []
+    },
+    {
+      "caseId": "U04",
+      "beforeCharacters": 27078,
+      "afterCharacters": 9729,
+      "modules": [
+        "interview-474b260a93",
+        "leave-c7b9221e8e",
+        "recruitment-cef5cdd19f",
+        "shared"
+      ],
+      "ruleIds": [
+        "R1",
+        "R3",
+        "R6",
+        "R11",
+        "R16",
+        "R19",
+        "R20",
+        "R21",
+        "R22",
+        "R23",
+        "R24",
+        "R30",
+        "R33",
+        "R35",
+        "R43",
+        "R46",
+        "R50",
+        "R54",
+        "R56"
+      ],
+      "fallbacks": []
+    },
+    {
+      "caseId": "U05",
+      "beforeCharacters": 27078,
+      "afterCharacters": 9625,
+      "modules": [
+        "interview-474b260a93",
+        "recruitment-cef5cdd19f",
+        "shared"
+      ],
+      "ruleIds": [
+        "R1",
+        "R3",
+        "R6",
+        "R7",
+        "R16",
+        "R19",
+        "R20",
+        "R21",
+        "R22",
+        "R23",
+        "R24",
+        "R26",
+        "R33",
+        "R35",
+        "R39",
+        "R46",
+        "R50",
+        "R54"
+      ],
+      "fallbacks": []
+    },
+    {
+      "caseId": "U06",
+      "beforeCharacters": 27078,
+      "afterCharacters": 9729,
+      "modules": [
+        "interview-474b260a93",
+        "leave-c7b9221e8e",
+        "recruitment-cef5cdd19f",
+        "shared"
+      ],
+      "ruleIds": [
+        "R1",
+        "R3",
+        "R6",
+        "R11",
+        "R16",
+        "R19",
+        "R20",
+        "R21",
+        "R22",
+        "R23",
+        "R24",
+        "R30",
+        "R33",
+        "R35",
+        "R43",
+        "R46",
+        "R50",
+        "R54",
+        "R56"
+      ],
+      "fallbacks": []
+    },
+    {
+      "caseId": "F07",
+      "beforeCharacters": 27078,
+      "afterCharacters": 9625,
+      "modules": [
+        "interview-474b260a93",
+        "recruitment-cef5cdd19f",
+        "shared"
+      ],
+      "ruleIds": [
+        "R1",
+        "R3",
+        "R6",
+        "R7",
+        "R16",
+        "R19",
+        "R20",
+        "R21",
+        "R22",
+        "R23",
+        "R24",
+        "R26",
+        "R33",
+        "R35",
+        "R39",
+        "R46",
+        "R50",
+        "R54"
+      ],
+      "fallbacks": []
+    },
+    {
+      "caseId": "F08",
+      "beforeCharacters": 27078,
+      "afterCharacters": 9729,
+      "modules": [
+        "interview-474b260a93",
+        "leave-c7b9221e8e",
+        "recruitment-cef5cdd19f",
+        "shared"
+      ],
+      "ruleIds": [
+        "R1",
+        "R3",
+        "R6",
+        "R11",
+        "R16",
+        "R19",
+        "R20",
+        "R21",
+        "R22",
+        "R23",
+        "R24",
+        "R30",
+        "R33",
+        "R35",
+        "R43",
+        "R46",
+        "R50",
+        "R54",
+        "R56"
+      ],
+      "fallbacks": []
+    }
+  ]
+}

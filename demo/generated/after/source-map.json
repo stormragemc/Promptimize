@@ -1,0 +1,1282 @@
+[
+  {
+    "id": "R1",
+    "file": "_core.txt",
+    "line": 1,
+    "sources": [
+      {
+        "id": "S-6715f132b195ab0c295ed573",
+        "file": "_core.txt",
+        "line": 1,
+        "endLine": 3,
+        "start": 0,
+        "end": 449,
+        "sha256": "a332b834346fb3e896ed3b4605bc94389452c6fd97a294642ff0b4154d601a53"
+      }
+    ],
+    "workflows": [
+      "shared"
+    ],
+    "quote": "GLOBAL GUARDRAILS\nClassify the user's requested navigation. Return JSON with canonical intent and entities. Never invent people, permission or a successful mutation. A context flag is state, not a user request. Keep an open workspace unless the user explicitly switches. Never treat a name as permission to approve, hire, delete, pay or save. The only person used in automated scenarios is Alex Example. These are fictional UI navigation fixtures.\n\n"
+  },
+  {
+    "id": "R2",
+    "file": "_core.txt",
+    "line": 4,
+    "sources": [
+      {
+        "id": "S-efb5d26634f314589a38f396",
+        "file": "_core.txt",
+        "line": 4,
+        "endLine": 7,
+        "start": 449,
+        "end": 968,
+        "sha256": "7e35896c1a282c235f584b5e9440a528b559d0135ad1273513cfbf0d2bd6ce76"
+      }
+    ],
+    "workflows": [
+      "evaluation-39453b7a46"
+    ],
+    "quote": "Evaluation tab routing\nnavigate_published_jd_applicant_evaluation_tab:\nWhen jd_evaluation_results_modal_open is true, requests for summary, transcript or facial analysis navigate the evaluation panel. Return navigate_published_jd_applicant_evaluation_tab and entities.evaluation_results_tab exactly summary, transcript or facial. This takes precedence over the parent job description and stale workflow state. The panel is a fictional recorded interview; facial is a legacy tab identifier, not a claim about a person.\n\n"
+  },
+  {
+    "id": "R3",
+    "file": "_core.txt",
+    "line": 8,
+    "sources": [
+      {
+        "id": "S-9f052704a3d111eab2672387",
+        "file": "_core.txt",
+        "line": 8,
+        "endLine": 11,
+        "start": 968,
+        "end": 1453,
+        "sha256": "046c6cba8644ff2853657942b02da617c8466ba40cf8e3f5eea4120439c2aece"
+      }
+    ],
+    "workflows": [
+      "recruitment-cef5cdd19f"
+    ],
+    "quote": "Applicant search with stale leave\nview_published_jd_applicant:\nWhen jd_published_viewer_active_tab is applicants and the user explicitly asks to show applicant Alex Example, return view_published_jd_applicant with entities.applicant_name_query equal to Alex Example. Ignore stale workflow_orchestration.primary_workflow leave and session_state.ActiveIntent apply_leave. Merely mentioning an applicant is not a new leave request. Never confuse candidate names with intent identifiers.\n\n"
+  },
+  {
+    "id": "R4",
+    "file": "_core.txt",
+    "line": 12,
+    "sources": [
+      {
+        "id": "S-ee92c091388e828195817e4c",
+        "file": "_core.txt",
+        "line": 12,
+        "endLine": 16,
+        "start": 1453,
+        "end": 2018,
+        "sha256": "c8cf8ff52ecc18b053dfc30c79e44877cc544d6001ebf9a7d2501e423cee1ec0"
+      }
+    ],
+    "workflows": [
+      "benefits-0ae897400e"
+    ],
+    "quote": "Benefit enrollment 1\nview_benefit_plan:\nUse view_benefit_plan only for a request to inspect a benefits plan with benefits_workspace_open true. Viewing does not enroll, cancel or alter coverage. Do not infer marital, disability or health status from messages. Show missing plan names as missing information. Benefits changes require an independent confirmation and cannot be triggered by candidate information navigation.\nbenefits_workspace_open must be true for this domain. Version 1 keeps this guard beside the consumer, even when other files already repeat it.\n\n"
+  },
+  {
+    "id": "R5",
+    "file": "_core.txt",
+    "line": 17,
+    "sources": [
+      {
+        "id": "S-8ba05451ecbc3c3aa7c44313",
+        "file": "_core.txt",
+        "line": 17,
+        "endLine": 21,
+        "start": 2018,
+        "end": 2595,
+        "sha256": "b56f1c2e51cf3366dacca74c96276775b0f32449484a73106662ee26a2a33e39"
+      }
+    ],
+    "workflows": [
+      "attendance-2f11330aad"
+    ],
+    "quote": "Attendance correction 1\nview_attendance_adjustment:\nUse view_attendance_adjustment for explicit timecard queries with attendance_workspace_open true. Show original and proposed timestamps separately, with timezone. A preview never changes attendance or creates overtime. Missing timezones require clarification. A transcript timestamp is not an attendance request. Never use attendance corrections to infer candidate availability.\nattendance_workspace_open must be true for this domain. Version 1 keeps this guard beside the consumer, even when other files already repeat it.\n\n"
+  },
+  {
+    "id": "R6",
+    "file": "_core.txt",
+    "line": 22,
+    "sources": [
+      {
+        "id": "S-cda091874792b06b5b23faa2",
+        "file": "_core.txt",
+        "line": 22,
+        "endLine": 24,
+        "start": 2595,
+        "end": 3044,
+        "sha256": "a332b834346fb3e896ed3b4605bc94389452c6fd97a294642ff0b4154d601a53"
+      }
+    ],
+    "workflows": [
+      "shared"
+    ],
+    "quote": "GLOBAL GUARDRAILS\nClassify the user's requested navigation. Return JSON with canonical intent and entities. Never invent people, permission or a successful mutation. A context flag is state, not a user request. Keep an open workspace unless the user explicitly switches. Never treat a name as permission to approve, hire, delete, pay or save. The only person used in automated scenarios is Alex Example. These are fictional UI navigation fixtures.\n\n"
+  },
+  {
+    "id": "R7",
+    "file": "_core.txt",
+    "line": 25,
+    "sources": [
+      {
+        "id": "S-af7fea66b10ac846e5b9f159",
+        "file": "_core.txt",
+        "line": 25,
+        "endLine": 28,
+        "start": 3044,
+        "end": 3522,
+        "sha256": "35051255ce68fdc64a176ef29b1acc748492c2f8668d4c41d675cf11f79ccd4e"
+      }
+    ],
+    "workflows": [
+      "interview-474b260a93"
+    ],
+    "quote": "Interview attendee exception\ninterview_scheduling:\nWhen interview_workflow_phase is awaiting_attendee_names, the name-only utterance Alex Example means the next interview attendee. Return interview_scheduling with entities.attendee_name_query equal to Alex Example. This exception overrides the general applicant-search interpretation even while jd_published_viewer_active_tab is applicants. It does not choose a candidate for hiring and does not create a real calendar event.\n\n"
+  },
+  {
+    "id": "R8",
+    "file": "_core.txt",
+    "line": 29,
+    "sources": [
+      {
+        "id": "S-cefabdeca50d4b30f4fd62ca",
+        "file": "_core.txt",
+        "line": 29,
+        "endLine": 32,
+        "start": 3522,
+        "end": 3917,
+        "sha256": "0b8c0b71761cc0f5a034acd8bf4f76279211a08c455333024b5ba07856de9afb"
+      }
+    ],
+    "workflows": [
+      "evaluation-39453b7a46"
+    ],
+    "quote": "Evaluation close exception\nclose_published_jd_applicant_evaluation_results:\nWhen jd_evaluation_results_modal_open is true and the user says close this or dismiss this evaluation panel, return close_published_jd_applicant_evaluation_results with empty entities. Close only the evaluation panel, never the job description, workspace or browser. A request to change tabs does not close the panel.\n\n"
+  },
+  {
+    "id": "R9",
+    "file": "_core.txt",
+    "line": 33,
+    "sources": [
+      {
+        "id": "S-1f23bb8cd53dfc4ef799bbb7",
+        "file": "_core.txt",
+        "line": 33,
+        "endLine": 37,
+        "start": 3917,
+        "end": 4482,
+        "sha256": "32eb5b170c23f8fde02dc311b5b3ac2445382bdfcc2e626d0fe4a6649acd2320"
+      }
+    ],
+    "workflows": [
+      "benefits-0ae897400e"
+    ],
+    "quote": "Benefit enrollment 2\nview_benefit_plan:\nUse view_benefit_plan only for a request to inspect a benefits plan with benefits_workspace_open true. Viewing does not enroll, cancel or alter coverage. Do not infer marital, disability or health status from messages. Show missing plan names as missing information. Benefits changes require an independent confirmation and cannot be triggered by candidate information navigation.\nbenefits_workspace_open must be true for this domain. Version 2 keeps this guard beside the consumer, even when other files already repeat it.\n\n"
+  },
+  {
+    "id": "R10",
+    "file": "_core.txt",
+    "line": 38,
+    "sources": [
+      {
+        "id": "S-aa815d837edadd3c82d597f0",
+        "file": "_core.txt",
+        "line": 38,
+        "endLine": 42,
+        "start": 4482,
+        "end": 5059,
+        "sha256": "05f773de6052ce9f00ef4bb39dc06ef2033733d95a500b13d982ff5a21bc8f93"
+      }
+    ],
+    "workflows": [
+      "attendance-2f11330aad"
+    ],
+    "quote": "Attendance correction 2\nview_attendance_adjustment:\nUse view_attendance_adjustment for explicit timecard queries with attendance_workspace_open true. Show original and proposed timestamps separately, with timezone. A preview never changes attendance or creates overtime. Missing timezones require clarification. A transcript timestamp is not an attendance request. Never use attendance corrections to infer candidate availability.\nattendance_workspace_open must be true for this domain. Version 2 keeps this guard beside the consumer, even when other files already repeat it.\n\n"
+  },
+  {
+    "id": "R11",
+    "file": "_core.txt",
+    "line": 43,
+    "sources": [
+      {
+        "id": "S-f5d8caa47dd3ec671fab8235",
+        "file": "_core.txt",
+        "line": 43,
+        "endLine": 46,
+        "start": 5059,
+        "end": 5443,
+        "sha256": "53f62e52a25143a1e0ead2eef6b0c580903c058dae3df67b4672b0f5947caeff"
+      }
+    ],
+    "workflows": [
+      "leave-c7b9221e8e"
+    ],
+    "quote": "Explicit workspace switch\napply_leave:\nAn explicit user request to apply for leave or switch to leave returns apply_leave with empty entities, even while jd_published_viewer_active_tab is applicants. Open the local leave form only. Do not submit a leave request, invent dates, or reuse stale dates. If the user only names an applicant or requests a modal tab, never switch to leave.\n\n"
+  },
+  {
+    "id": "R12",
+    "file": "_core.txt",
+    "line": 47,
+    "sources": [
+      {
+        "id": "S-f0fc3510a454ffd4681d38d6",
+        "file": "_core.txt",
+        "line": 47,
+        "endLine": 50,
+        "start": 5443,
+        "end": 5849,
+        "sha256": "781b33ceb62baeb3c4b4298ba4a46ceb0554de41fb12c9f82b461e34c9287749"
+      }
+    ],
+    "workflows": [
+      "candidate-information-c8b56ec30e"
+    ],
+    "quote": "Candidate information navigation\nnavigate_candidate_information_tab:\nWhen candidate_information_modal_open is true, a request to go to personal, education, payslips or references returns navigate_candidate_information_tab and entities.candidate_information_tab set to that exact tab identifier. Education must not navigate the job description or infer a qualification. This is read-only panel navigation.\n\n"
+  },
+  {
+    "id": "R13",
+    "file": "_core.txt",
+    "line": 51,
+    "sources": [
+      {
+        "id": "S-d4633ead7f57d3afc940c26b",
+        "file": "_core.txt",
+        "line": 51,
+        "endLine": 55,
+        "start": 5849,
+        "end": 6414,
+        "sha256": "40705933ab3b951fb11ed8752b059d4d04ae7e0ec148f7efaeed320c39a63d43"
+      }
+    ],
+    "workflows": [
+      "benefits-0ae897400e"
+    ],
+    "quote": "Benefit enrollment 3\nview_benefit_plan:\nUse view_benefit_plan only for a request to inspect a benefits plan with benefits_workspace_open true. Viewing does not enroll, cancel or alter coverage. Do not infer marital, disability or health status from messages. Show missing plan names as missing information. Benefits changes require an independent confirmation and cannot be triggered by candidate information navigation.\nbenefits_workspace_open must be true for this domain. Version 3 keeps this guard beside the consumer, even when other files already repeat it.\n\n"
+  },
+  {
+    "id": "R14",
+    "file": "_core.txt",
+    "line": 56,
+    "sources": [
+      {
+        "id": "S-1bf070fb134442482f9dcea1",
+        "file": "_core.txt",
+        "line": 56,
+        "endLine": 60,
+        "start": 6414,
+        "end": 6991,
+        "sha256": "8a97315683f944084136f5ac3337c8eddff2c6adaab9e49af8c531598c95a429"
+      }
+    ],
+    "workflows": [
+      "attendance-2f11330aad"
+    ],
+    "quote": "Attendance correction 3\nview_attendance_adjustment:\nUse view_attendance_adjustment for explicit timecard queries with attendance_workspace_open true. Show original and proposed timestamps separately, with timezone. A preview never changes attendance or creates overtime. Missing timezones require clarification. A transcript timestamp is not an attendance request. Never use attendance corrections to infer candidate availability.\nattendance_workspace_open must be true for this domain. Version 3 keeps this guard beside the consumer, even when other files already repeat it.\n\n"
+  },
+  {
+    "id": "R15",
+    "file": "_core.txt",
+    "line": 61,
+    "sources": [
+      {
+        "id": "S-0c03533b0f78abd8b7201a89",
+        "file": "_core.txt",
+        "line": 61,
+        "endLine": 64,
+        "start": 6991,
+        "end": 7510,
+        "sha256": "7e35896c1a282c235f584b5e9440a528b559d0135ad1273513cfbf0d2bd6ce76"
+      }
+    ],
+    "workflows": [
+      "evaluation-39453b7a46"
+    ],
+    "quote": "Evaluation tab routing\nnavigate_published_jd_applicant_evaluation_tab:\nWhen jd_evaluation_results_modal_open is true, requests for summary, transcript or facial analysis navigate the evaluation panel. Return navigate_published_jd_applicant_evaluation_tab and entities.evaluation_results_tab exactly summary, transcript or facial. This takes precedence over the parent job description and stale workflow state. The panel is a fictional recorded interview; facial is a legacy tab identifier, not a claim about a person.\n\n"
+  },
+  {
+    "id": "R16",
+    "file": "_core.txt",
+    "line": 65,
+    "sources": [
+      {
+        "id": "S-045bbb69573e6f04bcdb4452",
+        "file": "_core.txt",
+        "line": 65,
+        "endLine": 68,
+        "start": 7510,
+        "end": 7995,
+        "sha256": "046c6cba8644ff2853657942b02da617c8466ba40cf8e3f5eea4120439c2aece"
+      }
+    ],
+    "workflows": [
+      "recruitment-cef5cdd19f"
+    ],
+    "quote": "Applicant search with stale leave\nview_published_jd_applicant:\nWhen jd_published_viewer_active_tab is applicants and the user explicitly asks to show applicant Alex Example, return view_published_jd_applicant with entities.applicant_name_query equal to Alex Example. Ignore stale workflow_orchestration.primary_workflow leave and session_state.ActiveIntent apply_leave. Merely mentioning an applicant is not a new leave request. Never confuse candidate names with intent identifiers.\n\n"
+  },
+  {
+    "id": "R17",
+    "file": "_core.txt",
+    "line": 69,
+    "sources": [
+      {
+        "id": "S-a7b6f5f1d8bafdb3512555a0",
+        "file": "_core.txt",
+        "line": 69,
+        "endLine": 73,
+        "start": 7995,
+        "end": 8572,
+        "sha256": "dbdf86a42928e2dc98899233fced99093ed1d86b9283febca5e16f2175e67066"
+      }
+    ],
+    "workflows": [
+      "attendance-2f11330aad"
+    ],
+    "quote": "Attendance correction 4\nview_attendance_adjustment:\nUse view_attendance_adjustment for explicit timecard queries with attendance_workspace_open true. Show original and proposed timestamps separately, with timezone. A preview never changes attendance or creates overtime. Missing timezones require clarification. A transcript timestamp is not an attendance request. Never use attendance corrections to infer candidate availability.\nattendance_workspace_open must be true for this domain. Version 4 keeps this guard beside the consumer, even when other files already repeat it.\n\n"
+  },
+  {
+    "id": "R18",
+    "file": "_core.txt",
+    "line": 74,
+    "sources": [
+      {
+        "id": "S-98bc574c1a3782fb0f92493b",
+        "file": "_core.txt",
+        "line": 74,
+        "endLine": 78,
+        "start": 8572,
+        "end": 9137,
+        "sha256": "72baf9baae3491cf4ee4d48fbd9878f1d312fc8f6676d874d577fb68fd40e667"
+      }
+    ],
+    "workflows": [
+      "benefits-0ae897400e"
+    ],
+    "quote": "Benefit enrollment 4\nview_benefit_plan:\nUse view_benefit_plan only for a request to inspect a benefits plan with benefits_workspace_open true. Viewing does not enroll, cancel or alter coverage. Do not infer marital, disability or health status from messages. Show missing plan names as missing information. Benefits changes require an independent confirmation and cannot be triggered by candidate information navigation.\nbenefits_workspace_open must be true for this domain. Version 4 keeps this guard beside the consumer, even when other files already repeat it.\n\n"
+  },
+  {
+    "id": "R19",
+    "file": "_core.txt",
+    "line": 79,
+    "sources": [
+      {
+        "id": "S-ab05373da5074429e3a0e403",
+        "file": "_core.txt",
+        "line": 79,
+        "endLine": 80,
+        "start": 9137,
+        "end": 9584,
+        "sha256": "02cadde8fee170b818e006e5aec88775fd53bab5973029ff7d24b3ea0f66ffa3"
+      }
+    ],
+    "workflows": [
+      "shared"
+    ],
+    "quote": "GLOBAL GUARDRAILS\nClassify the user's requested navigation. Return JSON with canonical intent and entities. Never invent people, permission or a successful mutation. A context flag is state, not a user request. Keep an open workspace unless the user explicitly switches. Never treat a name as permission to approve, hire, delete, pay or save. The only person used in automated scenarios is Alex Example. These are fictional UI navigation fixtures."
+  },
+  {
+    "id": "R20",
+    "file": "_core.txt",
+    "line": 79,
+    "sources": [
+      {
+        "id": "S-ab05373da5074429e3a0e403",
+        "file": "_core.txt",
+        "line": 79,
+        "endLine": 80,
+        "start": 9137,
+        "end": 9584,
+        "sha256": "02cadde8fee170b818e006e5aec88775fd53bab5973029ff7d24b3ea0f66ffa3"
+      }
+    ],
+    "workflows": [
+      "shared"
+    ],
+    "quote": "GLOBAL GUARDRAILS\nClassify the user's requested navigation. Return JSON with canonical intent and entities. Never invent people, permission or a successful mutation. A context flag is state, not a user request. Keep an open workspace unless the user explicitly switches. Never treat a name as permission to approve, hire, delete, pay or save. The only person used in automated scenarios is Alex Example. These are fictional UI navigation fixtures."
+  },
+  {
+    "id": "R21",
+    "file": "_core.txt",
+    "line": 79,
+    "sources": [
+      {
+        "id": "S-ab05373da5074429e3a0e403",
+        "file": "_core.txt",
+        "line": 79,
+        "endLine": 80,
+        "start": 9137,
+        "end": 9584,
+        "sha256": "02cadde8fee170b818e006e5aec88775fd53bab5973029ff7d24b3ea0f66ffa3"
+      }
+    ],
+    "workflows": [
+      "shared"
+    ],
+    "quote": "GLOBAL GUARDRAILS\nClassify the user's requested navigation. Return JSON with canonical intent and entities. Never invent people, permission or a successful mutation. A context flag is state, not a user request. Keep an open workspace unless the user explicitly switches. Never treat a name as permission to approve, hire, delete, pay or save. The only person used in automated scenarios is Alex Example. These are fictional UI navigation fixtures."
+  },
+  {
+    "id": "R22",
+    "file": "_core.txt",
+    "line": 79,
+    "sources": [
+      {
+        "id": "S-ab05373da5074429e3a0e403",
+        "file": "_core.txt",
+        "line": 79,
+        "endLine": 80,
+        "start": 9137,
+        "end": 9584,
+        "sha256": "02cadde8fee170b818e006e5aec88775fd53bab5973029ff7d24b3ea0f66ffa3"
+      }
+    ],
+    "workflows": [
+      "shared"
+    ],
+    "quote": "GLOBAL GUARDRAILS\nClassify the user's requested navigation. Return JSON with canonical intent and entities. Never invent people, permission or a successful mutation. A context flag is state, not a user request. Keep an open workspace unless the user explicitly switches. Never treat a name as permission to approve, hire, delete, pay or save. The only person used in automated scenarios is Alex Example. These are fictional UI navigation fixtures."
+  },
+  {
+    "id": "R23",
+    "file": "_core.txt",
+    "line": 79,
+    "sources": [
+      {
+        "id": "S-ab05373da5074429e3a0e403",
+        "file": "_core.txt",
+        "line": 79,
+        "endLine": 80,
+        "start": 9137,
+        "end": 9584,
+        "sha256": "02cadde8fee170b818e006e5aec88775fd53bab5973029ff7d24b3ea0f66ffa3"
+      }
+    ],
+    "workflows": [
+      "shared"
+    ],
+    "quote": "GLOBAL GUARDRAILS\nClassify the user's requested navigation. Return JSON with canonical intent and entities. Never invent people, permission or a successful mutation. A context flag is state, not a user request. Keep an open workspace unless the user explicitly switches. Never treat a name as permission to approve, hire, delete, pay or save. The only person used in automated scenarios is Alex Example. These are fictional UI navigation fixtures."
+  },
+  {
+    "id": "R24",
+    "file": "_core.txt",
+    "line": 79,
+    "sources": [
+      {
+        "id": "S-ab05373da5074429e3a0e403",
+        "file": "_core.txt",
+        "line": 79,
+        "endLine": 80,
+        "start": 9137,
+        "end": 9584,
+        "sha256": "02cadde8fee170b818e006e5aec88775fd53bab5973029ff7d24b3ea0f66ffa3"
+      }
+    ],
+    "workflows": [
+      "shared"
+    ],
+    "quote": "GLOBAL GUARDRAILS\nClassify the user's requested navigation. Return JSON with canonical intent and entities. Never invent people, permission or a successful mutation. A context flag is state, not a user request. Keep an open workspace unless the user explicitly switches. Never treat a name as permission to approve, hire, delete, pay or save. The only person used in automated scenarios is Alex Example. These are fictional UI navigation fixtures."
+  },
+  {
+    "id": "R25",
+    "file": "_core_jd_request_context.txt",
+    "line": 1,
+    "sources": [
+      {
+        "id": "S-a575ccdbf0e9733e6cdac39a",
+        "file": "_core_jd_request_context.txt",
+        "line": 1,
+        "endLine": 4,
+        "start": 0,
+        "end": 395,
+        "sha256": "0b8c0b71761cc0f5a034acd8bf4f76279211a08c455333024b5ba07856de9afb"
+      }
+    ],
+    "workflows": [
+      "evaluation-39453b7a46"
+    ],
+    "quote": "Evaluation close exception\nclose_published_jd_applicant_evaluation_results:\nWhen jd_evaluation_results_modal_open is true and the user says close this or dismiss this evaluation panel, return close_published_jd_applicant_evaluation_results with empty entities. Close only the evaluation panel, never the job description, workspace or browser. A request to change tabs does not close the panel.\n\n"
+  },
+  {
+    "id": "R26",
+    "file": "_core_jd_request_context.txt",
+    "line": 5,
+    "sources": [
+      {
+        "id": "S-3aef705cc9309459371609fd",
+        "file": "_core_jd_request_context.txt",
+        "line": 5,
+        "endLine": 8,
+        "start": 395,
+        "end": 873,
+        "sha256": "35051255ce68fdc64a176ef29b1acc748492c2f8668d4c41d675cf11f79ccd4e"
+      }
+    ],
+    "workflows": [
+      "interview-474b260a93"
+    ],
+    "quote": "Interview attendee exception\ninterview_scheduling:\nWhen interview_workflow_phase is awaiting_attendee_names, the name-only utterance Alex Example means the next interview attendee. Return interview_scheduling with entities.attendee_name_query equal to Alex Example. This exception overrides the general applicant-search interpretation even while jd_published_viewer_active_tab is applicants. It does not choose a candidate for hiring and does not create a real calendar event.\n\n"
+  },
+  {
+    "id": "R27",
+    "file": "_core_jd_request_context.txt",
+    "line": 9,
+    "sources": [
+      {
+        "id": "S-62b8d10aa3d7f4cdf175de37",
+        "file": "_core_jd_request_context.txt",
+        "line": 9,
+        "endLine": 13,
+        "start": 873,
+        "end": 1506,
+        "sha256": "5d3216afcc42235359d814542cb9ca86a592aab27164097db640b93e4528d68e"
+      }
+    ],
+    "workflows": [
+      "payroll-3fe40e21d2"
+    ],
+    "quote": "Payroll export 1\nexport_payroll_preview:\nUse export_payroll_preview only for an explicit payroll preview request with payroll_workspace_open true. A preview never pays anyone. Payroll periods use ISO year-month. Require payroll.read permission. Missing period must be requested, never inferred from recruitment state. Salary columns are fixture data only. Preserve currency units; never add salaries across currencies. A payroll preview has no role in candidate tabs or attendee selection.\npayroll_workspace_open must be true for this domain. Version 1 keeps this guard beside the consumer, even when other files already repeat it.\n\n"
+  },
+  {
+    "id": "R28",
+    "file": "_core_jd_request_context.txt",
+    "line": 14,
+    "sources": [
+      {
+        "id": "S-837100bed5775322f2dcb85c",
+        "file": "_core_jd_request_context.txt",
+        "line": 14,
+        "endLine": 18,
+        "start": 1506,
+        "end": 2078,
+        "sha256": "3e0c8f5303b66575aaca7ba67baca52f91146f25a1eea647d3d68be964231698"
+      }
+    ],
+    "workflows": [
+      "assets-9b1cf6e78d"
+    ],
+    "quote": "Asset inventory 1\nview_asset_record:\nUse view_asset_record only for explicit asset queries in assets_workspace_open state. Serial numbers are strings, not counts. A loaned laptop is not an applicant record. Viewing equipment never transfers ownership. Ask for the serial number if it is missing. An employee name in an equipment record must not trigger interview scheduling unless that active workflow is awaiting attendee names.\nassets_workspace_open must be true for this domain. Version 1 keeps this guard beside the consumer, even when other files already repeat it.\n\n"
+  },
+  {
+    "id": "R29",
+    "file": "_core_jd_request_context.txt",
+    "line": 19,
+    "sources": [
+      {
+        "id": "S-76dbdede4875a5fd9ef105ce",
+        "file": "_core_jd_request_context.txt",
+        "line": 19,
+        "endLine": 22,
+        "start": 2078,
+        "end": 2484,
+        "sha256": "781b33ceb62baeb3c4b4298ba4a46ceb0554de41fb12c9f82b461e34c9287749"
+      }
+    ],
+    "workflows": [
+      "candidate-information-c8b56ec30e"
+    ],
+    "quote": "Candidate information navigation\nnavigate_candidate_information_tab:\nWhen candidate_information_modal_open is true, a request to go to personal, education, payslips or references returns navigate_candidate_information_tab and entities.candidate_information_tab set to that exact tab identifier. Education must not navigate the job description or infer a qualification. This is read-only panel navigation.\n\n"
+  },
+  {
+    "id": "R30",
+    "file": "_core_jd_request_context.txt",
+    "line": 23,
+    "sources": [
+      {
+        "id": "S-387ce80f498f356cb27a7e81",
+        "file": "_core_jd_request_context.txt",
+        "line": 23,
+        "endLine": 26,
+        "start": 2484,
+        "end": 2868,
+        "sha256": "53f62e52a25143a1e0ead2eef6b0c580903c058dae3df67b4672b0f5947caeff"
+      }
+    ],
+    "workflows": [
+      "leave-c7b9221e8e"
+    ],
+    "quote": "Explicit workspace switch\napply_leave:\nAn explicit user request to apply for leave or switch to leave returns apply_leave with empty entities, even while jd_published_viewer_active_tab is applicants. Open the local leave form only. Do not submit a leave request, invent dates, or reuse stale dates. If the user only names an applicant or requests a modal tab, never switch to leave.\n\n"
+  },
+  {
+    "id": "R31",
+    "file": "_core_jd_request_context.txt",
+    "line": 27,
+    "sources": [
+      {
+        "id": "S-54b53e2eef7e4584cb344ebd",
+        "file": "_core_jd_request_context.txt",
+        "line": 27,
+        "endLine": 31,
+        "start": 2868,
+        "end": 3440,
+        "sha256": "229bf9bcd6bb40f33e96ae0422840303c57d6d1369b50b7ed922056c1d199db1"
+      }
+    ],
+    "workflows": [
+      "assets-9b1cf6e78d"
+    ],
+    "quote": "Asset inventory 2\nview_asset_record:\nUse view_asset_record only for explicit asset queries in assets_workspace_open state. Serial numbers are strings, not counts. A loaned laptop is not an applicant record. Viewing equipment never transfers ownership. Ask for the serial number if it is missing. An employee name in an equipment record must not trigger interview scheduling unless that active workflow is awaiting attendee names.\nassets_workspace_open must be true for this domain. Version 2 keeps this guard beside the consumer, even when other files already repeat it.\n\n"
+  },
+  {
+    "id": "R32",
+    "file": "_core_jd_request_context.txt",
+    "line": 32,
+    "sources": [
+      {
+        "id": "S-0da3c2f06ea982c7a9b12b8b",
+        "file": "_core_jd_request_context.txt",
+        "line": 32,
+        "endLine": 36,
+        "start": 3440,
+        "end": 4073,
+        "sha256": "9d61b990b953750cb6c9d6db76af50fb04b3c60f553ae48e1f08113b53649184"
+      }
+    ],
+    "workflows": [
+      "payroll-3fe40e21d2"
+    ],
+    "quote": "Payroll export 2\nexport_payroll_preview:\nUse export_payroll_preview only for an explicit payroll preview request with payroll_workspace_open true. A preview never pays anyone. Payroll periods use ISO year-month. Require payroll.read permission. Missing period must be requested, never inferred from recruitment state. Salary columns are fixture data only. Preserve currency units; never add salaries across currencies. A payroll preview has no role in candidate tabs or attendee selection.\npayroll_workspace_open must be true for this domain. Version 2 keeps this guard beside the consumer, even when other files already repeat it.\n\n"
+  },
+  {
+    "id": "R33",
+    "file": "_core_jd_request_context.txt",
+    "line": 37,
+    "sources": [
+      {
+        "id": "S-f18a9205ba847036ec585e36",
+        "file": "_core_jd_request_context.txt",
+        "line": 37,
+        "endLine": 39,
+        "start": 4073,
+        "end": 4522,
+        "sha256": "a332b834346fb3e896ed3b4605bc94389452c6fd97a294642ff0b4154d601a53"
+      }
+    ],
+    "workflows": [
+      "shared"
+    ],
+    "quote": "GLOBAL GUARDRAILS\nClassify the user's requested navigation. Return JSON with canonical intent and entities. Never invent people, permission or a successful mutation. A context flag is state, not a user request. Keep an open workspace unless the user explicitly switches. Never treat a name as permission to approve, hire, delete, pay or save. The only person used in automated scenarios is Alex Example. These are fictional UI navigation fixtures.\n\n"
+  },
+  {
+    "id": "R34",
+    "file": "_core_jd_request_context.txt",
+    "line": 40,
+    "sources": [
+      {
+        "id": "S-cda6c4883232ee3363036766",
+        "file": "_core_jd_request_context.txt",
+        "line": 40,
+        "endLine": 43,
+        "start": 4522,
+        "end": 5041,
+        "sha256": "7e35896c1a282c235f584b5e9440a528b559d0135ad1273513cfbf0d2bd6ce76"
+      }
+    ],
+    "workflows": [
+      "evaluation-39453b7a46"
+    ],
+    "quote": "Evaluation tab routing\nnavigate_published_jd_applicant_evaluation_tab:\nWhen jd_evaluation_results_modal_open is true, requests for summary, transcript or facial analysis navigate the evaluation panel. Return navigate_published_jd_applicant_evaluation_tab and entities.evaluation_results_tab exactly summary, transcript or facial. This takes precedence over the parent job description and stale workflow state. The panel is a fictional recorded interview; facial is a legacy tab identifier, not a claim about a person.\n\n"
+  },
+  {
+    "id": "R35",
+    "file": "_core_jd_request_context.txt",
+    "line": 44,
+    "sources": [
+      {
+        "id": "S-717e94d7a083b14cefbfbb7e",
+        "file": "_core_jd_request_context.txt",
+        "line": 44,
+        "endLine": 47,
+        "start": 5041,
+        "end": 5526,
+        "sha256": "046c6cba8644ff2853657942b02da617c8466ba40cf8e3f5eea4120439c2aece"
+      }
+    ],
+    "workflows": [
+      "recruitment-cef5cdd19f"
+    ],
+    "quote": "Applicant search with stale leave\nview_published_jd_applicant:\nWhen jd_published_viewer_active_tab is applicants and the user explicitly asks to show applicant Alex Example, return view_published_jd_applicant with entities.applicant_name_query equal to Alex Example. Ignore stale workflow_orchestration.primary_workflow leave and session_state.ActiveIntent apply_leave. Merely mentioning an applicant is not a new leave request. Never confuse candidate names with intent identifiers.\n\n"
+  },
+  {
+    "id": "R36",
+    "file": "_core_jd_request_context.txt",
+    "line": 48,
+    "sources": [
+      {
+        "id": "S-134a3f48d20ca9eb474c8b8e",
+        "file": "_core_jd_request_context.txt",
+        "line": 48,
+        "endLine": 52,
+        "start": 5526,
+        "end": 6098,
+        "sha256": "3b90d6ad67df259ccedbe66d308057271de6ff7c9767922569b04b52cff624e9"
+      }
+    ],
+    "workflows": [
+      "assets-9b1cf6e78d"
+    ],
+    "quote": "Asset inventory 3\nview_asset_record:\nUse view_asset_record only for explicit asset queries in assets_workspace_open state. Serial numbers are strings, not counts. A loaned laptop is not an applicant record. Viewing equipment never transfers ownership. Ask for the serial number if it is missing. An employee name in an equipment record must not trigger interview scheduling unless that active workflow is awaiting attendee names.\nassets_workspace_open must be true for this domain. Version 3 keeps this guard beside the consumer, even when other files already repeat it.\n\n"
+  },
+  {
+    "id": "R37",
+    "file": "_core_jd_request_context.txt",
+    "line": 53,
+    "sources": [
+      {
+        "id": "S-69ed39bc42d9c12e5c153431",
+        "file": "_core_jd_request_context.txt",
+        "line": 53,
+        "endLine": 57,
+        "start": 6098,
+        "end": 6731,
+        "sha256": "71313f71f7cef9c295a87b901f3042a39b11d3cc0c5bd5cf10269fd2af17e28f"
+      }
+    ],
+    "workflows": [
+      "payroll-3fe40e21d2"
+    ],
+    "quote": "Payroll export 3\nexport_payroll_preview:\nUse export_payroll_preview only for an explicit payroll preview request with payroll_workspace_open true. A preview never pays anyone. Payroll periods use ISO year-month. Require payroll.read permission. Missing period must be requested, never inferred from recruitment state. Salary columns are fixture data only. Preserve currency units; never add salaries across currencies. A payroll preview has no role in candidate tabs or attendee selection.\npayroll_workspace_open must be true for this domain. Version 3 keeps this guard beside the consumer, even when other files already repeat it.\n\n"
+  },
+  {
+    "id": "R38",
+    "file": "_core_jd_request_context.txt",
+    "line": 58,
+    "sources": [
+      {
+        "id": "S-208f53d52f682e41762b7a4c",
+        "file": "_core_jd_request_context.txt",
+        "line": 58,
+        "endLine": 61,
+        "start": 6731,
+        "end": 7126,
+        "sha256": "0b8c0b71761cc0f5a034acd8bf4f76279211a08c455333024b5ba07856de9afb"
+      }
+    ],
+    "workflows": [
+      "evaluation-39453b7a46"
+    ],
+    "quote": "Evaluation close exception\nclose_published_jd_applicant_evaluation_results:\nWhen jd_evaluation_results_modal_open is true and the user says close this or dismiss this evaluation panel, return close_published_jd_applicant_evaluation_results with empty entities. Close only the evaluation panel, never the job description, workspace or browser. A request to change tabs does not close the panel.\n\n"
+  },
+  {
+    "id": "R39",
+    "file": "_core_jd_request_context.txt",
+    "line": 62,
+    "sources": [
+      {
+        "id": "S-5a6bf5305033bcbb809b21ed",
+        "file": "_core_jd_request_context.txt",
+        "line": 62,
+        "endLine": 65,
+        "start": 7126,
+        "end": 7604,
+        "sha256": "35051255ce68fdc64a176ef29b1acc748492c2f8668d4c41d675cf11f79ccd4e"
+      }
+    ],
+    "workflows": [
+      "interview-474b260a93"
+    ],
+    "quote": "Interview attendee exception\ninterview_scheduling:\nWhen interview_workflow_phase is awaiting_attendee_names, the name-only utterance Alex Example means the next interview attendee. Return interview_scheduling with entities.attendee_name_query equal to Alex Example. This exception overrides the general applicant-search interpretation even while jd_published_viewer_active_tab is applicants. It does not choose a candidate for hiring and does not create a real calendar event.\n\n"
+  },
+  {
+    "id": "R40",
+    "file": "_core_jd_request_context.txt",
+    "line": 66,
+    "sources": [
+      {
+        "id": "S-cf7cc18a8959bbe6399b6ec9",
+        "file": "_core_jd_request_context.txt",
+        "line": 66,
+        "endLine": 70,
+        "start": 7604,
+        "end": 8176,
+        "sha256": "aae801120a3918c8b8fa62bd5cadfbb25dfb0986458f3dfc3ce4c6437dea7607"
+      }
+    ],
+    "workflows": [
+      "assets-9b1cf6e78d"
+    ],
+    "quote": "Asset inventory 4\nview_asset_record:\nUse view_asset_record only for explicit asset queries in assets_workspace_open state. Serial numbers are strings, not counts. A loaned laptop is not an applicant record. Viewing equipment never transfers ownership. Ask for the serial number if it is missing. An employee name in an equipment record must not trigger interview scheduling unless that active workflow is awaiting attendee names.\nassets_workspace_open must be true for this domain. Version 4 keeps this guard beside the consumer, even when other files already repeat it.\n\n"
+  },
+  {
+    "id": "R41",
+    "file": "_core_jd_request_context.txt",
+    "line": 71,
+    "sources": [
+      {
+        "id": "S-75719ca4e9a9e8f148cef8ef",
+        "file": "_core_jd_request_context.txt",
+        "line": 71,
+        "endLine": 74,
+        "start": 8176,
+        "end": 8807,
+        "sha256": "f39c5b42d712ad81dccad94807723e5d849fcbb4b3e3c02202f5ccfb836c4e24"
+      }
+    ],
+    "workflows": [
+      "payroll-3fe40e21d2"
+    ],
+    "quote": "Payroll export 4\nexport_payroll_preview:\nUse export_payroll_preview only for an explicit payroll preview request with payroll_workspace_open true. A preview never pays anyone. Payroll periods use ISO year-month. Require payroll.read permission. Missing period must be requested, never inferred from recruitment state. Salary columns are fixture data only. Preserve currency units; never add salaries across currencies. A payroll preview has no role in candidate tabs or attendee selection.\npayroll_workspace_open must be true for this domain. Version 4 keeps this guard beside the consumer, even when other files already repeat it."
+  },
+  {
+    "id": "R42",
+    "file": "rules_m2_recruitment_viewer.txt",
+    "line": 1,
+    "sources": [
+      {
+        "id": "S-d722d6715b56ee3f08f0251f",
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 1,
+        "endLine": 4,
+        "start": 0,
+        "end": 406,
+        "sha256": "781b33ceb62baeb3c4b4298ba4a46ceb0554de41fb12c9f82b461e34c9287749"
+      }
+    ],
+    "workflows": [
+      "candidate-information-c8b56ec30e"
+    ],
+    "quote": "Candidate information navigation\nnavigate_candidate_information_tab:\nWhen candidate_information_modal_open is true, a request to go to personal, education, payslips or references returns navigate_candidate_information_tab and entities.candidate_information_tab set to that exact tab identifier. Education must not navigate the job description or infer a qualification. This is read-only panel navigation.\n\n"
+  },
+  {
+    "id": "R43",
+    "file": "rules_m2_recruitment_viewer.txt",
+    "line": 5,
+    "sources": [
+      {
+        "id": "S-ad3c6338d197f656da136de1",
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 5,
+        "endLine": 8,
+        "start": 406,
+        "end": 790,
+        "sha256": "53f62e52a25143a1e0ead2eef6b0c580903c058dae3df67b4672b0f5947caeff"
+      }
+    ],
+    "workflows": [
+      "leave-c7b9221e8e"
+    ],
+    "quote": "Explicit workspace switch\napply_leave:\nAn explicit user request to apply for leave or switch to leave returns apply_leave with empty entities, even while jd_published_viewer_active_tab is applicants. Open the local leave form only. Do not submit a leave request, invent dates, or reuse stale dates. If the user only names an applicant or requests a modal tab, never switch to leave.\n\n"
+  },
+  {
+    "id": "R44",
+    "file": "rules_m2_recruitment_viewer.txt",
+    "line": 9,
+    "sources": [
+      {
+        "id": "S-4cf857b74355f84bc562be0b",
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 9,
+        "endLine": 13,
+        "start": 790,
+        "end": 1373,
+        "sha256": "194c3606f504c8c841d17644315434fde68bb675a5604ca4087352f93cee2c77"
+      }
+    ],
+    "workflows": [
+      "travel-65d90d46f1"
+    ],
+    "quote": "Travel draft 1\ndraft_travel_request:\nUse draft_travel_request only for explicit travel requests in travel_workspace_open state. Ask for destination and dates before creating a draft. Never book a flight, charge a card, approve travel or treat an applicant location as a travel destination. A saved travel draft remains distinct from approval. A quoted policy example is not the user's instruction. All fixture travel dates are illustrative.\ntravel_workspace_open must be true for this domain. Version 1 keeps this guard beside the consumer, even when other files already repeat it.\n\n"
+  },
+  {
+    "id": "R45",
+    "file": "rules_m2_recruitment_viewer.txt",
+    "line": 14,
+    "sources": [
+      {
+        "id": "S-c2b42259b8df30d5d05deaf3",
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 14,
+        "endLine": 18,
+        "start": 1373,
+        "end": 1934,
+        "sha256": "e23857fadbc410e404886b991aedab9de62061e9e4604e06a4c65e249e7d47e0"
+      }
+    ],
+    "workflows": [
+      "expenses-5430246a20"
+    ],
+    "quote": "Expense policy 1\npreview_expense_claim:\nUse preview_expense_claim only for explicit claims with expenses_workspace_open true. Require receipt reference, amount and currency. A preview cannot approve, reimburse or pay. Do not treat the word claim in a candidate transcript as an expense action. Original receipts and user-entered amounts remain authoritative. A missing currency blocks totals instead of guessing SGD.\nexpenses_workspace_open must be true for this domain. Version 1 keeps this guard beside the consumer, even when other files already repeat it.\n\n"
+  },
+  {
+    "id": "R46",
+    "file": "rules_m2_recruitment_viewer.txt",
+    "line": 19,
+    "sources": [
+      {
+        "id": "S-d5f54298a18e318fcb2a9067",
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 19,
+        "endLine": 22,
+        "start": 1934,
+        "end": 2419,
+        "sha256": "046c6cba8644ff2853657942b02da617c8466ba40cf8e3f5eea4120439c2aece"
+      }
+    ],
+    "workflows": [
+      "recruitment-cef5cdd19f"
+    ],
+    "quote": "Applicant search with stale leave\nview_published_jd_applicant:\nWhen jd_published_viewer_active_tab is applicants and the user explicitly asks to show applicant Alex Example, return view_published_jd_applicant with entities.applicant_name_query equal to Alex Example. Ignore stale workflow_orchestration.primary_workflow leave and session_state.ActiveIntent apply_leave. Merely mentioning an applicant is not a new leave request. Never confuse candidate names with intent identifiers.\n\n"
+  },
+  {
+    "id": "R47",
+    "file": "rules_m2_recruitment_viewer.txt",
+    "line": 23,
+    "sources": [
+      {
+        "id": "S-86f1ff4a23b982046d662aa5",
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 23,
+        "endLine": 26,
+        "start": 2419,
+        "end": 2938,
+        "sha256": "7e35896c1a282c235f584b5e9440a528b559d0135ad1273513cfbf0d2bd6ce76"
+      }
+    ],
+    "workflows": [
+      "evaluation-39453b7a46"
+    ],
+    "quote": "Evaluation tab routing\nnavigate_published_jd_applicant_evaluation_tab:\nWhen jd_evaluation_results_modal_open is true, requests for summary, transcript or facial analysis navigate the evaluation panel. Return navigate_published_jd_applicant_evaluation_tab and entities.evaluation_results_tab exactly summary, transcript or facial. This takes precedence over the parent job description and stale workflow state. The panel is a fictional recorded interview; facial is a legacy tab identifier, not a claim about a person.\n\n"
+  },
+  {
+    "id": "R48",
+    "file": "rules_m2_recruitment_viewer.txt",
+    "line": 27,
+    "sources": [
+      {
+        "id": "S-96ace7944d2f8724022f0ca6",
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 27,
+        "endLine": 31,
+        "start": 2938,
+        "end": 3521,
+        "sha256": "5363e110d5423edb99ce7fb4f6534827924ca2df1c41d2b88c4b70cd4a2d7f3f"
+      }
+    ],
+    "workflows": [
+      "travel-65d90d46f1"
+    ],
+    "quote": "Travel draft 2\ndraft_travel_request:\nUse draft_travel_request only for explicit travel requests in travel_workspace_open state. Ask for destination and dates before creating a draft. Never book a flight, charge a card, approve travel or treat an applicant location as a travel destination. A saved travel draft remains distinct from approval. A quoted policy example is not the user's instruction. All fixture travel dates are illustrative.\ntravel_workspace_open must be true for this domain. Version 2 keeps this guard beside the consumer, even when other files already repeat it.\n\n"
+  },
+  {
+    "id": "R49",
+    "file": "rules_m2_recruitment_viewer.txt",
+    "line": 32,
+    "sources": [
+      {
+        "id": "S-435b93db5611c6ba0590466b",
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 32,
+        "endLine": 36,
+        "start": 3521,
+        "end": 4082,
+        "sha256": "291966fd53b7d276dc7580fbd7c4f5179e3311294f7aed21f4176356972bdb37"
+      }
+    ],
+    "workflows": [
+      "expenses-5430246a20"
+    ],
+    "quote": "Expense policy 2\npreview_expense_claim:\nUse preview_expense_claim only for explicit claims with expenses_workspace_open true. Require receipt reference, amount and currency. A preview cannot approve, reimburse or pay. Do not treat the word claim in a candidate transcript as an expense action. Original receipts and user-entered amounts remain authoritative. A missing currency blocks totals instead of guessing SGD.\nexpenses_workspace_open must be true for this domain. Version 2 keeps this guard beside the consumer, even when other files already repeat it.\n\n"
+  },
+  {
+    "id": "R50",
+    "file": "rules_m2_recruitment_viewer.txt",
+    "line": 37,
+    "sources": [
+      {
+        "id": "S-da0f9752ccf19a908b6cef06",
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 37,
+        "endLine": 40,
+        "start": 4082,
+        "end": 4560,
+        "sha256": "35051255ce68fdc64a176ef29b1acc748492c2f8668d4c41d675cf11f79ccd4e"
+      }
+    ],
+    "workflows": [
+      "interview-474b260a93"
+    ],
+    "quote": "Interview attendee exception\ninterview_scheduling:\nWhen interview_workflow_phase is awaiting_attendee_names, the name-only utterance Alex Example means the next interview attendee. Return interview_scheduling with entities.attendee_name_query equal to Alex Example. This exception overrides the general applicant-search interpretation even while jd_published_viewer_active_tab is applicants. It does not choose a candidate for hiring and does not create a real calendar event.\n\n"
+  },
+  {
+    "id": "R51",
+    "file": "rules_m2_recruitment_viewer.txt",
+    "line": 41,
+    "sources": [
+      {
+        "id": "S-b67e0be1595b03312faa21dc",
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 41,
+        "endLine": 44,
+        "start": 4560,
+        "end": 4955,
+        "sha256": "0b8c0b71761cc0f5a034acd8bf4f76279211a08c455333024b5ba07856de9afb"
+      }
+    ],
+    "workflows": [
+      "evaluation-39453b7a46"
+    ],
+    "quote": "Evaluation close exception\nclose_published_jd_applicant_evaluation_results:\nWhen jd_evaluation_results_modal_open is true and the user says close this or dismiss this evaluation panel, return close_published_jd_applicant_evaluation_results with empty entities. Close only the evaluation panel, never the job description, workspace or browser. A request to change tabs does not close the panel.\n\n"
+  },
+  {
+    "id": "R52",
+    "file": "rules_m2_recruitment_viewer.txt",
+    "line": 45,
+    "sources": [
+      {
+        "id": "S-50970ce0fb12a165c8db022d",
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 45,
+        "endLine": 49,
+        "start": 4955,
+        "end": 5516,
+        "sha256": "eb2f62ca56256084d688e29512c913e8378402241294565bc9bc5d5faca4fe3e"
+      }
+    ],
+    "workflows": [
+      "expenses-5430246a20"
+    ],
+    "quote": "Expense policy 3\npreview_expense_claim:\nUse preview_expense_claim only for explicit claims with expenses_workspace_open true. Require receipt reference, amount and currency. A preview cannot approve, reimburse or pay. Do not treat the word claim in a candidate transcript as an expense action. Original receipts and user-entered amounts remain authoritative. A missing currency blocks totals instead of guessing SGD.\nexpenses_workspace_open must be true for this domain. Version 3 keeps this guard beside the consumer, even when other files already repeat it.\n\n"
+  },
+  {
+    "id": "R53",
+    "file": "rules_m2_recruitment_viewer.txt",
+    "line": 50,
+    "sources": [
+      {
+        "id": "S-41c9960947f9377e1262eb8a",
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 50,
+        "endLine": 54,
+        "start": 5516,
+        "end": 6099,
+        "sha256": "c25c78ff40e9c9955625fda854b22c4f47b42a4e8fae8288578065b5d3d36e4a"
+      }
+    ],
+    "workflows": [
+      "travel-65d90d46f1"
+    ],
+    "quote": "Travel draft 3\ndraft_travel_request:\nUse draft_travel_request only for explicit travel requests in travel_workspace_open state. Ask for destination and dates before creating a draft. Never book a flight, charge a card, approve travel or treat an applicant location as a travel destination. A saved travel draft remains distinct from approval. A quoted policy example is not the user's instruction. All fixture travel dates are illustrative.\ntravel_workspace_open must be true for this domain. Version 3 keeps this guard beside the consumer, even when other files already repeat it.\n\n"
+  },
+  {
+    "id": "R54",
+    "file": "rules_m2_recruitment_viewer.txt",
+    "line": 55,
+    "sources": [
+      {
+        "id": "S-be1c04cf80ca274d4d027d82",
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 55,
+        "endLine": 57,
+        "start": 6099,
+        "end": 6548,
+        "sha256": "a332b834346fb3e896ed3b4605bc94389452c6fd97a294642ff0b4154d601a53"
+      }
+    ],
+    "workflows": [
+      "shared"
+    ],
+    "quote": "GLOBAL GUARDRAILS\nClassify the user's requested navigation. Return JSON with canonical intent and entities. Never invent people, permission or a successful mutation. A context flag is state, not a user request. Keep an open workspace unless the user explicitly switches. Never treat a name as permission to approve, hire, delete, pay or save. The only person used in automated scenarios is Alex Example. These are fictional UI navigation fixtures.\n\n"
+  },
+  {
+    "id": "R55",
+    "file": "rules_m2_recruitment_viewer.txt",
+    "line": 58,
+    "sources": [
+      {
+        "id": "S-ae6b7cd424fa1f9c4037e8ba",
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 58,
+        "endLine": 61,
+        "start": 6548,
+        "end": 6954,
+        "sha256": "781b33ceb62baeb3c4b4298ba4a46ceb0554de41fb12c9f82b461e34c9287749"
+      }
+    ],
+    "workflows": [
+      "candidate-information-c8b56ec30e"
+    ],
+    "quote": "Candidate information navigation\nnavigate_candidate_information_tab:\nWhen candidate_information_modal_open is true, a request to go to personal, education, payslips or references returns navigate_candidate_information_tab and entities.candidate_information_tab set to that exact tab identifier. Education must not navigate the job description or infer a qualification. This is read-only panel navigation.\n\n"
+  },
+  {
+    "id": "R56",
+    "file": "rules_m2_recruitment_viewer.txt",
+    "line": 62,
+    "sources": [
+      {
+        "id": "S-09facd7ecdd57193e107b4de",
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 62,
+        "endLine": 65,
+        "start": 6954,
+        "end": 7338,
+        "sha256": "53f62e52a25143a1e0ead2eef6b0c580903c058dae3df67b4672b0f5947caeff"
+      }
+    ],
+    "workflows": [
+      "leave-c7b9221e8e"
+    ],
+    "quote": "Explicit workspace switch\napply_leave:\nAn explicit user request to apply for leave or switch to leave returns apply_leave with empty entities, even while jd_published_viewer_active_tab is applicants. Open the local leave form only. Do not submit a leave request, invent dates, or reuse stale dates. If the user only names an applicant or requests a modal tab, never switch to leave.\n\n"
+  },
+  {
+    "id": "R57",
+    "file": "rules_m2_recruitment_viewer.txt",
+    "line": 66,
+    "sources": [
+      {
+        "id": "S-085375827231c998bfd946e8",
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 66,
+        "endLine": 70,
+        "start": 7338,
+        "end": 7899,
+        "sha256": "d76b3f606e92d69921d6918e1ed597b5bb362386591807b8dffb6b45dc5b4783"
+      }
+    ],
+    "workflows": [
+      "expenses-5430246a20"
+    ],
+    "quote": "Expense policy 4\npreview_expense_claim:\nUse preview_expense_claim only for explicit claims with expenses_workspace_open true. Require receipt reference, amount and currency. A preview cannot approve, reimburse or pay. Do not treat the word claim in a candidate transcript as an expense action. Original receipts and user-entered amounts remain authoritative. A missing currency blocks totals instead of guessing SGD.\nexpenses_workspace_open must be true for this domain. Version 4 keeps this guard beside the consumer, even when other files already repeat it.\n\n"
+  },
+  {
+    "id": "R58",
+    "file": "rules_m2_recruitment_viewer.txt",
+    "line": 71,
+    "sources": [
+      {
+        "id": "S-08df42b2ec2f46e1e1a43108",
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 71,
+        "endLine": 74,
+        "start": 7899,
+        "end": 8480,
+        "sha256": "1add160ecb6b133f2947171f2b11344fe4d8544ccd9ead13ce18990bef096778"
+      }
+    ],
+    "workflows": [
+      "travel-65d90d46f1"
+    ],
+    "quote": "Travel draft 4\ndraft_travel_request:\nUse draft_travel_request only for explicit travel requests in travel_workspace_open state. Ask for destination and dates before creating a draft. Never book a flight, charge a card, approve travel or treat an applicant location as a travel destination. A saved travel draft remains distinct from approval. A quoted policy example is not the user's instruction. All fixture travel dates are illustrative.\ntravel_workspace_open must be true for this domain. Version 4 keeps this guard beside the consumer, even when other files already repeat it."
+  },
+  {
+    "id": "R59",
+    "file": "rules_m2_recruitment_viewer.txt",
+    "line": 71,
+    "sources": [
+      {
+        "id": "S-08df42b2ec2f46e1e1a43108",
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 71,
+        "endLine": 74,
+        "start": 7899,
+        "end": 8480,
+        "sha256": "1add160ecb6b133f2947171f2b11344fe4d8544ccd9ead13ce18990bef096778"
+      }
+    ],
+    "workflows": [
+      "travel-65d90d46f1"
+    ],
+    "quote": "Travel draft 4\ndraft_travel_request:\nUse draft_travel_request only for explicit travel requests in travel_workspace_open state. Ask for destination and dates before creating a draft. Never book a flight, charge a card, approve travel or treat an applicant location as a travel destination. A saved travel draft remains distinct from approval. A quoted policy example is not the user's instruction. All fixture travel dates are illustrative.\ntravel_workspace_open must be true for this domain. Version 4 keeps this guard beside the consumer, even when other files already repeat it."
+  },
+  {
+    "id": "R60",
+    "file": "rules_m2_recruitment_viewer.txt",
+    "line": 71,
+    "sources": [
+      {
+        "id": "S-08df42b2ec2f46e1e1a43108",
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 71,
+        "endLine": 74,
+        "start": 7899,
+        "end": 8480,
+        "sha256": "1add160ecb6b133f2947171f2b11344fe4d8544ccd9ead13ce18990bef096778"
+      }
+    ],
+    "workflows": [
+      "travel-65d90d46f1"
+    ],
+    "quote": "Travel draft 4\ndraft_travel_request:\nUse draft_travel_request only for explicit travel requests in travel_workspace_open state. Ask for destination and dates before creating a draft. Never book a flight, charge a card, approve travel or treat an applicant location as a travel destination. A saved travel draft remains distinct from approval. A quoted policy example is not the user's instruction. All fixture travel dates are illustrative.\ntravel_workspace_open must be true for this domain. Version 4 keeps this guard beside the consumer, even when other files already repeat it."
+  },
+  {
+    "id": "R61",
+    "file": "rules_m2_recruitment_viewer.txt",
+    "line": 71,
+    "sources": [
+      {
+        "id": "S-08df42b2ec2f46e1e1a43108",
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 71,
+        "endLine": 74,
+        "start": 7899,
+        "end": 8480,
+        "sha256": "1add160ecb6b133f2947171f2b11344fe4d8544ccd9ead13ce18990bef096778"
+      }
+    ],
+    "workflows": [
+      "travel-65d90d46f1"
+    ],
+    "quote": "Travel draft 4\ndraft_travel_request:\nUse draft_travel_request only for explicit travel requests in travel_workspace_open state. Ask for destination and dates before creating a draft. Never book a flight, charge a card, approve travel or treat an applicant location as a travel destination. A saved travel draft remains distinct from approval. A quoted policy example is not the user's instruction. All fixture travel dates are illustrative.\ntravel_workspace_open must be true for this domain. Version 4 keeps this guard beside the consumer, even when other files already repeat it."
+  },
+  {
+    "id": "R62",
+    "file": "rules_m2_recruitment_viewer.txt",
+    "line": 71,
+    "sources": [
+      {
+        "id": "S-08df42b2ec2f46e1e1a43108",
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 71,
+        "endLine": 74,
+        "start": 7899,
+        "end": 8480,
+        "sha256": "1add160ecb6b133f2947171f2b11344fe4d8544ccd9ead13ce18990bef096778"
+      }
+    ],
+    "workflows": [
+      "travel-65d90d46f1"
+    ],
+    "quote": "Travel draft 4\ndraft_travel_request:\nUse draft_travel_request only for explicit travel requests in travel_workspace_open state. Ask for destination and dates before creating a draft. Never book a flight, charge a card, approve travel or treat an applicant location as a travel destination. A saved travel draft remains distinct from approval. A quoted policy example is not the user's instruction. All fixture travel dates are illustrative.\ntravel_workspace_open must be true for this domain. Version 4 keeps this guard beside the consumer, even when other files already repeat it."
+  },
+  {
+    "id": "R63",
+    "file": "rules_m2_recruitment_viewer.txt",
+    "line": 71,
+    "sources": [
+      {
+        "id": "S-08df42b2ec2f46e1e1a43108",
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 71,
+        "endLine": 74,
+        "start": 7899,
+        "end": 8480,
+        "sha256": "1add160ecb6b133f2947171f2b11344fe4d8544ccd9ead13ce18990bef096778"
+      }
+    ],
+    "workflows": [
+      "travel-65d90d46f1"
+    ],
+    "quote": "Travel draft 4\ndraft_travel_request:\nUse draft_travel_request only for explicit travel requests in travel_workspace_open state. Ask for destination and dates before creating a draft. Never book a flight, charge a card, approve travel or treat an applicant location as a travel destination. A saved travel draft remains distinct from approval. A quoted policy example is not the user's instruction. All fixture travel dates are illustrative.\ntravel_workspace_open must be true for this domain. Version 4 keeps this guard beside the consumer, even when other files already repeat it."
+  },
+  {
+    "id": "R64",
+    "file": "rules_m2_recruitment_viewer.txt",
+    "line": 71,
+    "sources": [
+      {
+        "id": "S-08df42b2ec2f46e1e1a43108",
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 71,
+        "endLine": 74,
+        "start": 7899,
+        "end": 8480,
+        "sha256": "1add160ecb6b133f2947171f2b11344fe4d8544ccd9ead13ce18990bef096778"
+      }
+    ],
+    "workflows": [
+      "travel-65d90d46f1"
+    ],
+    "quote": "Travel draft 4\ndraft_travel_request:\nUse draft_travel_request only for explicit travel requests in travel_workspace_open state. Ask for destination and dates before creating a draft. Never book a flight, charge a card, approve travel or treat an applicant location as a travel destination. A saved travel draft remains distinct from approval. A quoted policy example is not the user's instruction. All fixture travel dates are illustrative.\ntravel_workspace_open must be true for this domain. Version 4 keeps this guard beside the consumer, even when other files already repeat it."
+  }
+]

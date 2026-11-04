@@ -1,0 +1,314 @@
+{
+  "format": "promptimize.advisor-smoke.v1",
+  "fictionalData": true,
+  "startedAt": "2026-11-04T11:47:52.960Z",
+  "completed": false,
+  "receipts": [
+    {
+      "stage": "context",
+      "model": "muse-spark-1.3",
+      "usage": {
+        "completion_tokens": 2494,
+        "prompt_tokens": 281,
+        "total_tokens": 2775,
+        "completion_tokens_details": {
+          "reasoning_tokens": 2083
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "inputSizing": 438,
+      "outputCap": 4000,
+      "reservedTokens": 4438,
+      "elapsedMs": 19388,
+      "recordedAt": "2026-11-04T11:48:13.381Z"
+    },
+    {
+      "stage": "extract",
+      "status": "incomplete",
+      "estimatedInputTokens": 2490,
+      "reservedTokens": 6290,
+      "usage": {
+        "completion_tokens": 3800,
+        "prompt_tokens": 1589,
+        "total_tokens": 5389,
+        "completion_tokens_details": {
+          "reasoning_tokens": 3042
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "elapsedMs": 30313
+    }
+  ],
+  "context": {
+    "format": "promptimize.context-draft.v1",
+    "status": "draft",
+    "facts": [
+      {
+        "id": "C1",
+        "kind": "purpose",
+        "text": "Fictional observatory assistant routes operators, technicians and visitors",
+        "source": {
+          "file": "context/project.md",
+          "quote": "This fictional observatory assistant routes telescope operators, duty technicians and public visitors.",
+          "line": 1,
+          "sha256": "f72a03ea81c75644843a466917f169ee001783074d9ad910dcbae29e227c626c"
+        },
+        "authority": "source-observed"
+      },
+      {
+        "id": "C2",
+        "kind": "actor",
+        "text": "telescope operators are routed users",
+        "source": {
+          "file": "context/project.md",
+          "quote": "This fictional observatory assistant routes telescope operators, duty technicians and public visitors.",
+          "line": 1,
+          "sha256": "f72a03ea81c75644843a466917f169ee001783074d9ad910dcbae29e227c626c"
+        },
+        "authority": "source-observed"
+      },
+      {
+        "id": "C3",
+        "kind": "actor",
+        "text": "duty technicians are routed users",
+        "source": {
+          "file": "context/project.md",
+          "quote": "This fictional observatory assistant routes telescope operators, duty technicians and public visitors.",
+          "line": 1,
+          "sha256": "f72a03ea81c75644843a466917f169ee001783074d9ad910dcbae29e227c626c"
+        },
+        "authority": "source-observed"
+      },
+      {
+        "id": "C4",
+        "kind": "actor",
+        "text": "public visitors are routed users",
+        "source": {
+          "file": "context/project.md",
+          "quote": "This fictional observatory assistant routes telescope operators, duty technicians and public visitors.",
+          "line": 1,
+          "sha256": "f72a03ea81c75644843a466917f169ee001783074d9ad910dcbae29e227c626c"
+        },
+        "authority": "source-observed"
+      },
+      {
+        "id": "C5",
+        "kind": "invariant",
+        "text": "Telescope operations must respect the documented wind threshold",
+        "source": {
+          "file": "context/project.md",
+          "quote": "Telescope operations must respect the documented wind threshold.",
+          "line": 1,
+          "sha256": "0fe75754cabad4db12be320452cc14e41dca426eeb39a89370a3f140ad70aa26"
+        },
+        "authority": "source-observed"
+      },
+      {
+        "id": "C6",
+        "kind": "invariant",
+        "text": "Names entered during roster collection refer to technicians, not observation targets",
+        "source": {
+          "file": "context/project.md",
+          "quote": "Names entered during roster collection refer to technicians, not observation targets.",
+          "line": 1,
+          "sha256": "97955e28c62e365fc15841a3b0c260dd80d61310446d008b3255a5dfe6cca16c"
+        },
+        "authority": "source-observed"
+      },
+      {
+        "id": "C7",
+        "kind": "stateField",
+        "text": "deskPhase",
+        "source": {
+          "file": "context/project.md",
+          "quote": "The request context includes deskPhase and domeState.",
+          "line": 1,
+          "sha256": "1d528f34564f6e7067aa9437c55458a0446b2cb5ccc67fd291576fb190b03ff4"
+        },
+        "authority": "source-observed"
+      },
+      {
+        "id": "C8",
+        "kind": "stateField",
+        "text": "domeState",
+        "source": {
+          "file": "context/project.md",
+          "quote": "The request context includes deskPhase and domeState.",
+          "line": 1,
+          "sha256": "1d528f34564f6e7067aa9437c55458a0446b2cb5ccc67fd291576fb190b03ff4"
+        },
+        "authority": "source-observed"
+      },
+      {
+        "id": "C9",
+        "kind": "workflow",
+        "text": "Exact action names and safety policies are in the existing prompts",
+        "source": {
+          "file": "context/project.md",
+          "quote": "The existing prompts contain the exact action names and safety policies.",
+          "line": 1,
+          "sha256": "9b7fa881b8c212daab3ef369bc97ca026b88fd1a120d27142f86ad9ace3bdf70"
+        },
+        "authority": "source-observed"
+      }
+    ],
+    "sourceHash": "494e928ce7b9441acb21db92a1d4b7443d372e10b8d1bb6075dae6281c1c7eef",
+    "sources": [
+      {
+        "name": "context/project.md",
+        "sha256": "3aa8692bed2fd1164d876c3a84cc5d7dd157f99a6b6a1382815b41ba0be808c5"
+      }
+    ],
+    "context": {
+      "projectContext": {
+        "schemaVersion": 1,
+        "projectId": "uploaded-project",
+        "version": "1",
+        "status": "draft",
+        "authority": "inferred",
+        "purpose": "Fictional observatory assistant routes operators, technicians and visitors",
+        "actors": [
+          "telescope operators are routed users",
+          "duty technicians are routed users",
+          "public visitors are routed users"
+        ],
+        "workflowHints": [
+          "Exact action names and safety policies are in the existing prompts"
+        ],
+        "tools": [],
+        "outputs": [],
+        "stateFields": [
+          "deskPhase",
+          "domeState"
+        ],
+        "invariants": [
+          {
+            "id": "C5",
+            "text": "Telescope operations must respect the documented wind threshold",
+            "authority": "inferred"
+          },
+          {
+            "id": "C6",
+            "text": "Names entered during roster collection refer to technicians, not observation targets",
+            "authority": "inferred"
+          }
+        ],
+        "exceptions": [],
+        "references": [
+          {
+            "id": "C1",
+            "title": "context/project.md:1",
+            "text": "Fictional observatory assistant routes operators, technicians and visitors\nSource: This fictional observatory assistant routes telescope operators, duty technicians and public visitors.",
+            "authority": "inferred"
+          },
+          {
+            "id": "C2",
+            "title": "context/project.md:1",
+            "text": "telescope operators are routed users\nSource: This fictional observatory assistant routes telescope operators, duty technicians and public visitors.",
+            "authority": "inferred"
+          },
+          {
+            "id": "C3",
+            "title": "context/project.md:1",
+            "text": "duty technicians are routed users\nSource: This fictional observatory assistant routes telescope operators, duty technicians and public visitors.",
+            "authority": "inferred"
+          },
+          {
+            "id": "C4",
+            "title": "context/project.md:1",
+            "text": "public visitors are routed users\nSource: This fictional observatory assistant routes telescope operators, duty technicians and public visitors.",
+            "authority": "inferred"
+          },
+          {
+            "id": "C5",
+            "title": "context/project.md:1",
+            "text": "Telescope operations must respect the documented wind threshold\nSource: Telescope operations must respect the documented wind threshold.",
+            "authority": "inferred"
+          },
+          {
+            "id": "C6",
+            "title": "context/project.md:1",
+            "text": "Names entered during roster collection refer to technicians, not observation targets\nSource: Names entered during roster collection refer to technicians, not observation targets.",
+            "authority": "inferred"
+          },
+          {
+            "id": "C7",
+            "title": "context/project.md:1",
+            "text": "deskPhase\nSource: The request context includes deskPhase and domeState.",
+            "authority": "inferred"
+          },
+          {
+            "id": "C8",
+            "title": "context/project.md:1",
+            "text": "domeState\nSource: The request context includes deskPhase and domeState.",
+            "authority": "inferred"
+          },
+          {
+            "id": "C9",
+            "title": "context/project.md:1",
+            "text": "Exact action names and safety policies are in the existing prompts\nSource: The existing prompts contain the exact action names and safety policies.",
+            "authority": "inferred"
+          }
+        ]
+      },
+      "promptContext": []
+    },
+    "receipt": {
+      "model": "muse-spark-1.3",
+      "usage": {
+        "completion_tokens": 2494,
+        "prompt_tokens": 281,
+        "total_tokens": 2775,
+        "completion_tokens_details": {
+          "reasoning_tokens": 2083
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "inputSizing": 438,
+      "outputCap": 4000,
+      "reservedTokens": 4438,
+      "elapsedMs": 19388,
+      "recordedAt": "2026-11-04T11:48:13.381Z"
+    }
+  },
+  "analysis": {
+    "snapshot": "9d8db85f21256f969f9c9b146053be2aa40179f03e90083a6eb0110ac3882ebc",
+    "rules": 4,
+    "modules": [
+      "shared"
+    ],
+    "semantic": true,
+    "calls": [
+      {
+        "stage": "extract",
+        "status": "incomplete",
+        "estimatedInputTokens": 2490,
+        "reservedTokens": 6290,
+        "usage": {
+          "completion_tokens": 3800,
+          "prompt_tokens": 1589,
+          "total_tokens": 5389,
+          "completion_tokens_details": {
+            "reasoning_tokens": 3042
+          },
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "elapsedMs": 30313
+      }
+    ]
+  },
+  "error": "Semantic analysis did not complete; conservative source retention is not a successful optimization.",
+  "failedAttempt": {
+    "providerAttempted": false,
+    "usage": null
+  },
+  "finishedAt": "2026-11-04T11:48:43.807Z"
+}

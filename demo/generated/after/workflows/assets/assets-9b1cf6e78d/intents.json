@@ -1,0 +1,32 @@
+[
+  {
+    "kind": "intent",
+    "intent": "view_asset_record",
+    "module": "assets-9b1cf6e78d",
+    "ruleIds": [
+      "R28",
+      "R31",
+      "R36",
+      "R40"
+    ],
+    "description": "Use view_asset_record only for explicit asset queries in assets_workspace_open state. Serial numbers are strings, not counts. Viewing equipment never transfers ownership. Ask for the serial number if it is missing",
+    "source": [
+      {
+        "file": "_core_jd_request_context.txt",
+        "line": 14
+      },
+      {
+        "file": "_core_jd_request_context.txt",
+        "line": 27
+      },
+      {
+        "file": "_core_jd_request_context.txt",
+        "line": 48
+      },
+      {
+        "file": "_core_jd_request_context.txt",
+        "line": 66
+      }
+    ]
+  }
+]

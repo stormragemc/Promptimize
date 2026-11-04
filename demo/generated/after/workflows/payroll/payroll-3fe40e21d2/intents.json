@@ -1,0 +1,32 @@
+[
+  {
+    "kind": "intent",
+    "intent": "export_payroll_preview",
+    "module": "payroll-3fe40e21d2",
+    "ruleIds": [
+      "R27",
+      "R32",
+      "R37",
+      "R41"
+    ],
+    "description": "Use export_payroll_preview only for an explicit payroll preview request with payroll_workspace_open true. A preview never pays anyone. Payroll periods use ISO year-month. Require payroll.read permission. Missing period must be requested, never inferred from recruitment state. Salary columns are fixture data only. Preserve currency units and never add salaries across currencies",
+    "source": [
+      {
+        "file": "_core_jd_request_context.txt",
+        "line": 9
+      },
+      {
+        "file": "_core_jd_request_context.txt",
+        "line": 32
+      },
+      {
+        "file": "_core_jd_request_context.txt",
+        "line": 53
+      },
+      {
+        "file": "_core_jd_request_context.txt",
+        "line": 71
+      }
+    ]
+  }
+]

@@ -366,7 +366,7 @@ function semanticCase(files,a,{mode,executionContext={},utterance,intent,require
   user = envelope;
  } else if (adapter === 'sample') {
   developer = 'You are an event operations assistant. Follow only these promptbase instructions:\n' + text + '\n\nReturn JSON only: {"action":"eligible|ineligible|lookup_event_status|ask_event_id|ask_confirmation|show_profile|cancel_booking|save_profile|escalate","event_id":"string or empty"}. A lookup action asks for a simulated tool result; do not infer its result. Never claim a side effect happened when no tool ran.';
-  user = utterance;
+  user = Object.keys(executionContext).length ? envelope : utterance;
  } else {
   developer = 'Follow these promptbase instructions. Return a JSON object. Do not execute side effects.\n\n' + text;
   user = envelope;

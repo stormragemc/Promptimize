@@ -1,0 +1,792 @@
+{
+  "format": "promptimize.advisor-smoke.v1",
+  "fictionalData": true,
+  "startedAt": "2026-11-04T11:54:31.190Z",
+  "completed": true,
+  "receipts": [
+    {
+      "stage": "context",
+      "model": "muse-spark-1.3",
+      "usage": {
+        "completion_tokens": 1009,
+        "prompt_tokens": 281,
+        "total_tokens": 1290,
+        "completion_tokens_details": {
+          "reasoning_tokens": 683
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "inputSizing": 438,
+      "outputCap": 6000,
+      "reservedTokens": 6438,
+      "elapsedMs": 6369,
+      "recordedAt": "2026-11-04T11:54:38.757Z"
+    },
+    {
+      "stage": "extract",
+      "status": "completed",
+      "estimatedInputTokens": 2517,
+      "reservedTokens": 8517,
+      "usage": {
+        "completion_tokens": 2059,
+        "prompt_tokens": 1601,
+        "total_tokens": 3660,
+        "completion_tokens_details": {
+          "reasoning_tokens": 525
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "model": "muse-spark-1.3",
+      "elapsedMs": 11037
+    },
+    {
+      "stage": "compare",
+      "status": "completed",
+      "estimatedInputTokens": 2051,
+      "reservedTokens": 8051,
+      "usage": {
+        "completion_tokens": 2678,
+        "prompt_tokens": 1330,
+        "total_tokens": 4008,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1768
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "model": "muse-spark-1.3",
+      "elapsedMs": 19214
+    },
+    {
+      "stage": "compare",
+      "status": "completed",
+      "estimatedInputTokens": 1911,
+      "reservedTokens": 7911,
+      "usage": {
+        "completion_tokens": 1568,
+        "prompt_tokens": 1256,
+        "total_tokens": 2824,
+        "completion_tokens_details": {
+          "reasoning_tokens": 996
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "model": "muse-spark-1.3",
+      "elapsedMs": 10241
+    },
+    {
+      "stage": "compare",
+      "status": "completed",
+      "estimatedInputTokens": 1781,
+      "reservedTokens": 7781,
+      "usage": {
+        "completion_tokens": 1219,
+        "prompt_tokens": 1141,
+        "total_tokens": 2360,
+        "completion_tokens_details": {
+          "reasoning_tokens": 542
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 241
+        }
+      },
+      "model": "muse-spark-1.3",
+      "elapsedMs": 7459
+    },
+    {
+      "stage": "architecture",
+      "model": "muse-wonder-1.0",
+      "usage": {
+        "completion_tokens": 2277,
+        "prompt_tokens": 3089,
+        "total_tokens": 5366,
+        "completion_tokens_details": {
+          "reasoning_tokens": 919
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "inputSizing": 3243,
+      "outputCap": 6500,
+      "reservedTokens": 9743,
+      "elapsedMs": 23693,
+      "recordedAt": "2026-11-04T11:55:42.062Z"
+    }
+  ],
+  "context": {
+    "format": "promptimize.context-draft.v1",
+    "status": "draft",
+    "facts": [
+      {
+        "id": "C1",
+        "kind": "purpose",
+        "text": "Assistant routes observatory users including operators, technicians and visitors",
+        "source": {
+          "file": "context/project.md",
+          "quote": "This fictional observatory assistant routes telescope operators, duty technicians and public visitors.",
+          "line": 1,
+          "sha256": "f72a03ea81c75644843a466917f169ee001783074d9ad910dcbae29e227c626c"
+        },
+        "authority": "source-observed"
+      },
+      {
+        "id": "C2",
+        "kind": "actor",
+        "text": "Telescope operators, duty technicians and public visitors are routed users",
+        "source": {
+          "file": "context/project.md",
+          "quote": "This fictional observatory assistant routes telescope operators, duty technicians and public visitors.",
+          "line": 1,
+          "sha256": "f72a03ea81c75644843a466917f169ee001783074d9ad910dcbae29e227c626c"
+        },
+        "authority": "source-observed"
+      },
+      {
+        "id": "C3",
+        "kind": "invariant",
+        "text": "Telescope operations must respect the documented wind threshold",
+        "source": {
+          "file": "context/project.md",
+          "quote": "Telescope operations must respect the documented wind threshold.",
+          "line": 1,
+          "sha256": "0fe75754cabad4db12be320452cc14e41dca426eeb39a89370a3f140ad70aa26"
+        },
+        "authority": "source-observed"
+      },
+      {
+        "id": "C4",
+        "kind": "invariant",
+        "text": "Names entered during roster collection are technicians, not observation targets",
+        "source": {
+          "file": "context/project.md",
+          "quote": "Names entered during roster collection refer to technicians, not observation targets.",
+          "line": 1,
+          "sha256": "97955e28c62e365fc15841a3b0c260dd80d61310446d008b3255a5dfe6cca16c"
+        },
+        "authority": "source-observed"
+      },
+      {
+        "id": "C5",
+        "kind": "stateField",
+        "text": "deskPhase",
+        "source": {
+          "file": "context/project.md",
+          "quote": "The request context includes deskPhase and domeState.",
+          "line": 1,
+          "sha256": "1d528f34564f6e7067aa9437c55458a0446b2cb5ccc67fd291576fb190b03ff4"
+        },
+        "authority": "source-observed"
+      },
+      {
+        "id": "C6",
+        "kind": "stateField",
+        "text": "domeState",
+        "source": {
+          "file": "context/project.md",
+          "quote": "The request context includes deskPhase and domeState.",
+          "line": 1,
+          "sha256": "1d528f34564f6e7067aa9437c55458a0446b2cb5ccc67fd291576fb190b03ff4"
+        },
+        "authority": "source-observed"
+      },
+      {
+        "id": "C7",
+        "kind": "invariant",
+        "text": "Exact action names and safety policies are in the existing prompts",
+        "source": {
+          "file": "context/project.md",
+          "quote": "The existing prompts contain the exact action names and safety policies.",
+          "line": 1,
+          "sha256": "9b7fa881b8c212daab3ef369bc97ca026b88fd1a120d27142f86ad9ace3bdf70"
+        },
+        "authority": "source-observed"
+      }
+    ],
+    "sourceHash": "494e928ce7b9441acb21db92a1d4b7443d372e10b8d1bb6075dae6281c1c7eef",
+    "sources": [
+      {
+        "name": "context/project.md",
+        "sha256": "3aa8692bed2fd1164d876c3a84cc5d7dd157f99a6b6a1382815b41ba0be808c5"
+      }
+    ],
+    "context": {
+      "projectContext": {
+        "schemaVersion": 1,
+        "projectId": "uploaded-project",
+        "version": "1",
+        "status": "draft",
+        "authority": "inferred",
+        "purpose": "Assistant routes observatory users including operators, technicians and visitors",
+        "actors": [
+          "Telescope operators, duty technicians and public visitors are routed users"
+        ],
+        "workflowHints": [],
+        "tools": [],
+        "outputs": [],
+        "stateFields": [
+          "deskPhase",
+          "domeState"
+        ],
+        "invariants": [
+          {
+            "id": "C3",
+            "text": "Telescope operations must respect the documented wind threshold",
+            "authority": "inferred"
+          },
+          {
+            "id": "C4",
+            "text": "Names entered during roster collection are technicians, not observation targets",
+            "authority": "inferred"
+          },
+          {
+            "id": "C7",
+            "text": "Exact action names and safety policies are in the existing prompts",
+            "authority": "inferred"
+          }
+        ],
+        "exceptions": [],
+        "references": [
+          {
+            "id": "C1",
+            "title": "context/project.md:1",
+            "text": "Assistant routes observatory users including operators, technicians and visitors\nSource: This fictional observatory assistant routes telescope operators, duty technicians and public visitors.",
+            "authority": "inferred"
+          },
+          {
+            "id": "C2",
+            "title": "context/project.md:1",
+            "text": "Telescope operators, duty technicians and public visitors are routed users\nSource: This fictional observatory assistant routes telescope operators, duty technicians and public visitors.",
+            "authority": "inferred"
+          },
+          {
+            "id": "C3",
+            "title": "context/project.md:1",
+            "text": "Telescope operations must respect the documented wind threshold\nSource: Telescope operations must respect the documented wind threshold.",
+            "authority": "inferred"
+          },
+          {
+            "id": "C4",
+            "title": "context/project.md:1",
+            "text": "Names entered during roster collection are technicians, not observation targets\nSource: Names entered during roster collection refer to technicians, not observation targets.",
+            "authority": "inferred"
+          },
+          {
+            "id": "C5",
+            "title": "context/project.md:1",
+            "text": "deskPhase\nSource: The request context includes deskPhase and domeState.",
+            "authority": "inferred"
+          },
+          {
+            "id": "C6",
+            "title": "context/project.md:1",
+            "text": "domeState\nSource: The request context includes deskPhase and domeState.",
+            "authority": "inferred"
+          },
+          {
+            "id": "C7",
+            "title": "context/project.md:1",
+            "text": "Exact action names and safety policies are in the existing prompts\nSource: The existing prompts contain the exact action names and safety policies.",
+            "authority": "inferred"
+          }
+        ]
+      },
+      "promptContext": []
+    },
+    "receipt": {
+      "model": "muse-spark-1.3",
+      "usage": {
+        "completion_tokens": 1009,
+        "prompt_tokens": 281,
+        "total_tokens": 1290,
+        "completion_tokens_details": {
+          "reasoning_tokens": 683
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "inputSizing": 438,
+      "outputCap": 6000,
+      "reservedTokens": 6438,
+      "elapsedMs": 6369,
+      "recordedAt": "2026-11-04T11:54:38.757Z"
+    }
+  },
+  "analysis": {
+    "snapshot": "79080d3d3876a002a89e95137d7c7cccb6c4ce24a1be50d2f0d8c470de41786d",
+    "rules": 21,
+    "modules": [
+      "confirmation-23e6f62757",
+      "roster-collection-7d490e812f",
+      "safety-f86c1570f8",
+      "safety-gate-581f568f60",
+      "safety-notice-f6b170e5c9",
+      "shared",
+      "target-selection-d19ab2b3de",
+      "telescope-operator-247979276f",
+      "visit-status-9309abf7fa",
+      "visitor-badge-878e5dab75",
+      "wind-interlock-5f63881b40"
+    ],
+    "semantic": true,
+    "calls": [
+      {
+        "stage": "extract",
+        "status": "completed",
+        "estimatedInputTokens": 2517,
+        "reservedTokens": 8517,
+        "usage": {
+          "completion_tokens": 2059,
+          "prompt_tokens": 1601,
+          "total_tokens": 3660,
+          "completion_tokens_details": {
+            "reasoning_tokens": 525
+          },
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "model": "muse-spark-1.3",
+        "elapsedMs": 11037
+      },
+      {
+        "stage": "compare",
+        "status": "completed",
+        "estimatedInputTokens": 2051,
+        "reservedTokens": 8051,
+        "usage": {
+          "completion_tokens": 2678,
+          "prompt_tokens": 1330,
+          "total_tokens": 4008,
+          "completion_tokens_details": {
+            "reasoning_tokens": 1768
+          },
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "model": "muse-spark-1.3",
+        "elapsedMs": 19214
+      },
+      {
+        "stage": "compare",
+        "status": "completed",
+        "estimatedInputTokens": 1911,
+        "reservedTokens": 7911,
+        "usage": {
+          "completion_tokens": 1568,
+          "prompt_tokens": 1256,
+          "total_tokens": 2824,
+          "completion_tokens_details": {
+            "reasoning_tokens": 996
+          },
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "model": "muse-spark-1.3",
+        "elapsedMs": 10241
+      },
+      {
+        "stage": "compare",
+        "status": "completed",
+        "estimatedInputTokens": 1781,
+        "reservedTokens": 7781,
+        "usage": {
+          "completion_tokens": 1219,
+          "prompt_tokens": 1141,
+          "total_tokens": 2360,
+          "completion_tokens_details": {
+            "reasoning_tokens": 542
+          },
+          "prompt_tokens_details": {
+            "cached_tokens": 241
+          }
+        },
+        "model": "muse-spark-1.3",
+        "elapsedMs": 7459
+      }
+    ]
+  },
+  "design": {
+    "flow": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 800 650\" role=\"img\" aria-labelledby=\"flow-title flow-desc\"><title id=\"flow-title\">Compact context with a conditional fallback</title><desc id=\"flow-desc\">A request selects compact context. Ready context proceeds to the model. Otherwise expand once. If still unresolved, stop and ask for clarification.</desc><defs><linearGradient id=\"bg\"><stop stop-color=\"#f0f0f0\"/><stop offset=\".6\" stop-color=\"#e8dcff\"/><stop offset=\"1\" stop-color=\"#ffd9f4\"/></linearGradient></defs><rect width=\"800\" height=\"650\" rx=\"24\" fill=\"url(#bg)\"/><g font-family=\"sans-serif\" fill=\"#23172f\"><text x=\"30\" y=\"45\" font-size=\"24\">Load less. Expand only when needed.</text><text x=\"30\" y=\"73\" font-size=\"14\">Suggested flow \u00b7 79080d3d3876 \u00b7 validate before adoption</text></g><g fill=\"none\" stroke=\"#6342bd\" stroke-width=\"2\"><path d=\"M375 160v40m-5-6 5 6 5-6M375 260v40m-5-6 5 6 5-6M375 360v160m-5-6 5 6 5-6M500 330h145v70m-5-6 5 6 5-6M645 460v90H500m6-5-6 5 6 5M520 430H280m6-5-6 5 6 5\"/></g><g font-family=\"sans-serif\" font-size=\"13\" fill=\"#51415f\"><text x=\"388\" y=\"490\">ready</text><text x=\"525\" y=\"318\">needs context</text><text x=\"552\" y=\"535\">ready</text><text x=\"304\" y=\"419\">still unresolved</text></g><rect x=\"250\" y=\"100\" width=\"250\" height=\"60\" rx=\"12\" fill=\"white\"/><g font-family=\"sans-serif\" fill=\"#23172f\"><text x=\"264\" y=\"125\" font-size=\"17\">User request</text><text x=\"264\" y=\"146\" font-size=\"12\">Message + application state</text></g><rect x=\"250\" y=\"200\" width=\"250\" height=\"60\" rx=\"12\" fill=\"#563bdf\"/><g font-family=\"sans-serif\" fill=\"white\"><text x=\"264\" y=\"225\" font-size=\"17\">Compact context</text><text x=\"264\" y=\"246\" font-size=\"12\">Shared + relevant workflow rules</text></g><rect x=\"250\" y=\"300\" width=\"250\" height=\"60\" rx=\"12\" fill=\"white\"/><g font-family=\"sans-serif\" fill=\"#23172f\"><text x=\"264\" y=\"325\" font-size=\"17\">Readiness check</text><text x=\"264\" y=\"346\" font-size=\"12\">Required context available?</text></g><rect x=\"520\" y=\"400\" width=\"250\" height=\"60\" rx=\"12\" fill=\"white\"/><g font-family=\"sans-serif\" fill=\"#23172f\"><text x=\"534\" y=\"425\" font-size=\"17\">Expand once</text><text x=\"534\" y=\"446\" font-size=\"12\">Broader context + references</text></g><rect x=\"30\" y=\"400\" width=\"250\" height=\"60\" rx=\"12\" fill=\"white\"/><g font-family=\"sans-serif\" fill=\"#23172f\"><text x=\"44\" y=\"425\" font-size=\"17\">Stop / clarify</text><text x=\"44\" y=\"446\" font-size=\"12\">Required state still missing</text></g><rect x=\"250\" y=\"520\" width=\"250\" height=\"60\" rx=\"12\" fill=\"white\"/><g font-family=\"sans-serif\" fill=\"#23172f\"><text x=\"264\" y=\"545\" font-size=\"17\">Meta response</text><text x=\"264\" y=\"566\" font-size=\"12\">Check behavior, tokens and timing</text></g><text x=\"30\" y=\"622\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#51415f\">Promptimize \u00b7 exact flow diagram \u00b7 no measured improvement is implied</text></svg>",
+    "format": "promptimize.architecture.v1",
+    "snapshot": "79080d3d3876a002a89e95137d7c7cccb6c4ce24a1be50d2f0d8c470de41786d",
+    "contextFingerprint": "2b9351929193e6d166ab4dba6e9a0584e92c7c60eb1c93887ce20b8a25100024",
+    "generatedAt": "2026-11-04T11:55:42.063Z",
+    "summary": "The project already has workflow-specific modules plus a shared module, and the existing semantic runtime already supports compact context, dependency closure, and one broader pre-generation expansion. That separation is real, but the supplied character-based estimate does not establish savings: at the assumed 10% fallback rate, expected input tokens are about 409 versus a 341-token baseline, an estimated -19.8% saving. The adapter below therefore delegates selection to the existing runtime, validates only the supplied state-field shapes, passes no invented workflow hint, and returns the runtime result unchanged so unresolved routing can trigger clarification.",
+    "techniques": [
+      {
+        "id": "selective-loading",
+        "status": "already-present",
+        "title": "Selective workflow loading is already present",
+        "why": "The supplied module map separates wind interlock, roster collection, target selection, confirmation, visitor, and status concerns instead of placing every rule only in shared. Phase-specific rules such as roster and target selection are isolated in their own modules.",
+        "implementation": "Keep using the reviewed semantic runtime through runtime_bridge.prepare_request. The generated adapter makes one prepare_request(context, utterance) call, supplies no workflow hint, and returns the ready or unresolved result unchanged. Do not add loader calls or duplicate module-selection logic.",
+        "risk": "A wrong compact selection can omit a safety or phase rule, especially where a name means a technician during roster collection but a target in another phase.",
+        "validation": "Run paired tests for identical expected action, entities, and final state across roster, target-selection, wind, confirmation, visitor, and ambiguous requests before claiming any behavioral equivalence or saving.",
+        "evidence": [
+          "R2",
+          "R8",
+          "R10"
+        ]
+      },
+      {
+        "id": "dependency-aware-loading",
+        "status": "already-present",
+        "title": "Dependency closure is already present",
+        "why": "Each listed candidate module includes the shared rules in the estimate, showing that workflow rules are intended to travel with their shared headings and assembly context rather than alone.",
+        "implementation": "Leave closure construction in the existing semantic runtime. Do not strip the shared rules in the adapter and do not hand-build dependency lists. Treat the supplied estimate as unmeasured because it depends on traffic mix, fallback rate, and one broader expansion.",
+        "risk": "Removing apparently empty shared headings or assembly context could change interpretation, while keeping all shared content limits possible savings.",
+        "validation": "Test boundary and cross-workflow cases, including safety confirmation while another workflow is active, missing deskPhase or domeState, and one broader expansion after an unresolved compact attempt.",
+        "evidence": [
+          "R1",
+          "R4",
+          "R21"
+        ]
+      },
+      {
+        "id": "deterministic-routing",
+        "status": "recommend",
+        "title": "Validate state shape, not invented routes",
+        "why": "The supplied context explicitly includes deskPhase and domeState, and the phase distinction matters: roster collection must select a technician rather than an observation target, while target selection uses the target rule.",
+        "implementation": "In templates/project_adapter.py, accept deskPhase and domeState only as strings when present and require utterance to be a non-empty string. Do not compare them with invented phase or dome values, do not invent workflow IDs or action names, and pass no workflow hint to prepare_request, leaving semantic selection to the runtime.",
+        "risk": "Adding literal phase checks not supplied by the existing prompts could misroute requests or override the semantic selector; over-strict validation could also reject valid context objects produced by the host.",
+        "validation": "Test present, missing, null, and non-string deskPhase and domeState values; ambiguous names spanning roster and target workflows; and confirmation that unresolved results are returned for clarification rather than guessed.",
+        "evidence": [
+          "R8",
+          "R10",
+          "R12"
+        ]
+      },
+      {
+        "id": "prompt-caching",
+        "status": "defer",
+        "title": "Defer prompt caching until measured",
+        "why": "Shared content appears in every module estimate, which makes caching plausible, but the supplied estimate explicitly excludes cache discounts and gives no measured cache hit, latency, or cost data.",
+        "implementation": "Do not add cache keys, cache headers, providers, or model changes in this adapter. First instrument actual input, cached-input, output, reasoning, and response-time fields through the existing deployment path, separately from this wrapper.",
+        "risk": "Assuming a stable shared prefix can fail if context ordering, user state, or workflow content changes; unsupported cache claims could also hide the negative estimated input saving.",
+        "validation": "Run repeated identical-prefix requests and mixed-workflow traffic, measure cache eligibility and hits, and compare total cost and response time against the uncached semantic runtime before adoption.",
+        "evidence": [
+          "R1",
+          "R3",
+          "R5"
+        ]
+      }
+    ],
+    "files": [
+      {
+        "path": "templates/project_adapter.py",
+        "content": "\"\"\"Project adapter for the fictional observatory assistant.\n\nThe existing semantic runtime performs routing, compact context loading,\ndependency closure, and one broader pre-generation expansion. This adapter\nonly validates the shapes of the source-explicit context fields and then\ndelegates once to the reviewed runtime bridge. It deliberately supplies no\nworkflow hint and invents no phase values, workflow IDs, or action names.\n\"\"\"\n\nfrom runtime_bridge import prepare_request\n\n\n_FIELD_NAMES = (\"deskPhase\", \"domeState\")\n\n\ndef _validate_context(context):\n    if not isinstance(context, dict):\n        raise TypeError(\"context must be a dict\")\n    for field_name in _FIELD_NAMES:\n        if field_name in context and context[field_name] is not None:\n            if not isinstance(context[field_name], str):\n                raise TypeError(f\"{field_name} must be a string when present\")\n\n\ndef build_request(context, utterance):\n    \"\"\"Return the runtime bridge result for one observatory request.\n\n    ``deskPhase`` and ``domeState`` are validated only as optional string\n    fields because their allowed values are owned by the existing prompts\n    and runtime, not by this adapter. Unclear routing is therefore left to\n    the semantic selector: a ready result is used as returned, while an\n    unresolved result should be surfaced by the caller for clarification.\n    \"\"\"\n    _validate_context(context)\n    if not isinstance(utterance, str) or not utterance.strip():\n        raise ValueError(\"utterance must be a non-empty string\")\n    return prepare_request(context, utterance)",
+        "reviewRequired": true,
+        "executed": false
+      }
+    ],
+    "projection": {
+      "kind": "character-based-scenario-estimate",
+      "measured": false,
+      "baselineChars": 1363,
+      "compactChars": 950,
+      "broadChars": 2827,
+      "fallbackRate": 0.1,
+      "routingChars": 400,
+      "expectedChars": 1633,
+      "baselineInputTokens": 341,
+      "expectedInputTokens": 409,
+      "tokenRange": {
+        "baseline": [
+          273,
+          455
+        ],
+        "candidate": [
+          327,
+          545
+        ]
+      },
+      "inputSavingsPercent": -19.8,
+      "breakEvenFallbackRate": 0.004633887513264953,
+      "sensitivity": [
+        {
+          "fallbackRate": 0,
+          "expectedInputTokens": 338,
+          "inputSavingsPercent": 1
+        },
+        {
+          "fallbackRate": 0.1,
+          "expectedInputTokens": 409,
+          "inputSavingsPercent": -19.8
+        },
+        {
+          "fallbackRate": 0.25,
+          "expectedInputTokens": 515,
+          "inputSavingsPercent": -50.9
+        },
+        {
+          "fallbackRate": 0.5,
+          "expectedInputTokens": 691,
+          "inputSavingsPercent": -102.7
+        },
+        {
+          "fallbackRate": 1,
+          "expectedInputTokens": 1045,
+          "inputSavingsPercent": -206.4
+        }
+      ],
+      "modules": [
+        {
+          "module": "confirmation-23e6f62757",
+          "ruleIds": [
+            "R1",
+            "R3",
+            "R5",
+            "R7",
+            "R9",
+            "R11",
+            "R13",
+            "R15",
+            "R17",
+            "R19",
+            "R21",
+            "R4"
+          ],
+          "compactChars": 988,
+          "approxInputTokens": 247
+        },
+        {
+          "module": "roster-collection-7d490e812f",
+          "ruleIds": [
+            "R1",
+            "R3",
+            "R5",
+            "R7",
+            "R9",
+            "R11",
+            "R13",
+            "R15",
+            "R17",
+            "R19",
+            "R21",
+            "R10"
+          ],
+          "compactChars": 1046,
+          "approxInputTokens": 262
+        },
+        {
+          "module": "safety-f86c1570f8",
+          "ruleIds": [
+            "R1",
+            "R3",
+            "R5",
+            "R7",
+            "R9",
+            "R11",
+            "R13",
+            "R15",
+            "R17",
+            "R19",
+            "R21",
+            "R6"
+          ],
+          "compactChars": 900,
+          "approxInputTokens": 225
+        },
+        {
+          "module": "safety-gate-581f568f60",
+          "ruleIds": [
+            "R1",
+            "R3",
+            "R5",
+            "R7",
+            "R9",
+            "R11",
+            "R13",
+            "R15",
+            "R17",
+            "R19",
+            "R21",
+            "R12"
+          ],
+          "compactChars": 899,
+          "approxInputTokens": 225
+        },
+        {
+          "module": "safety-notice-f6b170e5c9",
+          "ruleIds": [
+            "R1",
+            "R3",
+            "R5",
+            "R7",
+            "R9",
+            "R11",
+            "R13",
+            "R15",
+            "R17",
+            "R19",
+            "R21",
+            "R18"
+          ],
+          "compactChars": 891,
+          "approxInputTokens": 223
+        },
+        {
+          "module": "target-selection-d19ab2b3de",
+          "ruleIds": [
+            "R1",
+            "R3",
+            "R5",
+            "R7",
+            "R9",
+            "R11",
+            "R13",
+            "R15",
+            "R17",
+            "R19",
+            "R21",
+            "R8"
+          ],
+          "compactChars": 987,
+          "approxInputTokens": 247
+        },
+        {
+          "module": "telescope-operator-247979276f",
+          "ruleIds": [
+            "R1",
+            "R3",
+            "R5",
+            "R7",
+            "R9",
+            "R11",
+            "R13",
+            "R15",
+            "R17",
+            "R19",
+            "R21",
+            "R14"
+          ],
+          "compactChars": 930,
+          "approxInputTokens": 233
+        },
+        {
+          "module": "visit-status-9309abf7fa",
+          "ruleIds": [
+            "R1",
+            "R3",
+            "R5",
+            "R7",
+            "R9",
+            "R11",
+            "R13",
+            "R15",
+            "R17",
+            "R19",
+            "R21",
+            "R20"
+          ],
+          "compactChars": 900,
+          "approxInputTokens": 225
+        },
+        {
+          "module": "visitor-badge-878e5dab75",
+          "ruleIds": [
+            "R1",
+            "R3",
+            "R5",
+            "R7",
+            "R9",
+            "R11",
+            "R13",
+            "R15",
+            "R17",
+            "R19",
+            "R21",
+            "R16"
+          ],
+          "compactChars": 919,
+          "approxInputTokens": 230
+        },
+        {
+          "module": "wind-interlock-5f63881b40",
+          "ruleIds": [
+            "R1",
+            "R3",
+            "R5",
+            "R7",
+            "R9",
+            "R11",
+            "R13",
+            "R15",
+            "R17",
+            "R19",
+            "R21",
+            "R2"
+          ],
+          "compactChars": 1039,
+          "approxInputTokens": 260
+        }
+      ],
+      "assumptions": [
+        "Equal request share across listed workflow modules; replace with your traffic mix.",
+        "Token counts approximate instruction characters / 4, with a 3\u20135 characters/token range. They are not Meta token counts.",
+        "Fallback scenario adds a broader retry after a compact attempt; actual pre-generation expansion can cost less.",
+        "Shared rules, approved dependency closure, routing overhead and approved reference lengths are included.",
+        "User messages, tools, full message envelope, generated/reasoning output, cache discounts and optimization setup cost are excluded.",
+        "This is an input-cost scenario at the same model/rate; accuracy, total cost and speed improvements require paired live tests."
+      ],
+      "nextTests": [
+        "Boundary cases and cross-workflow exceptions",
+        "Ambiguous requests and missing state",
+        "Routing mistakes and broader fallback",
+        "Identical expected action, entities and final state",
+        "Actual input/output/reasoning/cache usage and response time"
+      ]
+    },
+    "receipt": {
+      "model": "muse-wonder-1.0",
+      "usage": {
+        "completion_tokens": 2277,
+        "prompt_tokens": 3089,
+        "total_tokens": 5366,
+        "completion_tokens_details": {
+          "reasoning_tokens": 919
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "inputSizing": 3243,
+      "outputCap": 6500,
+      "reservedTokens": 9743,
+      "elapsedMs": 23693,
+      "recordedAt": "2026-11-04T11:55:42.062Z"
+    },
+    "modelSelection": {
+      "model": "muse-wonder-1.0",
+      "reason": "You selected Muse Wonder for a deeper design pass."
+    },
+    "scope": "Advisory templates only. No candidate edits, generated-code execution or measured performance claim."
+  },
+  "kitFiles": [
+    "templates/project_adapter.py",
+    "templates/runtime_bridge.py",
+    "architecture.json",
+    "flow.svg",
+    "muse-image-prompt.txt",
+    "IMPLEMENTATION.md"
+  ],
+  "finishedAt": "2026-11-04T11:55:42.067Z",
+  "localValidation": {
+    "pythonSyntax": true,
+    "isolatedReadyAndUnresolvedPassthrough": true,
+    "fieldTypeCheck": true,
+    "productionIntegrationTested": false,
+    "imageGenerationTested": false
+  },
+  "executionCommit": "e675da526e48db883f7584a5e88028c412cc8f79"
+}

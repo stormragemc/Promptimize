@@ -1,0 +1,32 @@
+[
+  {
+    "kind": "intent",
+    "intent": "preview_expense_claim",
+    "module": "expenses-5430246a20",
+    "ruleIds": [
+      "R45",
+      "R49",
+      "R52",
+      "R57"
+    ],
+    "description": "Use preview_expense_claim only for explicit claims with expenses_workspace_open true, requiring receipt reference, amount and currency",
+    "source": [
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 14
+      },
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 32
+      },
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 45
+      },
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 66
+      }
+    ]
+  }
+]

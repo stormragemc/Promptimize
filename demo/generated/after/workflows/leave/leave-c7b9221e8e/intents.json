@@ -1,0 +1,32 @@
+[
+  {
+    "kind": "intent",
+    "intent": "apply_leave",
+    "module": "leave-c7b9221e8e",
+    "ruleIds": [
+      "R11",
+      "R30",
+      "R43",
+      "R56"
+    ],
+    "description": "an explicit user request to apply for leave or switch to leave returns apply_leave with empty entities and opens the local leave form only",
+    "source": [
+      {
+        "file": "_core.txt",
+        "line": 43
+      },
+      {
+        "file": "_core_jd_request_context.txt",
+        "line": 23
+      },
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 5
+      },
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 62
+      }
+    ]
+  }
+]

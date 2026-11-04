@@ -6,15 +6,15 @@ ROOT = Path(__file__).resolve().parent
 BASE = "https://api.meta.ai/v1"
 MODEL = "muse-spark-1.3"
 
-def messages(context, utterance, baseline=False):
+def messages(context, utterance, baseline=False, route_intent=None):
     manifest = json.loads((ROOT / "manifest.json").read_text(encoding="utf-8"))
-    text = (ROOT / "baseline.md").read_text(encoding="utf-8") if baseline else load_context(context)
+    text = (ROOT / "baseline.md").read_bytes().decode("utf-8") if baseline else load_context({**context, "intent": route_intent} if route_intent else context)
     if manifest["adapter"] == "jd-viewer-v1":
         developer = 'Classify the HR assistant request using the following instructions. Return JSON only: {"intent":"canonical intent name","entities":{}}. Preserve canonical entity field names. Do not execute HR actions.\n\n' + text
         user = json.dumps({"request_context": context, "utterance": utterance}, ensure_ascii=False, separators=(",", ":"))
     else:
         developer = 'You are an event operations assistant. Follow only these promptbase instructions:\n' + text + '\n\nReturn JSON only: {"action":"eligible|ineligible|lookup_event_status|ask_event_id|ask_confirmation|show_profile|cancel_booking|save_profile|escalate","event_id":"string or empty"}. A lookup action asks for a simulated tool result; do not infer its result. Never claim a side effect happened when no tool ran.'
-        user = utterance
+        user = json.dumps({"request_context": context, "utterance": utterance}, ensure_ascii=False, separators=(",", ":")) if context else utterance
     return [{"role":"developer", "content":developer}, {"role":"user", "content":user}]
 
 def post(path, body, key):
@@ -59,7 +59,7 @@ def main():
         request=prepared["messages"]
     else:
         if args.intent or args.require_rule: p.error("Selection hints require a semantic bundle.")
-        request=messages(context,utterance,args.mode=="baseline")
+        request=messages(context,utterance,args.mode=="baseline",case["intent"] if case and manifest["adapter"] != "jd-viewer-v1" else None)
     receipt={"contextSelection":selection} if selection is not None else {}
     if args.dry_run:
         print(json.dumps({"mode":args.mode,"messages":request,"generation_started":False,**receipt},ensure_ascii=False,indent=2));return
