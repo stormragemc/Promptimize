@@ -2,7 +2,8 @@
 const test=require('node:test'),assert=require('node:assert/strict'),vm=require('node:vm');
 const {readFileSync}=require('node:fs');const {join}=require('node:path');
 const {digest}=require('../../api/_bundle');
-const routes={'/api/evaluation-plan':require('../../api/evaluation-plan'),'/api/evaluation-preflight':require('../../api/evaluation-preflight'),'/api/evaluation-case':require('../../api/evaluation-case')};
+const dispatch=require('../../api/evaluation');
+const routes=Object.fromEntries(['plan','preflight','case'].map(operation=>['/api/evaluation-'+operation,(req,res)=>dispatch({...req,query:{operation}},res)]));
 const root=join(__dirname,'../..');
 function dom(){
  const nodes=new Map(),dynamic=new Map();

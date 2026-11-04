@@ -17,7 +17,7 @@ The newer comparison recovery is applied to the reviewed-plan endpoints, rather 
 
 ## Checks
 
-- `node --test tests/backend/*.test.cjs`: 94 tests, deterministic provider and functional DOM fixtures.
+- `node --test tests/backend/*.test.cjs`: 95 tests, deterministic provider and functional DOM fixtures.
 - `node test-contract.cjs`, `node test-jd-adapter.cjs`, `node test-review.cjs`, `node test-simulation.cjs`.
 - `node tests/browser/build-experience-fixture.cjs`: isolated synthetic visual fixture, with all combined assets inlined.
 - `node tests/check-build.cjs`: syntax/asset verification and both app archives, no provider calls.
@@ -28,7 +28,7 @@ No fresh paid Meta benchmark or browser visual assessment is claimed for the int
 
 ## Deployment
 
-`vercel.json` explicitly sets the static output directory to the repository root (`.`), matching this app’s root-level HTML/CSS/JS and avoiding Vercel’s default `public` folder assumption. The build also packages the Forma ZIP downloads without making model calls.
+`vercel.json` explicitly sets the static output directory to the repository root (`.`), matching this app’s root-level HTML/CSS/JS and avoiding Vercel’s default `public` folder assumption. The build also packages the Forma ZIP downloads without making model calls. The three public evaluation URLs rewrite to a single allowlisted evaluation dispatcher, keeping the combined deployment within the existing 12-function limit. Plan, preflight and case logic remain independent internal modules; requests and frontend URLs are unchanged.
 
 ## Manual review
 

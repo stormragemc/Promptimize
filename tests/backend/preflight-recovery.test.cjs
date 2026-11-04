@@ -53,7 +53,7 @@ test('default sample facts resolve all six cases and the lookup follow-ups witho
 });
 test('reviewed plans retain missing-state recovery, repetition reserves and exact follow-up requests',async t=>{
  const {createPlan,approvePlan}=require('../../api/_evaluation');
- const reviewedPreflight=require('../../api/evaluation-preflight'),reviewedRun=require('../../api/evaluation-case');
+ const reviewedPreflight=require('../../api/_evaluation-preflight'),reviewedRun=require('../../api/_evaluation-case');
  const a=await analysis(),original=JSON.stringify(a),requests=provider(t,[sample.LOOKUP,{action:'eligible'}]);
  const draft=createPlan(files,a);draft.repetitions=2;draft.budgetLimit=100000;
  const broken=structuredClone(draft);broken.cases.find(c=>c.id==='T04').followupContext={};

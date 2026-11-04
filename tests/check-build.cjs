@@ -4,6 +4,8 @@ const sources=['app.js','advisor.js','preflight-ui.js','sample-contract.js',...f
 for(const source of sources)new vm.Script(fs.readFileSync(source,'utf8'),{filename:source});
 for(const [,src]of fs.readFileSync('index.html','utf8').matchAll(/<script src="([^"]+)"/g)){const file=src.replace(/^\//,'');if(!fs.existsSync(file))throw Error('Missing script: '+src);new vm.Script(fs.readFileSync(file,'utf8'),{filename:file});}
 JSON.parse(fs.readFileSync('vercel.json','utf8'));
+const deployed=fs.readdirSync('api').filter(name=>name.endsWith('.js')&&!name.startsWith('_'));
+if(deployed.length>12)throw Error('Deployment exceeds the configured Hobby function limit: '+deployed.length);
 console.log('Checked '+sources.length+' JavaScript files and script assets. No model calls.');
 
 require('node:child_process').execFileSync(process.execPath,['demo/package-apps.cjs'],{stdio:'inherit'});

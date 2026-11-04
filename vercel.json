@@ -15,13 +15,24 @@
     "api/preflight.js": {
       "maxDuration": 90
     },
-    "api/evaluation-preflight.js": {
-      "maxDuration": 90
-    },
-    "api/evaluation-case.js": {
+    "api/evaluation.js": {
       "maxDuration": 90
     }
   },
   "buildCommand": "node tests/check-build.cjs",
-  "outputDirectory": "."
+  "outputDirectory": ".",
+  "rewrites": [
+    {
+      "source": "/api/evaluation-plan",
+      "destination": "/api/evaluation?operation=plan"
+    },
+    {
+      "source": "/api/evaluation-preflight",
+      "destination": "/api/evaluation?operation=preflight"
+    },
+    {
+      "source": "/api/evaluation-case",
+      "destination": "/api/evaluation?operation=case"
+    }
+  ]
 }
