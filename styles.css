@@ -149,3 +149,44 @@ footer { padding:21px 0 38px; border-top:1px solid var(--line); font-size:12px; 
 @media(prefers-reduced-motion:reduce){.trace-success{animation:none}}
 @media(max-width:640px){.finish-downloads>div{align-items:flex-start;flex-direction:column;gap:14px}.finish-downloads button{width:100%}.budget-warning-dialog{padding:22px}.budget-warning-numbers{gap:16px}.budget-warning-numbers>div{min-width:100px}.budget-warning-head h2{font-size:1.55rem}.trace-success{padding:16px;gap:11px}.trace-success-mark{width:34px;height:34px}.trace-success strong{font-size:1rem}}
 #budget-keep-allowance[hidden]{display:none}
+/* Stage 6: a folded-paper flight for waiting, precise motion for measured results. */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.help-guide{position:fixed;right:clamp(16px,3vw,44px);top:20px;z-index:25;width:48px;height:48px;padding:10px;border:1px solid #cec6f7;border-radius:50%;background:linear-gradient(135deg,#fff4fb,#eee9ff);color:var(--violet);box-shadow:0 5px 18px #533ff620;cursor:pointer;transition:background .18s,transform .18s}
+.help-guide svg{width:100%;height:100%}.help-guide:hover{background:#eee8ff;transform:rotate(-8deg)}
+.topbar{padding-right:64px}
+button[aria-busy="true"]{cursor:wait;position:relative}
+button[aria-busy="true"]::after{content:'';display:inline-block;width:12px;height:12px;margin-left:10px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:activity-turn 1s linear infinite;vertical-align:middle}
+.activity{display:flex;align-items:center;gap:24px;padding:20px 28px;margin:22px 0;border-radius:16px;background:linear-gradient(110deg,#fce7f4 0%,#f5effc 45%,#eee9ff 100%);color:var(--ink);overflow:hidden}
+.activity[hidden]{display:none}.activity-flight{width:220px;flex:0 0 220px;isolation:isolate}.activity-flight svg{display:block;width:100%;height:auto;overflow:visible}
+.flight-plane{offset-path:path('M20 82C55 100 98 97 136 67S194 25 221 42C251 62 172 108 145 71S139 20 177 20');offset-rotate:auto;animation:paper-flight 4.5s linear infinite}
+.flight-trail{animation:trail-drift 3s linear infinite}.activity-copy strong{font-size:20px;letter-spacing:-.025em}.activity-copy p{margin:7px 0;line-height:1.5}.activity-copy small{display:block;color:#5e4775;line-height:1.5;font-size:13px}.activity-receipt{display:flex;flex-wrap:wrap;gap:6px 16px;color:#64498c;font-size:12px;margin-top:12px;font-variant-numeric:tabular-nums}.activity-receipt span:empty{display:none}
+.motion-paused *{animation-play-state:paused!important}
+.finish-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));text-align:left;gap:24px;margin:32px 0 40px;padding:26px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.finish-stat{display:flex;flex-direction:column;min-width:0;gap:8px}.finish-stat strong{font-size:clamp(22px,2.6vw,36px);font-weight:600;letter-spacing:-.035em;font-variant-numeric:tabular-nums;line-height:1.15;overflow-wrap:anywhere}.finish-stat>span{font-size:14px;font-weight:600}.finish-stat small{color:var(--muted);font-size:12px;line-height:1.5}.finish-stat strong.token-good{color:var(--good)}.finish-stat strong.token-bad{color:var(--bad)}
+.guide-dialog{position:fixed;inset:auto;margin:0;padding:0;border:0;background:transparent;color:var(--ink);width:390px;max-width:calc(100vw - 32px);max-height:calc(100dvh - 32px);overflow:visible;border-radius:16px}
+.guide-dialog::backdrop{background:transparent}
+.guide-spotlight{position:fixed;z-index:-1;border:2px solid #a99bff;border-radius:12px;box-shadow:0 0 0 9999px #19112480;pointer-events:none}
+.guide-card{background:var(--paper);border-radius:16px;box-shadow:0 16px 60px #21133840;padding:20px 24px;max-height:calc(100dvh - 32px);overflow-y:auto;position:relative}
+.guide-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:8px}.guide-top>span{font-size:12px;color:#655080;font-variant-numeric:tabular-nums}.guide-top .icon-button{width:36px;height:36px}
+.guide-card h2{font-size:26px;line-height:1.15;letter-spacing:-.035em;margin:0 0 16px;outline:none}.guide-card p{font-size:14px;line-height:1.6;margin:0 0 16px}.guide-card .guide-note{font-size:12px;color:#59476f;line-height:1.6}.guide-card .guide-availability{font-size:12px;color:#6441a4;margin:10px 0 16px}
+.guide-demo{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 8px;padding:22px 14px;background:linear-gradient(120deg,#f9e4f4,#e8e1ff);border-radius:12px;position:relative;overflow:hidden;min-height:88px}
+.guide-demo-control{position:relative;background:#fffafecf;border:1px solid #cbbbea;border-radius:8px;padding:8px 10px;font-size:12px;color:#392354;font-weight:600;animation:tutorial-control 4.5s ease-in-out infinite;animation-delay:calc(var(--order)*.55s)}
+.guide-demo-arrow{color:#7154a6;font-size:16px}.guide-pointer{position:absolute;width:24px;height:24px;right:-8px;bottom:-13px;color:var(--violet);animation:tutorial-pointer 2.8s ease-in-out infinite}
+.guide-controls{display:flex;justify-content:space-between;gap:12px;margin:18px 0}.guide-controls button{min-height:44px}.guide-controls .primary{min-width:110px}
+.guide-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:12px;color:#59476f}.guide-bottom label{display:flex;align-items:center;gap:6px;cursor:pointer}.guide-bottom input{accent-color:var(--violet);width:16px;height:16px}
+.guide-link{font:inherit;font-size:12px;border:0;border-radius:4px;padding:6px 0;background:transparent;color:#5b32bd;text-decoration:underline;text-underline-offset:3px;cursor:pointer}.guide-link:hover{color:#3f178e}.guide-link[hidden]{display:none}
+.next-hint{position:fixed;z-index:24;display:flex;align-items:center;gap:10px;padding:10px 12px;max-width:min(390px,calc(100vw - 24px));background:#f7f1ff;color:#44276d;border:1px solid #c6b1f3;border-radius:12px;box-shadow:0 8px 24px #3923541a;font-size:13px;line-height:1.4}
+.next-hint[hidden]{display:none}.next-hint .icon-button{flex:0 0 32px;width:32px;height:32px}.next-hint .guide-link{white-space:nowrap;min-width:50px}.hint-pointer{width:22px;height:22px;flex:0 0 22px;color:var(--violet);animation:hint-point 1.8s ease-in-out infinite}.next-hint:not(.hint-above):not(.hint-offscreen) .hint-pointer{rotate:180deg}
+.next-action{animation:next-breathe 2.6s ease-in-out infinite}.guide-arrival{animation:next-breathe 1.8s ease-in-out 1}
+body:has(#guide-dialog[open]) .next-action{animation:none}
+body:has(#guide-dialog[open]) .help-guide{visibility:hidden}
+body:has(#guide-dialog:not([open])) .guide-demo-control,body:has(#guide-dialog:not([open])) .guide-pointer{animation-play-state:paused}
+@keyframes paper-flight{from{offset-distance:0%}to{offset-distance:100%}}
+@keyframes trail-drift{to{stroke-dashoffset:-30}}
+@keyframes activity-turn{to{transform:rotate(360deg)}}
+@keyframes tutorial-pointer{0%,100%{transform:translate(4px,5px)}45%,60%{transform:translate(0,0)}}
+@keyframes tutorial-control{0%,20%,100%{background:#fffafe;border-color:#cbbbea}35%,60%{background:#ece4ff;border-color:#8c6de0}}
+@keyframes next-breathe{0%,100%{box-shadow:0 0 0 0 #8f65ff00}50%{box-shadow:0 0 0 5px #a37bfa33,0 0 24px 4px #b47beb38}}
+@keyframes hint-point{0%,100%{translate:0 -2px}50%{translate:0 3px}}
+@media(max-width:760px){.help-guide{top:12px;width:44px;height:44px}.activity{padding:20px;gap:8px;flex-direction:column;align-items:flex-start}.activity-flight{width:160px;flex-basis:auto;align-self:center}.activity-copy strong{font-size:18px}.finish-metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 20px}.guide-card{padding:16px 20px}.guide-card h2{font-size:23px}.guide-demo{padding:16px 12px;min-height:70px}.guide-card p{font-size:13px}.next-hint{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.flight-plane{animation:none;offset-distance:38%}.flight-trail,.guide-demo-control,.guide-pointer,.hint-pointer,.next-action,.guide-arrival,button[aria-busy="true"]::after{animation:none}.help-guide{transition:background .15s}.help-guide:hover{transform:none}.next-action{outline:2px solid #9b80df;outline-offset:4px}}
