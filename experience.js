@@ -132,7 +132,8 @@
   q('#guide-back').disabled=tourIndex===0;q('#guide-next').textContent=tourIndex===E.tour.length-1?'Let’s begin':'Next';
   q('#guide-take-me').hidden=!real||step.target==='workbench';
   q('#guide-take-me').disabled=!real;
-  tourTarget?.scrollIntoView({behavior:'auto',block:'center',inline:'nearest'});
+  // Keep the highlighted control above the card on narrow/short screens.
+  tourTarget?.scrollIntoView({behavior:'auto',block:'start',inline:'nearest'});
   requestAnimationFrame(placeTour);q('#guide-title').focus({preventScroll:true});
  }
  function openTour(){

@@ -166,7 +166,8 @@ button[aria-busy="true"]::after{content:'';display:inline-block;width:12px;heigh
 .guide-dialog{position:fixed;inset:auto;margin:0;padding:0;border:0;background:transparent;color:var(--ink);width:390px;max-width:calc(100vw - 32px);max-height:calc(100dvh - 32px);overflow:visible;border-radius:16px}
 .guide-dialog::backdrop{background:transparent}
 .guide-spotlight{position:fixed;z-index:-1;border:2px solid #a99bff;border-radius:12px;box-shadow:0 0 0 9999px #19112480;pointer-events:none}
-.guide-card{background:var(--paper);border-radius:16px;box-shadow:0 16px 60px #21133840;padding:20px 24px;max-height:calc(100dvh - 32px);overflow-y:auto;position:relative}
+.guide-card{background:var(--paper);border-radius:16px;box-shadow:0 16px 60px #21133840;padding:20px 24px;max-height:calc(100dvh - 32px);overflow:hidden;position:relative;display:grid;grid-template-rows:auto minmax(0,1fr) auto auto}
+.guide-content{overflow-y:auto;min-height:0;padding:0 2px}
 .guide-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:8px}.guide-top>span{font-size:12px;color:#655080;font-variant-numeric:tabular-nums}.guide-top .icon-button{width:36px;height:36px}
 .guide-card h2{font-size:26px;line-height:1.15;letter-spacing:-.035em;margin:0 0 16px;outline:none}.guide-card p{font-size:14px;line-height:1.6;margin:0 0 16px}.guide-card .guide-note{font-size:12px;color:#59476f;line-height:1.6}.guide-card .guide-availability{font-size:12px;color:#6441a4;margin:10px 0 16px}
 .guide-demo{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 8px;padding:22px 14px;background:linear-gradient(120deg,#f9e4f4,#e8e1ff);border-radius:12px;position:relative;overflow:hidden;min-height:88px}
