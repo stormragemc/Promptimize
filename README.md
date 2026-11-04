@@ -51,3 +51,17 @@ A small live runtime probe (a manually assembled two-rule candidate, not the ful
 `node test-contract.cjs` checks source provenance, snapshot change rejection, scoped assembly, the one-lookup execution limit, and usage aggregation with a mock provider. Live checks verified Meta authentication and the full sample audit (16 literal source-linked rules). Full six-case live evaluation remains a user-triggered checkpoint.
 
 Token preflight uses Meta's context sizing endpoint with representative requests. The reserve includes 14 output caps and estimated lookup overhead, with a 30,000-token allowance; this is not an exact bill or a dollar budget. A candidate with no projected initial-input reduction is blocked. The candidate snapshot is checked again on each task request.
+
+## UIC JD-viewer adapter (4 November update)
+
+Choose the original folder or the three specific files `_core.txt`, `_core_jd_request_context.txt`, and `rules_m2_recruitment_viewer.txt`. Folder selection automatically limits this adapter to those three names. The public repository contains the adapter and synthetic tests, not employer content.
+
+The adapter splits blank-line sections and individual canonical intent definitions. It preserves every source block, assigns uncertain blocks to shared context, and consolidates only literal duplicates. The selected real input produced 52 blocks in 10 modules. An initial parser incorrectly treated many intent definitions as one block; a regression test now covers that boundary. Tests verified all non-whitespace source characters remain represented. The ZIP contains workflow/subworkflow prompt files, intent indexes, a source map, snapshot manifest, report, and a runnable Python loader.
+
+Four authored classification cases cover evaluation tabs, closing the evaluation modal, candidate information tabs, and applicant selection over stale leave state. Routing uses request UI state, never the expected answer. Baseline loads all three sources; candidate uses the same module order as the exported loader. Unknown UI state falls back to all modules. Actual UIC behavioral equivalence and token savings require live model runs; offline character reductions are not token results. No production HR tools are invoked.
+
+The UIC adapter does not call an LLM to rewrite rules. Muse Spark runs the before/after classification tests. Integration with the missing original Gateway composer/classifier remains explicit future work. This is a supported migration adapter, not arbitrary program understanding.
+
+Token delta colors: negative = green (fewer task-run tokens), positive = red, zero = neutral. Quality failures independently block the recommendation.
+
+Run `node test-jd-adapter.cjs` and `node test-contract.cjs`. Real-source tests and private generated outputs were kept outside the public repository.
