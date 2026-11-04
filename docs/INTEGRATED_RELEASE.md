@@ -26,6 +26,10 @@ Tests cover missing-state recovery through the reviewed-plan API, repeated reser
 
 No fresh paid Meta benchmark or browser visual assessment is claimed for the integration. Prior live benchmark receipts remain unchanged. Historical handoff documents describe their original branch checkpoints; use this release guide for the combined flow.
 
+## Deployment
+
+`vercel.json` explicitly sets the static output directory to the repository root (`.`), matching this app’s root-level HTML/CSS/JS and avoiding Vercel’s default `public` folder assumption. The build also packages the Forma ZIP downloads without making model calls.
+
 ## Manual review
 
 Open the production app, reload, and use the header paper-plane guide. Run Input → Audit → Proposal → Review → Candidate → Tests → Downloads. In Tests, build the plan, edit any needed scenario state, approve it and check the allowance before starting comparisons. Optional context and architecture calls require their own reviewed inputs and explicit actions. A repeat visit may have already marked the tutorial seen; the header guide remains available.

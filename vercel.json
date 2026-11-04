@@ -22,5 +22,6 @@
       "maxDuration": 90
     }
   },
-  "buildCommand": "node tests/check-build.cjs"
+  "buildCommand": "node tests/check-build.cjs",
+  "outputDirectory": "."
 }
