@@ -6,9 +6,9 @@ function setup(fetch=async()=>{throw Error('Unexpected fetch');}){
  vm.runInContext(fs.readFileSync(require.resolve('../../advisor.js'),'utf8'),ctx);
  return {ctx,element,run:script=>vm.runInContext(script,ctx)};
 }
-test('manual context requires review; planning unlocks only after analysis with that context',()=>{
+test('manual context is optional; planning unlocks only after analysis with approved context',()=>{
  const ui=setup();ui.element('project-purpose').value='HR navigation assistant';
- assert.throws(()=>ui.run('advisorBeforeAnalyze()'),/approve/);
+ assert.equal(ui.run('advisorBeforeAnalyze().projectContext'),undefined);
  ui.element('context-approved').checked=true;
  assert.equal(ui.run('advisorBeforeAnalyze().projectContext.status'),'approved');
  ui.run('renderAdvisor()');assert.equal(ui.element('advisor-generate').disabled,true);
@@ -25,8 +25,10 @@ test('a late context response cannot repopulate a reset project',async()=>{
  release({ok:true,json:async()=>({facts:[{id:'C1',kind:'purpose',text:'Old project',source:{file:'context.md',line:1,quote:'Example'}}],receipt:{model:'muse-spark-1.3',usage:{total_tokens:3}}})});
  await operation;assert.equal(ui.run('contextFacts.length'),0);assert.equal(ui.element('project-purpose').value,'');assert.equal(ui.run('advisorBusy'),false);
 });
-test('context files cannot be silently ignored before promptbase analysis',()=>{
+test('uploaded draft files are optional and require reading before inclusion',()=>{
  const ui=setup();ui.run("contextDocuments=[{name:'context.md',content:'Example'}]");
+ assert.equal(ui.run('advisorBeforeAnalyze().projectContext'),undefined);
+ ui.element('context-approved').checked=true;
  assert.throws(()=>ui.run('advisorBeforeAnalyze()'),/Read the uploaded context/);
 });
 test('download controls invalidate when the reviewed candidate snapshot changes',()=>{
