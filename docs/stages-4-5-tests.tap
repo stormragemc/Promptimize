@@ -1,0 +1,311 @@
+TAP version 13
+# Subtest: review → repeated comparisons → receipts → replay keeps the candidate frozen
+ok 1 - review → repeated comparisons → receipts → replay keeps the candidate frozen
+  ---
+  duration_ms: 102.394719
+  type: 'test'
+  ...
+# Promptimize API: Invalid rule output
+# Subtest: reviewed plans bind source, candidate, expectations and repetitions independently
+ok 2 - reviewed plans bind source, candidate, expectations and repetitions independently
+  ---
+  duration_ms: 7.25769
+  type: 'test'
+  ...
+# Subtest: approval rejects invented rule coverage, unsafe identifiers and unbounded runs
+ok 3 - approval rejects invented rule coverage, unsafe identifiers and unbounded runs
+  ---
+  duration_ms: 2.474681
+  type: 'test'
+  ...
+# Subtest: preflight sizes every selected case and repetition, with a bounded lookup reserve
+ok 4 - preflight sizes every selected case and repetition, with a bounded lookup reserve
+  ---
+  duration_ms: 5.607383
+  type: 'test'
+  ...
+# Subtest: a too-small remaining allowance stops before generation
+ok 5 - a too-small remaining allowance stops before generation
+  ---
+  duration_ms: 1.96956
+  type: 'test'
+  ...
+# Subtest: classification produces complete usage receipts without leaking the expected oracle
+ok 6 - classification produces complete usage receipts without leaking the expected oracle
+  ---
+  duration_ms: 1.75809
+  type: 'test'
+  ...
+# Subtest: a bounded simulated lookup counts both calls and preserves incomplete second-call usage
+ok 7 - a bounded simulated lookup counts both calls and preserves incomplete second-call usage
+  ---
+  duration_ms: 7.110635
+  type: 'test'
+  ...
+# Subtest: an unexpected lookup is a recorded behavioral failure, not an automatic fix
+ok 8 - an unexpected lookup is a recorded behavioral failure, not an automatic fix
+  ---
+  duration_ms: 1.822537
+  type: 'test'
+  ...
+# Subtest: holdout modal assertions run against isolated state instead of a hardcoded case ID
+ok 9 - holdout modal assertions run against isolated state instead of a hardcoded case ID
+  ---
+  duration_ms: 0.428987
+  type: 'test'
+  ...
+# Subtest: price estimation subtracts cached input and does not double-charge reasoning
+ok 10 - price estimation subtracts cached input and does not double-charge reasoning
+  ---
+  duration_ms: 0.438862
+  type: 'test'
+  ...
+# Subtest: adoption requires complete behavior and cost evidence; retries and failures remain counted
+ok 11 - adoption requires complete behavior and cost evidence; retries and failures remain counted
+  ---
+  duration_ms: 2.352597
+  type: 'test'
+  ...
+# Subtest: exports retain the exact approved plan, metrics and reviewed cases
+ok 12 - exports retain the exact approved plan, metrics and reviewed cases
+  ---
+  duration_ms: 2.931039
+  type: 'test'
+  ...
+# Subtest: failed legacy rule validation retains the optimizer call usage
+ok 13 - failed legacy rule validation retains the optimizer call usage
+  ---
+  duration_ms: 5.089823
+  type: 'test'
+  ...
+# Subtest: a result from another plan cannot satisfy the current adoption gate
+ok 14 - a result from another plan cannot satisfy the current adoption gate
+  ---
+  duration_ms: 0.658863
+  type: 'test'
+  ...
+# Subtest: reviewed legacy exports reproduce the exact sample requests, including multiline corrections
+ok 15 - reviewed legacy exports reproduce the exact sample requests, including multiline corrections
+  ---
+  duration_ms: 677.648687
+  type: 'test'
+  ...
+# Subtest: synthetic audit keeps exceptions, exact provenance and independent workflow memberships
+ok 16 - synthetic audit keeps exceptions, exact provenance and independent workflow memberships
+  ---
+  duration_ms: 55.912112
+  type: 'test'
+  ...
+# Subtest: invalid model evidence falls back to original text and model failures keep reported usage
+ok 17 - invalid model evidence falls back to original text and model failures keep reported usage
+  ---
+  duration_ms: 66.832274
+  type: 'test'
+  ...
+# Subtest: budget refuses before dispatching a model call and does not lose source
+ok 18 - budget refuses before dispatching a model call and does not lose source
+  ---
+  duration_ms: 28.658872
+  type: 'test'
+  ...
+# Subtest: equivalence remains pending until explicit approval; overlapping visitor rules survive
+ok 19 - equivalence remains pending until explicit approval; overlapping visitor rules survive
+  ---
+  duration_ms: 36.059309
+  type: 'test'
+  ...
+# Subtest: legacy UIC analyze request keeps its historical shape and digest
+ok 20 - legacy UIC analyze request keeps its historical shape and digest
+  ---
+  duration_ms: 3.520963
+  type: 'test'
+  ...
+# Subtest: semantic analyze is an additive route selector and uses the Standard model
+ok 21 - semantic analyze is an additive route selector and uses the Standard model
+  ---
+  duration_ms: 32.04646
+  type: 'test'
+  ...
+# Subtest: analysis cache is content-addressed, scoped and does not report warm calls as usage
+ok 22 - analysis cache is content-addressed, scoped and does not report warm calls as usage
+  ---
+  duration_ms: 122.53404
+  type: 'test'
+  ...
+# Subtest: scope guard prevents a misleading model equivalence from authorizing a proposal
+ok 23 - scope guard prevents a misleading model equivalence from authorizing a proposal
+  ---
+  duration_ms: 29.180075
+  type: 'test'
+  ...
+# Subtest: an invented runtime condition cannot hide original requirements
+ok 24 - an invented runtime condition cannot hide original requirements
+  ---
+  duration_ms: 25.181522
+  type: 'test'
+  ...
+# Subtest: conflicts and inferred context are inspectable and behavior fields are frozen
+ok 25 - conflicts and inferred context are inspectable and behavior fields are frozen
+  ---
+  duration_ms: 56.438389
+  type: 'test'
+  ...
+# Subtest: one rule can span adjacent source sections without losing an exception
+ok 26 - one rule can span adjacent source sections without losing an exception
+  ---
+  duration_ms: 0.843572
+  type: 'test'
+  ...
+# Subtest: exact same-scope repeats merge with both original spans and workflow references
+ok 27 - exact same-scope repeats merge with both original spans and workflow references
+  ---
+  duration_ms: 0.795088
+  type: 'test'
+  ...
+# Subtest: approved, inferred and newer context fingerprints remain separate
+ok 28 - approved, inferred and newer context fingerprints remain separate
+  ---
+  duration_ms: 4.079379
+  type: 'test'
+  ...
+# Subtest: original evidence uses exact UTF-16 offsets and a UTF-8 content hash
+ok 29 - original evidence uses exact UTF-16 offsets and a UTF-8 content hash
+  ---
+  duration_ms: 0.664131
+  type: 'test'
+  ...
+# Subtest: structural parsing preserves ordered original spans for every fixture file
+ok 30 - structural parsing preserves ordered original spans for every fixture file
+  ---
+  duration_ms: 36.326342
+  type: 'test'
+  ...
+# Subtest: conflicting context facts remain pending and stay out of the approved brief
+ok 31 - conflicting context facts remain pending and stay out of the approved brief
+  ---
+  duration_ms: 0.405561
+  type: 'test'
+  ...
+# Subtest: Python source is parsed without executing a top-level write
+ok 32 - Python source is parsed without executing a top-level write
+  ---
+  duration_ms: 26.810285
+  type: 'test'
+  ...
+# Subtest: preview-only engine selection leaves production and explicit legacy requests unchanged
+ok 33 - preview-only engine selection leaves production and explicit legacy requests unchanged
+  ---
+  duration_ms: 65.444436
+  type: 'test'
+  ...
+# Subtest: semantic package check and export keep the route and ZIP contracts
+ok 34 - semantic package check and export keep the route and ZIP contracts
+  ---
+  duration_ms: 69.411251
+  type: 'test'
+  ...
+# Subtest: JD semantic route preserves classification and simulated dispatch fields
+ok 35 - JD semantic route preserves classification and simulated dispatch fields
+  ---
+  duration_ms: 5.813173
+  type: 'test'
+  ...
+# Subtest: JD semantic route refuses over-budget baseline and candidate before generation
+ok 36 - JD semantic route refuses over-budget baseline and candidate before generation
+  ---
+  duration_ms: 1.949559
+  type: 'test'
+  ...
+# Subtest: semantic event route preserves its bounded lookup trace
+ok 37 - semantic event route preserves its bounded lookup trace
+  ---
+  duration_ms: 2.62683
+  type: 'test'
+  ...
+# Subtest: JD semantic preflight sizes the same candidate request used during classification
+ok 38 - JD semantic preflight sizes the same candidate request used during classification
+  ---
+  duration_ms: 2.81891
+  type: 'test'
+  ...
+# Subtest: independent synthetic cases preserve phase overrides and required original behavior
+ok 39 - independent synthetic cases preserve phase overrides and required original behavior
+  ---
+  duration_ms: 63.882301
+  type: 'test'
+  ...
+# Subtest: cycles co-load rules; a broken dependency or insufficient budget cannot start execution
+ok 40 - cycles co-load rules; a broken dependency or insufficient budget cannot start execution
+  ---
+  duration_ms: 33.902102
+  type: 'test'
+  ...
+# Subtest: exported Python and Node select the same rules and construct identical requests
+ok 41 - exported Python and Node select the same rules and construct identical requests
+  ---
+  duration_ms: 653.94449
+  type: 'test'
+  ...
+# Subtest: lexical, explicit, shared and dependency selection cannot bypass missing rule state
+ok 42 - lexical, explicit, shared and dependency selection cannot bypass missing rule state
+  ---
+  duration_ms: 15.809402
+  type: 'test'
+  ...
+# Subtest: lexically selected assignment guards also require state
+ok 43 - lexically selected assignment guards also require state
+  ---
+  duration_ms: 1.627143
+  type: 'test'
+  ...
+# Subtest: Node and exported Python agree on missing-state refusals and exact CRLF/Unicode text
+ok 44 - Node and exported Python agree on missing-state refusals and exact CRLF/Unicode text
+  ---
+  duration_ms: 170.602059
+  type: 'test'
+  ...
+# Subtest: a missing required rule state stops the API before sizing or generation
+ok 45 - a missing required rule state stops the API before sizing or generation
+  ---
+  duration_ms: 4.665643
+  type: 'test'
+  ...
+# Subtest: conflicts require explicit source-backed review and retain original findings
+ok 46 - conflicts require explicit source-backed review and retain original findings
+  ---
+  duration_ms: 47.879983
+  type: 'test'
+  ...
+# Subtest: corrected-candidate resolutions require a correction and expire after affected edits
+ok 47 - corrected-candidate resolutions require a correction and expire after affected edits
+  ---
+  duration_ms: 49.955604
+  type: 'test'
+  ...
+# Subtest: unknown resolutions, unsupported evidence and project-context overrides are rejected
+ok 48 - unknown resolutions, unsupported evidence and project-context overrides are rejected
+  ---
+  duration_ms: 64.477506
+  type: 'test'
+  ...
+# Subtest: resolutions also work for dependency review findings and survive export parity
+ok 49 - resolutions also work for dependency review findings and survive export parity
+  ---
+  duration_ms: 71.38322
+  type: 'test'
+  ...
+# Subtest: export refuses edited or missing actual prompt files before generation
+ok 50 - export refuses edited or missing actual prompt files before generation
+  ---
+  duration_ms: 109.338864
+  type: 'test'
+  ...
+1..50
+# tests 50
+# suites 0
+# pass 50
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 886.803584

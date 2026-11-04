@@ -87,3 +87,10 @@ The JD-viewer suite now contains six authored cases, adding the interview-attend
 View trace and Open visual comparison show a fullscreen native dialog with old/new skeletal workspaces, context modules, reported tokens/latency, step playback, tool timelines, source references, expected outputs, assertions and a final-state diff. The same overlay can show completed sides while other requests are pending. Replay is local and sends no additional model requests. The UI never fabricates a pending answer or exposes private reasoning.
 
 Readiness colors and enabled buttons mark the required sequence. Frozen candidates remain unchanged by evaluation. Run `node test-simulation.cjs` with the prior test commands. Offline tests pass for valid transitions, invalid-tool rejection, state isolation, modal-only close, exports, review revisions and loader parity. Full live six-case Meta evaluation and authenticated browser screenshot QA still require verification.
+
+
+## Stages 4 and 5: reviewed regression and complete measurements
+
+The follow-up workbench supports separately approved test plans, optional holdout cases, 1–3 repetitions, per-rule evidence links, bounded per-attempt reservations and complete reported call receipts. It includes optimizer overhead, explicit retries, incomplete-call usage, cache/reasoning details, latency and pricing-based cost estimates. Unknown cost evidence or behavioral failures prevent an adoption recommendation.
+
+See [the stages 4–5 review guide](docs/STAGES_4_5_REVIEW.md) for the exact UI sequence, supported simulation boundaries, API fields and remaining live acceptance gate. Stage 6 remains deferred for owner review.

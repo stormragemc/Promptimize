@@ -11,7 +11,7 @@ function simulateJD(test,answer){
  default:tool='unsupported_intent';args={intent};allowed=false;
  }
  if(!allowed)reason='The simulated tool rejected an unsupported action or unmet UI precondition.';
- const wanted={U01:{evaluationTab:'facial',evaluationOpen:true,jdOpen:true},U02:{evaluationOpen:false,jdOpen:true},U03:{candidateInfoTab:'education',candidateInfoOpen:true},U04:{selectedApplicant:'applicant-fixture-1',leaveFormOpen:false},U05:{attendees:['Alex Example'],selectedApplicant:null,leaveFormOpen:false},U06:{workspace:'leave',leaveFormOpen:true}}[test.id]||{};
+ const wanted=test.assertions??({U01:{evaluationTab:'facial',evaluationOpen:true,jdOpen:true},U02:{evaluationOpen:false,jdOpen:true},U03:{candidateInfoTab:'education',candidateInfoOpen:true},U04:{selectedApplicant:'applicant-fixture-1',leaveFormOpen:false},U05:{attendees:['Alex Example'],selectedApplicant:null,leaveFormOpen:false},U06:{workspace:'leave',leaveFormOpen:true}}[test.id]||{});
  const assertions=Object.entries(wanted).map(([key,value])=>({label:key,expected:value,actual:state[key],pass:JSON.stringify(value)===JSON.stringify(state[key])}));
  return {kind:'jd-viewer',adapterDispatch:true,initialState:before,finalState:state,steps:[{type:'context',label:'Load request context',state:before},{type:'decision',label:'Model classification',detail:intent},{type:'tool',label:tool,arguments:args,executed:allowed,result:allowed?'Fixture state updated':reason,state},{type:'assertions',label:'Check resulting state',state}],assertions,passed:allowed&&assertions.every(x=>x.pass),invalidAttempts:allowed?0:1};
 }

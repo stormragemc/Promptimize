@@ -1,0 +1,51 @@
+{
+  "startingCommit": "73967fb98d34263ca1a3fc77bcb758d5175ae83f",
+  "branch": "feature/regression-measurements",
+  "stages": [
+    4,
+    5
+  ],
+  "stage6": "Deferred pending owner review",
+  "backendTests": {
+    "count": 50,
+    "passed": 50,
+    "failed": 0,
+    "mode": "Automated with provider doubles; not live Meta accuracy"
+  },
+  "legacy": [
+    {
+      "test": "test-contract.cjs",
+      "passed": true
+    },
+    {
+      "test": "test-jd-adapter.cjs",
+      "passed": true
+    },
+    {
+      "test": "test-review.cjs",
+      "passed": true
+    },
+    {
+      "test": "test-simulation.cjs",
+      "passed": true
+    }
+  ],
+  "uiCheck": "DOM functional double: plan build/approval, budget, 2 repetitions, both sides, 28 mocked generation calls, recorded replay and next-proposal carry-forwards",
+  "privateUIC": {
+    "sourceFiles": 3,
+    "rules": 52,
+    "modules": 10,
+    "availableCases": 10,
+    "selectedCases": 6,
+    "exportedPythonNodeRequestsMatched": 12,
+    "modelCalls": 0
+  },
+  "liveMeta": {
+    "verified": false,
+    "reason": "No local credential or authenticated protected Preview POST access"
+  },
+  "visualQA": "Deferred; no screenshot/browser verification claimed",
+  "pricingSource": "https://dev.meta.ai/docs/pricing-rate-limits",
+  "pricingVerifiedDate": "2026-11-04",
+  "rawTests": "stages-4-5-tests.tap"
+}
