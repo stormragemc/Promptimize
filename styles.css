@@ -182,6 +182,7 @@ button[aria-busy="true"]::after{content:'';display:inline-block;width:12px;heigh
 body:has(#guide-dialog[open]) .next-action{animation:none}
 body:has(#guide-dialog[open]) .help-guide{visibility:hidden}
 body:has(#guide-dialog[open]){padding-bottom:min(90vh,640px)}
+html:has(#guide-dialog[open]){scroll-behavior:auto}
 body:has(#guide-dialog:not([open])) .guide-demo-control,body:has(#guide-dialog:not([open])) .guide-pointer{animation-play-state:paused}
 @keyframes paper-flight{from{offset-distance:0%}to{offset-distance:100%}}
 @keyframes trail-drift{to{stroke-dashoffset:-30}}
