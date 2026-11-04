@@ -1,0 +1,8 @@
+const assert=require('node:assert/strict');const jd=require('./api/_organize'),{validateAnalysis}=require('./api/_bundle'),{bundleFiles,zip}=require('./api/_export');
+// Synthetic fixture only. Actual employer inputs are tested locally and are not committed.
+const files=[{name:'_core.txt',content:'Never invent a permission.'},{name:'_core_jd_request_context.txt',content:'**JD viewer workspace lock:** Stay in the viewer.\n\n**Evaluation results:** Navigate evaluation tabs when the modal is open.\n\n**Candidate Information:** Navigate the education tab when the panel is open.'},{name:'rules_m2_recruitment_viewer.txt',content:'- navigate_published_jd_applicant_evaluation_tab: Set evaluation_results_tab.\n - close_published_jd_applicant_evaluation_results: Close only the evaluation modal.\n - edit_job_description: Preserve the requested field.'}];
+const a=jd.organize(files);validateAnalysis(a,files);assert.equal(a.rules.length,7);assert(a.modules.evaluation.length>=3);assert(a.modules.editing.length===1);
+const output=bundleFiles(a);assert(output['loader.py']);assert(output['workflows/recruitment/jd-viewer/evaluation/prompt.md']);
+for(const f of files){const joined=a.rules.filter(r=>r.file===f.name).map(r=>r.quote).join('');assert.equal(joined.replace(/\s/g,''),f.content.replace(/\s/g,''))}
+assert(jd.selectModules({jd_evaluation_results_modal_open:true}).includes('evaluation'));assert(!jd.selectModules({jd_evaluation_results_modal_open:true}).includes('editing'));
+assert.equal(zip(output).readUInt32LE(0),0x04034b50);console.log('JD adapter: individual intents, full source coverage, scoped dependencies, and export layout pass.');
