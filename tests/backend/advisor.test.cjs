@@ -81,3 +81,10 @@ test('the reviewed Python bridge rejects unknown routes and never sends an unres
   const result=spawnSync('python3',['-c',code],{cwd:dir,encoding:'utf8',timeout:5000});assert.equal(result.status,0,result.stderr);
  }finally{fs.rmSync(dir,{recursive:true,force:true});}
 });
+test('semantic extraction rejects an invented state wrapper around a real flat field',async()=>{
+ const fixture=require('./fixtures/observatory.json'),{createProvider}=require('./observatory-provider.cjs'),{proposeSemantic}=require('../../api/_semantic-analysis');
+ const {provider}=createProvider({alter(value,stage){if(stage!=='Stage: extract')return value;return {...value,rules:value.rules.map(r=>r.key==='technician-selection'?{...r,conditions:[{field:'state.deskPhase',op:'eq',value:'roster-collection'}]}:r)};}});
+ const result=await proposeSemantic(fixture.files,fixture,{provider});
+ assert(result.rules.every(r=>(r.conditions||[]).every(c=>c.field!=='state.deskPhase')));
+ assert(result.semantic.reviewItems.some(x=>x.type==='condition-unresolved'));
+});

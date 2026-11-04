@@ -45,7 +45,7 @@ test('synthetic audit keeps exceptions, exact provenance and independent workflo
   const repeated = analysis.rules.filter(rule => rule.quote === 'Record the station status after the inspection.');
   assert.deepEqual(new Set(repeated.flatMap(rule => rule.sources.map(source => source.file))), new Set(['station/safety.md', 'station/accessibility.txt']));
   assert(repeated.flatMap(rule => rule.workflows).length >= 2);
-  assert(calls.some(call => call.stage === 'Stage: extract' && call.reasoningEffort === 'low'));
+  assert(calls.some(call => call.stage === 'Stage: extract' && call.reasoningEffort === 'minimal'));
   assert(calls.some(call => call.stage === 'Stage: compare' && call.reasoningEffort === 'medium'));
   assert.equal(analysis.usage.total_tokens, calls.length * 47);
 });
