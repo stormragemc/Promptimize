@@ -4,8 +4,14 @@ const EXECUTION_TOKEN_BUDGET = 20000;
 const OUTPUT_RESERVE = 750;
 const {currentResolution}=require('./_semantic-conflicts');
 const JD_ADAPTER = 'jd-viewer-v1';
+// The JD fixture state is sparse. An open JD viewer can omit inactive
+// panels, workspace flags and prior-session hints. Explicit values still win.
 const OPTIONAL_JD_STATE = new Map([
- ['jd_evaluation_results_modal_open',false],['candidate_information_modal_open',false],['interview_workflow_phase',null]
+ ['jd_evaluation_results_modal_open',false],['candidate_information_modal_open',false],
+ ['jd_published_viewer_active_tab',null],['interview_workflow_phase',null],['entity_domain_hint',null],
+ ['workflow_orchestration.primary_workflow',null],['workflow_orchestration.phase',null],['session_state.ActiveIntent',null],
+ ['payroll_workspace_open',false],['travel_workspace_open',false],['benefits_workspace_open',false],
+ ['assets_workspace_open',false],['expenses_workspace_open',false],['attendance_workspace_open',false]
 ]);
 const STOP_WORDS = new Set('a an and are as at be by for from has have i in is it me my of on or that the this to was we with you your'.split(' '));
 

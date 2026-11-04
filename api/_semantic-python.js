@@ -50,8 +50,13 @@ def hydrate_module_text():
 hydrate_module_text()
 MAX_CONTEXT_CHARS = 50000
 JD_ADAPTER = 'jd-viewer-v1'
-OPTIONAL_JD_STATE = {'jd_evaluation_results_modal_open': False, 'candidate_information_modal_open': False,
-                     'interview_workflow_phase': None}
+OPTIONAL_JD_STATE = {
+    'jd_evaluation_results_modal_open': False, 'candidate_information_modal_open': False,
+    'jd_published_viewer_active_tab': None, 'interview_workflow_phase': None, 'entity_domain_hint': None,
+    'workflow_orchestration.primary_workflow': None, 'workflow_orchestration.phase': None, 'session_state.ActiveIntent': None,
+    'payroll_workspace_open': False, 'travel_workspace_open': False, 'benefits_workspace_open': False,
+    'assets_workspace_open': False, 'expenses_workspace_open': False, 'attendance_workspace_open': False
+}
 STOP_WORDS = set('a an and are as at be by for from has have i in is it me my of on or that the this to was we with you your'.split())
 
 
