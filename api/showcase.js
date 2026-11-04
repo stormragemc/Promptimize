@@ -5,7 +5,7 @@ const {proposeSemantic}=require('./_semantic-analysis');
 const {revise}=require('./_review'),{bundleFiles}=require('./_export');
 const {charge}=require('../evaluation-metrics');
 module.exports=async(req,res)=>{
- if(req.method==='GET')return json(res,200,{name:'Forma',fictional:true,files:S.source.files,context:S.source.context,cases:S.cases,installed:!!S.readInstalled(),evidence:(()=>{try{return require('../demo/generated/benchmark.json')}catch{return null}})()});
+ if(req.method==='GET')return json(res,200,{name:'Forma',fictional:true,files:S.source.files,context:S.source.context,cases:S.cases,installed:!!S.readInstalled(),installedSnapshot:S.readInstalled()?.analysis.sha256,evidence:(()=>{try{return require('../demo/generated/benchmark.json')}catch{return null}})()});
  if(req.method!=='POST')return json(res,405,{error:'POST required'});
  try{
   const b=req.body||{};
@@ -33,7 +33,7 @@ module.exports=async(req,res)=>{
   try{result=await meta(prepared.messages,outputCap,{reasoningEffort:'minimal'});}
   catch(e){return json(res,200,{status:'incomplete',version:b.version,caseId:test?.id,reason:e.publicMessage||e.message,usage:e.providerUsage||{},usageKnown:!!e.providerUsage,model:MODEL,latencyMs:Date.now()-started,reservedTokens:reserved,packageHash:prepared.packageHash});}
   const answer={intent:String(result.value.intent||''),entities:result.value.entities||{}};
-  const scored=test?S.score(test,answer):{simulation:require('./_simulation').simulateJD({query,context:S.completeContext(context)},answer),pass:null};
-  return json(res,200,{status:'completed',version:b.version,caseId:test?.id,model:result.model,answer,...scored,usage:result.usage,usageKnown:Number.isInteger(result.usage.prompt_tokens)&&Number.isInteger(result.usage.completion_tokens),costEstimateUSD:charge(result.usage,result.model),latencyMs:result.elapsedMs,sizingMs,measuredInputTokens:inputTokens,reservedTokens:reserved,retrievalMs:prepared.retrievalMs,contextCharacters:prepared.contextCharacters,selection:prepared.selection,packageHash:prepared.packageHash,recordedAt:new Date().toISOString()});
+  const registryAllowed=prepared.intentIds.includes(answer.intent);const scored=test?S.score(test,answer):{simulation:require('./_simulation').simulateJD({query,context:S.completeContext(context)},answer),pass:null};
+  scored.simulation.registryAllowed=registryAllowed;scored.simulation.passed=scored.simulation.passed&&registryAllowed;if(scored.pass!==null)scored.pass=scored.pass&&registryAllowed;return json(res,200,{status:'completed',version:b.version,caseId:test?.id,model:result.model,answer,...scored,usage:result.usage,usageKnown:Number.isInteger(result.usage.prompt_tokens)&&Number.isInteger(result.usage.completion_tokens),costEstimateUSD:charge(result.usage,result.model),latencyMs:result.elapsedMs,sizingMs,measuredInputTokens:inputTokens,reservedTokens:reserved,retrievalMs:prepared.retrievalMs,contextCharacters:prepared.contextCharacters,selection:prepared.selection,packageHash:prepared.packageHash,recordedAt:new Date().toISOString()});
  }catch(e){e.publicMessage=e.message;e.status=e.status||400;error(res,e);}
 };

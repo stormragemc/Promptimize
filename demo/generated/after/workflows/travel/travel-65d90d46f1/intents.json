@@ -1,0 +1,57 @@
+[
+  {
+    "kind": "intent",
+    "intent": "draft_travel_request",
+    "module": "travel-65d90d46f1",
+    "ruleIds": [
+      "R44",
+      "R48",
+      "R53",
+      "R58",
+      "R59",
+      "R60",
+      "R61",
+      "R62",
+      "R64"
+    ],
+    "description": "use draft_travel_request only for explicit travel requests when travel workspace is open, ask for destination and dates before creating a draft",
+    "source": [
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 9
+      },
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 27
+      },
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 50
+      },
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 71
+      },
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 71
+      },
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 71
+      },
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 71
+      },
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 71
+      },
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 71
+      }
+    ]
+  }
+]

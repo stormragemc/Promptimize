@@ -1,0 +1,62 @@
+[
+  {
+    "kind": "intent",
+    "intent": "navigate_published_jd_applicant_evaluation_tab",
+    "module": "evaluation-39453b7a46",
+    "ruleIds": [
+      "R2",
+      "R15",
+      "R34",
+      "R47"
+    ],
+    "description": "When evaluation results modal is open, requests for summary, transcript or facial analysis navigate the evaluation panel with intent navigate_published_jd_applicant_evaluation_tab and entities.evaluation_results_tab exactly summary, transcript or facial, taking precedence over parent job description and stale workflow state",
+    "source": [
+      {
+        "file": "_core.txt",
+        "line": 4
+      },
+      {
+        "file": "_core.txt",
+        "line": 61
+      },
+      {
+        "file": "_core_jd_request_context.txt",
+        "line": 40
+      },
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 23
+      }
+    ]
+  },
+  {
+    "kind": "intent",
+    "intent": "close_published_jd_applicant_evaluation_results",
+    "module": "evaluation-39453b7a46",
+    "ruleIds": [
+      "R8",
+      "R25",
+      "R38",
+      "R51"
+    ],
+    "description": "when jd_evaluation_results_modal_open is true and user says close this or dismiss this evaluation panel, return close_published_jd_applicant_evaluation_results with empty entities and close only the evaluation panel",
+    "source": [
+      {
+        "file": "_core.txt",
+        "line": 29
+      },
+      {
+        "file": "_core_jd_request_context.txt",
+        "line": 1
+      },
+      {
+        "file": "_core_jd_request_context.txt",
+        "line": 58
+      },
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 41
+      }
+    ]
+  }
+]

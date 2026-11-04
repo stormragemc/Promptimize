@@ -1,0 +1,32 @@
+[
+  {
+    "kind": "intent",
+    "intent": "navigate_candidate_information_tab",
+    "module": "candidate-information-c8b56ec30e",
+    "ruleIds": [
+      "R12",
+      "R29",
+      "R42",
+      "R55"
+    ],
+    "description": "when candidate_information_modal_open is true, a request to go to personal, education, payslips or references returns navigate_candidate_information_tab with entities.candidate_information_tab set to that exact tab identifier as read-only panel navigation",
+    "source": [
+      {
+        "file": "_core.txt",
+        "line": 47
+      },
+      {
+        "file": "_core_jd_request_context.txt",
+        "line": 19
+      },
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 1
+      },
+      {
+        "file": "rules_m2_recruitment_viewer.txt",
+        "line": 58
+      }
+    ]
+  }
+]
