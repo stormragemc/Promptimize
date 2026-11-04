@@ -1,10 +1,11 @@
 const {json,error,validateFiles,meta}=require('./_meta');
+const {simulateSample}=require('./_simulation');
 const CASES={T01:{intent:'refund',expected:'eligible'},T02:{intent:'refund',expected:'eligible'},T03:{intent:'refund',expected:'eligible'},T04:{intent:'refund',expected:'eligible',tool:'lookup_event_status'},T05:{intent:'cancellation',expected:'ask_confirmation'},T06:{intent:'profile',expected:'show_profile'}};
 const {validateAnalysis,messagesFor}=require('./_bundle');
 const usageOf=u=>({prompt_tokens:u?.prompt_tokens||0,completion_tokens:u?.completion_tokens||0,total_tokens:u?.total_tokens||0});
 module.exports=async(req,res)=>{
  if(req.method!=='POST')return json(res,405,{error:'POST required'});
- let usage=usageOf(),a,mode,toolCalls=[];
+ let usage=usageOf(),a,mode,toolCalls=[];const started=Date.now();
  try{
   const files=validateFiles(req.body?.files);a=req.body?.analysis;mode=req.body?.mode;
   const c=req.body?.test,known=CASES[c?.id];
@@ -25,7 +26,7 @@ module.exports=async(req,res)=>{
   }
   const pass=!failureReason&&answer.action===known.expected&&toolCalls.length===(known.tool?1:0);
   if(!pass&&!failureReason)failureReason=`Expected ${known.expected}${known.tool?' after '+known.tool:''}; received ${String(answer.action||'unknown')}.`;
-  json(res,200,{status:'completed',mode,pass,failureReason,answer:{action:String(answer.action||'unknown')},toolCalls,usage,snapshot:a.sha256,suiteVersion:2,contextCharacters:context.length,model:first.model});
+  json(res,200,{status:'completed',mode,pass,simulation:simulateSample(c,answer,toolCalls,pass),loadedModules:mode==='baseline'?files.map(f=>f.name):['shared',known.intent],latencyMs:Date.now()-started,failureReason,answer:{action:String(answer.action||'unknown')},toolCalls,usage,snapshot:a.sha256,suiteVersion:2,contextCharacters:context.length,model:first.model});
  }catch(e){
   if(e.providerUsage){const extra=usageOf(e.providerUsage);for(const k of Object.keys(usage))usage[k]+=extra[k];return json(res,200,{status:'incomplete',mode,pass:null,reason:e.publicMessage,code:e.code,usage,toolCalls,snapshot:a?.sha256})}
   error(res,e);
