@@ -1,5 +1,5 @@
 const fs=require('node:fs'),path=require('node:path'),{zip}=require('../api/_export');
-const files={};for(const name of ['styles.css','evaluation-metrics.js','demo/index.html','demo/forma.css','demo/forma.js','demo/serve.cjs','demo/source.json'])files[name]=fs.readFileSync(name,'utf8');
+const files={};for(const name of ['styles.css','evaluation-metrics.js','demo/index.html','demo/bench.html','demo/bench.js','demo/forma.css','demo/forma.js','demo/serve.cjs','demo/source.json'])files[name]=fs.readFileSync(name,'utf8');
 function addTree(dir){for(const entry of fs.readdirSync(dir,{withFileTypes:true})){const file=path.posix.join(dir,entry.name);if(entry.isDirectory()){if(!entry.name.startsWith('.')&&entry.name!=='__pycache__')addTree(file);}else if(!file.endsWith('.pyc')&&file!=='api/showcase.js~')files[file]=fs.readFileSync(file,'utf8');}}
 addTree('api');addTree('demo/source');addTree('demo/generated/after');
 for(const name of ['package.json','benchmark.json','benchmark-cloud.json','benchmark-draft-transfer.json','failed-first-run.json','offline-selection.json']){const file='demo/generated/'+name;if(fs.existsSync(file))files[file]=fs.readFileSync(file,'utf8');}
