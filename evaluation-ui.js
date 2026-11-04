@@ -1,6 +1,70 @@
 // Reviewed regression plans and measured receipts. No provider calls on replay.
 const evaluationMoney=value=>value===null?'Unverified':'$'+value.toFixed(5);
 const evaluationTime=value=>value===null?'—':(value/1000).toFixed(2)+'s';
+const dismissedTraceSuccess=new Set();
+let budgetWarningBlocked=false;
+function evaluationFinished(){
+ return !comparisonsRunning&&!!approved&&!!analysis&&!!evaluationPlan?.approved&&bundleReady?.snapshot===analysis.sha256
+  &&evaluationPlan.snapshot===analysis.sha256&&PromptimizeMetrics.summarize(analysis,evaluationPlan,results).complete;
+}
+function showBudgetWarning(required,allocated,remaining=false){
+ const state=PromptimizeMetrics.budgetState(required,Math.max(0,allocated));if(!state||state.kind==='ready')return;
+ const insufficient=state.kind==='insufficient',format=n=>n.toLocaleString();
+ budgetWarningBlocked=insufficient;
+ $('#budget-warning-title').textContent=insufficient?'More tokens needed':'Very little room left';
+ $('#budget-warning-message').textContent=remaining
+  ?'The next attempt does not fit the remaining allowance. No additional model call started. Edit the test plan to reserve more tokens or reduce the selected work; previous receipts stay archived.'
+  :insufficient?'This plan needs more tokens than you allocated. Edit the cases, reduce repetitions, or reserve a larger allowance before running.'
+  :'This run fits, but leaves little room for a retry. You can edit the cases and allowance, or explicitly continue with the current limit.';
+ $('#budget-required').textContent=format(required);$('#budget-allocated').textContent=format(allocated);
+ $('#budget-difference-label').textContent=insufficient?'Shortfall':'Headroom';$('#budget-difference').textContent=format(Math.abs(state.difference));
+ $('#budget-warning-advice').textContent=required>300000?'Reduce the selected work; this plan exceeds the maximum 300,000-token allowance.'
+  :`A suggested allowance is ${format(state.recommended)} tokens${remaining?' for the next attempt':''}. You still need to approve and size an edited plan. Sizing is not exact billing.`;
+ $('#budget-keep-allowance').hidden=insufficient;$('#budget-keep-allowance').disabled=insufficient||!preflight?.canRun;
+ $('#run-tests').disabled=true;const dialog=$('#budget-warning-dialog');if(!dialog.open)dialog.showModal();
+}
+$('#close-budget-warning').onclick=()=>$('#budget-warning-dialog').close();
+$('#budget-keep-allowance').onclick=()=>$('#budget-warning-dialog').close();
+$('#budget-edit-plan').onclick=()=>{$('#budget-warning-dialog').close();$('#edit-test-plan').onclick();$('#evaluation-allowance').focus();$('#evaluation-allowance').scrollIntoView({block:'center'});};
+$('#budget-warning-dialog').addEventListener('close',()=>{$('#run-tests').disabled=budgetWarningBlocked||comparisonsRunning||!evaluationPlan?.approved||!preflight?.canRun||evaluationFinished();});
+function renderFinish(){
+ if(!evaluationFinished())return;
+ const report=PromptimizeMetrics.summarize(analysis,evaluationPlan,results);
+ $('#finish-status').textContent=!report.qualityPassed?'Some reviewed checks failed. Inspect the evidence before adopting this candidate.'
+  :report.decision==='cost-unverified'?'Behavior checks passed. Cost evidence still needs review.'
+  :report.decision==='do-not-adopt'?'Behavior checks passed, but this run did not establish lower task cost.'
+  :'Your promptbase and test evidence are ready to download.';
+ $('#finish-summary').textContent=`${report.baseline.passed}/${report.expectedPairs} old checks passed · ${report.candidate.passed}/${report.expectedPairs} candidate checks passed · snapshot ${analysis.sha256.slice(0,12)}`;
+ $('#finish-zip').textContent=report.qualityPassed?'Download folder ZIP ↓':'Download review bundle ↓';
+ $('#finish-mark').innerHTML=report.qualityPassed?'<svg viewBox="0 0 64 64" fill="none"><path d="M18 33l9 9 20-23" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+  :'<svg viewBox="0 0 64 64" fill="none"><path d="M32 12v28m-10-9 10 10 10-10M14 43v9h36v-9" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+ for(const id of ['finish-zip','finish-md','finish-json','finish-evidence'])$('#'+id).disabled=false;
+}
+function focusFinish(){if(!$('#simulation-dialog').open)$('#finish-title').focus({preventScroll:true});}
+function enterFinish(){if(!evaluationFinished())return;renderFinish();show('finish');focusFinish();}
+$('#finish-back').onclick=()=>show('tests');
+for(const [target,source]of [['finish-zip','export-zip'],['finish-md','export-md'],['finish-json','export'],['finish-evidence','download-evaluation']]){
+ $('#'+target).onclick=async()=>{const button=$('#'+target),label=button.textContent;button.disabled=true;button.textContent='Preparing download…';
+  try{await $('#'+source).onclick();}catch(e){$('#finish-status').textContent=e.message;}finally{button.disabled=false;button.textContent=label;}
+ };
+}
+$('#finish-another').onclick=()=>{
+ if(comparisonsRunning)return;
+ setFiles([],false);iterationHistory=[];sessionStorage.removeItem('promptimize-session');dismissedTraceSuccess.clear();budgetWarningBlocked=false;
+ $('#folder').value='';$('#file-select').value='';renderTestPlan();syncStepReadiness();
+ if(typeof window!=='undefined')window.scrollTo({top:0,behavior:typeof matchMedia==='function'&&matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+ $('#intro-title').focus({preventScroll:true});
+};
+function refreshTraceSuccess(){
+ const key=[analysis?.sha256,evaluationPlan?.sha256,simCaseId].join(':');
+ const finalFrame=!Number.isFinite(simFrame)||simFrame>=maxSimSteps()-1;
+ $('#trace-success').hidden=!$('#simulation-dialog').open||!finalFrame||dismissedTraceSuccess.has(key)
+  ||!PromptimizeMetrics.traceMatches(getSimulationRow(),analysis?.sha256,evaluationPlan?.approved?evaluationPlan.sha256:null);
+}
+$('#dismiss-trace-success').onclick=()=>{dismissedTraceSuccess.add([analysis?.sha256,evaluationPlan?.sha256,simCaseId].join(':'));$('#trace-success').hidden=true;};
+const originalRefreshSimulation=refreshSimulation;
+refreshSimulation=function(){originalRefreshSimulation();refreshTraceSuccess();};
+$('#simulation-dialog').addEventListener('close',()=>{if(evaluationFinished()&&$('#finish').classList.contains('active'))focusFinish();});
 function lockEvaluation(active){
  for(const id of ['sample','hero-start','folder','file-select','analyze','new-proposal'])$('#'+id).disabled=active;
  if(!active)$('#analyze').disabled=!files.length;
@@ -70,15 +134,16 @@ $('#preflight').onclick=async()=>{
  try{
   const sized=await post('/api/evaluation-preflight',{files,analysis,plan:evaluationPlan});
   if(!evaluationPlan?.approved||sized.planHash!==evaluationPlan.sha256||sized.snapshot!==analysis?.sha256)throw Error('The plan changed during sizing. Approve and size the current plan again.');
-  preflight=sized;
+  preflight=sized;budgetWarningBlocked=false;
   const unresolved=preflight.requests.filter(row=>row.unresolved);
   $('#budget').textContent=`Old ${preflight.baselineInitialInput.toLocaleString()} initial input tokens · candidate ${preflight.candidateInitialInput.toLocaleString()}. Reserve ${preflight.reservedTokens.toLocaleString()} / ${preflight.budgetLimit.toLocaleString()} tokens for all runs and bounded lookups. ${preflight.canRun?'Ready.':unresolved.length?unresolved.length+' requests need state, evidence or a smaller per-call context.':'Blocked: no input reduction or the allowance is too small.'} Sizing is not exact billing.`;
   $('#run-tests').disabled=!preflight.canRun;$('#run-tests').classList.toggle('ready-action',preflight.canRun);saveSession();
+  if(preflight.reservedTokens>preflight.budgetLimit||preflight.canRun)showBudgetWarning(preflight.reservedTokens,preflight.budgetLimit);
  }catch(e){preflight=null;$('#run-tests').disabled=true;$('#budget').textContent=e.message;}finally{button.disabled=!evaluationPlan?.approved;}
 };
 function reservedSoFar(){return results.reduce((n,row)=>n+[row.baseline,row.candidate,...(row.attempts||[])].filter(Boolean).reduce((sum,result)=>sum+Math.max(result.measurement?.reservedTokens||0,result.usage?.total_tokens||0),0),0);}
 $('#run-tests').onclick=async()=>{
- if(!approved||bundleReady?.snapshot!==analysis?.sha256||!evaluationPlan?.approved||!preflight?.canRun||preflight.planHash!==evaluationPlan.sha256||preflight.snapshot!==analysis.sha256||comparisonsRunning)return;
+ if(!approved||bundleReady?.snapshot!==analysis?.sha256||!evaluationPlan?.approved||!preflight?.canRun||preflight.planHash!==evaluationPlan.sha256||preflight.snapshot!==analysis.sha256||comparisonsRunning||budgetWarningBlocked||$('#budget-warning-dialog').open)return;
  comparisonsRunning=true;lockEvaluation(true);const button=$('#run-tests');button.disabled=true;$('#preflight').disabled=true;$('#live-view').disabled=false;let stopped='';renderTestPlan();
  try{
   for(const test of getCases()){
@@ -105,7 +170,9 @@ $('#run-tests').onclick=async()=>{
   const firstPending=getCases().flatMap(test=>['baseline','candidate'].map(mode=>({test,mode}))).find(({test,mode})=>!isComplete(results.find(row=>row.case.id===test.id)?.[mode]));
   const nextReserve=firstPending&&preflight.requests.find(request=>request.caseId===firstPending.test.baseId&&request.mode===firstPending.mode)?.reservedTokens;
   button.disabled=done||nextReserve>evaluationPlan.budgetLimit-reservedSoFar();button.textContent=done?'Comparison complete':button.disabled?'Allowance exhausted':'Resume unfinished comparisons';
-  if(stopped)$('#results').insertAdjacentHTML('beforeend',`<p class="failure">${escape(stopped)} Completed results and all attempt receipts are retained. Resume is an explicit retry within the remaining allowance.</p>`);saveSession();
+  if(stopped)$('#results').insertAdjacentHTML('beforeend',`<p class="failure">${escape(stopped)} Completed results and all attempt receipts are retained. Resume is an explicit retry within the remaining allowance.</p>`);
+  if(!done&&nextReserve>evaluationPlan.budgetLimit-reservedSoFar())showBudgetWarning(nextReserve,Math.max(0,evaluationPlan.budgetLimit-reservedSoFar()),true);
+  if(done)enterFinish();saveSession();
  }
 };
 function downloadEvaluation(data){const link=document.createElement('a');link.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));link.download='promptimize-evaluation.json';link.click();setTimeout(()=>URL.revokeObjectURL(link.href),1000);}
@@ -121,7 +188,7 @@ renderResults=function(){
  $('#results').innerHTML=`<div class="summary">${labels[report.decision]} · ${old.completed}/${report.expectedPairs} old and ${next.completed}/${report.expectedPairs} candidate runs completed</div><div class="metrics"><div class="metric"><strong>${old.passed}/${report.expectedPairs}</strong><span>Old behavior passed</span></div><div class="metric"><strong>${next.passed}/${report.expectedPairs}</strong><span>Candidate behavior passed</span></div><div class="metric"><strong class="${change===null||change===0?'':change<0?'token-good':'token-bad'}">${change===null?'—':(change>0?'+':'')+change+'%'}</strong><span>Recorded task tokens, including incomplete attempts</span></div></div><div class="measurement-summary"><p><strong>Old tasks ${evaluationMoney(old.costUSD)}</strong><span>Candidate tasks ${evaluationMoney(next.costUSD)}</span></p><p>One-time optimizer: ${evaluationMoney(report.optimizer.costUSD)} · ${report.optimizer.totalTokens.toLocaleString()} reported tokens. Estimated experiment total: ${evaluationMoney(report.totalExperimentEstimateUSD)}.</p><p>Optimizer break-even: ${report.breakEvenRequests===null?'not established':report.breakEvenRequests+' similar future requests'}. ${histories.length?histories.length+' earlier test plans retained in the evidence download.':''}</p></div><details class="measurement-detail"><summary>Inspect complete measurements</summary><div class="measurement-table"><table><thead><tr><th>Measurement</th><th>Old</th><th>Candidate</th></tr></thead><tbody>${rows.map(([label,before,after])=>`<tr><td>${label}</td><td>${escape(before)}</td><td>${escape(after)}</td></tr>`).join('')}</tbody></table></div><p class="hint">Routing and context expansion are local operations with zero provider calls. Their loaded input is counted in classification. No automatic retries. Simulated tools do not incur production tool fees.</p><p class="hint">USD estimates use <a href="${report.pricing.source}" target="_blank" rel="noreferrer">Meta Standard rates</a>, checked ${report.pricing.verified}. Missing cache counts use the uncached rate. Reasoning is already included in output. Estimates are not invoices.</p></details>${failures.map(row=>`<div class="failure">Next proposal · ${escape(row.case.id)}: ${escape(row.candidate?.failureReason||row.baseline?.failureReason||'A reviewed expectation failed.')}. Investigate source, state and dependencies before proposing a fix.</div>`).join('')}<div class="actions"><span class="hint">Declared rule coverage and a small test suite do not prove every source behavior is preserved.</span><button id="download-evaluation" class="secondary">Download test evidence</button></div>`;
  $('#download-evaluation').onclick=()=>downloadEvaluation({report,preflight,plan:evaluationPlan,results,previousPlans:evaluationHistory,previousPlanReports:histories});
 };
-renderTestPlan();if(analysis&&evaluationPlan)renderResults();
+renderTestPlan();if(analysis&&evaluationPlan){renderResults();renderFinish();syncStepReadiness();}
 
 const originalNextProposal=$('#new-proposal').onclick;
 $('#new-proposal').onclick=()=>{

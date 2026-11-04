@@ -54,3 +54,14 @@ Run `node --test tests/backend/*.test.cjs` and the four root legacy suites. The 
 The private three-file UIC slice was processed offline: 52 original heuristic rules, ten modules, ten available cases and six selected development cases. All twelve original/candidate requests assembled by exported Python matched Node byte-for-byte. Zero model calls were made for that check; no employer content was committed.
 
 Live Meta accuracy, cost savings and latency remain unverified from this agent because the local Meta credential and authenticated protected Preview POST are unavailable. The owner can start those bounded calls from the authenticated Preview. Visual QA, final demo recording and final delivery are stage 6 and have not been started. Do not merge or proceed to stage 6 until the owner reviews this branch.
+
+
+## Follow-up UI review: finish, allowance warnings and matching traces
+
+After every selected old/new run completes, the app opens **Here you go!** with ZIP, Markdown, candidate JSON and test-evidence downloads. Failed or cost-unverified runs retain clear review messaging. Incomplete runs stay on Tests. Upload another clears the current project/sample session and returns to the top/input section.
+
+A required reserve above the allocation opens a native blocking warning dialog. Closing it does not unlock an insufficient run. The dialog offers editing cases/repetitions/allowance and requires reapproval and sizing of the changed plan. A fitting reserve using at least 90% of the allocation gets a near-limit warning with explicit continuation. For example, 44,548 of 45,000 fits with 452 headroom and must not be described as a shortfall. Exhausted retry allowance also opens the warning before another generation call. No amount is silently increased.
+
+A dismissible **Hooray! Same final state.** banner appears above a trace only at the final frame, with both completed results passing their reviewed checks, current candidate/plan bindings and matching nonempty complete final states. Equal failed states do not celebrate. Dismissal and replay make no model calls; reduced-motion preferences are respected.
+
+The continuation handoff was saved before implementing these changes so a fresh account can resume safely. The current published branch remains the source of truth if that handoff's checkpoint is older. Roadmap stage 6 still awaits the owner's UI instructions.

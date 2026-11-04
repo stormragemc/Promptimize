@@ -161,3 +161,24 @@ test('reviewed legacy exports reproduce the exact sample requests, including mul
   }
  }finally{rmSync(directory,{recursive:true,force:true});}
 });
+
+test('trace celebration requires both correct completed current runs and matching complete state',()=>{
+ const result=state=>({status:'completed',pass:true,snapshot:'snap',planHash:'plan',simulation:{passed:true,finalState:state}});
+ const row={baseline:result({workspace:'jd',open:true}),candidate:result({open:true,workspace:'jd'})};
+ assert.equal(metrics.traceMatches(row,'snap','plan'),true);
+ for(const changed of [
+  {...row.candidate,pass:false},
+  {...row.candidate,status:'incomplete'},
+  {...row.candidate,snapshot:'old'},
+  {...row.candidate,planHash:'old-plan'},
+  {...row.candidate,simulation:{passed:false,finalState:{workspace:'jd',open:true}}},
+  result({workspace:'jd',open:false}),result({})
+ ])assert.equal(metrics.traceMatches({...row,candidate:changed},'snap','plan'),false);
+ assert.equal(metrics.traceMatches({baseline:{...row.baseline,pass:false},candidate:{...row.candidate,pass:false}},'snap','plan'),false);
+});
+
+test('budget classification distinguishes a real shortfall from the supplied near-limit example',()=>{
+ assert.equal(metrics.budgetState(44548,45000).kind,'tight');assert.equal(metrics.budgetState(44548,45000).difference,452);
+ assert.equal(metrics.budgetState(44548,40000).kind,'insufficient');assert.equal(metrics.budgetState(44548,40000).difference,-4548);
+ assert.equal(metrics.budgetState(1000,10000).kind,'ready');assert.equal(metrics.budgetState(-1,100),null);
+});

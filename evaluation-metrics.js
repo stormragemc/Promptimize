@@ -18,6 +18,19 @@
  }
  const total=(items,key)=>items.reduce((sum,item)=>sum+(Number.isFinite(item[key])?item[key]:0),0);
  function percentile(values,p){if(!values.length)return null;const sorted=[...values].sort((a,b)=>a-b);return sorted[Math.ceil(sorted.length*p)-1];}
+ function traceMatches(row,snapshot,planHash){
+  const before=row?.baseline,after=row?.candidate;
+  if(!before||!after||[before,after].some(result=>result.status!=='completed'||result.pass!==true||result.simulation?.passed!==true||result.snapshot!==snapshot||(planHash&&result.planHash!==planHash)))return false;
+  const left=before.simulation.finalState,right=after.simulation.finalState;
+  if(!left||!right||!Object.keys(left).length||!Object.keys(right).length)return false;
+  const canonical=value=>Array.isArray(value)?value.map(canonical):value&&typeof value==='object'?Object.fromEntries(Object.keys(value).sort().map(key=>[key,canonical(value[key])])):value;
+  return JSON.stringify(canonical(left))===JSON.stringify(canonical(right));
+ }
+ function budgetState(required,allocated){
+  if(!Number.isSafeInteger(required)||required<0||!Number.isSafeInteger(allocated)||allocated<0)return null;
+  return {kind:required>allocated?'insufficient':required>0&&required>=allocated*.9?'tight':'ready',required,allocated,
+   difference:allocated-required,recommended:Math.min(300000,Math.ceil(required*1.1/1000)*1000)};
+ }
  function summarize(a,plan,results){
   const calls=[],latest={baseline:[],candidate:[]},bindingErrors=[];
   const selected=new Set((plan?.cases||[]).filter(test=>test.enabled).map(test=>test.id));const seen=new Set();
@@ -62,5 +75,5 @@
    totalExperimentEstimateUSD:setupCost!==null&&baseline.costUSD!==null&&candidate.costUSD!==null?setupCost+baseline.costUSD+candidate.costUSD:null,
    calls,limitations:['Pricing-based estimates, not an invoice. Missing cache counts use the uncached rate.','Local routing and fallback make no provider calls; their selected text is billed within classification.','Only the supported simulated adapters are measured; the production Gateway composer was not supplied.','Rule coverage is human-declared. Small repeated/holdout suites are not production reliability estimates.']};
  }
- return {pricing,charge,optimizer,summarize};
+ return {pricing,charge,optimizer,summarize,traceMatches,budgetState};
 });
