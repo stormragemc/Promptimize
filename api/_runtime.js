@@ -30,6 +30,8 @@ def main():
     p.add_argument("--context", help="JSON request-context file")
     p.add_argument("--utterance")
     p.add_argument("--case", help="Case ID from cases.json")
+    p.add_argument("--intent", help="Optional workflow or intent hint for a semantic bundle")
+    p.add_argument("--require-rule", action="append", help="Require a source rule ID in a semantic candidate")
     p.add_argument("--mode", choices=["baseline","candidate"], default="candidate")
     p.add_argument("--dry-run", action="store_true", help="Build a request without calling Meta")
     p.add_argument("--budget", type=int, default=20000, help="Input sizing plus output reserve per call")
@@ -40,26 +42,48 @@ def main():
     if args.case:
         case=next((x for x in json.loads((ROOT/"cases.json").read_text(encoding="utf-8")) if x["id"]==args.case),None)
         if not case: p.error("Unknown case ID")
-    context=case["context"] if case else (json.loads(Path(args.context).read_text(encoding="utf-8")) if args.context else {})
+    context=case.get("context", {}) if case else (json.loads(Path(args.context).read_text(encoding="utf-8")) if args.context else {})
     utterance=case["query"] if case else args.utterance
     if not utterance: p.error("Provide --utterance or --case")
-    request=messages(context,utterance,args.mode=="baseline")
+    manifest=json.loads((ROOT / "manifest.json").read_text(encoding="utf-8"))
+    semantic=manifest.get("semantic")
+    selection=None
+    if semantic:
+        if semantic.get("runtime") != "runtime.json": p.error("Unsupported semantic runtime manifest.")
+        from loader import runtime_request
+        intent=args.intent or (case.get("intent") if case else None)
+        prepared=runtime_request(context,utterance,args.mode=="baseline",intent,args.require_rule)
+        selection=prepared.get("selection")
+        if "messages" not in prepared:
+            print(json.dumps({"mode":args.mode,"status":"unresolved","generation_started":False,"contextSelection":selection},ensure_ascii=False,indent=2));return
+        request=prepared["messages"]
+    else:
+        if args.intent or args.require_rule: p.error("Selection hints require a semantic bundle.")
+        request=messages(context,utterance,args.mode=="baseline")
+    receipt={"contextSelection":selection} if selection is not None else {}
     if args.dry_run:
-        print(json.dumps({"mode":args.mode,"messages":request,"generation_started":False},ensure_ascii=False,indent=2));return
+        print(json.dumps({"mode":args.mode,"messages":request,"generation_started":False,**receipt},ensure_ascii=False,indent=2));return
     key=os.getenv("MODEL_API_KEY") or os.getenv("META_API_KEY") or os.getenv("promptimizer_musespark")
     if not key: p.error("Set MODEL_API_KEY securely in your shell before generation")
     sized=post("/responses/input_tokens",{"model":MODEL,"input":request},key)["input_tokens"]
-    if sized+args.max_output>args.budget: p.error("Token allowance exceeded; no generation started")
+    if sized+args.max_output>args.budget:
+        if semantic:
+            budget_selection=dict(selection or {}, status="unresolved")
+            budget_selection["unresolved"]=[*budget_selection.get("unresolved",[]),{"code":"execution-token-budget-exceeded","detail":str(args.budget)}]
+            print(json.dumps({"mode":args.mode,"status":"unresolved","generation_started":False,"contextSelection":budget_selection},ensure_ascii=False,indent=2));return
+        p.error("Token allowance exceeded; no generation started")
     result=post("/chat/completions",{"model":MODEL,"messages":request,"max_completion_tokens":args.max_output,"reasoning_effort":"minimal","response_format":{"type":"json_object"}},key)
     choice=result.get("choices", [{}])[0];content=choice.get("message",{}).get("content")
-    report={"mode":args.mode,"usage":result.get("usage"),"sizing_input_tokens":sized,"sizing_note":"Context sizing is not exact billing","finish_reason":choice.get("finish_reason")}
-    if not content: report.update(status="incomplete",answer=None)
+    report={"mode":args.mode,"usage":result.get("usage"),"sizing_input_tokens":sized,"sizing_note":"Context sizing is not exact billing","finish_reason":choice.get("finish_reason"),**receipt}
+    if not content or (semantic and choice.get("finish_reason")=="length"): report.update(status="incomplete",answer=None)
     else:
         try: answer=json.loads(content)
         except json.JSONDecodeError: report.update(status="incomplete",answer=None)
         else:
             report.update(status="completed",answer=answer)
-            if case: report["classification_pass"]=answer.get("intent")==case["expected"] and (not case.get("field") or answer.get("entities",{}).get(case["field"])==case["value"])
+            if case:
+                action=answer.get("action" if semantic and manifest["adapter"]=="sample" else "intent")
+                report["classification_pass"]=action==case["expected"] and (not case.get("field") or answer.get("entities",{}).get(case["field"])==case["value"])
     print(json.dumps(report,ensure_ascii=False,indent=2))
     # The runner returns model decisions. The web workbench owns deterministic tool-state simulation.
 if __name__=="__main__":

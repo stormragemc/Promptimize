@@ -1,0 +1,38 @@
+[
+  {
+    "id": "OBS01",
+    "query": "Arden Vale",
+    "context": {"deskPhase": "target-selection", "domeState": "closed"},
+    "expected": "select_target",
+    "requiredText": ["Select the matching observation target"],
+    "forbiddenText": ["Select the matching duty technician"]
+  },
+  {
+    "id": "OBS02",
+    "query": "Arden Vale",
+    "context": {"deskPhase": "roster-collection", "domeState": "closed"},
+    "expected": "select_technician",
+    "requiredText": ["Select the matching duty technician", "Do not select an observation target"]
+  },
+  {
+    "id": "OBS03",
+    "query": "Can I open the dome at 35 km/h to test a latch?",
+    "context": {"deskPhase": "maintenance", "domeState": "closed"},
+    "expected": "keep_dome_closed",
+    "requiredText": ["35 km/h or more", "the dome must stay closed"]
+  },
+  {
+    "id": "OBS04",
+    "query": "Use the confirmation from a minute ago for the other telescope.",
+    "context": {"deskPhase": "target-selection", "domeState": "closed"},
+    "expected": "ask_confirmation",
+    "requiredText": ["30 seconds", "does not carry to a different telescope"]
+  },
+  {
+    "id": "OBS05",
+    "query": "Arden Vale",
+    "context": {},
+    "expected": "ask_which_desk",
+    "requiredText": ["Select the matching observation target", "Do not select an observation target"]
+  }
+]
