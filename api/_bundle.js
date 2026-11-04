@@ -2,7 +2,7 @@ const {createHash}=require('node:crypto');
 const digest=(files,a)=>createHash('sha256').update(JSON.stringify({files,rules:a.rules,modules:a.modules,...(a.reviewVersion?{paths:a.paths,reviewVersion:a.reviewVersion,review:a.review}:{})})).digest('hex');
 function validateAnalysis(a,files){
  if(!a||!Array.isArray(a.rules)||!a.rules.length||a.rules.length>(a.adapter==='jd-viewer-v1'?500:18)||!a.modules)throw Error('Invalid candidate');
- const ids=new Set();for(const r of a.rules){const f=files.find(f=>f.name===r.file);if(typeof r.id!=='string'||ids.has(r.id)||typeof r.quote!=='string'||!r.quote||!f?.content.includes(r.quote))throw Error('Source mapping invalid');ids.add(r.id)}
+ const ids=new Set();for(const r of a.rules){const f=files.find(f=>f.name===r.file);if((typeof r.id!=='string'||!/^R[0-9]+$/.test(r.id))||ids.has(r.id)||typeof r.quote!=='string'||!r.quote||!f?.content.includes(r.quote))throw Error('Source mapping invalid');ids.add(r.id)}
  const assigned=new Set();for(const [name,refs] of Object.entries(a.modules)){if(!(a.adapter==='jd-viewer-v1'?['shared','workspace','applicants','evaluation','candidate-information','interview','competency','publishing','archive','editing','navigation']:['shared','refund','cancellation','profile']).includes(name)||!Array.isArray(refs)||refs.some(id=>!ids.has(id)))throw Error('Manifest invalid');refs.forEach(id=>assigned.add(id))}
  if([...ids].some(id=>!assigned.has(id)))throw Error('Unassigned rule');
  if(a.reviewVersion){const {validatePaths}=require('./_review');validatePaths(a.paths,a.modules);for(const r of a.rules)if(r.candidateText!==undefined&&(typeof r.candidateText!=='string'||!r.candidateText.trim()))throw Error('Invalid corrected instruction')}
@@ -10,7 +10,7 @@ function validateAnalysis(a,files){
 }
 function messagesFor(files,a,intent,query,mode){
  const ids=new Set([...(a.modules.shared||[]),...(a.modules[intent]||[])]);
- const context=mode==='baseline'?files.map(f=>`[${f.name}]\n${f.content}`).join('\n\n'):a.rules.filter(r=>ids.has(r.id)).map(r=>r.candidateText??r.quote).join('\n');
+ const context=mode==='baseline'?files.map(f=>`[${f.name}]\n${f.content}`).join('\n\n'):a.rules.filter(r=>ids.has(r.id)).map(r=>r.candidateText??r.quote).join('\n\n');
  if(!context)throw Error('Empty context');
  return [{role:'developer',content:`You are an event operations assistant. Follow only these promptbase instructions:\n${context}\n\nReturn JSON only: {"action":"eligible|ineligible|lookup_event_status|ask_event_id|ask_confirmation|show_profile|cancel_booking|save_profile|escalate","event_id":"string or empty"}. A lookup action asks for a simulated tool result; do not infer its result. Never claim a side effect happened when no tool ran.`},{role:'user',content:query}];
 }
