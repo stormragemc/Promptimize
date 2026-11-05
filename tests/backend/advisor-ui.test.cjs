@@ -35,3 +35,13 @@ test('download controls invalidate when the reviewed candidate snapshot changes'
  const ui=setup();ui.run("architectureReport={snapshot:'old'};renderAdvisor()");
  assert.equal(ui.run('architectureReport'),null);assert.equal(ui.element('advisor-download').disabled,true);assert.equal(ui.element('candidate-advisor-download').disabled,true);
 });
+test('the sample upload path enables image generation with no context, analysis or proposal and retains its result',async()=>{
+ const requests=[];const ui=setup(async(path,options)=>{requests.push({path,body:JSON.parse(options.body)});return {ok:true,json:async()=>({source:'https://example.invalid/image.png',note:'Source preview',basis:'source-preview'})};});
+ ui.run('analysis=null;renderAdvisor()');assert.equal(ui.element('context-approved').checked,false);assert.equal(ui.element('input-advisor-image').disabled,false);assert.equal(ui.element('advisor-image').disabled,false);assert.equal(ui.element('advisor-generate').disabled,true);
+ await ui.element('input-advisor-image').listeners.click();assert.equal(requests.length,1);assert.equal(requests[0].path,'/api/architecture-image');assert.equal(requests[0].body.report,undefined);assert.equal(requests[0].body.projectContext,undefined);assert.equal(requests[0].body.analysis,null);
+ ui.run('renderAdvisor()');assert(ui.element('input-advisor-image-result').innerHTML.includes('<img'));assert(ui.element('advisor-image-result').innerHTML.includes('<img'));assert.equal(ui.element('input-advisor-image').disabled,false);
+ ui.run('files=[];renderAdvisor()');assert.equal(ui.element('input-advisor-image').disabled,true);assert.equal(ui.element('input-advisor-image-result').innerHTML,'');
+});
+test('an image response cannot appear after the project is reset',async()=>{
+ let release;const ui=setup(async()=>new Promise(resolve=>release=resolve));ui.run('analysis=null;renderAdvisor()');const pending=ui.element('input-advisor-image').listeners.click();assert.equal(ui.element('input-advisor-image').disabled,true);ui.run('resetAdvisor();files=[];renderAdvisor()');release({ok:true,json:async()=>({source:'https://example.invalid/old.png',note:'Old'})});await pending;assert.equal(ui.run('architectureImage'),null);assert.equal(ui.element('input-advisor-image-result').innerHTML,'');
+});

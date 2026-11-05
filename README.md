@@ -17,6 +17,10 @@ Built with **Meta Muse Spark 1.3** and an optional **Muse Wonder 1.0** architect
 
 **Recorded result:** on eight fictional scenarios repeated twice, both versions passed 16/16 reviewed checks. Task tokens fell **58.5%** and estimated task cost fell **51.9%**, excluding one-time optimization setup. Median model latency did not improve. See the verification document for method, overhead and limitations.
 
+## Try Muse Image immediately
+
+Open the app, click **Load the sample**, then **Generate Muse Image illustration** in Input. No project context, analysis or architecture proposal is required. Before analysis, the result is labeled as a concept preview; after analysis it uses the current modules. Each click makes one separately charged image call.
+
 ## Why this exists
 
 Meta's [Thin Orchestrator article](https://engineering.fb.com/2026/10/19/ml-applications/thin-orchestrator-ai-agent-architecture/) describes instructions from different systems interfering inside an overloaded agent. During my UIC internship, I encountered a related maintenance problem: long, scattered prompts, repeated rules and exceptions that were difficult to trace safely. Promptimize turns that manual cleanup into a reviewable engineering workflow.

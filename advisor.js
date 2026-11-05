@@ -1,4 +1,9 @@
 let architectureImage=null,projectionSnapshot=null;
+function imageSourceKey(){return JSON.stringify({files,snapshot:analysis?.sha256||null,report:architectureReport?.summary||null});}
+function renderArchitectureImage(){
+ const markup=architectureImage?`<img src="${adEscape(architectureImage.source)}" alt="Muse Image illustration of the prompt loading flow"><p class="hint">${adEscape(architectureImage.note)} No performance result is implied.</p><a class="secondary" href="${adEscape(architectureImage.source)}" download="promptimize-architecture.png" target="_blank" rel="noopener">Open / save illustration</a>`:'';
+ for(const id of ['advisor-image-result','input-advisor-image-result'])if(ad(id))ad(id).innerHTML=markup;
+}
 let contextDocuments=[],contextFacts=[],contextReceipt=null,architectureReport=null,advisorBusy=false,contextReadSequence=0,advisorSequence=0,analyzedContext=null;
 const ad=id=>document.getElementById(id);
 const adEscape=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -27,8 +32,9 @@ function advisorBeforeAnalyze(){
  return payload;
 }
 function advisorAnalyzed(payload=contextPayload()){analyzedContext=JSON.stringify(payload);projectionSnapshot=null;ad('advisor-projection').innerHTML='';architectureReport=null;advisorSequence++;}
-function invalidateAdvisor(){projectionSnapshot=null;ad('advisor-projection').innerHTML='';architectureImage=null;ad('advisor-image-result').innerHTML='';architectureReport=null;advisorSequence++;renderAdvisor();}
+function invalidateAdvisor(){projectionSnapshot=null;ad('advisor-projection').innerHTML='';architectureImage=null;renderArchitectureImage();architectureReport=null;advisorSequence++;renderAdvisor();}
 function resetAdvisor(){
+ architectureImage=null;renderArchitectureImage();
  contextReadSequence++;advisorSequence++;contextDocuments=[];contextFacts=[];contextReceipt=null;architectureReport=null;analyzedContext=null;advisorBusy=false;
  if(!ad('project-purpose'))return;
  projectionSnapshot=null;ad('advisor-projection').innerHTML='';
@@ -67,7 +73,7 @@ function renderFacts(){
 ad('context-facts').addEventListener('click',e=>{const id=e.target.dataset.removeFact;if(!id||advisorBusy)return;contextFacts=contextFacts.filter(f=>f.id!==id);contextEdited();renderFacts();});
 function setAdvisorBusy(busy){
  advisorBusy=busy;
- for(const id of ['read-context','context-files','context-folder','clear-context','project-purpose','context-approved','advisor-generate','advisor-model','advisor-budget','fallback-rate','routing-overhead'])ad(id).disabled=busy;
+ for(const id of ['read-context','context-files','context-folder','clear-context','project-purpose','context-approved','advisor-generate','advisor-model','advisor-budget','fallback-rate','routing-overhead','advisor-image','input-advisor-image'])ad(id).disabled=busy;
  ad('analyze').disabled=busy||!files.length;
  ad('context-facts').querySelectorAll('textarea,button').forEach(el=>el.disabled=busy);
  if(!busy)ad('read-context').disabled=!contextDocuments.length;
@@ -104,10 +110,11 @@ function renderAdvisor(){
  const context=contextPayload(),fresh=analyzedContext===JSON.stringify(context);
  const ready=!!analysis&&!!context.projectContext&&ad('context-approved').checked&&fresh&&!advisorBusy;
  ad('advisor-generate').disabled=!ready;ad('advisor-generate').classList.toggle('ready-action',ready);
- ad('advisor-image').disabled=!architectureReport||advisorBusy||!!architectureImage;
+ if(architectureImage&&architectureImage.sourceKey!==imageSourceKey()){architectureImage=null;renderArchitectureImage();}
+ for(const id of ['advisor-image','input-advisor-image'])if(ad(id)){ad(id).disabled=!files.length||advisorBusy;ad(id).classList.toggle('ready-action',!!files.length&&!advisorBusy);ad(id).textContent=architectureImage?'Regenerate Muse Image illustration':'Generate Muse Image illustration';}
  ad('advisor-download').disabled=!architectureReport||advisorBusy;
  ad('candidate-advisor-download').disabled=!architectureReport||advisorBusy;
- if(!architectureReport){architectureImage=null;ad('advisor-image-result').innerHTML='';ad('advisor-result').innerHTML='';ad('architecture-flow').innerHTML='';}
+ if(!architectureReport){ad('advisor-result').innerHTML='';ad('architecture-flow').innerHTML='';}
  if(!analysis)ad('advisor-status').textContent='Analyze a promptbase to inspect architecture options.';
  else if(!context.projectContext||!ad('context-approved').checked)ad('advisor-status').textContent='Add and approve project context in Input, then analyze again to request a tailored plan.';
  else if(!fresh)ad('advisor-status').textContent='Context changed. Analyze the promptbase again before requesting a plan.';
@@ -141,9 +148,10 @@ ad('advisor-preview').addEventListener('click',async()=>{
 });
 renderAdvisor();
 
-ad('advisor-image').addEventListener('click',async()=>{
- if(!architectureReport||advisorBusy)return;const seq=advisorSequence;setAdvisorBusy(true);ad('advisor-image').disabled=true;ad('advisor-image-result').textContent='Muse Image is drawing the suggested flow…';
- try{const result=await advisorPost({...advisorBody('image'),report:architectureReport},'/api/architecture-image');if(seq!==advisorSequence)return;architectureImage=result;ad('advisor-image-result').innerHTML=`<img src="${adEscape(result.source)}" alt="Muse Image illustration of the proposed context loading flow"><p class="hint">${adEscape(result.note)} No performance result is implied.</p><a class="secondary" href="${adEscape(result.source)}" download="promptimize-architecture.png" target="_blank" rel="noopener">Open / save illustration</a>`;}
- catch(e){if(seq===advisorSequence)ad('advisor-image-result').textContent=e.message+failedUsage(e);}
+async function generateArchitectureImage(){
+ if(!files.length||advisorBusy)return;const seq=advisorSequence,sourceKey=imageSourceKey();setAdvisorBusy(true);for(const id of ['advisor-image','input-advisor-image'])if(ad(id)){ad(id).disabled=true;ad(id).textContent='Generating illustration…';}for(const id of ['advisor-image-result','input-advisor-image-result'])if(ad(id))ad(id).textContent='Muse Image is drawing the prompt loading flow…';
+ try{const result=await advisorPost({...advisorBody('image'),report:architectureReport||undefined},'/api/architecture-image');if(seq!==advisorSequence||sourceKey!==imageSourceKey())return;architectureImage={...result,sourceKey};renderArchitectureImage();}
+ catch(e){if(seq===advisorSequence)for(const id of ['advisor-image-result','input-advisor-image-result'])if(ad(id))ad(id).textContent=e.message+failedUsage(e);}
  finally{if(seq===advisorSequence){setAdvisorBusy(false);renderAdvisor();}}
-});
+}
+for(const id of ['advisor-image','input-advisor-image'])if(ad(id))ad(id).addEventListener('click',generateArchitectureImage);

@@ -11,7 +11,7 @@
 3. Inspect the [context and architecture run](https://github.com/stormragemc/Promptimize/blob/87f0e73b7c0e2665b18d24ba5d1ece39cafcd167/docs/advisor-live-result.json): Spark extracts source-linked facts and instructions; Wonder generates the architecture proposal and starter adapter. The architecture receipt reports `muse-wonder-1.0` and 5,366 provider-reported tokens.
 4. Compare the [installed exported promptbase](https://github.com/stormragemc/Promptimize/tree/87f0e73b7c0e2665b18d24ba5d1ece39cafcd167/demo/generated/after) with the [before](https://promptimize-steel.vercel.app/demo/?version=before) and [after](https://promptimize-steel.vercel.app/demo/?version=after) apps. Assistant submissions make paid Meta calls; the saved report can be inspected without rerunning them.
 
-These implementation and receipt links are pinned to reviewed source commit `87f0e73b7c0e2665b18d24ba5d1ece39cafcd167`. The historical execution commits are recorded below. Subsequent documentation changes do not alter those receipts.
+These implementation and receipt links are pinned to reviewed source commit `87f0e73b7c0e2665b18d24ba5d1ece39cafcd167`. The historical execution commits are recorded below. The latest image convenience endpoint is linked on main; it does not alter those historical receipts.
 
 ## Models, purpose and verification status
 
@@ -42,7 +42,7 @@ Meta hosts the models. Vercel hosts our application and its API client; we do no
 - [Semantic analysis](https://github.com/stormragemc/Promptimize/blob/87f0e73b7c0e2665b18d24ba5d1ece39cafcd167/api/_semantic.js) handles bounded extraction and related-rule comparison. Current extraction uses minimal reasoning and comparisons use low reasoning; historical receipts retain their actual settings and usage.
 - [Reviewed test execution](https://github.com/stormragemc/Promptimize/blob/87f0e73b7c0e2665b18d24ba5d1ece39cafcd167/api/_evaluation-case.js) sends selected instructions, application state and the user request to Spark. The [evaluation dispatcher](https://github.com/stormragemc/Promptimize/blob/87f0e73b7c0e2665b18d24ba5d1ece39cafcd167/api/evaluation.js) preserves the public test URLs within the hosting function limit.
 - [Forma demonstration API](https://github.com/stormragemc/Promptimize/blob/87f0e73b7c0e2665b18d24ba5d1ece39cafcd167/api/showcase.js) runs the fictional before/after workload using the same model and settings.
-- [Optional Muse Image endpoint](https://github.com/stormragemc/Promptimize/blob/87f0e73b7c0e2665b18d24ba5d1ece39cafcd167/api/architecture-image.js) requires a validated architecture report and returns an image receipt if successful.
+- [Optional Muse Image endpoint](https://github.com/stormragemc/Promptimize/blob/main/api/architecture-image.js) accepts loaded promptbase files without project context or a design proposal and returns an image receipt if successful. It uses a validated candidate and proposal when supplied, otherwise it labels the source-only result as a concept preview.
 
 Model output is a proposed instruction interpretation or application decision. Local code validates evidence and applies isolated simulated actions. These are not production HR operations or native model tool-call traces. Uploaded source scripts and generated architecture templates are never executed by the workbench.
 
@@ -102,7 +102,7 @@ The successful fictional-data run at commit `e675da526e48db883f7584a5e88028c412c
 - Open the [saved benchmark](https://promptimize-steel.vercel.app/demo/bench.html) to inspect the primary evidence without new model calls.
 - In the main workbench, upload promptbase files. Upload context documentation through the separate context controls, click **Read context with Meta**, review the source-linked facts, approve them, and analyze again. The general promptbase upload is not a context-document upload.
 - Inspect Proposal and Review, freeze the candidate, prepare the bundle, build and approve a test plan, then check sizing before starting comparisons.
-- Optional architecture proposals and image generation require explicit actions. Do not automatically rerun paid experiments to inspect evidence.
+- For a quick image demonstration, click Load the sample, then Generate Muse Image illustration directly in Input. No context or prior analysis is required; source-only output is a concept preview. Optional architecture proposals and image generation require explicit actions. Do not automatically rerun paid experiments to inspect evidence.
 - Automated verification includes deterministic Node tests and four legacy suites. They use mocked providers or local fixtures and are not additional live benchmarks.
 
 Test inputs and routing still require review. Genuinely required missing state blocks generation rather than being guessed, and unprepared requests are not reported as zero-token savings. The saved Forma benchmark is a separate complete experiment; it does not certify every newly uploaded promptbase.
